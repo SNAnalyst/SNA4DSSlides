@@ -1,0 +1,479 @@
+
+/* CSS FOR THE SNA4DS LECTURE SLIDES */
+
+
+
+/* ======================================================================== */
+/* 						SETTING THE STAGE									*/
+/* ======================================================================== */
+
+/* The <a> tag defines a hyperlink, which is used to link from one page to another. */
+/* https://www.w3schools.com/tags/tag_a.asp */
+/* https://www.w3schools.com/css/css_link.asp */
+a, a > code {
+  color: rgb(249, 38, 114);    /* dark pink */
+  text-decoration: none;
+}
+
+
+/* The <body> element contains all the contents of an HTML document, such as headings, paragraphs, images, hyperlinks, tables, lists, etc. */
+body { 
+font-family: Calibri, Verdana, 'Palatino Linotype', 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif, 'Droid Serif'; 
+}
+
+
+
+
+
+/* ======================================================================== */
+/* 						IMAGES												*/
+/* ======================================================================== */
+
+img, video, iframe {
+  max-width: 100%;
+}
+
+
+
+/* ======================================================================== */
+/* 						SLIDE SETUP											*/
+/* ======================================================================== */
+
+/* Two-column layout */
+.left-column {
+  color: #777;
+  width: 20%;
+  height: 92%;
+  float: left;
+}
+
+.left-column h2:last-of-type, .left-column h3:last-child {
+  color: #000;
+}
+
+.left-column h2, .left-column h3, .left-column h4 {
+  color: #777;
+}
+
+.left-column h2:last-of-type, .left-column h3:last-child {
+  color: #1A292C;
+}
+
+.right-column {
+  width: 75%;
+  float: right;
+  padding-top: 1em;
+}
+
+/* pull right and left */
+.pull-left {
+  float: left;
+  width: 47%;
+}
+
+.pull-right {
+  float: right;
+  width: 47%;
+}
+
+.pull-right + * {
+  clear: both;
+}
+
+
+
+
+
+/* ======================================================================== */
+/* 						TITLE SLIDES										*/
+/* ======================================================================== */
+
+.title-slide {
+  background-color: #FAFAFA;
+  /* border-top: 80px solid #FAFAFA; */
+}
+
+.title-slide h1  {
+  color: #1A292C;
+  font-size: 40px;
+  text-shadow: none;
+  font-weight: 400;
+  text-align: left;
+  margin-left: 15px;
+  padding-top: 80px;
+}
+.title-slide h2  {
+  margin-top: -25px;
+  padding-bottom: -20px;
+  color: #1A292C;
+  text-shadow: none;
+  font-weight: 300;
+  font-size: 35px;
+  text-align: left;
+  margin-left: 15px;
+}
+.title-slide h3  {
+  color: #1A292C;
+  text-shadow: none;
+  font-weight: 300;
+  font-size: 25px;
+  text-align: left;
+  margin-left: 15px;
+  margin-bottom: -30px;
+}
+
+/* horizontal ruler */
+/* https://www.w3schools.com/howto/howto_css_style_hr.asp */
+/* https://www.w3schools.com/tags/tag_hr.asp */
+hr, .title-slide h2::after, .mline h1::after {
+  content: '';
+  display: block;
+  border: none;
+  background-color: #EB811B;
+  color: #EB811B;
+  height: 1px;
+}
+
+hr, .mline h1::after {
+  margin: 1em 15px 0 15px;
+}
+
+.title-slide h2::after {
+  margin: 10px 15px 35px 0;
+}
+
+.mline h1::after {
+  margin: 10px 15px 0 15px;
+}
+
+.title-slide .inverse .remark-slide-content {
+  background-color: #FAFAFA;
+}
+
+
+
+
+
+
+
+/* ======================================================================== */
+/* 						FOOTNOTES											*/
+/* ======================================================================== */
+
+/* footnote identifier use: .fn[1] */
+.fn {
+  vertical-align: super;
+  font-size: 60%;
+}
+
+.footnote {
+  position: absolute;
+  bottom: 0;
+  padding-right: 8em; /* to avoid the page numbering */ 
+  font-size: 70%;
+}
+
+.remark-slide-content .footnote  p, 
+.remark-slide-content .footnote li {
+  font-size: 0.7em!important;
+}
+.footnote .remark-code, 
+.footnote .remark-inline-code{ font-size: 0.8em!important; }
+
+
+/* ======================================================================== */
+/* 						SLIDE NUMBER										*/
+/* ======================================================================== */
+
+.inverse .remark-slide-number {
+  font-size: 13pt;
+  color: #FAFAFA;
+  opacity: 1;
+}
+
+.remark-slide-number {
+  font-size: 13pt;
+  color: #272822;
+  opacity: 1;
+  bottom: 8px;
+  right: 16px;
+}
+
+
+/* turns off slide numbers for title page: https://github.com/gnab/remark/issues/298 */
+.title-slide .remark-slide-number {
+  display: none;
+}
+
+
+
+
+
+
+
+/* ======================================================================== */
+/* 						INVERSE												*/
+/* ======================================================================== */
+
+.inverse {
+  background-color: #272822;
+  color: #d6d6d6;
+  text-shadow: none;
+}
+
+.inverse h1, .inverse h2, .inverse h3 {
+  color: #f3f3f3;
+}
+
+
+
+
+/* ======================================================================== */
+/* 						CODE												*/
+/* ======================================================================== */
+
+.code10 .remark-code {
+  font-size: 10%;
+}
+
+.code20 .remark-code {
+  font-size: 20%;
+}
+
+.code30 .remark-code {
+  font-size: 30%;
+}
+
+.code40 .remark-code {
+  font-size: 40%;
+}
+
+.code50 .remark-code {
+  font-size: 50%;
+}
+
+.code60 .remark-code {
+  font-size: 60%;
+}
+
+.code70 .remark-code {
+  font-size: 70%;
+}
+
+.code80 .remark-code {
+  font-size: 80%;
+}
+
+.code90 .remark-code {
+  font-size: 90%;
+}
+
+.code100 .remark-code {
+  font-size: 100%;
+}
+
+.hljs-github .hljs {
+  overflow-y: auto;
+}
+
+/* this is not ideal, but a response to the resizing issues
+   discussed https://github.com/yihui/xaringan/issues/62 and
+   https://github.com/yihui/xaringan/issues/143  */
+.mjx-chtml{ font-size: 100% !important; }
+
+
+.remark-code, .remark-inline-code { 
+  font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace; 
+  font-size: 95%;
+}
+
+.remark-code-line {
+  font-size: 80%;
+}
+
+/* remark-code-line is the R code block */
+.remark-code-line-highlighted     { 
+background-color: #ffff88; 
+}
+
+/* code that is printed as part of inline text */
+.remark-inline-code {
+  background: #F5F5F5; /* lighter */
+  /* background: #e7e8e2; /* darker */
+  border-radius: 3px;
+  padding: 4px;
+}
+
+
+/* ======================================================================== */
+/* 						TEXT TRANSFORMS										*/
+/* ======================================================================== */
+
+blockquote {
+  border-left: solid 5px lightgray;
+  padding-left: 1em;
+}
+
+.f-pen {
+  font-family: 'Nanum Pen Script', var(--text-font-family), var(--text-font-family-fallback);
+}
+.f-typewriter {
+  font-family: 'Special Elite', var(--code-font-family), monospace;
+}
+.f-zilla {
+  font-family: Zilla Slab;
+}
+.f-pompiere {
+  font-family: Pompiere;
+}
+
+
+.font10 , .code10 .remark-code, .code10 .remark-inline-code{ font-size: 10%; }
+.font20 , .code20 .remark-code, .code20 .remark-inline-code{ font-size: 20%; }
+.font30 , .code30 .remark-code, .code30 .remark-inline-code{ font-size: 30%; }
+.font40 , .code40 .remark-code, .code40 .remark-inline-code{ font-size: 40%; }
+.font50 , .code50 .remark-code, .code50 .remark-inline-code{ font-size: 50%; }
+.font60 , .code60 .remark-code, .code60 .remark-inline-code{ font-size: 60%; }
+.font70 , .code70 .remark-code, .code70 .remark-inline-code{ font-size: 70%; }
+.font75 , .code75 .remark-code, .code75 .remark-inline-code{ font-size: 75%; }
+.font80 , .code80 .remark-code, .code80 .remark-inline-code{ font-size: 80%; }
+.font90 , .code90 .remark-code, .code90 .remark-inline-code{ font-size: 90%; }
+.font100, .code100 .remark-code, .code100 .remark-inline-code{ font-size: 100%; }
+.font110, .code110 .remark-code, .code110 .remark-inline-code{ font-size: 110%; }
+.font120, .code120 .remark-code, .code120 .remark-inline-code{ font-size: 120%; }
+.font130, .code130 .remark-code, .code130 .remark-inline-code{ font-size: 130%; }
+.font140, .code140 .remark-code, .code140 .remark-inline-code{ font-size: 140%; }
+.font150, .code150 .remark-code, .code150 .remark-inline-code{ font-size: 150%; }
+.font160, .code160 .remark-code, .code160 .remark-inline-code{ font-size: 160%; }
+.font170, .code170 .remark-code, .code170 .remark-inline-code{ font-size: 170%; }
+.font175, .code175 .remark-code, .code175 .remark-inline-code{ font-size: 175%; }
+.font180, .code180 .remark-code, .code180 .remark-inline-code{ font-size: 180%; }
+.font190, .code190 .remark-code, .code190 .remark-inline-code{ font-size: 190%; }
+.font225, .code225 .remark-code, .code225 .remark-inline-code{ font-size: 225%; }
+.font250, .code250 .remark-code, .code250 .remark-inline-code{ font-size: 250%; }
+.font275, .code275 .remark-code, .code275 .remark-inline-code{ font-size: 275%; }
+.font300, .code300 .remark-code, .code300 .remark-inline-code{ font-size: 300%; }
+.font325, .code325 .remark-code, .code325 .remark-inline-code{ font-size: 325%; }
+.font350, .code350 .remark-code, .code350 .remark-inline-code{ font-size: 350%; }
+.font375, .code375 .remark-code, .code375 .remark-inline-code{ font-size: 375%; }
+.font400, .code400 .remark-code, .code400 .remark-inline-code{ font-size: 400%; }
+
+
+
+/* ======================================================================== */
+/* 						BOXES												*/
+/* ======================================================================== */
+
+
+
+
+/* ======================================================================== */
+/* 						SLIDE LAYOUT										*/
+/* ======================================================================== */
+
+h1 {
+ font-family: 'Shadows Into'; 
+  font-weight: bold;
+  font-style: italic;
+  color: #DAA520;
+  margin-top: -110px;
+  margin-left: -00px;
+}
+
+
+h2, h3, h4 {
+  padding-top: -15px;
+  padding-bottom: 00px;
+  color: #1A292C;
+  text-shadow: none;
+  font-weight: 400;
+  text-align: left;
+  margin-left: 00px;
+  margin-bottom: -30px;
+}
+
+
+
+
+hr, .mline h1::after {
+  margin: 1em 15px 0 15px;
+}
+
+
+/* Removes colored bar from top of the slide resulting in a clear slide */
+.no-top-border{
+  border-top: 0px solid #FAFAFA;
+}
+
+
+.remark-slide-content {
+  background-color: #FAFAFA;
+  /* border-top: 80px solid #23373B; */
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.5;
+  padding: 1em 2em 1em 2em
+}
+
+.remark-slide-content h1 {
+  font-size: 45px;
+}
+
+.remark-slide-content h2 {
+  font-size: 35px;
+}
+
+.remark-slide-content h3 {
+  font-size: 30px;
+}
+
+.remark-slide-content p, 
+.remark-slide-content li {
+  line-height: 1.4;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+}
+
+.remark-slide table {
+  margin: auto;
+  border-top: 1px solid #666;
+  border-bottom: 1px solid #666;
+}
+
+.remark-slide table thead th { 
+border-bottom: 1px solid #ddd; 
+}
+
+.remark-slide thead, .remark-slide tfoot, .remark-slide tr:nth-child(even) { 
+background: #eee 
+}
+
+
+
+/* The <th> tag defines a header cell in an HTML table. */
+th, td { 
+padding: 5px; 
+}
+
+
+/* ======================================================================== */
+/* 						@													*/
+/* ======================================================================== */
+
+/* The @page CSS at-rule is used to modify some CSS properties when printing a document */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/@page */
+@page { 
+margin: 0; 
+}
+
+/* The @media CSS at-rule can be used to apply part of a style sheet based on the result of one or more media queries. */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/@media */
+@media print {
+  .remark-slide-scaler {
+    width: 100% !important;
+    height: 100% !important;
+    transform: scale(1) !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
+}

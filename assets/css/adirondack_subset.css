@@ -1,0 +1,83 @@
+
+/* this is a subset of the adironack css set */
+
+
+
+.full-width-screen-black, 
+.full-width-screen-grey,
+.full-width-screen-lynch,
+.full-width-screen-orange,
+.full-width-screen-silver,
+.full-width-screen-silver2,
+.full-width-screen-silversand,
+.full-width-screen-white {
+    display: flex;
+    width: 100%;
+    flex: 1 1 auto;
+}
+
+.full-width-screen-black { background-color: rgba(0, 0, 0, 0.7); }
+.full-width-screen-grey{ background-color: rgba(128, 128, 128, 0.7); }
+.full-width-screen-lynch { background-color: rgba(108, 122, 137, 0.7); }
+.full-width-screen-orange { background-color: rgba(255, 165, 0, 0.7); }
+.full-width-screen-silver { background-color: rgba(192, 192, 192, 0.7); }
+.full-width-screen-silver2 { background-color: rgba(192, 192, 192, 0.85); }
+.full-width-screen-silversand { background-color: rgba(189, 195, 199, 0.7); }
+.full-width-screen-white { background-color: rgba(255, 255, 255, 0.7); }
+
+
+
+
+
+
+/* smokescreen */
+.remark-slide-content.smokescreen > h1,
+.remark-slide-content img[src~=smokescreen] {
+ background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* 
+.remark-slide-content.smokescreen > h1,
+.remark-slide-content.smokescreen > h2,
+.remark-slide-content.smokescreen > h3 {
+  color: white;
+  text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.8), 8px 8px 20px rgba(0, 0, 0, 0.9);
+}
+*/
+
+
+@media print {
+  .remark-slide-content.smokescreen {
+    -webkit-print-color-adjust: exact;
+    -webkit-filter: opacity(1);
+  }
+}
+
+
+/* fogscreen, like a smokescreen, but uses a white shading */
+.remark-slide-content.fogscreen > h1,
+.remark-slide-content.fogscreen > lecture_title {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+/*
+.remark-slide-content.fogscreen > h1,
+.remark-slide-content.fogscreen > h2,
+.remark-slide-content.fogscreen > h3 {
+  color: black;
+  text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5), 8px 8px 20px rgba(0, 0, 0, 0.2);
+}
+*/
+@media print {
+  .remark-slide-content.fogscreen {
+    -webkit-print-color-adjust: exact;
+    -webkit-filter: opacity(1);
+  }
+}
+
+
+/* fit-h1 */
+.remark-slide-content.fit-h1 h1 {
+  height: 1.25em;
+  overflow: hidden;
+}

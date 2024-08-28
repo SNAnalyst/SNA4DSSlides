@@ -1,0 +1,1339 @@
+
+:root {
+  --color-AliceBlue: #F0F8FF;
+  --color-AntiqueWhite: #FAEBD7;
+  --color-Aqua: #00FFFF;
+  --color-Aquamarine: #7FFFD4;
+  --color-Azure: #F0FFFF;
+  --color-Beige: #F5F5DC;
+  --color-Bisque: #FFE4C4;
+  --color-Black: #000000;
+  --color-BlanchedAlmond: #FFEBCD;
+  --color-Blue: #0000FF;
+  --color-BlueViolet: #8A2BE2;
+  --color-Brown: #A52A2A;
+  --color-BurlyWood: #DEB887;
+  --color-CadetBlue: #5F9EA0;
+  --color-Chartreuse: #7FFF00;
+  --color-Chocolate: #D2691E;
+  --color-Coral: #FF7F50;
+  --color-CornflowerBlue: #6495ED;
+  --color-Cornsilk: #FFF8DC;
+  --color-Crimson: #DC143C;
+  --color-Cyan: #00FFFF;
+  --color-DarkBlue: #00008B;
+  --color-DarkCyan: #008B8B;
+  --color-DarkGoldenRod: #B8860B;
+  --color-DarkGray: #A9A9A9;
+  --color-DarkGreen: #006400;
+  --color-DarkKhaki: #BDB76B;
+  --color-DarkMagenta: #8B008B;
+  --color-DarkOliveGreen: #556B2F;
+  --color-DarkOrange: #FF8C00;
+  --color-DarkOrchid: #9932CC;
+  --color-DarkRed: #8B0000;
+  --color-DarkSalmon: #E9967A;
+  --color-DarkSeaGreen: #8FBC8F;
+  --color-DarkSlateBlue: #483D8B;
+  --color-DarkSlateGray: #2F4F4F;
+  --color-DarkTurquoise: #00CED1;
+  --color-DarkViolet: #9400D3;
+  --color-DeepPink: #FF1493;
+  --color-DeepSkyBlue: #00BFFF;
+  --color-DimGray: #696969;
+  --color-DodgerBlue: #1E90FF;
+  --color-FireBrick: #B22222;
+  --color-FloralWhite: #FFFAF0;
+  --color-ForestGreen: #228B22;
+  --color-Fuchsia: #FF00FF;
+  --color-Gainsboro: #DCDCDC;
+  --color-GhostWhite: #F8F8FF;
+  --color-Gold: #FFD700;
+  --color-GoldenRod: #DAA520;
+  --color-Gray: #808080;
+  --color-Green: #008000;
+  --color-GreenYellow: #ADFF2F;
+  --color-HoneyDew: #F0FFF0;
+  --color-HotPink: #FF69B4;
+  --color-IndianRed: #CD5C5C;
+  --color-Indigo: #4B0082;
+  --color-Ivory: #FFFFF0;
+  --color-Khaki: #F0E68C;
+  --color-Lavender: #E6E6FA;
+  --color-LavenderBlush: #FFF0F5;
+  --color-LawnGreen: #7CFC00;
+  --color-LemonChiffon: #FFFACD;
+  --color-LightBlue: #ADD8E6;
+  --color-LightCoral: #F08080;
+  --color-LightCyan: #E0FFFF;
+  --color-LightGoldenRodYellow: #FAFAD2;
+  --color-LightGray: #D3D3D3;
+  --color-LightGreen: #90EE90;
+  --color-LightPink: #FFB6C1;
+  --color-LightSalmon: #FFA07A;
+  --color-LightSeaGreen: #20B2AA;
+  --color-LightSkyBlue: #87CEFA;
+  --color-LightSlateGray: #778899;
+  --color-LightSteelBlue: #B0C4DE;
+  --color-LightYellow: #FFFFE0;
+  --color-Lime: #00FF00;
+  --color-LimeGreen: #32CD32;
+  --color-Linen: #FAF0E6;
+  --color-Magenta: #FF00FF;
+  --color-Maroon: #800000;
+  --color-MediumAquaMarine: #66CDAA;
+  --color-MediumBlue: #0000CD;
+  --color-MediumOrchid: #BA55D3;
+  --color-MediumPurple: #9370DB;
+  --color-MediumSeaGreen: #3CB371;
+  --color-MediumSlateBlue: #7B68EE;
+  --color-MediumSpringGreen: #00FA9A;
+  --color-MediumTurquoise: #48D1CC;
+  --color-MediumVioletRed: #C71585;
+  --color-MidnightBlue: #191970;
+  --color-MintCream: #F5FFFA;
+  --color-MistyRose: #FFE4E1;
+  --color-Moccasin: #FFE4B5;
+  --color-NavajoWhite: #FFDEAD;
+  --color-Navy: #000080;
+  --color-OldLace: #FDF5E6;
+  --color-Olive: #808000;
+  --color-OliveDrab: #6B8E23;
+  --color-Orange: #FFA500;
+  --color-OrangeRed: #FF4500;
+  --color-Orchid: #DA70D6;
+  --color-PaleGoldenRod: #EEE8AA;
+  --color-PaleGreen: #98FB98;
+  --color-PaleTurquoise: #AFEEEE;
+  --color-PaleVioletRed: #DB7093;
+  --color-PapayaWhip: #FFEFD5;
+  --color-PeachPuff: #FFDAB9;
+  --color-Peru: #CD853F;
+  --color-Pink: #FFC0CB;
+  --color-Plum: #DDA0DD;
+  --color-PowderBlue: #B0E0E6;
+  --color-Purple: #800080;
+  --color-RebeccaPurple: #663399;
+  --color-Red: #FF0000;
+  --color-RosyBrown: #BC8F8F;
+  --color-RoyalBlue: #4169E1;
+  --color-SaddleBrown: #8B4513;
+  --color-Salmon: #FA8072;
+  --color-SandyBrown: #F4A460;
+  --color-SeaGreen: #2E8B57;
+  --color-SeaShell: #FFF5EE;
+  --color-Sienna: #A0522D;
+  --color-Silver: #C0C0C0;
+  --color-SkyBlue: #87CEEB;
+  --color-SlateBlue: #6A5ACD;
+  --color-SlateGray: #708090;
+  --color-Snow: #FFFAFA;
+  --color-SpringGreen: #00FF7F;
+  --color-SteelBlue: #4682B4;
+  --color-Tan: #D2B48C;
+  --color-Teal: #008080;
+  --color-Thistle: #D8BFD8;
+  --color-Tomato: #FF6347;
+  --color-Turquoise: #40E0D0;
+  --color-Violet: #EE82EE;
+  --color-Wheat: #F5DEB3;
+  --color-White: #FFFFFF;
+  --color-WhiteSmoke: #F5F5F5;
+  --color-Yellow: #FFFF00;
+  --color-YellowGreen: #9ACD32;
+}
+
+
+.AliceBlue {
+  color: var(--color-AliceBlue);
+  font-size: 200%;
+  font-weight:700;
+}
+.AntiqueWhite {
+  color: var(--color-AntiqueWhite);
+  font-size: 200%;
+  font-weight:700;
+}
+.Aqua {
+  color: var(--color-Aqua);
+  font-size: 200%;
+  font-weight:700;
+}
+.Aquamarine {
+  color: var(--color-Aquamarine);
+  font-size: 200%;
+  font-weight:700;
+}
+.Azure {
+  color: var(--color-Azure);
+  font-size: 200%;
+  font-weight:700;
+}
+.Beige {
+  color: var(--color-Beige);
+  font-size: 200%;
+  font-weight:700;
+}
+.Bisque {
+  color: var(--color-Bisque);
+  font-size: 200%;
+  font-weight:700;
+}
+.Black {
+  color: var(--color-Black);
+  font-size: 200%;
+  font-weight:700;
+}
+.BlanchedAlmond {
+  color: var(--color-BlanchedAlmond);
+  font-size: 200%;
+  font-weight:700;
+}
+.Blue {
+  color: var(--color-Blue);
+  font-size: 200%;
+  font-weight:700;
+}
+.BlueViolet {
+  color: var(--color-BlueViolet);
+  font-size: 200%;
+  font-weight:700;
+}
+.Brown {
+  color: var(--color-Brown);
+  font-size: 200%;
+  font-weight:700;
+}
+.BurlyWood {
+  color: var(--color-BurlyWood);
+  font-size: 200%;
+  font-weight:700;
+}
+.CadetBlue {
+  color: var(--color-CadetBlue);
+  font-size: 200%;
+  font-weight:700;
+}
+.Chartreuse {
+  color: var(--color-Chartreuse);
+  font-size: 200%;
+  font-weight:700;
+}
+.Chocolate {
+  color: var(--color-Chocolate);
+  font-size: 200%;
+  font-weight:700;
+}
+.Coral {
+  color: var(--color-Coral);
+  font-size: 200%;
+  font-weight:700;
+}
+.CornflowerBlue {
+  color: var(--color-CornflowerBlue);
+  font-size: 200%;
+  font-weight:700;
+}
+.Cornsilk {
+  color: var(--color-Cornsilk);
+  font-size: 200%;
+  font-weight:700;
+}
+.Crimson {
+  color: var(--color-Crimson);
+  font-size: 200%;
+  font-weight:700;
+}
+.Cyan {
+  color: var(--color-Cyan);
+  font-size: 200%;
+  font-weight:700;
+}
+.DarkBlue {
+  color: var(--color-DarkBlue);
+  font-size: 200%;
+  font-weight:700;
+}
+.DarkCyan {
+  color: var(--color-DarkCyan);
+  font-size: 200%;
+  font-weight:700;
+}
+.DarkGoldenRod {
+  color: var(--color-DarkGoldenRod);
+  font-size: 200%;
+  font-weight:700;
+}
+.DarkGray {
+  color: var(--color-DarkGray);
+  font-size: 200%;
+  font-weight:700;
+}
+.DarkGreen {
+  color: var(--color-DarkGreen);
+  font-size: 200%;
+  font-weight:700;
+}
+.DarkKhaki {
+  color: var(--color-DarkKhaki);
+  font-size: 200%;
+  font-weight:700;
+}
+.DarkMagenta {
+  color: var(--color-DarkMagenta);
+  font-size: 200%;
+  font-weight:700;
+}
+.DarkOliveGreen {
+  color: var(--color-DarkOliveGreen);
+  font-size: 200%;
+  font-weight:700;
+}
+.DarkOrange {
+  color: var(--color-DarkOrange);
+  font-size: 200%;
+  font-weight:700;
+}
+.DarkOrchid {
+  color: var(--color-DarkOrchid);
+  font-size: 200%;
+  font-weight:700;
+}
+.DarkRed {
+  color: var(--color-DarkRed);
+  font-size: 200%;
+  font-weight:700;
+}
+.DarkSalmon {
+  color: var(--color-DarkSalmon);
+  font-size: 200%;
+  font-weight:700;
+}
+.DarkSeaGreen {
+  color: var(--color-DarkSeaGreen);
+  font-size: 200%;
+  font-weight:700;
+}
+.DarkSlateBlue {
+  color: var(--color-DarkSlateBlue);
+  font-size: 200%;
+  font-weight:700;
+}
+.DarkSlateGray {
+  color: var(--color-DarkSlateGray);
+  font-size: 200%;
+  font-weight:700;
+}
+.DarkTurquoise {
+  color: var(--color-DarkTurquoise);
+  font-size: 200%;
+  font-weight:700;
+}
+.DarkViolet {
+  color: var(--color-DarkViolet);
+  font-size: 200%;
+  font-weight:700;
+}
+.DeepPink {
+  color: var(--color-DeepPink);
+  font-size: 200%;
+  font-weight:700;
+}
+.DeepSkyBlue {
+  color: var(--color-DeepSkyBlue);
+  font-size: 200%;
+  font-weight:700;
+}
+.DimGray {
+  color: var(--color-DimGray);
+  font-size: 200%;
+  font-weight:700;
+}
+.DodgerBlue {
+  color: var(--color-DodgerBlue);
+  font-size: 200%;
+  font-weight:700;
+}
+.FireBrick {
+  color: var(--color-FireBrick);
+  font-size: 200%;
+  font-weight:700;
+}
+.FloralWhite {
+  color: var(--color-FloralWhite);
+  font-size: 200%;
+  font-weight:700;
+}
+.ForestGreen {
+  color: var(--color-ForestGreen);
+  font-size: 200%;
+  font-weight:700;
+}
+.Fuchsia {
+  color: var(--color-Fuchsia);
+  font-size: 200%;
+  font-weight:700;
+}
+.Gainsboro {
+  color: var(--color-Gainsboro);
+  font-size: 200%;
+  font-weight:700;
+}
+.GhostWhite {
+  color: var(--color-GhostWhite);
+  font-size: 200%;
+  font-weight:700;
+}
+.Gold {
+  color: var(--color-Gold);
+  font-size: 200%;
+  font-weight:700;
+}
+.GoldenRod {
+  color: var(--color-GoldenRod);
+  font-size: 200%;
+  font-weight:700;
+}
+.Gray {
+  color: var(--color-Gray);
+  font-size: 200%;
+  font-weight:700;
+}
+.Green {
+  color: var(--color-Green);
+  font-size: 200%;
+  font-weight:700;
+}
+.GreenYellow {
+  color: var(--color-GreenYellow);
+  font-size: 200%;
+  font-weight:700;
+}
+.HoneyDew {
+  color: var(--color-HoneyDew);
+  font-size: 200%;
+  font-weight:700;
+}
+.HotPink {
+  color: var(--color-HotPink);
+  font-size: 200%;
+  font-weight:700;
+}
+.IndianRed {
+  color: var(--color-IndianRed);
+  font-size: 200%;
+  font-weight:700;
+}
+.Indigo {
+  color: var(--color-Indigo);
+  font-size: 200%;
+  font-weight:700;
+}
+.Ivory {
+  color: var(--color-Ivory);
+  font-size: 200%;
+  font-weight:700;
+}
+.Khaki {
+  color: var(--color-Khaki);
+  font-size: 200%;
+  font-weight:700;
+}
+.Lavender {
+  color: var(--color-Lavender);
+  font-size: 200%;
+  font-weight:700;
+}
+.LavenderBlush {
+  color: var(--color-LavenderBlush);
+  font-size: 200%;
+  font-weight:700;
+}
+.LawnGreen {
+  color: var(--color-LawnGreen);
+  font-size: 200%;
+  font-weight:700;
+}
+.LemonChiffon {
+  color: var(--color-LemonChiffon);
+  font-size: 200%;
+  font-weight:700;
+}
+.LightBlue {
+  color: var(--color-LightBlue);
+  font-size: 200%;
+  font-weight:700;
+}
+.LightCoral {
+  color: var(--color-LightCoral);
+  font-size: 200%;
+  font-weight:700;
+}
+.LightCyan {
+  color: var(--color-LightCyan);
+  font-size: 200%;
+  font-weight:700;
+}
+.LightGoldenRodYellow {
+  color: var(--color-LightGoldenRodYellow);
+  font-size: 200%;
+  font-weight:700;
+}
+.LightGray {
+  color: var(--color-LightGray);
+  font-size: 200%;
+  font-weight:700;
+}
+.LightGreen {
+  color: var(--color-LightGreen);
+  font-size: 200%;
+  font-weight:700;
+}
+.LightPink {
+  color: var(--color-LightPink);
+  font-size: 200%;
+  font-weight:700;
+}
+.LightSalmon {
+  color: var(--color-LightSalmon);
+  font-size: 200%;
+  font-weight:700;
+}
+.LightSeaGreen {
+  color: var(--color-LightSeaGreen);
+  font-size: 200%;
+  font-weight:700;
+}
+.LightSkyBlue {
+  color: var(--color-LightSkyBlue);
+  font-size: 200%;
+  font-weight:700;
+}
+.LightSlateGray {
+  color: var(--color-LightSlateGray);
+  font-size: 200%;
+  font-weight:700;
+}
+.LightSteelBlue {
+  color: var(--color-LightSteelBlue);
+  font-size: 200%;
+  font-weight:700;
+}
+.LightYellow {
+  color: var(--color-LightYellow);
+  font-size: 200%;
+  font-weight:700;
+}
+.Lime {
+  color: var(--color-Lime);
+  font-size: 200%;
+  font-weight:700;
+}
+.LimeGreen {
+  color: var(--color-LimeGreen);
+  font-size: 200%;
+  font-weight:700;
+}
+.Linen {
+  color: var(--color-Linen);
+  font-size: 200%;
+  font-weight:700;
+}
+.Magenta {
+  color: var(--color-Magenta);
+  font-size: 200%;
+  font-weight:700;
+}
+.Maroon {
+  color: var(--color-Maroon);
+  font-size: 200%;
+  font-weight:700;
+}
+.MediumAquaMarine {
+  color: var(--color-MediumAquaMarine);
+  font-size: 200%;
+  font-weight:700;
+}
+.MediumBlue {
+  color: var(--color-MediumBlue);
+  font-size: 200%;
+  font-weight:700;
+}
+.MediumOrchid {
+  color: var(--color-MediumOrchid);
+  font-size: 200%;
+  font-weight:700;
+}
+.MediumPurple {
+  color: var(--color-MediumPurple);
+  font-size: 200%;
+  font-weight:700;
+}
+.MediumSeaGreen {
+  color: var(--color-MediumSeaGreen);
+  font-size: 200%;
+  font-weight:700;
+}
+.MediumSlateBlue {
+  color: var(--color-MediumSlateBlue);
+  font-size: 200%;
+  font-weight:700;
+}
+.MediumSpringGreen {
+  color: var(--color-MediumSpringGreen);
+  font-size: 200%;
+  font-weight:700;
+}
+.MediumTurquoise {
+  color: var(--color-MediumTurquoise);
+  font-size: 200%;
+  font-weight:700;
+}
+.MediumVioletRed {
+  color: var(--color-MediumVioletRed);
+  font-size: 200%;
+  font-weight:700;
+}
+.MidnightBlue {
+  color: var(--color-MidnightBlue);
+  font-size: 200%;
+  font-weight:700;
+}
+.MintCream {
+  color: var(--color-MintCream);
+  font-size: 200%;
+  font-weight:700;
+}
+.MistyRose {
+  color: var(--color-MistyRose);
+  font-size: 200%;
+  font-weight:700;
+}
+.Moccasin {
+  color: var(--color-Moccasin);
+  font-size: 200%;
+  font-weight:700;
+}
+.NavajoWhite {
+  color: var(--color-NavajoWhite);
+  font-size: 200%;
+  font-weight:700;
+}
+.Navy {
+  color: var(--color-Navy);
+  font-size: 200%;
+  font-weight:700;
+}
+.OldLace {
+  color: var(--color-OldLace);
+  font-size: 200%;
+  font-weight:700;
+}
+.Olive {
+  color: var(--color-Olive);
+  font-size: 200%;
+  font-weight:700;
+}
+.OliveDrab {
+  color: var(--color-OliveDrab);
+  font-size: 200%;
+  font-weight:700;
+}
+.Orange {
+  color: var(--color-Orange);
+  font-size: 200%;
+  font-weight:700;
+}
+.OrangeRed {
+  color: var(--color-OrangeRed);
+  font-size: 200%;
+  font-weight:700;
+}
+.Orchid {
+  color: var(--color-Orchid);
+  font-size: 200%;
+  font-weight:700;
+}
+.PaleGoldenRod {
+  color: var(--color-PaleGoldenRod);
+  font-size: 200%;
+  font-weight:700;
+}
+.PaleGreen {
+  color: var(--color-PaleGreen);
+  font-size: 200%;
+  font-weight:700;
+}
+.PaleTurquoise {
+  color: var(--color-PaleTurquoise);
+  font-size: 200%;
+  font-weight:700;
+}
+.PaleVioletRed {
+  color: var(--color-PaleVioletRed);
+  font-size: 200%;
+  font-weight:700;
+}
+.PapayaWhip {
+  color: var(--color-PapayaWhip);
+  font-size: 200%;
+  font-weight:700;
+}
+.PeachPuff {
+  color: var(--color-PeachPuff);
+  font-size: 200%;
+  font-weight:700;
+}
+.Peru {
+  color: var(--color-Peru);
+  font-size: 200%;
+  font-weight:700;
+}
+.Pink {
+  color: var(--color-Pink);
+  font-size: 200%;
+  font-weight:700;
+}
+.Plum {
+  color: var(--color-Plum);
+  font-size: 200%;
+  font-weight:700;
+}
+.PowderBlue {
+  color: var(--color-PowderBlue);
+  font-size: 200%;
+  font-weight:700;
+}
+.Purple {
+  color: var(--color-Purple);
+  font-size: 200%;
+  font-weight:700;
+}
+.RebeccaPurple {
+  color: var(--color-RebeccaPurple);
+  font-size: 200%;
+  font-weight:700;
+}
+.Red {
+  color: var(--color-Red);
+  font-size: 200%;
+  font-weight:700;
+}
+.RosyBrown {
+  color: var(--color-RosyBrown);
+  font-size: 200%;
+  font-weight:700;
+}
+.RoyalBlue {
+  color: var(--color-RoyalBlue);
+  font-size: 200%;
+  font-weight:700;
+}
+.SaddleBrown {
+  color: var(--color-SaddleBrown);
+  font-size: 200%;
+  font-weight:700;
+}
+.Salmon {
+  color: var(--color-Salmon);
+  font-size: 200%;
+  font-weight:700;
+}
+.SandyBrown {
+  color: var(--color-SandyBrown);
+  font-size: 200%;
+  font-weight:700;
+}
+.SeaGreen {
+  color: var(--color-SeaGreen);
+  font-size: 200%;
+  font-weight:700;
+}
+.SeaShell {
+  color: var(--color-SeaShell);
+  font-size: 200%;
+  font-weight:700;
+}
+.Sienna {
+  color: var(--color-Sienna);
+  font-size: 200%;
+  font-weight:700;
+}
+.Silver {
+  color: var(--color-Silver);
+  font-size: 200%;
+  font-weight:700;
+}
+.SkyBlue {
+  color: var(--color-SkyBlue);
+  font-size: 200%;
+  font-weight:700;
+}
+.SlateBlue {
+  color: var(--color-SlateBlue);
+  font-size: 200%;
+  font-weight:700;
+}
+.SlateGray {
+  color: var(--color-SlateGray);
+  font-size: 200%;
+  font-weight:700;
+}
+.Snow {
+  color: var(--color-Snow);
+  font-size: 200%;
+  font-weight:700;
+}
+.SpringGreen {
+  color: var(--color-SpringGreen);
+  font-size: 200%;
+  font-weight:700;
+}
+.SteelBlue {
+  color: var(--color-SteelBlue);
+  font-size: 200%;
+  font-weight:700;
+}
+.Tan {
+  color: var(--color-Tan);
+  font-size: 200%;
+  font-weight:700;
+}
+.Teal {
+  color: var(--color-Teal);
+  font-size: 200%;
+  font-weight:700;
+}
+.Thistle {
+  color: var(--color-Thistle);
+  font-size: 200%;
+  font-weight:700;
+}
+.Tomato {
+  color: var(--color-Tomato);
+  font-size: 200%;
+  font-weight:700;
+}
+.Turquoise {
+  color: var(--color-Turquoise);
+  font-size: 200%;
+  font-weight:700;
+}
+.Violet {
+  color: var(--color-Violet);
+  font-size: 200%;
+  font-weight:700;
+}
+.Wheat {
+  color: var(--color-Wheat);
+  font-size: 200%;
+  font-weight:700;
+}
+.White {
+  color: var(--color-White);
+  font-size: 200%;
+  font-weight:700;
+}
+.WhiteSmoke {
+  color: var(--color-WhiteSmoke);
+  font-size: 200%;
+  font-weight:700;
+}
+.Yellow {
+  color: var(--color-Yellow);
+  font-size: 200%;
+  font-weight:700;
+}
+.YellowGreen {
+  color: var(--color-YellowGreen);
+  font-size: 200%;
+  font-weight:700;
+}
+.AliceBlue-inline {
+  color: var(--color-AliceBlue);
+}
+.AntiqueWhite-inline {
+  color: var(--color-AntiqueWhite);
+}
+.Aqua-inline {
+  color: var(--color-Aqua);
+}
+.Aquamarine-inline {
+  color: var(--color-Aquamarine);
+}
+.Azure-inline {
+  color: var(--color-Azure);
+}
+.Beige-inline {
+  color: var(--color-Beige);
+}
+.Bisque-inline {
+  color: var(--color-Bisque);
+}
+.Black-inline {
+  color: var(--color-Black);
+}
+.BlanchedAlmond-inline {
+  color: var(--color-BlanchedAlmond);
+}
+.Blue-inline {
+  color: var(--color-Blue);
+}
+.BlueViolet-inline {
+  color: var(--color-BlueViolet);
+}
+.Brown-inline {
+  color: var(--color-Brown);
+}
+.BurlyWood-inline {
+  color: var(--color-BurlyWood);
+}
+.CadetBlue-inline {
+  color: var(--color-CadetBlue);
+}
+.Chartreuse-inline {
+  color: var(--color-Chartreuse);
+}
+.Chocolate-inline {
+  color: var(--color-Chocolate);
+}
+.Coral-inline {
+  color: var(--color-Coral);
+}
+.CornflowerBlue-inline {
+  color: var(--color-CornflowerBlue);
+}
+.Cornsilk-inline {
+  color: var(--color-Cornsilk);
+}
+.Crimson-inline {
+  color: var(--color-Crimson);
+}
+.Cyan-inline {
+  color: var(--color-Cyan);
+}
+.DarkBlue-inline {
+  color: var(--color-DarkBlue);
+}
+.DarkCyan-inline {
+  color: var(--color-DarkCyan);
+}
+.DarkGoldenRod-inline {
+  color: var(--color-DarkGoldenRod);
+}
+.DarkGray-inline {
+  color: var(--color-DarkGray);
+}
+.DarkGreen-inline {
+  color: var(--color-DarkGreen);
+}
+.DarkKhaki-inline {
+  color: var(--color-DarkKhaki);
+}
+.DarkMagenta-inline {
+  color: var(--color-DarkMagenta);
+}
+.DarkOliveGreen-inline {
+  color: var(--color-DarkOliveGreen);
+}
+.DarkOrange-inline {
+  color: var(--color-DarkOrange);
+}
+.DarkOrchid-inline {
+  color: var(--color-DarkOrchid);
+}
+.DarkRed-inline {
+  color: var(--color-DarkRed);
+}
+.DarkSalmon-inline {
+  color: var(--color-DarkSalmon);
+}
+.DarkSeaGreen-inline {
+  color: var(--color-DarkSeaGreen);
+}
+.DarkSlateBlue-inline {
+  color: var(--color-DarkSlateBlue);
+}
+.DarkSlateGray-inline {
+  color: var(--color-DarkSlateGray);
+}
+.DarkTurquoise-inline {
+  color: var(--color-DarkTurquoise);
+}
+.DarkViolet-inline {
+  color: var(--color-DarkViolet);
+}
+.DeepPink-inline {
+  color: var(--color-DeepPink);
+}
+.DeepSkyBlue-inline {
+  color: var(--color-DeepSkyBlue);
+}
+.DimGray-inline {
+  color: var(--color-DimGray);
+}
+.DodgerBlue-inline {
+  color: var(--color-DodgerBlue);
+}
+.FireBrick-inline {
+  color: var(--color-FireBrick);
+}
+.FloralWhite-inline {
+  color: var(--color-FloralWhite);
+}
+.ForestGreen-inline {
+  color: var(--color-ForestGreen);
+}
+.Fuchsia-inline {
+  color: var(--color-Fuchsia);
+}
+.Gainsboro-inline {
+  color: var(--color-Gainsboro);
+}
+.GhostWhite-inline {
+  color: var(--color-GhostWhite);
+}
+.Gold-inline {
+  color: var(--color-Gold);
+}
+.GoldenRod-inline {
+  color: var(--color-GoldenRod);
+}
+.Gray-inline {
+  color: var(--color-Gray);
+}
+.Green-inline {
+  color: var(--color-Green);
+}
+.GreenYellow-inline {
+  color: var(--color-GreenYellow);
+}
+.HoneyDew-inline {
+  color: var(--color-HoneyDew);
+}
+.HotPink-inline {
+  color: var(--color-HotPink);
+}
+.IndianRed-inline {
+  color: var(--color-IndianRed);
+}
+.Indigo-inline {
+  color: var(--color-Indigo);
+}
+.Ivory-inline {
+  color: var(--color-Ivory);
+}
+.Khaki-inline {
+  color: var(--color-Khaki);
+}
+.Lavender-inline {
+  color: var(--color-Lavender);
+}
+.LavenderBlush-inline {
+  color: var(--color-LavenderBlush);
+}
+.LawnGreen-inline {
+  color: var(--color-LawnGreen);
+}
+.LemonChiffon-inline {
+  color: var(--color-LemonChiffon);
+}
+.LightBlue-inline {
+  color: var(--color-LightBlue);
+}
+.LightCoral-inline {
+  color: var(--color-LightCoral);
+}
+.LightCyan-inline {
+  color: var(--color-LightCyan);
+}
+.LightGoldenRodYellow-inline {
+  color: var(--color-LightGoldenRodYellow);
+}
+.LightGray-inline {
+  color: var(--color-LightGray);
+}
+.LightGreen-inline {
+  color: var(--color-LightGreen);
+}
+.LightPink-inline {
+  color: var(--color-LightPink);
+}
+.LightSalmon-inline {
+  color: var(--color-LightSalmon);
+}
+.LightSeaGreen-inline {
+  color: var(--color-LightSeaGreen);
+}
+.LightSkyBlue-inline {
+  color: var(--color-LightSkyBlue);
+}
+.LightSlateGray-inline {
+  color: var(--color-LightSlateGray);
+}
+.LightSteelBlue-inline {
+  color: var(--color-LightSteelBlue);
+}
+.LightYellow-inline {
+  color: var(--color-LightYellow);
+}
+.Lime-inline {
+  color: var(--color-Lime);
+}
+.LimeGreen-inline {
+  color: var(--color-LimeGreen);
+}
+.Linen-inline {
+  color: var(--color-Linen);
+}
+.Magenta-inline {
+  color: var(--color-Magenta);
+}
+.Maroon-inline {
+  color: var(--color-Maroon);
+}
+.MediumAquaMarine-inline {
+  color: var(--color-MediumAquaMarine);
+}
+.MediumBlue-inline {
+  color: var(--color-MediumBlue);
+}
+.MediumOrchid-inline {
+  color: var(--color-MediumOrchid);
+}
+.MediumPurple-inline {
+  color: var(--color-MediumPurple);
+}
+.MediumSeaGreen-inline {
+  color: var(--color-MediumSeaGreen);
+}
+.MediumSlateBlue-inline {
+  color: var(--color-MediumSlateBlue);
+}
+.MediumSpringGreen-inline {
+  color: var(--color-MediumSpringGreen);
+}
+.MediumTurquoise-inline {
+  color: var(--color-MediumTurquoise);
+}
+.MediumVioletRed-inline {
+  color: var(--color-MediumVioletRed);
+}
+.MidnightBlue-inline {
+  color: var(--color-MidnightBlue);
+}
+.MintCream-inline {
+  color: var(--color-MintCream);
+}
+.MistyRose-inline {
+  color: var(--color-MistyRose);
+}
+.Moccasin-inline {
+  color: var(--color-Moccasin);
+}
+.NavajoWhite-inline {
+  color: var(--color-NavajoWhite);
+}
+.Navy-inline {
+  color: var(--color-Navy);
+}
+.OldLace-inline {
+  color: var(--color-OldLace);
+}
+.Olive-inline {
+  color: var(--color-Olive);
+}
+.OliveDrab-inline {
+  color: var(--color-OliveDrab);
+}
+.Orange-inline {
+  color: var(--color-Orange);
+}
+.OrangeRed-inline {
+  color: var(--color-OrangeRed);
+}
+.Orchid-inline {
+  color: var(--color-Orchid);
+}
+.PaleGoldenRod-inline {
+  color: var(--color-PaleGoldenRod);
+}
+.PaleGreen-inline {
+  color: var(--color-PaleGreen);
+}
+.PaleTurquoise-inline {
+  color: var(--color-PaleTurquoise);
+}
+.PaleVioletRed-inline {
+  color: var(--color-PaleVioletRed);
+}
+.PapayaWhip-inline {
+  color: var(--color-PapayaWhip);
+}
+.PeachPuff-inline {
+  color: var(--color-PeachPuff);
+}
+.Peru-inline {
+  color: var(--color-Peru);
+}
+.Pink-inline {
+  color: var(--color-Pink);
+}
+.Plum-inline {
+  color: var(--color-Plum);
+}
+.PowderBlue-inline {
+  color: var(--color-PowderBlue);
+}
+.Purple-inline {
+  color: var(--color-Purple);
+}
+.RebeccaPurple-inline {
+  color: var(--color-RebeccaPurple);
+}
+.Red-inline {
+  color: var(--color-Red);
+}
+.RosyBrown-inline {
+  color: var(--color-RosyBrown);
+}
+.RoyalBlue-inline {
+  color: var(--color-RoyalBlue);
+}
+.SaddleBrown-inline {
+  color: var(--color-SaddleBrown);
+}
+.Salmon-inline {
+  color: var(--color-Salmon);
+}
+.SandyBrown-inline {
+  color: var(--color-SandyBrown);
+}
+.SeaGreen-inline {
+  color: var(--color-SeaGreen);
+}
+.SeaShell-inline {
+  color: var(--color-SeaShell);
+}
+.Sienna-inline {
+  color: var(--color-Sienna);
+}
+.Silver-inline {
+  color: var(--color-Silver);
+}
+.SkyBlue-inline {
+  color: var(--color-SkyBlue);
+}
+.SlateBlue-inline {
+  color: var(--color-SlateBlue);
+}
+.SlateGray-inline {
+  color: var(--color-SlateGray);
+}
+.Snow-inline {
+  color: var(--color-Snow);
+}
+.SpringGreen-inline {
+  color: var(--color-SpringGreen);
+}
+.SteelBlue-inline {
+  color: var(--color-SteelBlue);
+}
+.Tan-inline {
+  color: var(--color-Tan);
+}
+.Teal-inline {
+  color: var(--color-Teal);
+}
+.Thistle-inline {
+  color: var(--color-Thistle);
+}
+.Tomato-inline {
+  color: var(--color-Tomato);
+}
+.Turquoise-inline {
+  color: var(--color-Turquoise);
+}
+.Violet-inline {
+  color: var(--color-Violet);
+}
+.Wheat-inline {
+  color: var(--color-Wheat);
+}
+.White-inline {
+  color: var(--color-White);
+}
+.WhiteSmoke-inline {
+  color: var(--color-WhiteSmoke);
+}
+.Yellow-inline {
+  color: var(--color-Yellow);
+}
+.YellowGreen-inline {
+  color: var(--color-YellowGreen);
+}
+
+
+
+
+
+/* blue color of our SNA4DS logo */
+.LogoBlue-inline {
+	color: #2856CA;
+}
+
+
+
+/* ****************************************
+*** background slides 
+******************************************/
+
+/* add any new color thrice (always alphabetically):
+- to set the according background color 
+- for the appropriate text color (black or white)
+- no slide number
+*/
+
+/* background color ************************/
+.bg-Black { background-color: var(--color-Black); }
+.bg-Blue { background-color: var(--color-Blue); }
+.bg-Brown { background-color: var(--color-Brown); }
+.bg-DarkOrange { background-color: var(--color-DarkOrange); }
+.bg-GoldenRod { background-color: var(--color-GoldenRod) }
+.bg-Green { background-color: var(--color-Green); }
+.bg-Grey { background-color: var(--color-Grey); } 
+.bg-JADSbrown { background-color: #7F3024; }
+.bg-Orange { background-color: var(--color-Orange); }
+.bg-Red { background-color: var(--color-Red); }
+.bg-White { background-color: var(--color-White); }
+.bg-Yellow { background-color: var(--color-Yellow); }
+.bg-YellowGreen { background-color: var(--color-YellowGreen); }
+
+
+/* set text color: white or black **************/ 
+.bg-Black, .bg-Blue, .bg-Brown, .bg-DarkOrange, .bg-JADSbrown, .bg-Green {
+  color: var(--color-White);
+}
+.bg-GoldenRod, .bg-Grey, .bg-Orange, .bg-Red, .bg-White, .bg-Yellow, .bg-YellowGreen {
+  color: var(--color-Black);
+}
+
+
+/* no page numbers on these background slides *********/
+.bg-Black .remark-slide-number,
+.bg-Blue .remark-slide-number,
+.bg-Brown .remark-slide-number,
+.bg-DarkOrange .remark-slide-number,
+.bg-GoldenRod .remark-slide-number,
+.bg-Green .remark-slide-number,
+.bg-Grey .remark-slide-number,
+.bg-JADSbrown .remark-slide-number,
+.bg-Orange .remark-slide-number,
+.bg-Red .remark-slide-number,
+.bg-White .remark-slide-number,
+.bg-Yellow .remark-slide-number,
+.bg-YellowGreen .remark-slide-number {
+  display: none;
+}
+
+

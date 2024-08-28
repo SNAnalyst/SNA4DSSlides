@@ -1,0 +1,526 @@
+---
+title: "SNA4DS Slide collection"
+author: "Claudia & Roger"
+date: "2023-2024"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    highlight: github
+    includes:
+      in_header: header.html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+                  echo = FALSE,
+                  out.width = "90%",
+                  fig.height = 6,
+                  fig.path = "assets/images/",
+                  fig.retina = 1.5,
+                  dev = "svg",
+                  message = FALSE,
+                  warning = FALSE)
+
+knitr::opts_knit$set(global.par = TRUE)  # anders worden de margin settings niet overal doorgevoerd
+
+
+# path is the main github under which the slidedeck is published
+# slideDeckFile is the name of the html file (without the ".html") for which the over view is made
+# lectureName is the title that is printed above the overview
+path <- "https://snanalyst.github.io/SNA4DSSlides/"
+make_overview <- function(overview, path, slidedeckFile, lectureName) {
+  Top <- paste0('<h2>', lectureName, 
+                '</h2><div id="full-slide-deck" class="section level3"><h3><a href="', 
+                paste0(path, slidedeckFile, ".html"),
+                '">Full slide deck</a></h3>')
+  
+  if (!is.null(overview)) {
+    Links <- overview |> 
+      glue::glue_data('<a href="{path}{slidedeckFile}.html#{name}">{description}</a>')
+    
+    out <- paste0(Top, "<p>Some shortcuts:<br>",
+           paste0(Links, collapse = " -- "),
+           "</p><hr>")
+  } else {
+    out <- paste0(Top, "<hr>")
+  }
+  
+  return(out)
+}
+
+```
+
+<center>
+![](assets/images/sna4ds_logo_140.png)
+</center>
+
+------------------------------------------------------------------------
+
+Some hints for using these slides:
+
+-   You can use the shortcuts below to jump to a specific section in the slides directly
+
+-   When you have a slidedeck open, you can type `O` on your keyboard to get an overview with miniatures of the slides, to easily visually find a slide you are looking for
+
+-   Inside a slidedeck, type `m` on your keyboard if you want to challenge yourself when viewing the slides
+
+------------------------------------------------------------------------
+
+<!-- SNA4DS cheatsheet -->   
+
+
+Find the [SNA4DS cheatsheet here](https://snanalyst.github.io/cheatsheet.html).
+
+------------------------------------------------------------------------
+
+
+
+<!-- Week 03 -- Lecture: Intro to SNA4DS -->   
+
+```{r, include = FALSE}                                       
+overview <- matrix(c(                                         
+ "CourseTeam", "Your instructors",                           
+ "complex-systems", "Complex systems",                       
+ "networks_and-us", "Networks and us",                       
+ "JustOneFriend", "Just one friend",                         
+ "start_of_sna", "Start of SNA",                             
+ "examples-of-actors", "Examples of vertices",
+ "examples-of-relationships", "Examples of edges",
+ "examples-of-networks-internet", "Examples: internet",      
+ "examples-of-networks-HPlab", "Examples: HP Lab",           
+ "examples-of-networks-blogosphere", "Examples: Blogosphere",
+ "SNA4DS_topics", "SNA4DS topics"                            
+), byrow = TRUE, ncol = 2) |>                                 
+as.data.frame() |>                                            
+ setNames(c("name", "description"))                          
+                                                             
+slidedeckFile <- "Lecture_01a_publish"                        
+lectureName <- "Week 03 -- Lecture: Intro to SNA4DS, I"          
+```                                                           
+                                                            
+`r make_overview(overview, path, slidedeckFile, lectureName)`
+
+
+<!-- Week 03 – Lecture: Intro to SNA4DS, II -->      
+
+```{r, include = FALSE}                                      
+overview <- matrix(c(                                        
+ "intro_nets", "Two starts for one happy story",            
+ "graph_theory", "Graph theory"                             
+), byrow = TRUE, ncol = 2) |>                                
+as.data.frame() |>                                           
+ setNames(c("name", "description"))                         
+                                                            
+slidedeckFile <- "Lecture_01b_CZ"                            
+lectureName <- "Week 03 – Lecture: Intro to SNA4DS, II"      
+```                                                          
+                                                            
+`r make_overview(overview, path, slidedeckFile, lectureName)`
+
+
+
+<!-- Week 03 - Lab: Intro to R -->                           
+```{r, include = FALSE}                                      
+overview <- matrix(c(                                        
+ "intro_r", "Intro to R and RStudio",                       
+ "mentimeter", "Programming Survey",                        
+ "Rstudio_installation", "R studio installation and setup", 
+ "snaverse_setup", "snaverse setup",                        
+ "tutorials", "Info about tutorials",                       
+ "bug_reporting", "Bug Reporting",                          
+ "tutorial1", "T01 programming in R",                       
+ "Disclaimer", "Keep up with the material"                  
+), byrow = TRUE, ncol = 2) |>                                
+as.data.frame() |>                                           
+ setNames(c("name", "description"))                         
+                                                            
+slidedeckFile <- "Lab_01_CZ"                                 
+lectureName <- "Week 03 - Lab: Intro to R"                   
+```                                                          
+                                                            
+`r make_overview(overview, path, slidedeckFile, lectureName)`
+
+
+
+<!-- Week 04 - Lab: Intro to SNA in R -->                           
+```{r, include = FALSE}                                      
+overview <- matrix(c(                                        
+ "menu", "Menu",                                            
+ "whyr", "Why use R for SNA",                               
+ "homeplay", "Homeplay coding",                             
+ "awesome", "What makes snafun to awesome",                 
+ "graphobjects", "Dealing with graph objects",              
+ "exercise", "Do this exercise (1)",                        
+ "blogosphere", "What's up with the blogosphere graph?",    
+ "help", "Getting help"                                     
+), byrow = TRUE, ncol = 2) |>                                
+as.data.frame() |>                                           
+ setNames(c("name", "description"))                         
+                                                            
+slidedeckFile <- "Lab_02_SNA_in_R"                           
+lectureName <- "Week 04 - Lab: Intro to SNA in R"                   
+```                                                          
+                                                            
+`r make_overview(overview, path, slidedeckFile, lectureName)`
+
+
+
+
+                                                            
+<!-- Week 04 - Lecture: Social Network Measures -->         
+```{r, include = FALSE}                                      
+overview <- matrix(c(                                        
+ "gamenet", "The network of the game",                      
+ "alreadyknown", "You already learnt these measures/tools", 
+ "measures", "The main network measures in this course",    
+ "why", "Why?",                                             
+ "geodesic", "geodesic",                                    
+ "weighted", "weighted networks",                           
+ "multiplex", "multiplex networks",                         
+ "trains", "train station network",                         
+ "degree", "Degree centrality",                             
+ "closeness", "Closeness centrality",                       
+ "stress", "Stress centrality",                             
+ "betweenness", "Betweenness centrality",                   
+ "centrality-interpretation", "Interpretation",             
+ "centrality-distribution", "Centrality distribution",      
+ "takeaway-1", "Takeaway 1",                                
+ "takeaway-2", "Takeaway 2",                                
+ "centralization", "Centralization",                        
+ "freeman", "freeman centralization",                       
+ "sdcentral", "sd centralization"                           
+), byrow = TRUE, ncol = 2) |>                                
+as.data.frame() |>                                           
+ setNames(c("name", "description"))                         
+                                                            
+slidedeckFile <- "Week04_Lecture_Measures"                   
+lectureName <- "Week 04 - Lecture: Social Network Measures" 
+```                                                          
+                                                            
+`r make_overview(overview, path, slidedeckFile, lectureName)`
+
+
+
+<!-- Week 05 - Lab: Network measures -->                     
+```{r, include = FALSE}                                      
+overview <- matrix(c(                                        
+ "menu", "Menu",                                            
+ "descriptives", "Descriptive measures",                    
+ "transitivity", "Transitivity",                            
+ "walktrap", "Homeplay: communities",                       
+ "isolates", "Homeplay: toss them isolates!",               
+ "bonus", "Homeplay bonus question",                        
+ "bridge", "Who bridges between the communities",           
+ "facility", "Facility location analysis",                  
+ "Pagerank", "Pagerank through simulation"                  
+), byrow = TRUE, ncol = 2) |>                                
+as.data.frame() |>                                           
+ setNames(c("name", "description"))                         
+                                                            
+slidedeckFile <- "Lab-04_Measures"                           
+lectureName <- "Week 05 - Lab: Network measures"             
+```                                                          
+                                                            
+`r make_overview(overview, path, slidedeckFile, lectureName)`
+
+
+<!-- Week 05 - Lecture: Network models -->                                
+```{r, include = FALSE}                                                   
+overview <- matrix(c(                                                     
+ "menu", "Menu",                                                         
+ "assumption", "Our assumptions from here on out",                       
+ "role", "The role of statistics",                                       
+ "models_in_course", "Overview of the statistical models in this course",
+ "toblerslaw", "Tobler's First Law",                                     
+ "socinf", "Social influence on a network",                              
+ "nam", "Network autocorrelation model",                                 
+ "weightmatrix", "Weight matrix",                                        
+ "communication", "Communication",                                       
+ "comparison", "Comparison",                                             
+ "structuralequivalence", "Structural equivalence",                      
+ "sedist", "snafun::d_structural_equivalence",                           
+ "lnam", "stat_nam function"                                             
+), byrow = TRUE, ncol = 2) |>                                             
+as.data.frame() |>                                                        
+ setNames(c("name", "description"))                                      
+                                                                         
+slidedeckFile <- "Lecture_week05_stats"                                   
+lectureName <- "Week 05 - Lecture: Network models"                        
+```                                                                       
+                                                                         
+`r make_overview(overview, path, slidedeckFile, lectureName)`   
+
+
+
+                                                                                                              
+<!-- Week 06 - Lab: Network models -->                                                                         
+```{r, include = FALSE}                                                                                        
+overview <- matrix(c(                                                                                          
+ "menu", "Menu",                                                                                              
+ "extract_vertex_attributes", "Extract vertex attributes",                                                    
+ "louisiana", "Louisiana results",                                                                            
+ "pvalues", "Empirical <i>p</i>-values",                                                                      
+ "table", "Which method to use when?",                                                                        
+ "FIFA_networks", "FIFA networks",                                                                            
+ "advanced", "Advanced CUG use",                                                                              
+ "stat", "Statistically modeling networks"                                                                    
+), byrow = TRUE, ncol = 2) |>                                                                                  
+as.data.frame() |>                                                                                             
+ setNames(c("name", "description"))                                                                           
+                                                                                                              
+# slidedeckFile <- "C:\\Dropbox\\R\\eigen_packages\\=git\\SNA4DSSlides\\SNA4DSSlides\\Lab__week06__stats-publish"
+slidedeckFile <- "Lab__week06__stats"
+lectureName <- "Week 06 - Lab: Network models"                                                                 
+```                                                                                                            
+                                                                                                              
+`r make_overview(overview, path, slidedeckFile, lectureName)`  
+
+
+
+
+
+<!-- Week 07 -- Lecture: Network data collection -->                         
+```{r, include = FALSE}                                                      
+overview <- matrix(c(                                                        
+ "DataTypes_slide", "collect data about network, nodes and edge attributes",
+ "Design_Bias", "how to make an unbiased study design",                     
+ "Sampling_Bias", "Decide on the right approach for your sample",           
+ "egonets", "example of egonets",                                           
+ "ethical_issues", "Designing an ethics compliant study",                   
+ "collection_strategies", "How to approach a data collection problem",      
+ "collection_strategies", "How to approach a data collection problem",      
+ "processing_data", "How to turn into a network the data we collect",       
+ "SNA4DS_dataprocessing", "How to process survey data using `snafun`"       
+), byrow = TRUE, ncol = 2) |>                                                
+as.data.frame() |>                                                           
+ setNames(c("name", "description"))                                         
+                                                                            
+slidedeckFile <- "Week07_Lecture_CZ_collecting_data"                         
+lectureName <- "Week 07 -- Lecture: Network data collection"                 
+```                                                                          
+                                                                            
+`r make_overview(overview, path, slidedeckFile, lectureName)` 
+
+
+
+<!-- Week 08 -- Lab: Network visualization -->                                                     
+```{r, include = FALSE}                                                                            
+overview <- matrix(c(                                                                              
+ "Menu", "Topics covered in today's lab",                                                         
+ "Thinking_Viz", "How to conceptualize visualizations before plotting them",                      
+ "homeplay", "Discussing the homeplay",                                                           
+ "Storing_plot_features", "Alternative way of plotting with storing plot parameters in the graph",
+ "edge_as_color_scale", "Plotting a color scale on the edges",                                    
+ "layout_customization", "How to manually customize a layout",                                    
+ "tkplot", "Usage of the manual layout function",                                                 
+ "Color_palette", "Finding colors for plots in R",                                                
+ "Parameter_summary", "A summary of the most useful parameters for plotting in igraph",           
+ "Viz2022Data", "Visualization of 2022 cohort data"                                               
+), byrow = TRUE, ncol = 2) |>                                                                      
+as.data.frame() |>                                                                                 
+ setNames(c("name", "description"))                                                               
+                                                                                                  
+slidedeckFile <- "Week08-Lab-Visualizations"                                                       
+lectureName <- "Week 08 -- Lab: Network visualization"                                             
+```                                                                                                
+                                                                                                  
+`r make_overview(overview, path, slidedeckFile, lectureName)`
+
+
+
+
+<!-- Week 09 -- Lecture: ERGM I -->                                                                                   
+```{r, include = FALSE}                                                                                               
+overview <- matrix(c(                                                                                                 
+"Causal_inference_recap", "Causal inference models we did so far",                                                  
+"conceptualizing_ergm_outcome_var", "ergm outcome variable is always a network, it can be seen as a dummy variable",
+"Erdos_Renyi", "Erdos Renyi model",                                                                                 
+"P1_model", "P1 model",                                                                                             
+"Predictors", "Exogeneous and Endogeneous effects",                                                                 
+"ergm_math", "Mathematical model of the ERGM",                                                                      
+"ergm_effects", "intuitive idea of ergm effects within the model",                                                  
+"ergm_theory", "How to theoretically approach an ergm",                                                             
+"ergm_recap", "ergm model features",                                                                                
+"ergm_reasoning_example", "How to approach a research design with ergms",                                           
+"statnet", "Introducing statnet"                                                                                    
+), byrow = TRUE, ncol = 2) |>                                                                                         
+as.data.frame() |>                                                                                                    
+setNames(c("name", "description"))                                                                                  
+                                                                                                                 
+slidedeckFile <- "Week09_Lecture_ERGM1"                                                                               
+lectureName <- "Week 09 -- Lecture: ERGM I"                                                                           
+```                                                                                                                   
+                                                                                                                 
+`r make_overview(overview, path, slidedeckFile, lectureName)` 
+
+
+
+
+<!-- Week 09 -- Lecture: ERGM II -->                                
+```{r, include = FALSE}                                             
+overview <- matrix(c(                                               
+"Menu", "Topics we cover today",                                  
+"Recap_ERGM1", "Recap of the previous ERGM class",                
+"Fitting_ER", "Fitting an Erdos Renyi model",                     
+"Fitting_P1", "Fitting an ERGM with 4 terms - P1 model",          
+"ERGM_Effects", "More about ERGM Effects and estimation",         
+"Finding_Effects", "How to find ERGM effects in the help files",  
+"ERGM_pronunciation", "How to pronounce the name of these models",
+"Fitting_ERGM_exogenous", "Fitting ERGMs with exogenous terms"    
+), byrow = TRUE, ncol = 2) |>                                       
+as.data.frame() |>                                                  
+setNames(c("name", "description"))                                
+                                                                 
+slidedeckFile <- "Week09_Lecture_ERGM2"                             
+lectureName <- "Week 09 -- Lecture: ERGM II"                        
+```                                                                 
+                                                                 
+`r make_overview(overview, path, slidedeckFile, lectureName)`  
+
+
+
+ <!-- Week 10 -- Lab: ERGM I -->                                               
+```{r, include = FALSE}                                                       
+overview <- matrix(c(                                                         
+"menu", "List of content for today's lab",                                  
+"markovian_graph", "The effects in the neighborhood",                       
+"structural_undirected_terms", "structural undirected terms",               
+"structural_directed_terms", "Structural Directed terms",                   
+"shared_partners", "Egdewise and dyadwise shared partners",                 
+"terms_triads", "Terms for triads",                                         
+"cycle", "term for kcycle",                                                 
+"exogenous_effects", "Terms for exogenous effects",                         
+"mixing_matrix", "Cross tabulation for variables and edges",                
+"Homeplay_data_exploration", "Data analysis before running any model",      
+"hypotheses formulation", "Formulating hypotheses before running any model",
+"Baseline_models", "Running Baseline models",                               
+"testing_hypotheses", "testing the hypotheses",                             
+"exploring_terms", "Exploring other specifications",                        
+"results", "commenting on results",                                         
+"adding_structural_terms", "Adding structural undirected terms",            
+"re_fitting_curved", "Improving the model with curved term"                 
+), byrow = TRUE, ncol = 2) |>                                                 
+as.data.frame() |>                                                            
+setNames(c("name", "description"))                                          
+                                                                           
+slidedeckFile <- "Week10_Lab_ERGM1"                                           
+lectureName <- "Week 10 -- Lab: ERGM I"                                       
+```                                                                           
+                                                                           
+`r make_overview(overview, path, slidedeckFile, lectureName)` 
+
+
+
+<!-- Week 10 -- Lecture: ERGM III -->                                       
+```{r, include = FALSE}                                                     
+overview <- matrix(c(                                                       
+"menu", "List of contents for today's lecture",                           
+"ERGMestimation", "An intuitive description of how the estimation works", 
+"convergence", "What is the convergence of a model",                      
+"burnin", "What is the model burn-in",                                    
+"sample_size", "What is the model sample size",                           
+"mcmc_diagnostics", "How to perform and interpret mcmc diagnostics",      
+"model_degeneracy", "What is the model degeneracy",                       
+"curved_terms", "Terms to improve model convergence and predictive power",
+"gof", "How to perform and interpret goodness of fit"                     
+), byrow = TRUE, ncol = 2) |>                                               
+as.data.frame() |>                                                          
+setNames(c("name", "description"))                                        
+                                                                         
+slidedeckFile <- "Week10_Lecture_ERGM3"                                     
+lectureName <- "Week 10 -- Lecture: ERGM III"                               
+```                                                                         
+                                                                         
+`r make_overview(overview, path, slidedeckFile, lectureName)`
+
+
+
+
+ <!-- Week 11 -- Lab: ERGM II -->                             
+```{r, include = FALSE}                                      
+overview <- matrix(c(                                        
+"menu", "List of contents for the lab",                    
+"Model_results", "Interpreting model results",             
+"Odds_ratios", "Odds_ratios",                              
+"Probabilities", "Probabilities",                          
+"example_inter_res", "Example for interpreting results",   
+"Research_flow", "Approach to carry out research"          
+), byrow = TRUE, ncol = 2) |>                                
+as.data.frame() |>                                           
+setNames(c("name", "description"))                         
+                                                          
+slidedeckFile <- "Week11_Lab_ERGM2"                          
+lectureName <- "Week 11 -- Lab: ERGM II"                     
+```                                                          
+                                                          
+`r make_overview(overview, path, slidedeckFile, lectureName)`
+
+
+
+
+
+
+ <!-- Week 11 -- Lecture: ERGM IV -->                                             
+```{r, include = FALSE}                                                          
+overview <- matrix(c(                                                            
+"menu", "List of contents for today's lecture",                                
+"Bipartite_graph", "Recap about bipartite graphs",                             
+"modelling_Bipartite_graph", "Modelling bipartite graphs",                     
+"Bipartite_model_terms", "Terms for bipartite models",                         
+"Bipartite_model_example", "Bipartite model example",                          
+"Model_constraints", "Model constraints",                                      
+"Offset", "Offset a term in model specification",                              
+"Ergm_control", "Function for control ergm",                                   
+"diagnostics_bipartite", "diagnostics for bipartite",                          
+"gof_bipartite", "goodness of fit for bipartite",                              
+"weighted_networks", "Recap Weighted networks",                                
+"weight_types", "Types of Weighted networks",                                  
+"weight_count", "Weighted networks Count",                                     
+"weight_continuous", "Weighted networks continuous",                           
+"GERGM", "package for weighted network ERGMs",                                 
+"weighted_network_math", "GERGM mathematical specification",                   
+"GERGM_package", "A package for weighted network ERGMs",                       
+"GERGM_terms", "Specification of GERGM terms",                                 
+"GERGM_endogenous", "Specification of endogenous GERGM terms",                 
+"GERGM_exogenous", "Specification of exogenous GERGM terms",                   
+"GERGM_data", "Specification for data format in the GERGM package",            
+"GERGM_formula_specification", "Specification of the formula in a GERGM model",
+"GERGM_model_results", "Exploring results in a GERGM model"                    
+), byrow = TRUE, ncol = 2) |>                                                    
+as.data.frame() |>                                                               
+setNames(c("name", "description"))                                             
+                                                                              
+slidedeckFile <- "Week11_Lecture_ERGM4"                                          
+lectureName <- "Week 11 -- Lecture: ERGM IV"                                     
+```                                                                              
+                                                                              
+`r make_overview(overview, path, slidedeckFile, lectureName)`
+
+
+
+
+<!-- Week 12 -- Lab: ERGM III -->                                  
+```{r, include = FALSE}                                            
+overview <- matrix(c(                                              
+"menu", "List of contents for today's Lab",                      
+"Net_out", "The meaning of having a network as outcome variable",
+"Str_terms", "The importance of including structural terms",     
+"Large_nets", "How to handle large networks",                    
+"complex_cases", "Handling complex cases",                       
+"Stat_signif", "What is a good model",                           
+"Seven_steps", "Doing research in a nutshell",                   
+"Res_Qs", "Think carefully about research questions"             
+), byrow = TRUE, ncol = 2) |>                                      
+as.data.frame() |>                                                 
+setNames(c("name", "description"))                               
+                                                                
+slidedeckFile <- "Week12_Lab_ERGM3"                                
+lectureName <- "Week 12 -- Lab: ERGM III"                          
+```                                                                
+                                                                
+`r make_overview(overview, path, slidedeckFile, lectureName)`  
+
+
+
+
+
