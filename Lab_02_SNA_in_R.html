@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>SOCIAL NETWORK ANALYSIS for DATA SCIENTISTS</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Roger" />
+    <script src="assets/header-attrs-2.28/header-attrs.js"></script>
+    <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="assets/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="assets/tile-view-0.2.6/tile-view.js"></script>
+    <link href="assets/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="assets/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra_fit-screen-0.2.6/fit-screen.js"></script>
+    <link href="assets/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="assets/panelset-0.3.0/panelset.js"></script>
+    <script src="assets/fabric-4.3.1/fabric.min.js"></script>
+    <link href="assets/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="assets/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="assets/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script src="assets/xaringanExtra-webcam-0.0.1/webcam.js"></script>
+    <script id="xaringanExtra-webcam-options" type="application/json">{"width":"175","height":"131.25","margin":"1em"}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x1ea54d37339460eb06a2f71f1b0b35a","expires":1}</script>
+    <script src="assets/himalaya-1.1.0/himalaya.js"></script>
+    <script src="assets/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="assets/editable-0.2.6/editable.js"></script>
+    <script src="assets/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="assets/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <link href="assets/countdown-0.4.0/countdown.css" rel="stylesheet" />
+    <script src="assets/countdown-0.4.0/countdown.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="assets/css/apron.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/descartes.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/tachyons.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/xaringan-extra.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/RL-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS_effects.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/kleuren.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[SOCIAL NETWORK ANALYSIS&lt;br&gt;for DATA SCIENTISTS]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[LAB: Introduction to SNA in R .small-caps.font70[(lecture] .font70[02)]]]
+  ]
+
+&lt;br&gt;
+.f-abel.White-inline[Your lecturer: Roger]&lt;br&gt;
+.f-abel.White-inline[Playdate: September 04, 2024]
+
+
+&lt;!-- setup options start --&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.highlight-last-item &gt; ul &gt; li, 
+.highlight-last-item &gt; ol &gt; li {
+  opacity: 0.5;
+}
+
+.highlight-last-item &gt; ul &gt; li:last-of-type,
+.highlight-last-item &gt; ol &gt; li:last-of-type {
+  opacity: 1;
+
+.bold-last-item &gt; ul &gt; li:last-of-type,
+.bold-last-item &gt; ol &gt; li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+&lt;/style&gt;
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.remark-inline-code {
+  background: #F5F5F5;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.inverse-red, .inverse-red h1, .inverse-red h2, .inverse-red h3, .inverse-red a, inverse-red a &gt; code {
+	border-top: none;
+	background-color: red;
+	color: white; 
+	background-image: "";
+}
+
+.inverse-orange, .inverse-orange h1, .inverse-orange h2, .inverse-orange h3, .inverse-orange a, inverse-orange a &gt; code {
+	border-top: none;
+	background-color: orange;
+	color: black; 
+	background-image: "";
+}
+&lt;/style&gt;
+
+
+
+&lt;style type="text/css"&gt;
+.grid-3-2a {
+  display: grid;
+  height: calc(90%);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1em;
+  padding: 1em;
+}
+&lt;/style&gt;
+
+
+
+&lt;!-- setup options end --&gt;
+
+
+---
+class: course-logo
+layout: true
+
+---
+class: bg-JADSbrown
+name: menu
+description: "Menu"
+
+.Gold-inline[
+# Today's menu
+
+- R for Social Network Analysis
+
+- Homeplay
+
+- Network objects
+
+- Navigating network objects
+
+- Some exercises
+]
+
+---
+class: bg-Black course-logo
+
+background-image: url(assets/images/chris-montgomery-smgTvepind4-unsplash-L.jpg)
+background-position: 100% 0%
+background-size: cover
+background-color: #000000
+
+### .White-inline.font350.b[&lt;br&gt;Turn your&lt;br&gt;cameras on!]
+
+
+.footnote[[Credit](https://unsplash.com/@cwmonty)]
+
+---
+class: bg-Black
+
+# .Gold-inline[Today's menu]
+
+&lt;div class="grid-3-2a"&gt;
+&lt;div class="extension-tile tileview animated flipInY"&gt;&lt;div&gt;R for SNA&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+---
+layout: true
+class: course-logo
+
+# Why use &lt;svg style="height: 1em; top:.04em; position: relative; fill: #136CB9;" viewBox="0 0 581 512"&gt;&lt;path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/&gt;&lt;/svg&gt; for SNA
+
+---
+name: whyr
+description: "Why use R for SNA"
+
+### Huge ecosystem of network libraries
+
+- &lt;svg style="height: 1em; top:.04em; position: relative; fill: #136CB9;" viewBox="0 0 581 512"&gt;&lt;path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/&gt;&lt;/svg&gt; has BY FAR the largest ecosystem of 
+packages for network manipulation, network analysis, network visualization, and 
+specialized applications of all software platforms.
+
+.font70[(Currently, there are 1061 packages ***on CRAN alone*** that use `igraph`, `sna`, 
+`network`, or any of the other SNA packages we use in this course.
+)]
+
+- They are scattered across [CRAN](https://cran.r-project.org/web/packages/), 
+[bioconductor](https://www.bioconductor.org/packages/release/BiocViews.html#___Network), [github](https://github.com), and smaller repositories.
+
+- It is open source + it is free
+
+
+---
+
+### Very extensive statistical power
+
+- &lt;svg style="height: 1em; top:.04em; position: relative; fill: #136CB9;" viewBox="0 0 581 512"&gt;&lt;path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/&gt;&lt;/svg&gt; is especially powerful for statistical modeling in general
+
+- (almost) all of the latest statistical network modeling techniques are brought to 
+&lt;svg style="height: 1em; top:.04em; position: relative; fill: #136CB9;" viewBox="0 0 581 512"&gt;&lt;path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/&gt;&lt;/svg&gt; first
+
+- Our course will make heavy use of these statistical capabilities.
+
+---
+
+### Very well-developed visualization libraries
+
+- &lt;svg style="height: 1em; top:.04em; position: relative; fill: #136CB9;" viewBox="0 0 581 512"&gt;&lt;path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/&gt;&lt;/svg&gt; arguably has the best developed 
+visualization engines/libraries of all of the major OS software platforms
+
+- it does a decent job at visualizing social networks as well *(although network 
+visualization in general is very complex, debatable, and did I say it is very complex?--even in &lt;svg style="height: 1em; top:.04em; position: relative; fill: #136CB9;" viewBox="0 0 581 512"&gt;&lt;path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/&gt;&lt;/svg&gt;)*
+
+---
+
+### Very extensible
+
+- `rmarkdown` can integrate 52 languages and &lt;svg style="height: 1em; top:.04em; position: relative; fill: #136CB9;" viewBox="0 0 581 512"&gt;&lt;path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/&gt;&lt;/svg&gt; can use `C`, `C++`, `python`, `javascript`, and many other languages inside its own functions. 
+This makes it easy to integrate things that have not yet come to &lt;svg style="height: 1em; top:.04em; position: relative; fill: #136CB9;" viewBox="0 0 581 512"&gt;&lt;path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/&gt;&lt;/svg&gt; inside an analysis pipeline.
+
+---
+layout: false
+class: bg-Black course-logo
+
+# .Gold-inline[Today's menu]
+
+&lt;div class="grid-3-2a"&gt;
+&lt;div class="extension-tile tileview"&gt;&lt;div&gt;R for SNA&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile panelset-tile animated flipInX"&gt;&lt;div&gt;Homeplay&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+---
+class: course-logo
+layout: true
+
+---
+
+background-image: url('assets/images/question_mark_1.jpg')
+background-size: cover
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+### .Gold-inline.font250.center[Any general questions&lt;br&gt;about the homeplay?]
+
+---
+name: homeplay
+description: "Homeplay coding"
+
+&lt;iframe width="1212" height="682" src="assets/html/homeplay02_code.html" title="Homeplay 2 code" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="width:100%; height:100%;" allowfullscreen&gt;&lt;/iframe&gt;
+
+
+---
+
+.panelset[
+.panel[.panel-name[igraph object]
+.scroll-box-32[
+
+``` r
+data(elegans, package = "SNA4DSData")
+snafun::print(elegans)
+```
+
+```
+## IGRAPH 9c29ed1 DNW- 297 2344 -- 
+## + attr: name (v/c), weight (e/n)
+## + edges from 9c29ed1 (vertex names):
+##  [1] 202-&gt;1 1  -&gt;2 8  -&gt;2 17 -&gt;2 102-&gt;2 103-&gt;2 109-&gt;2 114-&gt;2 116-&gt;2 117-&gt;2
+## [11] 125-&gt;2 128-&gt;2 130-&gt;2 131-&gt;2 132-&gt;2 136-&gt;2 137-&gt;2 139-&gt;2 141-&gt;2 142-&gt;2
+## [21] 143-&gt;2 194-&gt;2 196-&gt;2 215-&gt;2 242-&gt;2 1  -&gt;3 5  -&gt;3 8  -&gt;3 13 -&gt;3 17 -&gt;3
+## [31] 21 -&gt;3 22 -&gt;3 64 -&gt;3 68 -&gt;3 73 -&gt;3 85 -&gt;3 88 -&gt;3 90 -&gt;3 99 -&gt;3 100-&gt;3
+## [41] 102-&gt;3 110-&gt;3 112-&gt;3 115-&gt;3 119-&gt;3 122-&gt;3 126-&gt;3 130-&gt;3 171-&gt;3 173-&gt;3
+## [51] 185-&gt;3 194-&gt;3 195-&gt;3 202-&gt;3 204-&gt;3 205-&gt;3 208-&gt;3 213-&gt;3 221-&gt;3 225-&gt;3
+## [61] 226-&gt;3 227-&gt;3 240-&gt;3 249-&gt;3 256-&gt;3 258-&gt;3 1  -&gt;4 6  -&gt;4 8  -&gt;4 9  -&gt;4
+## [71] 12 -&gt;4 13 -&gt;4 15 -&gt;4 28 -&gt;4 32 -&gt;4 51 -&gt;4 59 -&gt;4 63 -&gt;4 64 -&gt;4 66 -&gt;4
+## + ... omitted several edges
+```
+
+``` r
+snafun::is_igraph(elegans)
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+snafun::is_network(elegans)
+```
+
+```
+## [1] FALSE
+```
+
+``` r
+snafun::is_directed(elegans)
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+snafun::list_edge_attributes(elegans)
+```
+
+```
+## [1] "weight"
+```
+
+``` r
+snafun::list_vertex_attributes(elegans)
+```
+
+```
+## [1] "name"
+```
+
+``` r
+snafun::count_vertices(elegans)
+```
+
+```
+## [1] 297
+```
+
+``` r
+snafun::count_edges(elegans)
+```
+
+```
+## [1] 2344
+```
+
+``` r
+snafun::extract_vertex_names(elegans)
+```
+
+```
+##   [1] "202" "1"   "8"   "17"  "102" "103" "109" "114" "116" "117" "125" "128"
+##  [13] "130" "131" "132" "136" "137" "139" "141" "142" "143" "194" "196" "215"
+##  [25] "242" "5"   "13"  "21"  "22"  "64"  "68"  "73"  "85"  "88"  "90"  "99" 
+##  [37] "100" "110" "112" "115" "119" "122" "126" "171" "173" "185" "195" "204"
+##  [49] "205" "208" "213" "221" "225" "226" "227" "240" "249" "256" "258" "6"  
+##  [61] "9"   "12"  "15"  "28"  "32"  "51"  "59"  "63"  "66"  "83"  "87"  "91" 
+##  [73] "92"  "93"  "94"  "107" "138" "214" "217" "3"   "10"  "16"  "19"  "42" 
+##  [85] "53"  "54"  "72"  "77"  "120" "150" "188" "60"  "71"  "104" "14"  "31" 
+##  [97] "35"  "44"  "48"  "49"  "74"  "75"  "76"  "78"  "106" "108" "111" "210"
+## [109] "2"   "61"  "135" "124" "127" "209" "55"  "101" "4"   "86"  "96"  "118"
+## [121] "133" "212" "248" "257" "259" "262" "11"  "121" "20"  "43"  "69"  "33" 
+## [133] "56"  "58"  "70"  "84"  "18"  "27"  "41"  "57"  "7"   "47"  "241" "151"
+## [145] "30"  "67"  "39"  "46"  "62"  "206" "237" "146" "149" "172" "186" "207"
+## [157] "218" "36"  "24"  "25"  "37"  "50"  "52"  "65"  "97"  "98"  "105" "113"
+## [169] "134" "152" "153" "154" "155" "156" "157" "158" "159" "160" "161" "162"
+## [181] "163" "164" "165" "166" "167" "168" "169" "170" "176" "177" "178" "179"
+## [193] "180" "181" "182" "183" "184" "189" "190" "192" "193" "197" "198" "200"
+## [205] "201" "203" "211" "220" "222" "228" "231" "232" "233" "234" "235" "238"
+## [217] "239" "245" "246" "247" "250" "251" "252" "254" "255" "263" "264" "265"
+## [229] "266" "267" "268" "269" "270" "271" "272" "273" "274" "275" "276" "277"
+## [241] "278" "279" "280" "281" "282" "283" "284" "285" "286" "287" "288" "289"
+## [253] "290" "291" "292" "293" "294" "295" "23"  "34"  "223" "219" "236" "216"
+## [265] "199" "140" "224" "123" "129" "144" "29"  "148" "229" "230" "260" "145"
+## [277] "147" "174" "26"  "38"  "79"  "80"  "81"  "82"  "89"  "95"  "175" "187"
+## [289] "243" "244" "253" "296" "297" "261" "40"  "45"  "191"
+```
+
+``` r
+#dyad census
+snafun::count_dyads(elegans)
+```
+
+```
+##  Mutual Asymmetric  Null
+##     197       1950 41809
+```
+
+``` r
+snafun::g_reciprocity(elegans)
+```
+
+```
+## [1] 0.1680887
+```
+
+``` r
+snafun::g_transitivity(elegans)
+```
+
+```
+## [1] 0.1807128
+```
+
+``` r
+snafun::g_density(elegans)
+```
+
+```
+## [1] 0.02666303
+```
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt; &lt;br&gt;
+]
+]
+.panel[.panel-name[network object]
+.scroll-box-32[
+
+``` r
+elegans_n &lt;- snafun::to_network(elegans)
+snafun::print(elegans_n)
+```
+
+```
+##  Network attributes:
+##   vertices = 297 
+##   directed = TRUE 
+##   hyper = FALSE 
+##   loops = FALSE 
+##   multiple = FALSE 
+##   bipartite = FALSE 
+##   total edges= 2344 
+##     missing edges= 0 
+##     non-missing edges= 2344 
+## 
+##  Vertex attribute names: 
+##     vertex.names 
+## 
+##  Edge attribute names not shown
+```
+
+``` r
+snafun::is_igraph(elegans_n)
+```
+
+```
+## [1] FALSE
+```
+
+``` r
+snafun::is_network(elegans_n)
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+snafun::is_directed(elegans_n)
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+snafun::list_edge_attributes(elegans_n)
+```
+
+```
+## [1] "na"     "weight"
+```
+
+``` r
+snafun::list_vertex_attributes(elegans_n)
+```
+
+```
+## [1] "na"           "vertex.names"
+```
+
+``` r
+snafun::count_vertices(elegans_n)
+```
+
+```
+## [1] 297
+```
+
+``` r
+snafun::count_edges(elegans_n)
+```
+
+```
+## [1] 2344
+```
+
+``` r
+snafun::extract_vertex_names(elegans_n)
+```
+
+```
+##   [1] "202" "1"   "8"   "17"  "102" "103" "109" "114" "116" "117" "125" "128"
+##  [13] "130" "131" "132" "136" "137" "139" "141" "142" "143" "194" "196" "215"
+##  [25] "242" "5"   "13"  "21"  "22"  "64"  "68"  "73"  "85"  "88"  "90"  "99" 
+##  [37] "100" "110" "112" "115" "119" "122" "126" "171" "173" "185" "195" "204"
+##  [49] "205" "208" "213" "221" "225" "226" "227" "240" "249" "256" "258" "6"  
+##  [61] "9"   "12"  "15"  "28"  "32"  "51"  "59"  "63"  "66"  "83"  "87"  "91" 
+##  [73] "92"  "93"  "94"  "107" "138" "214" "217" "3"   "10"  "16"  "19"  "42" 
+##  [85] "53"  "54"  "72"  "77"  "120" "150" "188" "60"  "71"  "104" "14"  "31" 
+##  [97] "35"  "44"  "48"  "49"  "74"  "75"  "76"  "78"  "106" "108" "111" "210"
+## [109] "2"   "61"  "135" "124" "127" "209" "55"  "101" "4"   "86"  "96"  "118"
+## [121] "133" "212" "248" "257" "259" "262" "11"  "121" "20"  "43"  "69"  "33" 
+## [133] "56"  "58"  "70"  "84"  "18"  "27"  "41"  "57"  "7"   "47"  "241" "151"
+## [145] "30"  "67"  "39"  "46"  "62"  "206" "237" "146" "149" "172" "186" "207"
+## [157] "218" "36"  "24"  "25"  "37"  "50"  "52"  "65"  "97"  "98"  "105" "113"
+## [169] "134" "152" "153" "154" "155" "156" "157" "158" "159" "160" "161" "162"
+## [181] "163" "164" "165" "166" "167" "168" "169" "170" "176" "177" "178" "179"
+## [193] "180" "181" "182" "183" "184" "189" "190" "192" "193" "197" "198" "200"
+## [205] "201" "203" "211" "220" "222" "228" "231" "232" "233" "234" "235" "238"
+## [217] "239" "245" "246" "247" "250" "251" "252" "254" "255" "263" "264" "265"
+## [229] "266" "267" "268" "269" "270" "271" "272" "273" "274" "275" "276" "277"
+## [241] "278" "279" "280" "281" "282" "283" "284" "285" "286" "287" "288" "289"
+## [253] "290" "291" "292" "293" "294" "295" "23"  "34"  "223" "219" "236" "216"
+## [265] "199" "140" "224" "123" "129" "144" "29"  "148" "229" "230" "260" "145"
+## [277] "147" "174" "26"  "38"  "79"  "80"  "81"  "82"  "89"  "95"  "175" "187"
+## [289] "243" "244" "253" "296" "297" "261" "40"  "45"  "191"
+```
+
+``` r
+#dyad census
+snafun::count_dyads(elegans_n)
+```
+
+```
+##  Mutual Asymmetric  Null
+##     197       1950 41809
+```
+
+``` r
+snafun::g_reciprocity(elegans_n)
+```
+
+```
+## [1] 0.1680887
+```
+
+``` r
+snafun::g_transitivity(elegans_n)
+```
+
+```
+## [1] 0.1817806
+```
+
+``` r
+snafun::g_density(elegans_n)
+```
+
+```
+## [1] 0.02666303
+```
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt; &lt;br&gt;
+]
+]
+]
+
+
+
+
+
+---
+name: awesome
+description: What makes snafun to awesome
+
+# What makes `snafun` so awesome
+
+- `snafun` works on either object, both `igraph` and `network`
+
+- no need to convert between the classes
+
+- can convert between the classes where necessary
+
+- can be extended based on your needs/requests
+
+--
+
+&lt;br&gt;&lt;br&gt;
+As a previous student wrote to us:
+
+.f-marker.font150[the snafun package is .Red-inline[ frickin' awesome], 
+the .Red-inline[lucky basterds!]]
+
+---
+
+# &lt;svg style="height: 1em; top:.04em; position: relative; fill: #136CB9;" viewBox="0 0 581 512"&gt;&lt;path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/&gt;&lt;/svg&gt; under the hood
+
+&lt;svg style="height: 1em; top:.04em; position: relative; fill: #136CB9;" viewBox="0 0 581 512"&gt;&lt;path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/&gt;&lt;/svg&gt; is both a functional language and an object-oriented language. 
+As a result, it recognizes the class of the object and performs the 
+appropriate action. 
+
+
+.pull-left[
+
+
+``` r
+d &lt;- data.frame(x = rnorm(20), y = runif(20))
+plot(d)
+d &lt;- data.frame(x = as.factor(rep(c("M", "F"), each = 10)), y = runif(20))
+plot(d)
+```
+
+
+&lt;img src="assets/images/lab02__01-1.svg" width="90%" /&gt;
+
+]
+
+.pull-right[
+
+
+``` r
+mod &lt;- lm(y ~ x, data = d)
+plot(mod)
+```
+
+&lt;img src="assets/images/lab02__02-1.svg" width="90%" /&gt;
+
+
+&lt;!-- ```{r lab02__02bb, echo = FALSE, eval= FALSE, fig.height = 4, message=FALSE, warning=FALSE} --&gt;
+&lt;!-- opar &lt;- par() --&gt;
+&lt;!-- par("mar" = c(2, 2, 2, 2)) --&gt;
+&lt;!-- d &lt;- density(rnorm(20)) --&gt;
+&lt;!-- plot(d) --&gt;
+&lt;!-- par(opar) --&gt;
+&lt;!-- ``` --&gt;
+
+
+
+]
+
+
+---
+layout: false
+class: bg-Black course-logo
+
+# .Gold-inline[Today's menu]
+
+&lt;div class="grid-3-2a"&gt;
+&lt;div class="extension-tile tileview"&gt;&lt;div&gt;R for SNA&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile panelset-tile"&gt;&lt;div&gt;Homeplay&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile webcam animated bounceInDown"&gt;&lt;div&gt;Graph objects&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+---
+class: course-logo
+layout: true
+
+---
+name: graphobjects
+description: "Dealing with graph objects"
+
+# Zachary's karate club network
+
+
+``` r
+# install.packages("igraphdata")
+data(karate, package = "igraphdata")
+class(karate)
+```
+
+```
+## [1] "igraph"
+```
+
+---
+
+# Let's print the object
+
+.font80[
+
+```
+IGRAPH 4b458a1 UNW- 34 78 -- Zachary's karate club network
++ attr: name (g/c), Citation (g/c), Author (g/c), Faction (v/n), name
+| (v/c), label (v/c), color (v/n), weight (e/n)
++ edges from 4b458a1 (vertex names):
+ [1] Mr Hi  --Actor 2  Mr Hi  --Actor 3  Mr Hi  --Actor 4  Mr Hi  --Actor 5 
+ [5] Mr Hi  --Actor 6  Mr Hi  --Actor 7  Mr Hi  --Actor 8  Mr Hi  --Actor 9 
+ [9] Mr Hi  --Actor 11 Mr Hi  --Actor 12 Mr Hi  --Actor 13 Mr Hi  --Actor 14
+[13] Mr Hi  --Actor 18 Mr Hi  --Actor 20 Mr Hi  --Actor 22 Mr Hi  --Actor 32
+[17] Actor 2--Actor 3  Actor 2--Actor 4  Actor 2--Actor 8  Actor 2--Actor 14
+[21] Actor 2--Actor 18 Actor 2--Actor 20 Actor 2--Actor 22 Actor 2--Actor 31
+[25] Actor 3--Actor 4  Actor 3--Actor 8  Actor 3--Actor 9  Actor 3--Actor 10
++ ... omitted several edges
+```
+]
+
+This shows an overview of the attributes of the network, the vertices, and edges
+and prints the first couple of edges.
+
+---
+
+# `igraph` object
+
+The description of an `igraph` object starts with up to four letters:
+
+- __D__ or __U__, for a directed or undirected graph
+- __N__ for a named graph (= vertices have a name attribute)
+- __W__ for a weighted graph (= edges have a weight attribute)
+- __B__ for a bipartite (two-mode) graph (= where nodes have a type attribute)
+
+The two numbers that follow refer to the number of nodes and edges in the graph.
+The description also lists node &amp; edge attributes:
+
+.w-50.fl.tl[
+`(g/c)`: graph-level character attribute&lt;br&gt;
+`(v/c)`: vertex-level character attribute&lt;br&gt;
+`(e/n)`: edge-level numeric attribute
+]
+
+--
+
+.w-50.fr.tl[
+.code70[
+
+```
+IGRAPH 4b458a1 UNW- 34 78 -- Zachary's karate club network
++ attr: name (g/c), Citation (g/c), Author (g/c), Faction (v/n), name
+| (v/c), label (v/c), color (v/n), weight (e/n)
++ edges from 4b458a1 (vertex names):
+ [1] Mr Hi  --Actor 2  Mr Hi  --Actor 3  Mr Hi  --Actor 4  Mr Hi  --Actor 5 
+ [5] Mr Hi  --Actor 6  Mr Hi  --Actor 7  Mr Hi  --Actor 8  Mr Hi  --Actor 9 
+ [9] Mr Hi  --Actor 11 Mr Hi  --Actor 12 Mr Hi  --Actor 13 Mr Hi  --Actor 14
+[13] Mr Hi  --Actor 18 Mr Hi  --Actor 20 Mr Hi  --Actor 22 Mr Hi  --Actor 32
+[17] Actor 2--Actor 3  Actor 2--Actor 4  Actor 2--Actor 8  Actor 2--Actor 14
+[21] Actor 2--Actor 18 Actor 2--Actor 20 Actor 2--Actor 22 Actor 2--Actor 31
+[25] Actor 3--Actor 4  Actor 3--Actor 8  Actor 3--Actor 9  Actor 3--Actor 10
++ ... omitted several edges
+```
+]
+]
+
+---
+
+class: bg-Black course-logo
+
+# .Gold-inline[Today's menu]
+
+&lt;div class="grid-3-2a"&gt;
+&lt;div class="extension-tile tileview"&gt;&lt;div&gt;R for SNA&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile panelset-tile"&gt;&lt;div&gt;Homeplay&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile webcam"&gt;&lt;div&gt;Graph objects&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile slide"&gt;&lt;div&gt;Exercise&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+---
+name: exercise
+description: Do this exercise (1)
+
+
+.pull-left[
+Load the following graph objects from `SNA4DSData`:
+
+- DSstudents
+
+- enwiki
+
+- louis
+
+- judge_net_bp
+
+- blogosphere
+
+]
+
+.pull-right[
+
+- What are the characteristics of the object? (Directed/undirected, number of vertices etc.)
+
+- Convert to `network` or `igraph` and compare the characteristics
+
+We will discuss your findings after the clock is at 00:00
+
+]
+
+<div class="countdown" id="timer_d50f877a" data-warn-when="30" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;left:0;margin:5%;padding:50px;font-size:6em;">
+<div class="countdown-controls"><button class="countdown-bump-down">&minus;</button><button class="countdown-bump-up">&plus;</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+
+.panelset[
+
+.panel[.panel-name[General code]
+
+.scroll-box-30[
+
+
+``` r
+data(DSstudents, package = "SNA4DSData")
+snafun::print(DSstudents)
+```
+
+```
+## IGRAPH 39dd8ba DN-- 81 148 -- 
+## + attr: name (v/c), year (v/n), DS (v/n), Hang.Out (v/n), gender (v/c),
+## | frequency (e/n), closeness (e/n)
+## + edges from 39dd8ba (vertex names):
+##  [1] S19-&gt;S58 S36-&gt;S4  S3 -&gt;S28 S17-&gt;S64 S31-&gt;S9  S44-&gt;S30 S10-&gt;S30 S33-&gt;S12
+##  [9] S25-&gt;S63 S50-&gt;S16 S5 -&gt;S76 S39-&gt;S46 S47-&gt;S65 S6 -&gt;S70 S4 -&gt;S26 S28-&gt;S3 
+## [17] S22-&gt;S17 S29-&gt;S14 S13-&gt;S67 S11-&gt;S79 S24-&gt;S18 S34-&gt;S65 S23-&gt;S12 S18-&gt;S24
+## [25] S37-&gt;S16 S7 -&gt;S37 S20-&gt;S32 S32-&gt;S74 S12-&gt;S33 S16-&gt;S37 S26-&gt;S4  S15-&gt;S81
+## [33] S38-&gt;S42 S42-&gt;S38 S2 -&gt;S38 S9 -&gt;S31 S8 -&gt;S36 S21-&gt;S78 S40-&gt;S29 S46-&gt;S42
+## [41] S27-&gt;S35 S35-&gt;S27 S49-&gt;S41 S41-&gt;S49 S48-&gt;S23 S45-&gt;S75 S14-&gt;S29 S30-&gt;S63
+## [49] S43-&gt;S71 S1 -&gt;S72 S19-&gt;S74 S36-&gt;S30 S3 -&gt;S57 S17-&gt;S30 S31-&gt;S42 S44-&gt;S64
+## + ... omitted several edges
+```
+
+``` r
+snafun::list_edge_attributes(DSstudents)
+```
+
+```
+## [1] "frequency" "closeness"
+```
+
+``` r
+snafun::list_vertex_attributes(DSstudents)
+```
+
+```
+## [1] "name"     "year"     "DS"       "Hang.Out" "gender"
+```
+
+``` r
+snafun::list_graph_attributes(DSstudents)
+```
+
+```
+## character(0)
+```
+
+``` r
+snafun::to_network(DSstudents)
+```
+
+```
+##  Network attributes:
+##   vertices = 81 
+##   directed = TRUE 
+##   hyper = FALSE 
+##   loops = FALSE 
+##   multiple = FALSE 
+##   bipartite = FALSE 
+##   total edges= 148 
+##     missing edges= 0 
+##     non-missing edges= 148 
+## 
+##  Vertex attribute names: 
+##     DS gender Hang.Out vertex.names year 
+## 
+##  Edge attribute names: 
+##     closeness frequency
+```
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+]
+] # end panel 1
+
+.panel[.panel-name[igraph object]
+
+
+``` r
+snafun::print(DSstudents)  # igraph object
+```
+
+```
+## IGRAPH 39dd8ba DN-- 81 148 -- 
+## + attr: name (v/c), year (v/n), DS (v/n), Hang.Out (v/n), gender (v/c),
+## | frequency (e/n), closeness (e/n)
+## + edges from 39dd8ba (vertex names):
+##  [1] S19-&gt;S58 S36-&gt;S4  S3 -&gt;S28 S17-&gt;S64 S31-&gt;S9  S44-&gt;S30 S10-&gt;S30 S33-&gt;S12
+##  [9] S25-&gt;S63 S50-&gt;S16 S5 -&gt;S76 S39-&gt;S46 S47-&gt;S65 S6 -&gt;S70 S4 -&gt;S26 S28-&gt;S3 
+## [17] S22-&gt;S17 S29-&gt;S14 S13-&gt;S67 S11-&gt;S79 S24-&gt;S18 S34-&gt;S65 S23-&gt;S12 S18-&gt;S24
+## [25] S37-&gt;S16 S7 -&gt;S37 S20-&gt;S32 S32-&gt;S74 S12-&gt;S33 S16-&gt;S37 S26-&gt;S4  S15-&gt;S81
+## [33] S38-&gt;S42 S42-&gt;S38 S2 -&gt;S38 S9 -&gt;S31 S8 -&gt;S36 S21-&gt;S78 S40-&gt;S29 S46-&gt;S42
+## [41] S27-&gt;S35 S35-&gt;S27 S49-&gt;S41 S41-&gt;S49 S48-&gt;S23 S45-&gt;S75 S14-&gt;S29 S30-&gt;S63
+## [49] S43-&gt;S71 S1 -&gt;S72 S19-&gt;S74 S36-&gt;S30 S3 -&gt;S57 S17-&gt;S30 S31-&gt;S42 S44-&gt;S64
+## + ... omitted several edges
+```
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+]
+
+.panel[.panel-name[network object]
+
+
+``` r
+DSstudents_n &lt;- snafun::to_network(DSstudents)
+snafun::print(DSstudents_n)  # network object
+```
+
+```
+##  Network attributes:
+##   vertices = 81 
+##   directed = TRUE 
+##   hyper = FALSE 
+##   loops = FALSE 
+##   multiple = FALSE 
+##   bipartite = FALSE 
+##   total edges= 148 
+##     missing edges= 0 
+##     non-missing edges= 148 
+## 
+##  Vertex attribute names: 
+##     DS gender Hang.Out vertex.names year 
+## 
+##  Edge attribute names: 
+##     closeness frequency
+```
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+]
+
+]
+
+---
+name: blogosphere
+description: What's up with the blogosphere graph?
+
+
+.panelset[
+
+.panel[.panel-name[blogosphere igraph]
+
+
+
+```
+## IGRAPH 3254f1f D--- 1490 19090 -- 
+## + attr: id (v/n), label (v/c), value (v/n), source (v/c), party (v/c),
+## | color (v/c), within (e/l), within_republican (e/l), within_democrat
+## | (e/l)
+## + edges from 3254f1f:
+##  [1]  267-&gt;1394  267-&gt; 483  267-&gt;1051  904-&gt;1479  904-&gt; 919  904-&gt;1045
+##  [7]  904-&gt;1330  904-&gt;1108  904-&gt; 995  904-&gt; 963  904-&gt;1000  904-&gt;1192
+## [13]  904-&gt;1067  904-&gt;1270  904-&gt;1437  904-&gt;1037  903-&gt; 855  903-&gt;1008
+## [19]  982-&gt;1429  982-&gt; 952  982-&gt; 892  982-&gt;1479  982-&gt; 956  982-&gt;1306
+## [25]  982-&gt; 810  982-&gt;1437  982-&gt;1112  982-&gt;1051  982-&gt; 826  982-&gt;1478
+## [31]  982-&gt; 979  982-&gt;1255 1167-&gt; 963 1167-&gt; 802 1167-&gt; 842 1167-&gt;1408
+## + ... omitted several edges
+```
+
+] # end panel 1
+
+
+.panel[.panel-name[blogosphere network]
+
+
+
+```
+##  Network attributes:
+##   vertices = 1490 
+##   directed = TRUE 
+##   hyper = FALSE 
+##   loops = TRUE 
+##   multiple = FALSE 
+##   bipartite = FALSE 
+##   total edges= 19025 
+##     missing edges= 0 
+##     non-missing edges= 19025 
+## 
+##  Vertex attribute names: 
+##     color id label party source value vertex.names 
+## 
+##  Edge attribute names not shown
+```
+
+] # end panel 2
+
+.panel[.panel-name[Analysis 1]
+
+.scroll-box-30[
+
+``` r
+igraph::any_multiple(blogosphere)
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+multiples &lt;- igraph::which_multiple(blogosphere) |&gt; which()
+multiples
+```
+
+```
+##  [1] 12758 12760 12761 12762 12763 12764 12765 12766 12767 12768 12769 12770
+## [13] 12771 12772 12773 12774 12775 12776 12777 12778 12779 12780 12781 12782
+## [25] 12783 12784 12785 12786 12787 12788 12789 12790 12791 12792 12793 12794
+## [37] 12795 12796 12797 12798 12799 12800 18932 18933 18934 18935 18936 18937
+## [49] 18938 18939 18940 18941 18942 18943 18944 18945 18946 18947 18948 18949
+## [61] 18950 18951 18952 18953 18954
+```
+
+``` r
+mults &lt;- igraph::ends(blogosphere, multiples)
+mults[order(mults[, 1], mults[, 2]), ]
+```
+
+```
+##       [,1] [,2]
+##  [1,]   24   23
+##  [2,]   24   55
+##  [3,]   24   89
+##  [4,]   24  102
+##  [5,]   24  107
+##  [6,]   24  154
+##  [7,]   24  155
+##  [8,]   24  170
+##  [9,]   24  391
+## [10,]   24  402
+## [11,]   24  434
+## [12,]   24  495
+## [13,]   24  535
+## [14,]   24  563
+## [15,]   24  570
+## [16,]   24  610
+## [17,]   24  623
+## [18,]   24  641
+## [19,]   24  642
+## [20,]   24  644
+## [21,]   24  741
+## [22,]   24  798
+## [23,]   24  963
+## [24,] 1047  249
+## [25,] 1047  312
+## [26,] 1047  539
+## [27,] 1047  762
+## [28,] 1047  764
+## [29,] 1047  798
+## [30,] 1047  810
+## [31,] 1047  826
+## [32,] 1047  855
+## [33,] 1047  878
+## [34,] 1047  885
+## [35,] 1047  908
+## [36,] 1047  919
+## [37,] 1047  944
+## [38,] 1047  949
+## [39,] 1047  952
+## [40,] 1047  963
+## [41,] 1047 1000
+## [42,] 1047 1045
+## [43,] 1047 1048
+## [44,] 1047 1051
+## [45,] 1047 1091
+## [46,] 1047 1095
+## [47,] 1047 1101
+## [48,] 1047 1150
+## [49,] 1047 1153
+## [50,] 1047 1158
+## [51,] 1047 1172
+## [52,] 1047 1179
+## [53,] 1047 1191
+## [54,] 1047 1209
+## [55,] 1047 1215
+## [56,] 1047 1245
+## [57,] 1047 1277
+## [58,] 1047 1306
+## [59,] 1047 1317
+## [60,] 1047 1325
+## [61,] 1047 1399
+## [62,] 1047 1447
+## [63,] 1047 1461
+## [64,] 1047 1478
+## [65,] 1047 1479
+```
+]
+]
+
+.panel[.panel-name[Analysis 2]
+
+.scroll-box-30[
+
+``` r
+e1 &lt;- snafun::to_edgelist(blogosphere)
+e1 &lt;- e1[order(e1$from, e1$to), ]
+which(duplicated(e1))
+```
+
+```
+##  [1]   397   400   402   404   406   408   410   412   414   416   418   420
+## [13]   422   424   426   428   430   432   434   436   438   440   442 13247
+## [25] 13249 13252 13254 13256 13259 13261 13263 13265 13267 13269 13271 13273
+## [37] 13275 13277 13279 13281 13283 13285 13288 13290 13293 13295 13297 13299
+## [49] 13301 13303 13305 13307 13309 13311 13313 13316 13318 13320 13322 13324
+## [61] 13326 13328 13330 13332 13334
+```
+
+``` r
+e1[395:444, ]
+```
+
+```
+##       from   to within within_republican within_democrat
+## 10504   23 1380  FALSE             FALSE           FALSE
+## 12638   24   23   TRUE             FALSE            TRUE
+## 18932   24   23   TRUE             FALSE            TRUE
+## 12639   24   24   TRUE             FALSE            TRUE
+## 12641   24   55   TRUE             FALSE            TRUE
+## 18934   24   55   TRUE             FALSE            TRUE
+## 12660   24   89   TRUE             FALSE            TRUE
+## 18953   24   89   TRUE             FALSE            TRUE
+## 12642   24  102   TRUE             FALSE            TRUE
+## 18935   24  102   TRUE             FALSE            TRUE
+## 12643   24  107   TRUE             FALSE            TRUE
+## 18936   24  107   TRUE             FALSE            TRUE
+## 12644   24  154   TRUE             FALSE            TRUE
+## 18937   24  154   TRUE             FALSE            TRUE
+## 12645   24  155   TRUE             FALSE            TRUE
+## 18938   24  155   TRUE             FALSE            TRUE
+## 12646   24  170   TRUE             FALSE            TRUE
+## 18939   24  170   TRUE             FALSE            TRUE
+## 12648   24  391   TRUE             FALSE            TRUE
+## 18941   24  391   TRUE             FALSE            TRUE
+## 12649   24  402   TRUE             FALSE            TRUE
+## 18942   24  402   TRUE             FALSE            TRUE
+## 12650   24  434   TRUE             FALSE            TRUE
+## 18943   24  434   TRUE             FALSE            TRUE
+## 12647   24  495   TRUE             FALSE            TRUE
+## 18940   24  495   TRUE             FALSE            TRUE
+## 12657   24  535   TRUE             FALSE            TRUE
+## 18950   24  535   TRUE             FALSE            TRUE
+## 12651   24  563   TRUE             FALSE            TRUE
+## 18944   24  563   TRUE             FALSE            TRUE
+## 12652   24  570   TRUE             FALSE            TRUE
+## 18945   24  570   TRUE             FALSE            TRUE
+## 12653   24  610   TRUE             FALSE            TRUE
+## 18946   24  610   TRUE             FALSE            TRUE
+## 12654   24  623   TRUE             FALSE            TRUE
+## 18947   24  623   TRUE             FALSE            TRUE
+## 12655   24  641   TRUE             FALSE            TRUE
+## 18948   24  641   TRUE             FALSE            TRUE
+## 12656   24  642   TRUE             FALSE            TRUE
+## 18949   24  642   TRUE             FALSE            TRUE
+## 12658   24  644   TRUE             FALSE            TRUE
+## 18951   24  644   TRUE             FALSE            TRUE
+## 12659   24  741   TRUE             FALSE            TRUE
+## 18952   24  741   TRUE             FALSE            TRUE
+## 12640   24  798  FALSE             FALSE           FALSE
+## 18933   24  798  FALSE             FALSE           FALSE
+## 12661   24  963  FALSE             FALSE           FALSE
+## 18954   24  963  FALSE             FALSE           FALSE
+## 14982   26  155   TRUE             FALSE            TRUE
+## 18097   27   55   TRUE             FALSE            TRUE
+```
+]
+]
+
+]
+
+
+---
+class: bg-Black course-logo
+
+# .Gold-inline[Today's menu]
+
+&lt;div class="grid-3-2a"&gt;
+&lt;div class="extension-tile tileview"&gt;&lt;div&gt;R for SNA&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile panelset-tile"&gt;&lt;div&gt;Homeplay&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile webcam"&gt;&lt;div&gt;Graph objects&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile slide"&gt;&lt;div&gt;Exercise&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile editable"&gt;&lt;div&gt;How to know?&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+---
+
+# 'fastgreedy' community detection
+
+.panelset[
+
+.panel[.panel-name[Question]
+
+.b[CHALLENGE:]
+
+How do you run a 'fast greedy' community detection on `karate`?
+
+Find two ways.
+
+] # end panel 1
+
+
+.panel[.panel-name[Method 1]
+
+
+
+``` r
+snafun::extract_comm_fastgreedy(karate)
+```
+
+```
+## IGRAPH clustering fast greedy, groups: 3, mod: 0.38
+## + groups:
+##   $`1`
+##   [1] "Mr Hi"    "Actor 5"  "Actor 6"  "Actor 7"  "Actor 11" "Actor 12"
+##   [7] "Actor 17" "Actor 20"
+##   
+##   $`2`
+##    [1] "Actor 9"  "Actor 15" "Actor 16" "Actor 19" "Actor 21" "Actor 23"
+##    [7] "Actor 24" "Actor 25" "Actor 26" "Actor 27" "Actor 28" "Actor 29"
+##   [13] "Actor 30" "Actor 31" "Actor 32" "Actor 33" "John A"  
+##   
+##   $`3`
+##   + ... omitted several groups/vertices
+```
+
+] # end panel 2
+
+.panel[.panel-name[Method 2]
+
+
+``` r
+igraph::fastgreedy.community(karate)
+```
+
+```
+## IGRAPH clustering fast greedy, groups: 3, mod: 0.43
+## + groups:
+##   $`1`
+##    [1] "Actor 9"  "Actor 10" "Actor 15" "Actor 16" "Actor 19" "Actor 21"
+##    [7] "Actor 23" "Actor 24" "Actor 25" "Actor 26" "Actor 27" "Actor 28"
+##   [13] "Actor 29" "Actor 30" "Actor 31" "Actor 32" "Actor 33" "John A"  
+##   
+##   $`2`
+##    [1] "Mr Hi"    "Actor 2"  "Actor 3"  "Actor 4"  "Actor 8"  "Actor 12"
+##    [7] "Actor 13" "Actor 14" "Actor 18" "Actor 20" "Actor 22"
+##   
+##   $`3`
+##   + ... omitted several groups/vertices
+```
+]
+
+.panel[.panel-name[Bonus]
+
+.scroll-box-20[
+
+``` r
+karate_n &lt;- snafun::to_network(karate)
+igraph::fastgreedy.community(karate_n)
+```
+
+```
+## Error in `ensure_igraph()`:
+## ! Must provide a graph object (provided wrong object type).
+```
+
+``` r
+snafun::extract_comm_fastgreedy(karate_n)
+```
+
+```
+## IGRAPH clustering fast greedy, groups: 3, mod: 0.38
+## + groups:
+##   $`1`
+##   [1] "Mr Hi"    "Actor 5"  "Actor 6"  "Actor 7"  "Actor 11" "Actor 12"
+##   [7] "Actor 17" "Actor 20"
+##   
+##   $`2`
+##    [1] "Actor 9"  "Actor 15" "Actor 16" "Actor 19" "Actor 21" "Actor 23"
+##    [7] "Actor 24" "Actor 25" "Actor 26" "Actor 27" "Actor 28" "Actor 29"
+##   [13] "Actor 30" "Actor 31" "Actor 32" "Actor 33" "John A"  
+##   
+##   $`3`
+##   + ... omitted several groups/vertices
+```
+
+Note: the `snafun` function works on both object classes, the `igraph` function
+works only for `igraph` objects.
+So, make sure to always pass an object of the correct class!
+
+&lt;br&gt;&lt;br&gt;
+]
+]
+
+]
+
+
+---
+name: help
+description: Getting help
+
+
+# How do you expect me to know all that?
+
+### Multiple ways:
+
+--
+
+First, make sure you know and understand the concepts, so you know what to search for.
+
+- `help(package = "snafun")`
+
+- `help(package = "igraph")` or `help(package = "sna")` or `help(package = "network")`, et cetera
+
+--
+
+- use autocompletion in RStudio
+
+--
+
+- `?function_name` (prepend the package name, so: `?snafun::print`)
+
+--
+
+- `??pattern` (e.g., `??"cliques"`)
+![](assets/images/help_cliques.jpg# absolute w-30pct b-3-12th l-9-12th)
+
+--
+
+- `RSiteSearch(string)` (e.g., `RSiteSearch("cliques")`)
+
+--
+
+- Use our very helpful and extensive cheatsheet (see Canvas or the
+[html5 slides](https://snanalyst.github.io/SNA4DSSlides/index.html))
+
+--
+
+- ask Claudia and Roger
+
+---
+
+class: bg-Black course-logo
+
+# .Gold-inline[Today's menu]
+
+&lt;div class="grid-3-2a"&gt;
+&lt;div class="extension-tile tileview"&gt;&lt;div&gt;R for SNA&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile panelset-tile"&gt;&lt;div&gt;Homeplay&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile webcam"&gt;&lt;div&gt;Graph objects&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile slide"&gt;&lt;div&gt;Exercise&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile editable"&gt;&lt;div&gt;How to know?&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+---
+class: bg-Black course-logo
+
+
+background-image: url(assets/images/edwin-andrade-4V1dC_eoCwg-unsplash.jpg)
+background-position: 100% 0%
+background-size: contain
+background-color: #000000
+
+.Orange-inline.font160.b.i[?&lt;br&gt;Q&lt;br&gt;U&lt;br&gt;E&lt;br&gt;S&lt;br&gt;T&lt;br&gt;I&lt;br&gt;O&lt;br&gt;N&lt;br&gt;S&lt;br&gt;?]
+
+
+
+.footnote[[Credit](https://unsplash.com/@theunsteady5)]
+
+---
+class: bg-Black course-logo
+
+background-image: url(assets/images/junseong-lee-v_WLk_vNYRA-unsplash.jpg)
+background-position: 100% 0%
+background-size: cover
+background-color: #000000
+
+.footnote[[Credit](https://unsplash.com/@bearsnap)]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="assets/remark-latest.min.js"></script>
+<script src="assets/js/remark-zoom.js"></script>
+<script src="assets/js/macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "atom-one-light",
+"highlightLines": true,
+"highlightSpans": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "- %current% -",
+"ratio": "16:9",
+"navigation": {
+"scroll": true
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
