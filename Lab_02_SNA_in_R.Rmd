@@ -810,11 +810,6 @@ First, make sure you know and understand the concepts, so you know what to searc
 
 --
 
-- Use our very helpful and extensive cheatsheet (see Canvas or the
-[html5 slides](https://snanalyst.github.io/SNA4DSSlides/index.html))
-
---
-
 - ask Claudia and Roger
 
 ---
