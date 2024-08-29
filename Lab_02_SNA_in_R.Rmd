@@ -313,12 +313,35 @@ background-size: cover
 name: homeplay
 description: "Homeplay coding"
 
-<iframe width="1212" height="682" src="assets/html/homeplay02_code.html" title="Homeplay 2 code" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="width:100%; height:100%;" allowfullscreen></iframe>
-
-
----
 
 .panelset[
+.panel[.panel-name[snafun]
+.scroll-box-32[
+```{r homeplay_snafun, echo = TRUE, evalk = TRUE}
+data(elegans, package = "SNA4DSData")
+elegans
+snafun::print(elegans)
+snafun::is_igraph(elegans)
+
+snafun::is_directed(elegans)
+snafun::list_edge_attributes(elegans)
+snafun::list_vertex_attributes(elegans)
+
+snafun::count_vertices(elegans)
+snafun::count_edges(elegans)
+
+snafun::extract_vertex_names(elegans)
+
+#dyad census
+snafun::count_dyads(elegans)
+
+snafun::g_reciprocity(elegans)
+snafun::g_transitivity(elegans)
+snafun::g_density(elegans)
+```
+<br><br><br><br><br><br><br> <br>
+]
+]
 .panel[.panel-name[igraph object]
 .scroll-box-32[
 ```{r homeplay_igraph, echo = TRUE, evalk = TRUE}
@@ -449,17 +472,6 @@ mod <- lm(y ~ x, data = d)
 plot(mod)
 par(opar)
 ```
-
-
-<!-- ```{r lab02__02bb, echo = FALSE, eval= FALSE, fig.height = 4, message=FALSE, warning=FALSE} -->
-<!-- opar <- par() -->
-<!-- par("mar" = c(2, 2, 2, 2)) -->
-<!-- d <- density(rnorm(20)) -->
-<!-- plot(d) -->
-<!-- par(opar) -->
-<!-- ``` -->
-
-
 
 ]
 
@@ -776,6 +788,8 @@ First, make sure you know and understand the concepts, so you know what to searc
 - `help(package = "snafun")`
 
 - `help(package = "igraph")` or `help(package = "sna")` or `help(package = "network")`, et cetera
+
+- [snafun info page](https://snanalyst.github.io/SNAfun/)
 
 --
 
