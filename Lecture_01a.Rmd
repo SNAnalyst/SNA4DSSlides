@@ -367,13 +367,6 @@ Most households (71%) are in one large cluster. A single COVID case in one of th
 ] # end of panel 3
 
 
-<!-- start panel 4 -->
-.panel[.panel-name[Try it]
-       
- <br><br>.center[.font180[[Interactive application](https://steve-hood.shinyapps.io/OneFriend/)]]
-   
-   <!-- <br><br><center>.font180[[Interactive application](https://steve-hood.shinyapps.io/OneFriend/)]</center> -->
-] # end of panel 4
 
 ]
 <!-- end of panel set -->
