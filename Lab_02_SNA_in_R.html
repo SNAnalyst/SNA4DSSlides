@@ -22,7 +22,7 @@
     <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
     <script src="assets/xaringanExtra-webcam-0.0.1/webcam.js"></script>
     <script id="xaringanExtra-webcam-options" type="application/json">{"width":"175","height":"131.25","margin":"1em"}</script>
-    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"ecc9a626a4434856b1acc3fed6bd166a","expires":1}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"e314da42868d4797ad29553eab0ffa81","expires":1}</script>
     <script src="assets/himalaya-1.1.0/himalaya.js"></script>
     <script src="assets/js-cookie-3.0.0/js.cookie.js"></script>
     <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
@@ -287,7 +287,7 @@ description: "Homeplay coding"
 
 .panelset[
 .panel[.panel-name[snafun]
-.scroll-box-32[
+.scroll-box-24[
 
 ``` r
 data(elegans, package = "SNA4DSData")
@@ -1091,7 +1091,7 @@ elegans
 ## 
 ## 
 ## [[10]]
-## &lt;environment: 0x000002b6ffa433c8&gt;
+## &lt;environment: 0x0000020d7764fc88&gt;
 ## 
 ## attr(,"class")
 ## [1] "igraph"
@@ -1593,6 +1593,16 @@ plot(mod)
 
 ]
 
+???
+Python is ook enigzins object oriented, daar werkt het via "method chaining", waar 
+je van alles aan elkaar knoopt door het aan elkaar te schrijven met steeds een 
+punt ertussen.
+Echter, in Python werkt dit alleen met objecten van die specifieke klasse van die 
+library, je moet alle methods uit die ene library halen. Daarom zijn de 
+libraries van Python vaak ook zo gruwelijk omvangrijk.
+R heeft een andere filosofie, waarbij method dispatch werkt ongeacht de library, 
+en methoden uit meerdere libraries kunnen komen. Daardoor kun je kleine en specifieke 
+libraries maken.
 
 ---
 layout: false
@@ -1738,7 +1748,7 @@ We will discuss your findings after the clock is at 00:00
 
 ]
 
-<div class="countdown" id="timer_92b041b5" data-warn-when="30" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;left:0;margin:5%;padding:50px;font-size:6em;">
+<div class="countdown" id="timer_3310ace2" data-warn-when="30" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;left:0;margin:5%;padding:50px;font-size:6em;">
 <div class="countdown-controls"><button class="countdown-bump-down">&minus;</button><button class="countdown-bump-up">&plus;</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
@@ -2231,7 +2241,8 @@ snafun::extract_comm_fastgreedy(karate_n)
 
 Note: the `snafun` function works on both object classes, the `igraph` function
 works only for `igraph` objects.
-So, make sure to always pass an object of the correct class!
+So, make sure to always pass an object of the correct class when you use an 
+`igraph` function or a `network` function!
 
 &lt;br&gt;&lt;br&gt;
 ]

@@ -150,7 +150,7 @@ class: course-logo
 .font70[`r htmlent$envelope` Email: SNA4DS@jads.nl]
 
 ]
-k
+
 
 .pull-right[
 .font150[<b>Claudia Zucca</b>]
@@ -163,42 +163,26 @@ k
 
 ]
 
-
 ---
-  class: bg-Black course-logo animated fadeIn
-
-# me: Roger Leenders
-
-```{r wordcloud_inlezen, echo=FALSE, include = FALSE}
-load("assets/data/freq.RData")
-```
-
-
-```{r wordcloud_maken, echo = FALSE, include = TRUE, out.height="80%", fig.align = 'center'}
-wordcloud2::wordcloud2(freq, size = .7,
-                       color = "random-light", backgroundColor = "black")
-```
-
----
-  class: course-logo
+class: course-logo
 
 # Getting in touch
 
 <br><br><br>
-  - Speak with us during/around lectures/labs/game/group meetings
+- Speak with us during/around lectures/labs/group meetings
+
+- Speak with us during our office hours
 
 - Get in touch with us through **SNA4DS@jads.nl**
-  
-  - Speak with us during our office hours
 
 --
   
-  <br><br><br>
-  
-  `r triangle_exclamation(fill = "red")` ***DO NOT email us on our university email addresses***
-  
-  `r triangle_exclamation()` ***DO NOT message us through Canvas***
-  
+<br><br><br>
+
+`r triangle_exclamation(fill = "red")` ***DO NOT email us on our university email addresses***
+
+`r triangle_exclamation()` ***DO NOT message us through Canvas***
+
 ---
 layout: false
 class: course-logo
@@ -245,10 +229,11 @@ time and space.
 
 
 ---
+
+<br><br>
+The various networks we meet in nature or society vary widely:
   
-  The various networks we meet in nature or society vary widely:
-  
-  - the nodes of the **metabolic network** are tiny molecules
+- the nodes of the **metabolic network** are tiny molecules
 and the links are chemical reactions
 governed by the laws of chemistry and quantum mechanics;
 - the nodes of the **WWW** are web documents and the links are URLs
@@ -258,11 +243,12 @@ and the links represent family, professional, friendship,
 and acquaintance ties.
 
 ---
-  
-  The processes that generated these networks also differ
+
+<br><br>
+The processes that generated these networks also differ
 greatly:
   
-  - **metabolic** networks were shaped by billions of years
+- **metabolic** networks were shaped by billions of years
 of evolution;
 - the **WWW** is built on the collective actions of
 millions of individuals and organizations;
@@ -271,16 +257,20 @@ shaped by social norms whose roots go back thousands of
 years.
 
 ---
-  
-  A key discovery of network science is that the ***architectures*** of
+
+
+# However
+
+a key discovery of network science is that the ***architectures*** of
 networks emerging in such varying domains are surprisingly similar to each other,
 and are governed by ***similar organizing principles***.
 
 --
   
-.right-column.f-marker.Blue-inline.font150[.w-60[Consequently, we
-                                                   can use a common set of mathematical tools to explore these
-                                                   systems.]]
+.right-column.f-marker.Blue-inline.font150[.w-60[
+Consequently, we can use <br>a common set of <br>mathematical and statistical tools<br>
+to explore these systems
+]]
 
 
 ---
@@ -292,19 +282,19 @@ description: Networks and us
 # Networks and us
 
 <br>
-  .Blue-inline[We live inside networks]
+.Blue-inline[We live inside networks]
 
 We work with others, we study with others, we have family, we have friends, we take part in internet communities, et cetera.
 
 --
   
-  .Blue-inline[We are shaped by our networks]
+.Blue-inline[We are shaped by our networks]
 
 Find information, get advice, receive friendship, sanction/punish behavior, create (conditions for) trust, et cetera.
 
 --
   
-  .Blue-inline[We shape our networks]
+.Blue-inline[We shape our networks]
 
 We make friends, give advice, get new jobs, join clubs, we show trustworthiness, et cetera.
 
@@ -352,10 +342,10 @@ layout: false
 .center[![10% essential households ](assets/images/EssentialJobs.png)]
 
 .font70[
- Most households are isolated. The largest cluster contains just 26% of
- households. The vast majority of households are shielded from the Corona virus.
- 
- .fn[source: https://www.washington.edu/news/2020/04/13/just-one-friend-covid-19/]
+Most households are isolated. The largest cluster contains just 26% of
+households. The vast majority of households are shielded from the Corona virus.
+
+.fn[source: https://www.washington.edu/news/2020/04/13/just-one-friend-covid-19/]
 ]
        
 ] # end panel 2
@@ -365,22 +355,22 @@ layout: false
 
 <!-- start panel 3 -->
 .panel[.panel-name[Just 1 friend]
-       .font70[Each household is allowed to interact with one friend]
-       
-   .center[![10% essential households ](assets/images/Just1friend.png)]
+.font70[Each household is allowed to interact with one friend]
    
-   .font70[
-     Most households (71%) are in one large cluster. A single COVID case in one of these households can spread to 3/4 of the families in this community.
-     
-   .fn[source: https://www.washington.edu/news/2020/04/13/just-one-friend-covid-19/]
-   ]
+.center[![10% essential households ](assets/images/Just1friend.png)]
+
+.font70[
+Most households (71%) are in one large cluster. A single COVID case in one of these households can spread to 3/4 of the families in this community.
+ 
+.fn[source: https://www.washington.edu/news/2020/04/13/just-one-friend-covid-19/]
+]
 ] # end of panel 3
 
 
 <!-- start panel 4 -->
 .panel[.panel-name[Try it]
        
-   <br><br>.center[.font180[[Interactive application](https://steve-hood.shinyapps.io/OneFriend/)]]
+ <br><br>.center[.font180[[Interactive application](https://steve-hood.shinyapps.io/OneFriend/)]]
    
    <!-- <br><br><center>.font180[[Interactive application](https://steve-hood.shinyapps.io/OneFriend/)]</center> -->
 ] # end of panel 4
@@ -394,12 +384,12 @@ name: start_of_sna
 description: Start of SNA
 class: course-logo
 
-# How did .Blue-inline[SOCIAL] networks start?
+# How did the field of .Blue-inline[SOCIAL] networks start?
 
 --
 
 .pull-left[
-  .animated.fadeIn[![:scale 200%](assets/images/moreno/01-moreno.jpg)]
+.animated.fadeIn[![:scale 200%](assets/images/moreno/01-moreno.jpg)]
 ]
 
 .pull-right.tl[
@@ -464,7 +454,7 @@ will use these terms interchangeably.
 
 A graph consists of
 + nodes / actors / vertices
-+ links / ties/ edges / relationships / connections
++ links / ties / edges / relationships / connections
 
 Formally: $Graph = \{Vertices, Edges\}$
 
@@ -541,81 +531,34 @@ class: course-logo
 
 
 ---
-name: examples-of-networks-internet
-description: Examples: internet
-class: course-logo
-
-# Example of networks
-
-.center[![:scale 70%](assets/images/Internet1970.png)]
-
---
   
-The internet in December 1970.
-
-.fn[source: http://som.csudh.edu/fac/lpress/history/arpamaps/f7dec1970.jpg]
-
-
----
-name: examples-of-networks-blogosphere
-description: Examples: Blogosphere
-class: course-logo
-
-# Example of networks
-
-.center[![:scale 60%](assets/images/blogosphere.png)]
-
-The network structure of political blogs prior to the 2004 U.S. Presidential
-election. The network  reveals two natural and well-separated clusters.
-
-.fn[source:http://www.ramb.ethz.ch/CDstore/www2005-ws/workshop/wf10/AdamicGlanceBlogWWW.pdf]
-
-
----
-name: example-coffee
-description: Examples: coffee percolation
-class: course-logo
-
-# Applications in Physics 
-
-
-.flex.h-50[
-.w-50[
-![](assets/images/coffee.png)]
-.w-50[
-![](assets/images/latice.png)]]
-
-E.g., Coffee percolation
-- phase transition 
-
-- (square lattice)
-
----
-  
-# Some more examples
+# Some examples
 
 
 
 .w-40.fl.tl[
-  - Networks of international diplomacy
-  
-  - Collaboration between musical artists
-  
-  - Songs listened to on Spotify
-  
-  - Terrorist cells
-  
-  - Drugs trafficking networks
-  
-  - Users (and bots) on internet forums
-  
-  - Player performance in soccer or basketball
-  
-  - Book ratings on amazon / recommender systems
+- Networks of international diplomacy
+
+- Collaboration between musical artists
+
+- Songs listened to on Spotify
+
+- Terrorist cells
+
+- Drugs trafficking networks
+
+- Users (and bots) on internet forums
+
+- Playing strategy in soccer or basketball
+
+- Book ratings on amazon
+
+- Coffee percolation
+
 ]
 
 .w-40.fr.tl[
-  - JADS students' social life (eating, drinking, studying)
+- JADS students' social life (eating, drinking, studying)
 
 - Interaction and murder in Game of Thrones
 
@@ -656,13 +599,10 @@ name: class
 description: SNA4DS setup
 layout: false
 
-
 background-image: url(assets/images/kaleidico-26MJGnCM0Wc-unsplash.jpg)
 background-size: cover
 
-
-# What happens in class?
-
+.f-marker.Orange-inline.font400[What happens in class?]
 
 ---
 class: course-logo
@@ -670,37 +610,39 @@ class: course-logo
 
 # Each week
 
-- read the book chapter (or other readings) listed on canvas for that week
+<br>
 
-- do the tutorial on the `snaverse`
-
-- do the *homeplay*
-
-<br><br><br>
 `r chevron_right()` Lectures (on Mondays) are in the chapel
  
 `r chevron_right()` Labs (on Wednesdays) are online (Zoom)
 
 `r chevron_right()` Project progress meetings are at JADS
 
-<br><br>
-Come prepared! It will make your life easier :)
+<br><br><br>
+
+- read the book chapter (or other readings) listed on canvas for that week
+
+- do the tutorial on the `snaverse`
+
+- do the *homeplay*
+
+- Come prepared! It will make your life easier and you'll learn so much more :)
 
 ---
 class: course-logo
 
-# Assessment Strategy
+# Assessment
 
 - Group project (write a report) - 40%
 - Exam - 60%
 
 <br><br><br>
 
-### Exam
+## Exam
 
-Questions and problem sets (with real datasets)
+- Questions and problem sets (with real datasets)
 
-Similar to the Bootcamp Exam :)
+- Similar to the Bootcamp Exam :)<br>
 (but you'll need the full three hours)
 
 ---
@@ -727,8 +669,8 @@ class: course-logo
 # Project (2)
 
 - Identify or collect appropriate and relevant data 
-- Formulate network-based research questions that can be answered with that data.
-- Formulate appropriate hypotheses and
+- Formulate network-based research questions that can be answered with that data
+- Formulate appropriate hypotheses
 - Run analyses using the models we will learn in class
 - Write a report (about 4500 words)
 
@@ -737,15 +679,15 @@ class: course-logo
 class: course-logo
 
 
-# For Wednesday: 
+# For Wednesday
 
 1. Do Tutorial "Intro to R" and 02 "SNA in R" (`sna4tutti::open_sna4tutti_tutorials()`)
 
 1. Read INA chapter 1 <br>(If you haven't done it already)
 
-1. Read Borgatti, S. P., Mehra, A., Brass, D. J., & Labianca, G. (2009). <br>(If you haven't done it already)
+1. Read Borgatti, S. P., Mehra, A., Brass, D. J., & Labianca, G. (2009) <br>(If you haven't done it already)
 
-1. Do the homeplay
+1. Do the two homeplays
 
 
 ---

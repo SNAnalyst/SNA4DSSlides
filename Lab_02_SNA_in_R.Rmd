@@ -316,7 +316,7 @@ description: "Homeplay coding"
 
 .panelset[
 .panel[.panel-name[snafun]
-.scroll-box-32[
+.scroll-box-24[
 ```{r homeplay_snafun, echo = TRUE, evalk = TRUE}
 data(elegans, package = "SNA4DSData")
 elegans
@@ -475,6 +475,16 @@ par(opar)
 
 ]
 
+???
+Python is ook enigzins object oriented, daar werkt het via "method chaining", waar 
+je van alles aan elkaar knoopt door het aan elkaar te schrijven met steeds een 
+punt ertussen.
+Echter, in Python werkt dit alleen met objecten van die specifieke klasse van die 
+library, je moet alle methods uit die ene library halen. Daarom zijn de 
+libraries van Python vaak ook zo gruwelijk omvangrijk.
+R heeft een andere filosofie, waarbij method dispatch werkt ongeacht de library, 
+en methoden uit meerdere libraries kunnen komen. Daardoor kun je kleine en specifieke 
+libraries maken.
 
 ---
 layout: false
@@ -763,7 +773,8 @@ snafun::extract_comm_fastgreedy(karate_n)
 
 Note: the `snafun` function works on both object classes, the `igraph` function
 works only for `igraph` objects.
-So, make sure to always pass an object of the correct class!
+So, make sure to always pass an object of the correct class when you use an 
+`igraph` function or a `network` function!
 
 <br><br>
 ]
