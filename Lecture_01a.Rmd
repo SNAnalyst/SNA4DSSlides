@@ -462,29 +462,29 @@ class: course-logo
 
 
 .w-40.fl.tl[
-  - people
-  - organizations
-  - countries
-  - teams
-  - animals
-  - bacteria
-  - trainstations, airports
-  - electricity stations
-  - knowledge repositories
-  - political parties
+- people
+- organizations
+- countries
+- teams
+- animals
+- bacteria
+- trainstations, airports
+- electricity stations
+- knowledge repositories
+- political parties
 ]
 
 
 .w-50.fr.tl[
 .can-edit[
-  - scientific articles
-  - chapters in a book
-  - variables in a model
-  - words
-  - products
-  - plants, flowers
-  - pieces of land
-  - ...
+- scientific articles
+- chapters in a book
+- variables in a model
+- words
+- products
+- plants, flowers
+- pieces of land
+- ...
 ]]
 
 
