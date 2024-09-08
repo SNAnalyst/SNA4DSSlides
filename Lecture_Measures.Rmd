@@ -1,9 +1,9 @@
 ---
 title: "SOCIAL NETWORK ANALYSIS<br>for DATA SCIENTISTS"
 topic: "Lecture: Social Network Measures"
-lecture_no: Week 04
+lecture_no: Week 03
 author: "Roger"
-playdate: "September 20, 2023"
+playdate: "September 09, 2024"
 output:
   xaringan::moon_reader:
     css:
@@ -300,9 +300,11 @@ layout: true
 
 ---
 name: gamenet
-description: The network of the game
+description: Running example graph
 
-# Recognize this network?
+# Example graph
+
+## Which actor is in a good position/whose position s@$ks?
 
 ```{r maakgamenetd3plot, hide = TRUE, eval = FALSE}
 networkD3::simpleNetwork(links, 
@@ -616,7 +618,7 @@ give different results for such networks.
 ---
 class: course-logo
 
-# Closeness in the game network
+# Closeness in the example graph
 
 
 
@@ -692,7 +694,7 @@ where:<br>
 --
 
 In words: the betweenness centrality of _i_ is the proportion of all shortest 
-paths in the network that pass through _i_. 
+paths between actors other than _i_ in the graph that pass through _i_. 
 Betweenness shows which nodes have information access advantage and are important 
 to the network's efficiency. 
 It also shows the relative stress on nodes.
@@ -850,7 +852,7 @@ $Centralization = \sum_{i}\left | max(c(w)) -  c(i)\right |$
 
 .center.i[or]
 
-$sd(c(i))$
+$Centralization = sd(c(i))$
 
 &emsp; `r chevron_right()` the standard deviation of the centrality scores of the 
 vertices in the graph.
@@ -859,7 +861,7 @@ vertices in the graph.
 
 <br><br><br>
 `r arrow_right(fill = "orange")` the *freeman* method is the default in `snafun`, 
-`igraph`, and `sna`.
+`igraph`, and `sna`
 
 ---
 class: course-logo
