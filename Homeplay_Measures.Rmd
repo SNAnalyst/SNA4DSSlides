@@ -119,6 +119,8 @@ blog0 <- snafun::add_vertex_attributes(blog0, "community", value = igraph::membe
 # alternatively
 # igraph::V(blog0)$community <- igraph::membership(walk0)
 
+snafun::make_mixingmatrix(blog0, "community")
+
 all_attr <- snafun::extract_all_vertex_attributes(blog0)
 
 table(all_attr$party, all_attr$community)

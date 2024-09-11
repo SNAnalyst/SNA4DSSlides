@@ -152,4 +152,25 @@ lectureName <- "Week 03 -- Lecture: Network measures"
 `r make_overview(overview, path, slidedeckFile, lectureName)`
 
 
+<!-- Week 03 -- Lab: Network measures -->                    
+```{r, include = FALSE}                                      
+overview <- matrix(c(                                        
+"menu", "Menu",                                            
+"descriptives", "Descriptive measures",                    
+"transitivity", "Transitivity",                            
+"walktrap", "Homeplay: communities",                       
+"isolates", "Homeplay: toss them isolates!",               
+"bonus", "Homeplay bonus question",                        
+"bridge", "Who bridges between the communities",           
+"facility", "Facility location analysis",                  
+"Pagerank", "Pagerank through simulation"                  
+), byrow = TRUE, ncol = 2) |>                                
+as.data.frame() |>                                           
+setNames(c("name", "description"))                         
+                                                          
+slidedeckFile <- "Lab_Measures"                              
+lectureName <- "Week 03 -- Lab: Network measures"            
+```                                                          
+                                                          
+`r make_overview(overview, path, slidedeckFile, lectureName)`
 
