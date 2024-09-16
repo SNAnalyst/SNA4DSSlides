@@ -174,3 +174,34 @@ lectureName <- "Week 03 -- Lab: Network measures"
                                                           
 `r make_overview(overview, path, slidedeckFile, lectureName)`
 
+
+
+
+                                                                      
+<!-- Week 04 -- Lecture: Basic Statistical Models -->                     
+```{r, include = FALSE}                                                   
+overview <- matrix(c(                                                     
+"menu", "Menu",                                                         
+"assumption", "Our assumptions from here on out",                       
+"role", "The role of statistics",                                       
+"models_in_course", "Overview of the statistical models in this course",
+"toblerslaw", "Tobler's First Law",                                     
+"socinf", "Social influence on a network",                              
+"nam", "Network autocorrelation model",                                 
+"weightmatrix", "Weight matrix",                                        
+"communication", "Communication",                                       
+"comparison", "Comparison",                                             
+"structuralequivalence", "Structural equivalence",                      
+"sedist", "snafun::d_structural_equivalence",                           
+"lnam", "stat_nam function"                                             
+), byrow = TRUE, ncol = 2) |>                                             
+as.data.frame() |>                                                        
+setNames(c("name", "description"))                                      
+                                                                       
+slidedeckFile <- "Lecture_stats"                                          
+lectureName <- "Week 04 -- Lecture: Basic Statistical Models"             
+```                                                                       
+                                                                       
+`r make_overview(overview, path, slidedeckFile, lectureName)`  
+
+
