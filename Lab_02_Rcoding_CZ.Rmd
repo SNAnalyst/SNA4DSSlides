@@ -28,8 +28,7 @@ output:
       beforeInit:
         - assets/js/remark-zoom.js
         - assets/js/macros.js
-        - https://unpkg.com/shiki
-        - assets/js/
+        # - https://unpkg.com/shiki
       highlightStyle: atom-one-light
       highlightLines: true
       highlightSpans: true
@@ -98,15 +97,14 @@ xaringanExtra::use_editable(expires = 1)
 xaringanExtra::use_search(show_icon = FALSE, case_sensitive = FALSE)
 xaringanExtra::use_logo("sna4ds_logo_140.png")
 
-# htmltools::tagList(
-#   xaringanExtra::use_clipboard(
-#     button_text = "<i class=\"fa fa-clipboard\"></i>",
-#     success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
-#     error_text = "<i class=\"fa fa-times-circle\" style=\"color: #F94144\"></i>"
-#   )
-#   # ,
-#   # rmarkdown::html_dependency_font_awesome()
-# )
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fa fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+    error_text = "<i class=\"fa fa-times-circle\" style=\"color: #F94144\"></i>"
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
 ```
 
 
@@ -134,50 +132,6 @@ xaringanExtra::use_extra_styles(
 
 .show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
     display: none;
-}
-```
-
-```{js,  eval = TRUE}
-var element = document.getElementById("myCode");
-Shiki.highlight(element);
-```
-
-```{r irrelevant_for_the_template_itself, echo = FALSE}
-`%||%` <- function(x, y) if (is.null(x)) y else x
-
-rewrite_chunk <- function(label, include_label = FALSE, nbt = 3) {
-  chunk <- knitr::knit_code$get(label)
-  opts <- attr(chunk, "chunk_opts")
-  bt <- strrep("`", nbt)
-  engine <- opts$engine %||% "r"
-  exclude <- c("engine")
-  if (is.logical(include_label) && !isTRUE(include_label)) {
-    exclude <- c(exclude, "label")
-  }
-  if (is.character(include_label)) {
-    label <- include_label
-  }
-  opts <- opts[setdiff(names(opts), exclude)]
-  opts <- paste(
-    vapply(names(opts), FUN.VALUE = character(1), function(on) {
-      paste0(
-        if (on != "label") paste(on, "= "), 
-        if (is.character(opts[[on]])) {
-          if (on == "label") label else dQuote(opts[[on]], q = 0) 
-        } else {
-          deparse(opts[[on]])
-        }
-      )
-    }),
-    collapse = ", "
-  )
-  header <- paste0(bt, "{", engine, if (length(opts) && nzchar(opts)) " ", opts, "}")
-  paste(
-    header,
-    paste(chunk, collapse = "\n"),
-    bt,
-    sep = "\n"
-  )
 }
 ```
 

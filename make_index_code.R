@@ -64,12 +64,12 @@ make_index_code <- function(rmd_file, lecture_description = "Week 02 -- Lab: Int
   code_matrix[2, ] <- "```{r, include = FALSE}"
   code_matrix[3, ] <- "overview <- matrix(c("
   final_name <- 3 + nrow(output)
-  code_matrix[4:final_name, ] <- glue::glue('  "{name}", "{description}",', name = output[, 1], description = output[, 2])
+  code_matrix[4:final_name, ] <- glue::glue('"{name}", "{description}",', name = output[, 1], description = output[, 2])
   # remove the last comma for the last one
   code_matrix[final_name, 1] <- stringr::str_remove(code_matrix[(3 + nrow(output)), 1], ",$")
   code_matrix[final_name + 1, ] <- ("), byrow = TRUE, ncol = 2) |> ")
   code_matrix[final_name + 2, ] <- "as.data.frame() |> "
-  code_matrix[final_name + 3, ] <- '  setNames(c("name", "description"))'
+  code_matrix[final_name + 3, ] <- 'setNames(c("name", "description"))'
   code_matrix[final_name + 5, ] <- glue::glue('slidedeckFile <- "{slidedeckFile}"')
   code_matrix[final_name + 6, ] <- glue::glue('lectureName <- "{lecture_description}"')
   code_matrix[final_name + 7, ] <- "```"
