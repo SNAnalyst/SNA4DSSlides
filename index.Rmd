@@ -97,6 +97,43 @@ lectureName <- "Week 02 -- Lecture: Intro to SNA & SNA4DS"
 `r make_overview(overview, path, slidedeckFile, lectureName)`
 
 
+<!-- Week 02 -- Lecture: Intro to R -->                                                     
+```{r, include = FALSE}                                                                     
+overview <- matrix(c(                                                                       
+"intro_r", "Intro to R and RStudio",                                                      
+"mentimeter", "Programming Survey",                                                       
+"Rstudio_installation", "R studio installation and setup",                                
+"snaverse_setup", "snaverse setup",                                                       
+"tutorials", "Info about tutorials",                                                      
+"bug_reporting", "Bug Reporting",                                                         
+"tutorial1", "T01 programming in R",                                                      
+"Disclaimer", "Keep up with the material"                                                 
+), byrow = TRUE, ncol = 2) |>                                                               
+as.data.frame() |>                                                                          
+setNames(c("name", "description"))                                                        
+                                                                                         
+slidedeckFile <- "Lecture_02_Rcoding_CZ"
+lectureName <- "Week 02 -- Lecture: Intro to R"                                             
+```                                                                                         
+                                                                                         
+`r make_overview(overview, path, slidedeckFile, lectureName)`           
+
+
+<!-- Week 02 -- Lab: Coding in R -->                                                    
+```{r, include = FALSE}                                                                 
+overview <- matrix(c(                                                                   
+"intro_r", "Intro to R and RStudio"                                                     
+), byrow = TRUE, ncol = 2) |>                                                           
+as.data.frame() |>                                                                      
+setNames(c("name", "description"))                                                      
+                                                                                       
+slidedeckFile <- "Lab_02_Rcoding_CZ"
+lectureName <- "Week 02 -- Lab: Coding in R"                                            
+```                                                                                     
+
+`r make_overview(overview, path, slidedeckFile, lectureName)`                                                               
+
+
 <!-- Week 02 -- Lab: Intro to R in SNA -->                   
 ```{r, include = FALSE}                                      
 overview <- matrix(c(                                        
@@ -204,4 +241,25 @@ lectureName <- "Week 04 -- Lecture: Basic Statistical Models"
                                                                        
 `r make_overview(overview, path, slidedeckFile, lectureName)`  
 
+
+<!-- Week 04 -- Lab: Basic Statistical Models -->                               
+```{r, include = FALSE}                                                         
+overview <- matrix(c(                                                           
+"menu", "Menu",                                                                 
+"extract_vertex_attributes", "Extract vertex attributes",                       
+"louisiana", "Louisiana results",                                               
+"pvalues", "Empirical <i>p</i>-values",                                         
+"table", "Which method to use when?",                                           
+"FIFA_networks", "FIFA networks",                                               
+"advanced", "Advanced CUG use",                                                 
+"stat", "Statistically modeling networks"                                       
+), byrow = TRUE, ncol = 2) |>                                                   
+as.data.frame() |>                                                              
+setNames(c("name", "description"))                                              
+                                                                               
+slidedeckFile <- "Lab_stats"
+lectureName <- "Week 04 -- Lab: Basic Statistical Models"                       
+```                                                                             
+                                                                               
+`r make_overview(overview, path, slidedeckFile, lectureName)`   
 
