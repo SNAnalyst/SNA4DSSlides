@@ -839,7 +839,7 @@ at the variation of the predictor
 # Plug in effects in the equation
 <br>
 <br>
-##  $\theta$ - Using a combination of network statistics
+##  $h$ - Using a combination of network statistics
 <br>
 ## We can plug in effects in the equation here.
 
@@ -856,7 +856,7 @@ background-position: 85% 85%
 <br>
 ### In Math
 
-### $\theta = \sum_{i<j} N_{ij} N_{ji}$
+### $h = \sum_{i<j} N_{ij} N_{ji}$
 
 ---
 # ERGM with Reciprocity effect
@@ -864,7 +864,7 @@ background-position: 85% 85%
 substititute the reciprocity formula in the generic parameter $\theta$
 <br> 
 <br>
-## $P(N,\theta) = \frac{exp\{(\sum_{i<j} N_{ij} N_{ji})^T h(N)\}}{\sum_{N^*\in \mathcal{N}} exp\{(\sum_{i<j} N_{ij} N_{ji})^T h(N^*) \}^T}$
+## $P(N,\theta) = \frac{exp\{\theta^T (\sum_{i<j} N_{ij} N_{ji})(N)\}}{\sum_{N^*\in \mathcal{N}} exp\{\theta^T (\sum_{i<j} N_{ij} N_{ji})(N^*) \}^T}$
 <br> 
 <br>
 If you insert more than one effect you keep adding them up

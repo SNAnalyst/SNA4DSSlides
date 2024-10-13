@@ -20,7 +20,7 @@
     <script src="assets/freezeframe-5.0.2/freezeframe.min.js"></script>
     <script src="assets/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
     <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
-    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x4a7f61d8f9244958b96e28be5da9ec4","expires":1}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"f3b1cac8bbb248cfaa5193d03067c4d2","expires":1}</script>
     <script src="assets/himalaya-1.1.0/himalaya.js"></script>
     <script src="assets/js-cookie-3.0.0/js.cookie.js"></script>
     <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
@@ -800,7 +800,7 @@ at the variation of the predictor
 # Plug in effects in the equation
 &lt;br&gt;
 &lt;br&gt;
-##  `\(\theta\)` - Using a combination of network statistics
+##  `\(h\)` - Using a combination of network statistics
 &lt;br&gt;
 ## We can plug in effects in the equation here.
 
@@ -817,7 +817,7 @@ background-position: 85% 85%
 &lt;br&gt;
 ### In Math
 
-### `\(\theta = \sum_{i&lt;j} N_{ij} N_{ji}\)`
+### `\(h = \sum_{i&lt;j} N_{ij} N_{ji}\)`
 
 ---
 # ERGM with Reciprocity effect
@@ -825,7 +825,7 @@ background-position: 85% 85%
 substititute the reciprocity formula in the generic parameter `\(\theta\)`
 &lt;br&gt; 
 &lt;br&gt;
-## `\(P(N,\theta) = \frac{exp\{(\sum_{i&lt;j} N_{ij} N_{ji})^T h(N)\}}{\sum_{N^*\in \mathcal{N}} exp\{(\sum_{i&lt;j} N_{ij} N_{ji})^T h(N^*) \}^T}\)`
+## `\(P(N,\theta) = \frac{exp\{\theta^T (\sum_{i&lt;j} N_{ij} N_{ji})(N)\}}{\sum_{N^*\in \mathcal{N}} exp\{\theta^T (\sum_{i&lt;j} N_{ij} N_{ji})(N^*) \}^T}\)`
 &lt;br&gt; 
 &lt;br&gt;
 If you insert more than one effect you keep adding them up
