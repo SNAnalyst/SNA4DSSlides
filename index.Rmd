@@ -51,8 +51,7 @@ make_overview <- function(overview, path, slidedeckFile, lectureName) {
 ```
 
 
-
-```{html}
+```{js, eval = FALSE, echo = FALSE}
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E84CP2L725"></script>
 <script>
@@ -63,6 +62,8 @@ make_overview <- function(overview, path, slidedeckFile, lectureName) {
   gtag('config', 'G-E84CP2L725');
 </script>
 ```
+
+
 
 
 
@@ -328,5 +329,52 @@ lectureName <- "Week 05 -- Lab: Visualizing Network Data"
 
 
 
+<!-- Week 07 -- Lecture: Exponential Random Graph Model I -->                                                       
+```{r, include = FALSE}                                                                                             
+overview <- matrix(c(                                                                                               
+"Causal_inference_recap", "Causal inference models we did so far",                                                  
+"conceptualizing_ergm_outcome_var", "ergm outcome variable is always a network, it can be seen as a dummy variable",
+"Erdos_Renyi", "Erdos Renyi model",                                                                                 
+"P1_model", "P1 model",                                                                                             
+"Predictors", "Exogeneous and Endogeneous effects",                                                                 
+"ergm_math", "Mathematical model of the ERGM",                                                                      
+"ergm_effects", "intuitive idea of ergm effects within the model",                                                  
+"ergm_theory", "How to theoretically approach an ergm",                                                             
+"ergm_recap", "ergm model features",                                                                                
+"ergm_reasoning_example", "How to approach a research design with ergms",                                           
+"statnet", "Introducing statnet"                                                                                    
+), byrow = TRUE, ncol = 2) |>                                                                                       
+as.data.frame() |>                                                                                                  
+setNames(c("name", "description"))                                                                                  
+                                                                                                               
+slidedeckFile <- "Week07_Lecture_ERGM1"                                                                             
+lectureName <- "Week 07 -- Lecture: Exponential Random Graph Model I"                                               
+```                                                                                                                 
+                                                                                                               
+`r make_overview(overview, path, slidedeckFile, lectureName)`      
+
+
+
+
+<!-- Week 08 -- Lecture: Exponential Random Graph Model II -->        
+```{r, include = FALSE}                                               
+overview <- matrix(c(                                                 
+"Menu", "Topics we cover today",                                      
+"Recap_ERGM1", "Recap of the previous ERGM class",                    
+"Fitting_ER", "Fitting an Erdos Renyi model",                         
+"Fitting_P1", "Fitting an ERGM with 4 terms - P1 model",              
+"ERGM_Effects", "More about ERGM Effects and estimation",             
+"Finding_Effects", "How to find ERGM effects in the help files",      
+"ERGM_pronunciation", "How to pronounce the name of these models",    
+"Fitting_ERGM_exogenous", "Fitting ERGMs with exogenous terms"        
+), byrow = TRUE, ncol = 2) |>                                         
+as.data.frame() |>                                                    
+setNames(c("name", "description"))                                    
+                                                                   
+slidedeckFile <- "Week08_Lecture_ERGM2"                               
+lectureName <- "Week 08 -- Lecture: Exponential Random Graph Model II"
+```                                                                   
+                                                                   
+`r make_overview(overview, path, slidedeckFile, lectureName)` 
 
 
