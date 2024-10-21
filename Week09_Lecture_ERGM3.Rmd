@@ -509,7 +509,7 @@ This function outputs three things:
 - Plots the MCMC diagnostics
 
 ---
-## MCMC Dyagnostics
+## MCMC Diagnostics
 .scroll-box-18[
 ```{r Les09_2, echo=TRUE}
 
