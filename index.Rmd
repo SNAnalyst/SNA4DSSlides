@@ -378,3 +378,35 @@ lectureName <- "Week 08 -- Lecture: Exponential Random Graph Model II"
 `r make_overview(overview, path, slidedeckFile, lectureName)` 
 
 
+                                                                                    
+<!-- Lab: Exponential Random Graph Model I -->                                         
+```{r, include = FALSE}                                                                
+overview <- matrix(c(                                                                  
+"menu", "List of content for today's lab",                                             
+"markovian_graph", "The effects in the neighborhood",                                  
+"structural_undirected_terms", "structural undirected terms",                          
+"structural_directed_terms", "Structural Directed terms",                              
+"shared_partners", "Egdewise and dyadwise shared partners",                            
+"terms_triads", "Terms for triads",                                                    
+"cycle", "term for kcycle",                                                            
+"exogenous_effects", "Terms for exogenous effects",                                    
+"mixing_matrix", "Cross tabulation for variables and edges",                           
+"Homeplay_data_exploration", "Data analysis before running any model",                 
+"hypotheses formulation", "Formulating hypotheses before running any model",           
+"Baseline_models", "Running Baseline models",                                          
+"testing_hypotheses", "testing the hypotheses",                                        
+"exploring_terms", "Exploring other specifications",                                   
+"results", "commenting on results",                                                    
+"adding_structural_terms", "Adding structural undirected terms",                       
+"re_fitting_curved", "Improving the model with curved term"                            
+), byrow = TRUE, ncol = 2) |>                                                          
+as.data.frame() |>                                                                     
+setNames(c("name", "description"))                                                     
+                                                                                    
+slidedeckFile <- "Week08_Lab_ERGM1"
+lectureName <- "Lab: Exponential Random Graph Model I"                                 
+```                                                                                    
+                                                                                    
+`r make_overview(overview, path, slidedeckFile, lectureName)`  
+
+ 
