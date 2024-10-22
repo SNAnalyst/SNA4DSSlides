@@ -410,3 +410,30 @@ lectureName <- "Lab: Exponential Random Graph Model I"
 `r make_overview(overview, path, slidedeckFile, lectureName)`  
 
  
+
+                                                                     
+<!-- Week 09 -- Lecture: Exponential Random Graph Model III -->           
+```{r, include = FALSE}                                                   
+overview <- matrix(c(                                                     
+"menu", "List of contents for today's lecture",                           
+"ERGMestimation", "An intuitive description of how the estimation works", 
+"ERGMmath", "How the math of ERGM estimation works",                      
+"convergence", "What is the convergence of a model",                      
+"burnin", "What is the model burn-in",                                    
+"sample_size", "What is the model sample size",                           
+"mcmc_diagnostics", "How to perform and interpret mcmc diagnostics",      
+"model_degeneracy", "What is the model degeneracy",                       
+"curved_terms", "Terms to improve model convergence and predictive power",
+"gof", "How to perform and interpret goodness of fit"                     
+), byrow = TRUE, ncol = 2) |>                                             
+as.data.frame() |>                                                        
+setNames(c("name", "description"))                                        
+                                                                     
+slidedeckFile <- "Week09_Lecture_ERGM3"                                   
+lectureName <- "Week 09 -- Lecture: Exponential Random Graph Model III"   
+```                                                                       
+                                                                     
+`r make_overview(overview, path, slidedeckFile, lectureName)`  
+
+
+ 
