@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>SOCIAL NETWORK ANALYSIS for DATA SCIENTISTS</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Claudia" />
+    <script src="assets/header-attrs-2.28/header-attrs.js"></script>
+    <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="assets/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="assets/tile-view-0.2.6/tile-view.js"></script>
+    <link href="assets/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="assets/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra_fit-screen-0.2.6/fit-screen.js"></script>
+    <link href="assets/panelset-0.3.1/panelset.css" rel="stylesheet" />
+    <script src="assets/panelset-0.3.1/panelset.js"></script>
+    <script src="assets/fabric-4.3.1/fabric.min.js"></script>
+    <link href="assets/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="assets/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="assets/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script src="assets/xaringanExtra-webcam-0.0.1/webcam.js"></script>
+    <script id="xaringanExtra-webcam-options" type="application/json">{"width":"200","height":"150","margin":"1em"}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"xa63e91e669f4ceca1f6f5348799c660","expires":1}</script>
+    <script src="assets/himalaya-1.1.0/himalaya.js"></script>
+    <script src="assets/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="assets/editable-0.2.6/editable.js"></script>
+    <script src="assets/mark.js-8.11.1/mark.min.js"></script>
+    <link href="assets/xaringanExtra-search-0.0.1/search.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-search-0.0.1/search.js"></script>
+    <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"bottom-left","caseSensitive":false,"showIcon":false,"autoSearch":true}) })</script>
+    <script src="assets/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="assets/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <link href="assets/countdown-0.4.0/countdown.css" rel="stylesheet" />
+    <script src="assets/countdown-0.4.0/countdown.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="assets/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/apron.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/descartes.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/tachyons.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/xaringan-extra.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/RL-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS_effects.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/kleuren.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[SOCIAL NETWORK ANALYSIS&lt;br&gt;for DATA SCIENTISTS]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[LAB: ERGM III .small-caps.font70[(lab] .font70[Week 10)]]]
+  ]
+
+&lt;br&gt;
+.f-abel.White-inline[Your lecturer: Claudia]&lt;br&gt;
+.f-abel.White-inline[Playdate: October, 30th, 2024]
+
+
+&lt;!-- setup options start --&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.highlight-last-item &gt; ul &gt; li, 
+.highlight-last-item &gt; ol &gt; li {
+  opacity: 0.5;
+}
+
+.highlight-last-item &gt; ul &gt; li:last-of-type,
+.highlight-last-item &gt; ol &gt; li:last-of-type {
+  opacity: 1;
+
+.bold-last-item &gt; ul &gt; li:last-of-type,
+.bold-last-item &gt; ol &gt; li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+&lt;/style&gt;
+
+&lt;style type="text/css"&gt;
+.remark-inline-code {
+  background: #F5F5F5;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.inverse-red, .inverse-red h1, .inverse-red h2, .inverse-red h3, .inverse-red a, inverse-red a &gt; code {
+	border-top: none;
+	background-color: red;
+	color: white; 
+	background-image: "";
+}
+
+.inverse-orange, .inverse-orange h1, .inverse-orange h2, .inverse-orange h3, .inverse-orange a, inverse-orange a &gt; code {
+	border-top: none;
+	background-color: orange;
+	color: black; 
+	background-image: "";
+}
+
+.tab{
+  display: inline-block;
+  margin-left: 40px;
+}
+
+.tab1{tab-size: 2;}
+.tab2{tab-size: 4;}
+.tab3{tab-size: 6;}
+.tab4{tab-size: 8;}
+
+&lt;/style&gt;
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.grid-2-2 {
+  display: grid;
+  height: calc(80%);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1em;
+  padding: 1em;
+}
+&lt;/style&gt;
+
+&lt;!-- setup options end --&gt;
+
+---
+
+class: bg-Black course-logo
+
+background-image: url(assets/images/chris-montgomery-smgTvepind4-unsplash-L.jpg)
+background-position: 100% 0%
+background-size: cover
+background-color: #000000
+
+### .White-inline.font350.b[&lt;br&gt;Turn your&lt;br&gt;cameras on!]
+
+
+.footnote[[Credit](https://unsplash.com/@cwmonty)]
+
+---
+class: course-logo
+layout: true
+
+---
+
+name: menu
+description: List of contents for today's Lab
+# Menu
+&lt;br&gt;
+
+- Super Lab - Real Time ERGM!
+- Final Recommendations
+- ERGMs Qs &amp; As
+
+
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# Real Time ERGM
+
+
+---
+# Let's Research JADS Data! :)
+
+.center[![:scale 50%](assets/images/JADSstudents2022.png)]
+
+<div class="countdown" id="timer_c9638f75" data-warn-when="30" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:30;margin:5%;font-size:3em;">
+<div class="countdown-controls"><button class="countdown-bump-down">&minus;</button><button class="countdown-bump-up">&plus;</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">60</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+`setwd("C:/Users/...")`
+
+`load("JADSmaster2022.Rdata")`
+
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# Final Recomendations
+
+
+
+---
+
+# Remember
+&lt;br&gt;
+- Network outcome variable 
+- Always use structural terms
+- Handling large networks
+- Handling complex cases 
+- Seven step flow approach 
+
+---
+name: Net_out
+description: The meaning of having a network as outcome variable
+# Network outcome variable 
+
+&lt;br&gt;
+
+## You already know that ERGMs work with a network outcome variable. 
+&lt;br&gt;
+## Make sure you are developing your theory accordingly!
+
+### Some examples
+
+- Is it more likely that people of the same age are friends?
+- Do more popular scholars prefer to collaborate with other popular scholars?
+- Do companies want to trade with other companies in the same sector?
+
+---
+# Please NOTE:
+
+## Is it more likely that people of the same age are friends?
+
+- outcome: friendship
+- predictor: age (numeric)
+
+## Do more popular scholars prefer to collaborate with other popular scholars?
+
+- outcome: collaboration 
+- predictor: popularity (numeric/ordinal)
+
+## Do companies want to trade with other companies in the same sector?
+- outcome: trade
+- predictor: sector (categorical)
+
+---
+name: Str_terms
+description: The importance of including structural terms
+# Always use structural terms
+&lt;br&gt;
+
+## Even if your hypotheses do not point you to structural terms, they still must be in the model.
+
+&lt;br&gt;
+
+### Two reasons
+
+- Otherwise it is just like a logistic regression 
+- The model won't work well
+
+&lt;br&gt;
+
+## ERGMs explain relationships.
+
+Allow them to do their job
+
+
+---
+name: Large_nets
+description: How to handle large networks
+# Handling large networks
+&lt;br&gt;
+## Ideally, for this assignment, you should stay below 500 nodes
+
+
+---
+# Handling large networks
+&lt;br&gt;
+## Ideally, for this assignment, you should stay below 500 nodes
+
+## .red[Why?]
+
+---
+# Handling large networks
+&lt;br&gt;
+## Ideally, for this assignment, you should stay below 500 nodes
+
+## .red[Why?]
+
+Just because it takes too much time to run these models and you have a tight deadline. 
+
+---
+# Handling large networks
+&lt;br&gt;
+## If your project requires large networks
+
+1. use control ergm to optimize the simulation parameters
+2. contraint the model so that the simulation gets a little faster
+3. use simple models - Test a smaller number of hypotheses
+4. run it on a server
+5. parallelize
+
+---
+name: complex_cases
+description: Handling complex cases
+# Handling complex cases
+&lt;br&gt;
+## Some of you are re-constructing fairly complex networks
+&lt;br&gt;
+## Make sure that you know what the terms you insert in the model mean 
+
+It is better to have a simple model (few straightforwardly interpretable terms) than super fancy specification that nobody can understand. 
+&lt;br&gt;
+### Also, make sure you don't do too many transformations with your data before putting them into the model.
+
+---
+name: Stat_signif
+description: What is a good model
+# SUPER DISCLAIMER
+&lt;br&gt;
+## WE DON'T CARE ABOUT STARS
+
+- Significant effects + good MCMC diagnostics + good GOF = AWESOME
+
+### BUT 
+
+- Significant effects + bad MCMC diagnostics + bad GOF = bad mark
+
+- NON-Significant effects + good MCMC diagnostics + good GOF = good mark (IF YOU CAN EXPLAIN WHY)
+
+
+---
+name: Seven_steps
+description: Doing research in a nutshell
+
+
+
+.center[![:scale 40%](assets/images/7stepsFlow.png)]
+
+
+
+---
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# ERGMs Qs &amp; As
+
+---
+name: Res_Qs
+description: Think carefully about research questions
+# Final point: Think carefully about your research questions! 
+
+.center[![:scale 30%](assets/images/thinking-cap.png)]
+
+---
+# Good Luck backing your Projects!
+
+.center[![:scale 50%](assets/images/Chocolate-Chess-Pie-a.jpg)]
+
+---
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="assets/remark-latest.min.js"></script>
+<script src="assets/js/remark-zoom.js"></script>
+<script src="assets/js/macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "atom-one-light",
+"highlightLines": true,
+"highlightSpans": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "- %current% -",
+"ratio": "16:9",
+"navigation": {
+"scroll": true
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
