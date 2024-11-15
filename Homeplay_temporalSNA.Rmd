@@ -1,0 +1,193 @@
+---
+title: "Homeplay TERGM"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+remedy::remedy_opts$set(name = paste0("btergm_homeplay", "_"))
+```
+
+
+# Introduction
+
+For this homeplay we are going to use the `friendship` data from the `SNA4DSData` 
+package. You probably need to update the `SNA4DSData` 
+package for it, through
+
+
+`remotes::install_github("SNAnalyst/SNA4DSData")`
+
+
+The load the data and the `btergm` package as follows:
+
+```{r , eval = FALSE}
+data(friendship, package = "SNA4DSData")
+library(btergm)
+```
+
+This loads the dataset into your workspace. The data consist of the 
+friendship network of 26 pupils in a Dutch school class measured at four time 
+points along with several demographic and behavioral covariates. 
+
+
+Check the number of vertices per network as follows
+
+```{r, eval = FALSE}
+sapply(friendship, snafun::count_vertices)
+```
+
+
+# Model I
+
+Fit the first model on this dataset. 
+Although the vertex covariates speak for themselves, this is what they represent:
+
+- idegsqrt = the square root of the vertex indegree at that point in time
+
+- odegsqrt = the square root of the vertex outdegree at that point in time
+
+- sex: gender, 1 = girl, 2 = boy
+
+We start with the model below (`model.01`). Run it now.
+
+```{r , eval = FALSE}
+model.01 <- btergm::btergm(friendship ~ edges + mutual + ttriple +
+                     transitiveties + ctriple + nodeicov("idegsqrt") +
+                     nodeicov("odegsqrt") + nodeocov("odegsqrt") +
+                     nodeofactor("sex") + nodeifactor("sex") + nodematch("sex") +
+                     edgecov(primary), R = 100)
+
+snafun::stat_plot_gof_as_btergm(model.01, 
+                                btergm_statistics = c(esp, dsp, geodesic, deg, triad.undirected, rocpr))
+```
+
+The last line shows how you can easily specify the statistics you want to check for 
+the goodness of fit. If you leave out the `btergm_statistics` argument, you'll 
+only get the default statistics (ie. shared partners, geodesic distances, degree, roc/pr).
+
+After you run the model:
+* step 1: interpret the findings of the model--which effect are (not) statistically significant and does that make sense?
+(hint: use `btergm::summary(model.01)`.
+* Step 2: What do you think of the model's goodness of fit?
+
+# Model II
+
+Model I didn't include any history. Lets add some now. 
+
+* Extend model I with "delayed reciprocity." Use the default arguments.
+
+* Also, add a stability memory effect, again using the defaults.
+
+Call this new model `model.02`. 
+
+Hint, use 
+
+```{r , eval = FALSE}
+help("tergm-terms")
+```
+
+to find out how to specify the various time effects. 
+Of course, you can also use the lecture slides to get you started.
+
+
+```{r , echo = FALSE, eval = FALSE}
+model.02 <- btergm::btergm(friendship ~ edges + mutual + ttriple +
+                     transitiveties + ctriple + nodeicov("idegsqrt") + nodeicov("odegsqrt") +
+                     nodeocov("odegsqrt") + nodeofactor("sex") + nodeifactor("sex") +
+                     nodematch("sex") + edgecov(primary) + delrecip +
+                     memory(type = "stability"), R = 100)
+```
+
+
+After you run the model:
+* step 1: interpret the findings of the model--which effect are (not) statistically significant and does that make sense?
+* Step 2: What do you think of the model's goodness of fit?
+
+
+# Model III
+
+The final model is actually the same model that you just formulated. 
+But this time, we are going to only run it on the first three networks and use 
+the fitted model to predict the fourth. 
+This is a useful way to check the fit of our model through out-of-sample prediction.
+
+STEP 1
+
+Fit Model II, but now use `friendship[1:3]` as the set of dependent networks, 
+rather than `friendship` (which would fit the model on all networks). 
+For the rest, don't change anything in the model.
+Name the model `model.03`.
+
+
+```{r , echo = FALSE, eval = FALSE}
+model.03 <- btergm::btergm(friendship[1:3] ~ edges + mutual + ttriple +
+                     transitiveties + ctriple + nodeicov("idegsqrt") + nodeicov("odegsqrt") +
+                     nodeocov("odegsqrt") + nodeofactor("sex") + nodeifactor("sex") +
+                     nodematch("sex") + edgecov(primary) + delrecip() +
+                     memory(type = "stability"), R = 100)
+```
+
+OK, so how do we predict and know how well the prediction does? 
+We can employ the `gof` function to simulate 100 networks from the model and compare
+them to the actually observed network at $t = 4$. 
+
+For the prediction, we use the argument `target = friendship[[4]]` to tell the 
+`gof` function to compare the simulated networks to the omitted
+and observed fourth time step. To simulate new networks, one needs to supply the covariates
+for the coeﬃcients, including the temporal statistics. We do this by specifying the formula
+again and adding index [3:4] to the left-hand side of the formula. This computes the
+relevant covariates for the fourth time step, partly by making use of information contained in
+the third time step (in the case of the temporal variables). Using the `coef` argument, we tell
+the `gof` function to use the estimated coeﬃcients from the model.
+
+As an example, suppose that you model.03 looked as follows:
+
+```{r btergm_homeplay_001, eval = FALSE}
+model.03 <- btergm::btergm(friendship[1:3] ~ edges + A + B + C, R = 100)
+```
+
+Then, you predict the next network by:
+
+```{r, echo = TRUE , eval = FALSE}
+gof.03 <- btergm::gof(model.03, nsim = 100, target = friendship[[4]],
+              formula = friendship[3:4] ~ A + B + C, coef = coef(model.03),
+              statistics = c(esp, dsp, geodesic, deg, triad.undirected, rocpr))
+```
+
+Do this now for the actual model you fitted.
+(if you have a slow computer, you can reduce `nsim`, but this should run within a 
+few minutes on most laptops).
+
+
+```{r, echo = TRUE , eval = FALSE}
+gof.03 <- btergm::gof(model.03, nsim = 100, target = friendship[[4]],
+              formula = friendship[3:4] ~ edges + mutual + ttriple +
+                transitiveties + ctriple + nodeicov("idegsqrt") +
+                nodeicov("odegsqrt") + nodeocov("odegsqrt") + nodeofactor("sex") +
+                nodeifactor("sex") + nodematch("sex") + edgecov(primary) +
+                delrecip + memory(type = "stability"), coef = coef(model.03),
+              statistics = c(esp, dsp, geodesic, deg, triad.undirected, rocpr))
+```
+
+To extract the area uder the ROC and PR curves, use:
+
+```{r , eval = FALSE}
+gof.03$`Tie prediction`$auc.roc
+gof.03$`Tie prediction`$auc.pr
+```
+
+
+For your information, you can also simulate a set of networks without automatically 
+extracting the `gof` like you did above.
+
+The following command simulates ten new networks based on the coeﬃcients stored 
+in Model.03 and for time step 4. 
+The resulting ten networks are stored in a list. 
+This would be the code to do that (but you don't need to do it for this homeplay, 
+this is just so you know how to do it, in case you would like to):
+
+```{r , eval = FALSE}
+nw <- simulate(model.03, nsim = 10, index = 4)
+```
+
