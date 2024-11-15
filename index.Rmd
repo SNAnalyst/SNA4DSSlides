@@ -451,7 +451,7 @@ overview <- matrix(c(
 as.data.frame() |>                                           
 setNames(c("name", "description"))                           
                                                           
-slidedeckFile <- "Week09_Lab_ERGM2.html"                     
+slidedeckFile <- "Week09_Lab_ERGM2"                     
 lectureName <- "Week 09 -- Lab: Exponential Random Graph Model II"       
 ```                                                          
                                                           
@@ -489,7 +489,7 @@ overview <- matrix(c(
 as.data.frame() |>                                                             
 setNames(c("name", "description"))                                             
                                                                           
-slidedeckFile <- "Week10_Lecture_ERGM4.html"                                   
+slidedeckFile <- "Week10_Lecture_ERGM4"                                   
 lectureName <- "Week 10 -- Lecture: Exponential Random Graph Model IV"                    
 ```                                                                            
                                                                           
@@ -512,7 +512,7 @@ overview <- matrix(c(
 as.data.frame() |>                                               
 setNames(c("name", "description"))                               
                                                               
-slidedeckFile <- "Week10_Lab_ERGM3.html"                         
+slidedeckFile <- "Week10_Lab_ERGM3"                         
 lectureName <- "Week 10 -- Lab: Exponential Random Graph Model III"         
 ```                                                              
                                                               
@@ -538,7 +538,7 @@ overview <- matrix(c(
 as.data.frame() |>                                                      
 setNames(c("name", "description"))                                      
                                                                      
-slidedeckFile <- "Lecture_TemporalSNA.html"                             
+slidedeckFile <- "Lecture_TemporalSNA"                             
 lectureName <- "Week 12 -- Lecture: Temporal Networks"                             
 ```                                                                     
                                                                      
