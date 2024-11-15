@@ -404,7 +404,7 @@ as.data.frame() |>
 setNames(c("name", "description"))                                                     
                                                                                     
 slidedeckFile <- "Week08_Lab_ERGM1"
-lectureName <- "Lab: Exponential Random Graph Model I"                                 
+lectureName <- "Week 08 -- Lab: Exponential Random Graph Model I"                                 
 ```                                                                                    
                                                                                     
 `r make_overview(overview, path, slidedeckFile, lectureName)`  
@@ -436,4 +436,114 @@ lectureName <- "Week 09 -- Lecture: Exponential Random Graph Model III"
 `r make_overview(overview, path, slidedeckFile, lectureName)`  
 
 
+
+
+<!-- Lab: Exponential Random Graph Model II -->               
+```{r, include = FALSE}                                      
+overview <- matrix(c(                                        
+"menu", "List of contents for the lab",                      
+"Model_results", "Interpreting model results",               
+"Odds_ratios", "Odds_ratios",                                
+"Probabilities", "Probabilities",                            
+"example_inter_res", "Example for interpreting results",     
+"Research_flow", "Approach to carry out research"            
+), byrow = TRUE, ncol = 2) |>                                
+as.data.frame() |>                                           
+setNames(c("name", "description"))                           
+                                                          
+slidedeckFile <- "Week09_Lab_ERGM2.html"                     
+lectureName <- "Week 09 -- Lab: Exponential Random Graph Model II"       
+```                                                          
+                                                          
+`r make_overview(overview, path, slidedeckFile, lectureName)`
+
+
+                                                                         
+<!-- Lecture: Exponential Random Graph Model IV -->                            
+```{r, include = FALSE}                                                        
+overview <- matrix(c(                                                          
+"menu", "List of contents for today's lecture",                                
+"Bipartite_graph", "Recap about bipartite graphs",                             
+"modelling_Bipartite_graph", "Modelling bipartite graphs",                     
+"Bipartite_model_terms", "Terms for bipartite models",                         
+"Bipartite_model_example", "Bipartite model example",                          
+"Model_constraints", "Model constraints",                                      
+"Offset", "Offset a term in model specification",                              
+"Ergm_control", "Function for control ergm",                                   
+"diagnostics_bipartite", "diagnostics for bipartite",                          
+"gof_bipartite", "goodness of fit for bipartite",                              
+"weighted_networks", "Recap Weighted networks",                                
+"weight_types", "Types of Weighted networks",                                  
+"weight_count", "Weighted networks Count",                                     
+"weight_continuous", "Weighted networks continuous",                           
+"GERGM", "package for weighted network ERGMs",                                 
+"weighted_network_math", "GERGM mathematical specification",                   
+"GERGM_package", "A package for weighted network ERGMs",                       
+"GERGM_terms", "Specification of GERGM terms",                                 
+"GERGM_endogenous", "Specification of endogenous GERGM terms",                 
+"GERGM_exogenous", "Specification of exogenous GERGM terms",                   
+"GERGM_data", "Specification for data format in the GERGM package",            
+"GERGM_formula_specification", "Specification of the formula in a GERGM model",
+"GERGM_model_results", "Exploring results in a GERGM model"                    
+), byrow = TRUE, ncol = 2) |>                                                  
+as.data.frame() |>                                                             
+setNames(c("name", "description"))                                             
+                                                                          
+slidedeckFile <- "Week10_Lecture_ERGM4.html"                                   
+lectureName <- "Week 10 -- Lecture: Exponential Random Graph Model IV"                    
+```                                                                            
+                                                                          
+`r make_overview(overview, path, slidedeckFile, lectureName)`
+
+
+
+<!-- Lab: Exponential Random Graph Model III -->                 
+```{r, include = FALSE}                                          
+overview <- matrix(c(                                            
+"menu", "List of contents for today's Lab",                      
+"Net_out", "The meaning of having a network as outcome variable",
+"Str_terms", "The importance of including structural terms",     
+"Large_nets", "How to handle large networks",                    
+"complex_cases", "Handling complex cases",                       
+"Stat_signif", "What is a good model",                           
+"Seven_steps", "Doing research in a nutshell",                   
+"Res_Qs", "Think carefully about research questions"             
+), byrow = TRUE, ncol = 2) |>                                    
+as.data.frame() |>                                               
+setNames(c("name", "description"))                               
+                                                              
+slidedeckFile <- "Week10_Lab_ERGM3.html"                         
+lectureName <- "Week 10 -- Lab: Exponential Random Graph Model III"         
+```                                                              
+                                                              
+`r make_overview(overview, path, slidedeckFile, lectureName)`  
+ 
+ 
+<!-- Lecture: Temporal Networks -->                                     
+```{r, include = FALSE}                                                 
+overview <- matrix(c(                                                   
+"soccer", "ball passing network in soccer",                             
+"learnt_sofar", "Can we use what we have learnt sofar?",                
+"characteristics", "Characteristics of temporal networks",              
+"how_analyze", "How do you analyze temporal networks",                  
+"analysis_overview", "Analysis of temporal network data in this course",
+"tergms", "The TERGM",                                                  
+"btergm", "The `btergm` package",                                       
+"example", "International alliances (example)",                         
+"memory", "Time effects (Memory)",                                      
+"reciprocity", "Time effects (Delayed reciprocity)",                    
+"covariates", "Time effects (Covariates)",                              
+"nextlab", "What happens in the lab"                                    
+), byrow = TRUE, ncol = 2) |>                                           
+as.data.frame() |>                                                      
+setNames(c("name", "description"))                                      
+                                                                     
+slidedeckFile <- "Lecture_TemporalSNA.html"                             
+lectureName <- "Week 12 -- Lecture: Temporal Networks"                             
+```                                                                     
+                                                                     
+`r make_overview(overview, path, slidedeckFile, lectureName)`  
+
+
+ 
  
