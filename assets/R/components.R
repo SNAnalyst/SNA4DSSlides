@@ -161,7 +161,7 @@ repl_iframe <- function(code, class = NULL, ...) {
 
 
 slides_from_images <- function(
-  path,
+  path = "assets/images",
   regexp = NULL,
   class = "hide-count",
   background_size = "contain",

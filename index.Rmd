@@ -545,5 +545,19 @@ lectureName <- "Week 12 -- Lecture: Temporal Networks"
 `r make_overview(overview, path, slidedeckFile, lectureName)`  
 
 
- 
- 
+<!-- Week 13 -- Lab: Temporal Networks -->                   
+```{r, include = FALSE}                                      
+overview <- matrix(c(                                        
+"friendship_dataset", "friendship dataset",                  
+"models", "modeling",                                        
+"interpret", "interpret function",                           
+"SNA4DS exam", "SNA4DS exam"                                 
+), byrow = TRUE, ncol = 2) |>                                
+as.data.frame() |>                                           
+setNames(c("name", "description"))                           
+                                                          
+slidedeckFile <- "Lab_temporalSNA"                           
+lectureName <- "Week 13 -- Lab: Temporal Networks"           
+```                                                          
+                                                          
+`r make_overview(overview, path, slidedeckFile, lectureName)`
