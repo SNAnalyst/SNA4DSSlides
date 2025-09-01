@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>SOCIAL NETWORK ANALYSIS for DATA SCIENTISTS</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Roger Leenders" />
+    <meta name="date" content="2025-09-02" />
+    <script src="assets/header-attrs-2.29/header-attrs.js"></script>
+    <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="assets/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="assets/tile-view-0.2.6/tile-view.js"></script>
+    <link href="assets/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="assets/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra_fit-screen-0.2.6/fit-screen.js"></script>
+    <link href="assets/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="assets/panelset-0.3.0/panelset.js"></script>
+    <script src="assets/fabric-4.3.1/fabric.min.js"></script>
+    <link href="assets/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="assets/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="assets/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script src="assets/xaringanExtra-webcam-0.0.1/webcam.js"></script>
+    <script id="xaringanExtra-webcam-options" type="application/json">{"width":"300","height":"225","margin":"1em"}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"xfddbec701834ea18faaf9a2a5b4b494","expires":1}</script>
+    <script src="assets/himalaya-1.1.0/himalaya.js"></script>
+    <script src="assets/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="assets/editable-0.2.6/editable.js"></script>
+    <link href="assets/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="assets/css/apron.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/descartes.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/tachyons.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/RL-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS_effects.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/ninjutsu.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/kleuren.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[SOCIAL NETWORK ANALYSIS&lt;br&gt;for DATA SCIENTISTS]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[Introduction  .small-caps.font70[(lecture] .font70[01)]]]
+]
+
+&lt;br&gt;
+.f-abel.White-inline[Your lecturer: Roger Leenders]&lt;br&gt;
+.f-abel.White-inline[Playdate: September 02, 2025]
+
+
+&lt;!-- setup options start --&gt;
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.highlight-last-item &gt; ul &gt; li,
+.highlight-last-item &gt; ol &gt; li {
+  opacity: 0.5;
+}
+
+.highlight-last-item &gt; ul &gt; li:last-of-type,
+.highlight-last-item &gt; ol &gt; li:last-of-type {
+  opacity: 1;
+
+.bold-last-item &gt; ul &gt; li:last-of-type,
+.bold-last-item &gt; ol &gt; li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+&lt;/style&gt;
+
+
+
+&lt;!-- setup options end --&gt;
+
+
+---
+name: CourseTeam
+description: Your instructors
+class: bg-black course-logo split-three 
+
+# Your instructors
+
+.column[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.font150.DarkOrange-inline[&lt;b&gt;Roger Leenders&lt;/b&gt;]
+
+
+&lt;img src="assets/images/rleenders.jpg" heigth="125px" width="200px"&gt;
+
+.font70.DarkOrange-inline[[https://www.tilburguniversity.edu/staff/r-t-a-j-leenders](https://www.tilburguniversity.edu/staff/r-t-a-j-leenders)]
+
+.font70.DarkOrange-inline[&amp;#9993; Email: SNA4DS@jads.nl]
+
+]
+
+
+.column[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.font150.DarkOrange-inline[&lt;b&gt;Claudia Zucca&lt;/b&gt;]
+
+&lt;img src="assets/images/s200_claudia.zucca.jpg" heigth="125px" width="200px"&gt;
+
+.font70.DarkOrange-inline[[https://www.tilburguniversity.edu/staff/c-zucca](https://www.tilburguniversity.edu/staff/c-zucca)]
+
+.font70.DarkOrange-inline[&amp;#9993;Email: SNA4DS@jads.nl]
+
+]
+
+
+.column[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.font150.DarkOrange-inline[&lt;b&gt;Gergő Bocsárdi&lt;/b&gt;]
+
+&lt;img src="assets/images/gergo-bocsardi.jpg" heigth="125px" width="200px"&gt;
+
+.font70.DarkOrange-inline[[https://www.jads.nl/researcher/gergo-bocsardi/](https://www.jads.nl/researcher/gergo-bocsardi)]
+
+.font70.DarkOrange-inline[&amp;#9993;Email: SNA4DS@jads.nl]
+]
+
+
+
+---
+class: course-logo
+
+# Getting in touch
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+- Speak with us during/around lectures/labs/group meetings
+
+- Speak with us during our office hours
+
+- Get in touch with us through **SNA4DS@jads.nl**
+
+--
+  
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+&lt;svg style="height: 1em; top:.04em; position: relative; fill: #2F4F4F;"  viewBox="0 0 512 512"&gt;&lt;path d="M256 320c4.406 0 8.013-3.594 8.013-8v-160c0-4.406-3.607-8-8.013-8c-4.406 0-7.987 3.594-7.987 8v160C248 316.4 251.6 320 256 320zM506.3 417l-213.3-364C284.8 39 270.4 32 256 32C241.7 32 227.2 39 218.1 53l-213.2 364C-10.62 444.9 9.848 480 42.74 480h426.6C502 480 522.7 445 506.3 417zM492.6 450.7C487.8 459 479.1 464 469.3 464H42.73c-9.789 0-18.49-4.982-23.27-13.33c-4.678-8.162-4.641-17.49 .1035-25.58L232.8 61.1C237.6 52.9 246.3 48 256 48c9.699 0 18.34 4.887 23.14 13.09l213.3 364C497.2 433.2 497.2 442.5 492.6 450.7zM256.1 368c-8.822 0-16 7.178-16 16s7.138 16 15.96 16c8.822 0 16.04-7.178 16.04-16S264.9 368 256.1 368z"/&gt;&lt;/svg&gt; ***DO NOT email us on our university email addresses***
+
+&lt;svg style="height: 1em; top:.04em; position: relative; fill: #136CB9;"  viewBox="0 0 512 512"&gt;&lt;path d="M256 320c4.406 0 8.013-3.594 8.013-8v-160c0-4.406-3.607-8-8.013-8c-4.406 0-7.987 3.594-7.987 8v160C248 316.4 251.6 320 256 320zM506.3 417l-213.3-364C284.8 39 270.4 32 256 32C241.7 32 227.2 39 218.1 53l-213.2 364C-10.62 444.9 9.848 480 42.74 480h426.6C502 480 522.7 445 506.3 417zM492.6 450.7C487.8 459 479.1 464 469.3 464H42.73c-9.789 0-18.49-4.982-23.27-13.33c-4.678-8.162-4.641-17.49 .1035-25.58L232.8 61.1C237.6 52.9 246.3 48 256 48c9.699 0 18.34 4.887 23.14 13.09l213.3 364C497.2 433.2 497.2 442.5 492.6 450.7zM256.1 368c-8.822 0-16 7.178-16 16s7.138 16 15.96 16c8.822 0 16.04-7.178 16.04-16S264.9 368 256.1 368z"/&gt;&lt;/svg&gt; ***DO NOT message us through Canvas***
+
+---
+layout: false
+class: course-logo
+
+# The main book
+
+![:abs2 30%, 35%, 20%, -20](assets/images/CourseBook.jpg)
+
+--
+  
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.w-30.fr.tr[
+  Additional literature is provided on Canvas
+]
+
+
+---
+name: complex-systems
+description: Complex systems
+class: animated fadeIn course-logo
+
+# Complex systems
+
+We are surrounded by systems that are hopelessly complicated.
+
+Consider, for example,
+
+- **communications infrastructures** that integrate billions of cell phones
+with computers and satellites;
+
+--
+
+- our ability to reason and comprehend our world
+requires the coherent activity of billions of **neurons** in our brain;
+
+--
+
+- our biological existence is rooted in seamless interactions
+between thousands of **genes and metabolites within our cells**;
+
+--
+
+- **markets** that revolve around thousands of organizations doing business
+with each other;
+
+--
+
+- **soccer matches** are characterized by 22 actors constantly moving and
+interacting (passing, giving directions, giving support/criticism) in
+time and space.
+
+--
+  
+&lt;svg style="height: 1em; top:.04em; position: relative; fill: #136CB9;" viewBox="0 0 512 512"&gt;&lt;path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm113.9 231L234.4 103.5c-9.4-9.4-24.6-9.4-33.9 0l-17 17c-9.4 9.4-9.4 24.6 0 33.9L285.1 256 183.5 357.6c-9.4 9.4-9.4 24.6 0 33.9l17 17c9.4 9.4 24.6 9.4 33.9 0L369.9 273c9.4-9.4 9.4-24.6 0-34z"/&gt;&lt;/svg&gt; These systems are collectively called .hl-orange[complex systems] and can
+(partly/largely) be understood as **networks**.
+
+
+---
+
+&lt;br&gt;&lt;br&gt;
+The various networks we meet in nature or society vary widely:
+  
+- the nodes of the **metabolic network** are tiny molecules
+and the links are chemical reactions
+governed by the laws of chemistry and quantum mechanics;
+- the nodes of the **WWW** are web documents and the links are URLs
+guaranteed by computer algorithms;
+- the nodes of **social networks** are individuals or groups of individuals,
+and the links represent family, professional, friendship,
+and acquaintance ties.
+
+---
+
+&lt;br&gt;&lt;br&gt;
+The processes that generated these networks also differ
+greatly:
+  
+- **metabolic** networks were shaped by billions of years
+of evolution;
+- the **WWW** is built on the collective actions of
+millions of individuals and organizations;
+- **social networks** are
+shaped by social norms whose roots go back thousands of
+years.
+
+---
+
+
+# However
+
+a key discovery of network science is that the ***architectures*** of
+networks emerging in such varying domains are surprisingly similar to each other,
+and are governed by ***similar organizing principles***.
+
+--
+  
+.right-column.f-marker.Blue-inline.font150[.w-60[
+Consequently, we can use &lt;br&gt;a common set of &lt;br&gt;mathematical and statistical tools&lt;br&gt;
+to explore these systems
+]]
+
+
+---
+layout: false
+name: start_of_sna
+description: Start of SNA
+class: course-logo
+
+# How did the field of .Blue-inline[SOCIAL] networks start?
+
+--
+
+.pull-left[
+.animated.fadeIn[![:scale 200%](assets/images/moreno/01-moreno.jpg)]
+]
+
+.pull-right.tl[
+.small-caps[[Jacob L. Moreno](https://en.wikipedia.org/wiki/Jacob_L._Moreno)]
+
+May 18, 1889 – May 14, 1974
+
+His 1934 book [Who Shall Survive?](https://archive.org/details/whoshallsurviven00jlmo)
+contains some of the earliest graphical depictions of social networks.
+
+]
+
+---
+class: bg-White course-logo
+
+.pull-left.w30[
+.center[![:scale 80%](assets/images/moreno/02-article.png)]
+]
+
+
+.pull-right.w65[
+.center[![](assets/images/moreno/03-moreno.jpg)]
+
+.tr[New York Times&lt;br&gt;
+      April 3, 1933]
+]
+
+
+---
+class: bg-Black course-logo
+
+# An SNA Classic: Windsurfers on the beach
+
+![](assets/images/FreemanPaper.PNG# absolute ofc w-6-12th h-7-12th t-2-12th)
+
+--
+
+![](assets/images/hammock.jpg# absolute ofc w-7-12th h-6-12th t-5-12th l-5-12th)
+
+.footnote.DarkOrange-inline[source: https://unsplash.com/photos/qxbxq96BpXc]
+
+---
+class: bg-Black course-logo
+
+# Windsurfer interactions over time
+
+.center[
+&lt;iframe src="assets/html/windsurfers.html" width="90%" height="520px" data-external="1"&gt;&lt;/iframe&gt;
+]
+          
+
+
+---
+class: course-logo
+
+# Formal notation
+
+The most common model of a network in network analysis is that of a _graph_. We
+will use these terms interchangeably.
+
+A graph consists of
++ nodes / actors / vertices
++ links / ties / edges / relationships / connections
+
+Formally: `\(Graph = \{Vertices, Edges\}\)`
+
+---
+name: examples-of-actors
+description: Examples of vertices
+class: course-logo
+
+# Examples of actors (vertices)
+
+--
+
+
+.w-40.fl.tl[
+- people
+- organizations
+- countries
+- teams
+- animals
+- bacteria
+- trainstations, airports
+- electricity stations
+- knowledge repositories
+- political parties
+]
+
+
+.w-50.fr.tl[
+.can-edit[
+- scientific articles
+- chapters in a book
+- variables in a model
+- words
+- products
+- plants, flowers
+- pieces of land
+- ...
+]]
+
+
+---
+name: examples-of-relations
+description: Examples of edges
+class: course-logo
+
+
+
+# Examples of relationships (edges)
+
+--
+
+
+.w-40.fl.tl[
+  - giving advice
+- friendship
+- selling a product
+- passing on a virus
+- voting along
+- passing a ball to
+- praising
+- collaboration
+]
+
+
+.w-50.fr.tl[
+.can-edit[
+  - co-occurrence
+- sitting next to
+- be in war with
+- stealing from
+- giving orders
+- ...
+- ...
+- ...
+]]
+
+
+---
+  
+# Some examples
+
+
+
+.w-40.fl.tl[
+- Networks of international diplomacy
+
+- Collaboration between musical artists
+
+- Songs listened to on Spotify
+
+- Terrorist cells
+
+- Drugs trafficking networks
+
+- Users (and bots) on internet forums
+
+- Playing strategy in soccer or basketball
+
+- Book ratings on amazon
+
+- Coffee percolation
+
+]
+
+.w-40.fr.tl[
+- JADS students' social life (eating, drinking, studying)
+
+- Interaction and murder in Game of Thrones
+
+- Migrant movement between countries
+
+- Social movements
+
+- Political debates
+
+- Collaboration in Software development
+
+- Beer rating networks
+
+- Co-authorships between academists
+]
+
+---
+class: animated fadeIn hide-count center-full course-logo
+name: SNA4DS_topics
+description: SNA4DS topics
+layout: false
+
+# Social Network Analysis for Data Scientists
+
+## What is this course about?
+
+---
+class: course-logo
+
+
+class: 
+background-image: url('assets/images/SNA4DS_topic/Slide1.JPG')
+background-size: contain
+background-position: top left
+
+
+---
+
+
+class: 
+background-image: url('assets/images/SNA4DS_topic/Slide2.JPG')
+background-size: contain
+background-position: top left
+
+
+---
+
+
+class: 
+background-image: url('assets/images/SNA4DS_topic/Slide3.JPG')
+background-size: contain
+background-position: top left
+
+
+---
+
+
+class: 
+background-image: url('assets/images/SNA4DS_topic/Slide4.JPG')
+background-size: contain
+background-position: top left
+
+
+---
+
+
+class: 
+background-image: url('assets/images/SNA4DS_topic/Slide5.JPG')
+background-size: contain
+background-position: top left
+
+
+
+
+
+
+
+---
+class: animated fadeIn hide-count center-full course-logo
+name: class
+description: SNA4DS setup
+layout: false
+
+background-image: url(assets/images/kaleidico-26MJGnCM0Wc-unsplash.jpg)
+background-size: cover
+
+.f-marker.Orange-inline.font400[What happens in class?]
+
+---
+class: course-logo
+
+
+# Each week
+
+&lt;br&gt;
+
+&lt;svg style="height: 1em; top:.04em; position: relative; fill: #136CB9;" viewBox="0 0 512 512"&gt;&lt;path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm113.9 231L234.4 103.5c-9.4-9.4-24.6-9.4-33.9 0l-17 17c-9.4 9.4-9.4 24.6 0 33.9L285.1 256 183.5 357.6c-9.4 9.4-9.4 24.6 0 33.9l17 17c9.4 9.4 24.6 9.4 33.9 0L369.9 273c9.4-9.4 9.4-24.6 0-34z"/&gt;&lt;/svg&gt; Labs (mostly on Tuesdays) are online (Zoom)
+ 
+&lt;svg style="height: 1em; top:.04em; position: relative; fill: #136CB9;" viewBox="0 0 512 512"&gt;&lt;path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm113.9 231L234.4 103.5c-9.4-9.4-24.6-9.4-33.9 0l-17 17c-9.4 9.4-9.4 24.6 0 33.9L285.1 256 183.5 357.6c-9.4 9.4-9.4 24.6 0 33.9l17 17c9.4 9.4 24.6 9.4 33.9 0L369.9 273c9.4-9.4 9.4-24.6 0-34z"/&gt;&lt;/svg&gt; Lectures (mostly on Wednesdays) are in the attic
+
+&lt;svg style="height: 1em; top:.04em; position: relative; fill: #136CB9;" viewBox="0 0 512 512"&gt;&lt;path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm113.9 231L234.4 103.5c-9.4-9.4-24.6-9.4-33.9 0l-17 17c-9.4 9.4-9.4 24.6 0 33.9L285.1 256 183.5 357.6c-9.4 9.4-9.4 24.6 0 33.9l17 17c9.4 9.4 24.6 9.4 33.9 0L369.9 273c9.4-9.4 9.4-24.6 0-34z"/&gt;&lt;/svg&gt; Project progress meetings are at JADS
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+--
+
+- read the book chapter (or other readings) listed on canvas for that week
+
+- do the tutorial on the `snaverse`
+
+- do the *homeplay*
+
+- Come prepared! It will make your life easier and you'll learn so much more :)
+
+---
+class: course-logo
+
+# Assessment
+
+- Group project (write a report) - 40%
+- Exam - 60%
+
+&lt;br&gt;
+
+## Exam
+
+- Questions and problem sets (with real datasets)
+
+- Similar to the Bootcamp Exam&lt;br&gt;
+(but you'll need the full three hours)
+
+---
+class: course-logo
+
+# Project (1)
+
+With your group, pick a topic related to one of these application fields:
+- Political science
+- Organizations
+- Internet
+- Social influence
+- Marketing
+- Sport
+- Text analysis
+- Recommender systems
+- Crime &amp; Safety
+- other (discuss it with Roger or Gergő)
+
+---
+class: course-logo
+
+
+# Project (2)
+
+- Identify or collect appropriate and relevant data 
+- Formulate network-based research questions that can be answered with that data
+- Formulate appropriate hypotheses
+- Run analyses using the models we will learn in class
+- Write a report (about 4500 words)
+
+Details will soon be posted on Canvas, including the intermediate deadlines for the various project milestones.
+
+---
+class: bg-Black course-logo
+
+
+background-image: url(assets/images/lets_break.png)
+background-size: contain
+background-position: 80% 60%
+background-repeat: no-repeat
+
+# Let's break!
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="assets/remark-latest.min.js"></script>
+<script src="assets/js/remark-zoom.js"></script>
+<script src="assets/js/macros.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "atom-one-light",
+  "highlightLines": true,
+  "highlightSpans": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": "- %current% -",
+  "ratio": "16:9",
+  "navigation": {
+    "scroll": true
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

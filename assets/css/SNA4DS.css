@@ -1,0 +1,1409 @@
+
+/* CSS FOR THE SNA4DS LECTURE SLIDES */
+
+:root {
+  --color-AliceBlue: #F0F8FF;
+  --color-AntiqueWhite: #FAEBD7;
+  --color-Aqua: #00FFFF;
+  --color-Aquamarine: #7FFFD4;
+  --color-Azure: #F0FFFF;
+  --color-Beige: #F5F5DC;
+  --color-Bisque: #FFE4C4;
+  --color-Black: #000000;
+  --color-BlanchedAlmond: #FFEBCD;
+  --color-Blue: #0000FF;
+  --color-BlueViolet: #8A2BE2;
+  --color-Brown: #A52A2A;
+  --color-BurlyWood: #DEB887;
+  --color-CadetBlue: #5F9EA0;
+  --color-Chartreuse: #7FFF00;
+  --color-Chocolate: #D2691E;
+  --color-Coral: #FF7F50;
+  --color-CornflowerBlue: #6495ED;
+  --color-Cornsilk: #FFF8DC;
+  --color-Crimson: #DC143C;
+  --color-Cyan: #00FFFF;
+  --color-DarkBlue: #00008B;
+  --color-DarkCyan: #008B8B;
+  --color-DarkGoldenRod: #B8860B;
+  --color-DarkGray: #A9A9A9;
+  --color-DarkGreen: #006400;
+  --color-DarkKhaki: #BDB76B;
+  --color-DarkMagenta: #8B008B;
+  --color-DarkOliveGreen: #556B2F;
+  --color-DarkOrange: #FF8C00;
+  --color-DarkOrchid: #9932CC;
+  --color-DarkRed: #8B0000;
+  --color-DarkSalmon: #E9967A;
+  --color-DarkSeaGreen: #8FBC8F;
+  --color-DarkSlateBlue: #483D8B;
+  --color-DarkSlateGray: #2F4F4F;
+  --color-DarkTurquoise: #00CED1;
+  --color-DarkViolet: #9400D3;
+  --color-DeepPink: #FF1493;
+  --color-DeepSkyBlue: #00BFFF;
+  --color-DimGray: #696969;
+  --color-DodgerBlue: #1E90FF;
+  --color-FireBrick: #B22222;
+  --color-FloralWhite: #FFFAF0;
+  --color-ForestGreen: #228B22;
+  --color-Fuchsia: #FF00FF;
+  --color-Gainsboro: #DCDCDC;
+  --color-GhostWhite: #F8F8FF;
+  --color-Gold: #FFD700;
+  --color-GoldenRod: #DAA520;
+  --color-Gray: #808080;
+  --color-Green: #008000;
+  --color-GreenYellow: #ADFF2F;
+  --color-HoneyDew: #F0FFF0;
+  --color-HotPink: #FF69B4;
+  --color-IndianRed: #CD5C5C;
+  --color-Indigo: #4B0082;
+  --color-Ivory: #FFFFF0;
+  --color-Khaki: #F0E68C;
+  --color-Lavender: #E6E6FA;
+  --color-LavenderBlush: #FFF0F5;
+  --color-LawnGreen: #7CFC00;
+  --color-LemonChiffon: #FFFACD;
+  --color-LightBlue: #ADD8E6;
+  --color-LightCoral: #F08080;
+  --color-LightCyan: #E0FFFF;
+  --color-LightGoldenRodYellow: #FAFAD2;
+  --color-LightGray: #D3D3D3;
+  --color-LightGreen: #90EE90;
+  --color-LightPink: #FFB6C1;
+  --color-LightSalmon: #FFA07A;
+  --color-LightSeaGreen: #20B2AA;
+  --color-LightSkyBlue: #87CEFA;
+  --color-LightSlateGray: #778899;
+  --color-LightSteelBlue: #B0C4DE;
+  --color-LightYellow: #FFFFE0;
+  --color-Lime: #00FF00;
+  --color-LimeGreen: #32CD32;
+  --color-Linen: #FAF0E6;
+  --color-Magenta: #FF00FF;
+  --color-Maroon: #800000;
+  --color-MediumAquaMarine: #66CDAA;
+  --color-MediumBlue: #0000CD;
+  --color-MediumOrchid: #BA55D3;
+  --color-MediumPurple: #9370DB;
+  --color-MediumSeaGreen: #3CB371;
+  --color-MediumSlateBlue: #7B68EE;
+  --color-MediumSpringGreen: #00FA9A;
+  --color-MediumTurquoise: #48D1CC;
+  --color-MediumVioletRed: #C71585;
+  --color-MidnightBlue: #191970;
+  --color-MintCream: #F5FFFA;
+  --color-MistyRose: #FFE4E1;
+  --color-Moccasin: #FFE4B5;
+  --color-NavajoWhite: #FFDEAD;
+  --color-Navy: #000080;
+  --color-OldLace: #FDF5E6;
+  --color-Olive: #808000;
+  --color-OliveDrab: #6B8E23;
+  --color-Orange: #FFA500;
+  --color-OrangeRed: #FF4500;
+  --color-Orchid: #DA70D6;
+  --color-PaleGoldenRod: #EEE8AA;
+  --color-PaleGreen: #98FB98;
+  --color-PaleTurquoise: #AFEEEE;
+  --color-PaleVioletRed: #DB7093;
+  --color-PapayaWhip: #FFEFD5;
+  --color-PeachPuff: #FFDAB9;
+  --color-Peru: #CD853F;
+  --color-Pink: #FFC0CB;
+  --color-Plum: #DDA0DD;
+  --color-PowderBlue: #B0E0E6;
+  --color-Purple: #800080;
+  --color-RebeccaPurple: #663399;
+  --color-Red: #FF0000;
+  --color-RosyBrown: #BC8F8F;
+  --color-RoyalBlue: #4169E1;
+  --color-SaddleBrown: #8B4513;
+  --color-Salmon: #FA8072;
+  --color-SandyBrown: #F4A460;
+  --color-SeaGreen: #2E8B57;
+  --color-SeaShell: #FFF5EE;
+  --color-Sienna: #A0522D;
+  --color-Silver: #C0C0C0;
+  --color-SkyBlue: #87CEEB;
+  --color-SlateBlue: #6A5ACD;
+  --color-SlateGray: #708090;
+  --color-Snow: #FFFAFA;
+  --color-SpringGreen: #00FF7F;
+  --color-SteelBlue: #4682B4;
+  --color-Tan: #D2B48C;
+  --color-Teal: #008080;
+  --color-Thistle: #D8BFD8;
+  --color-Tomato: #FF6347;
+  --color-Turquoise: #40E0D0;
+  --color-VeryDarkCyan: #23373B; /* RL added, Very dark saturated cyan */
+  --color-VeryDarkOrange: #cc7000;   /* RL added, not official color name */
+  --color-VeryLightGrey: #F7F7F7; /* RL: Very light gray (mostly white) */
+  --color-Violet: #EE82EE;
+  --color-Wheat: #F5DEB3;
+  --color-White: #FFFFFF;
+  --color-WhiteSmoke: #F5F5F5;
+  --color-Yellow: #FFFF00;
+  --color-YellowGreen: #9ACD32;
+  
+  /* Fonts */
+  --base-font-size: 24px;
+  --code-font-family: 'Source Code Pro';
+  --code-font-is-google: 1;
+  --code-font-size: 0.9rem;
+  --code-inline-font-size: 0.9em;
+  --header-font-family: 'Shadows Into';
+  --h2-font-family: 'Abel';
+  --h3-font-family: var(--h2-font-family);
+  --h4-font-family: var(--h2-font-family);
+  --header-font-is-google: 1;
+  --header-h1-font-weight: bold;
+  --header-h1-font-size: 2.75rem;
+  --header-h2-font-size: 1.5em;
+  --header-h3-font-size: 1.20rem;
+  --header-h4-font-size: 1.1rem;
+  --text-font-base: sans-serif;
+  --text-font-family: Calibri, Verdana;
+  --text-font-is-google: 1;
+  --text-font-family-fallback: 'Noto Sans', -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial;
+  --text-font-size: 1rem;
+
+  
+  /* specific color variable values */
+  --background-color: var(--color-VeryLightGrey);
+  --color-contentbox-default: #E2E2E2; /* medium-light grey */
+  --code-highlight-color: #ffe4b4;   /* pale orange */
+  --color-code-inline-font-color: #4D8DC9;  /* light blue-ish */
+  --color-remark-code-span-highlighted: #4D8DC9; /* color of the highlighted code, NOT of its background */
+  --header-background-color: var(--color-Red);
+  --header-background-text-color: var(--color-Blue); 
+  --header-color: var(--color-DarkOrange);
+  --h2-color: var(--color-Black);
+  --h3-color: var(--color-Black);
+  --h4-color: var(--color-Black);
+  --inverse-text-color: var(--color-VeryLightGrey);
+  --inverse-background-color: var(--color-Black);
+  --inverse-header-color: #FFC0CB; /* very pale red */
+  --link-color: #0148A4;   /* light blue */
+  --slide-number-color: #9A9A9A;  /* light grey */
+  --text-color: #333333;  /* medium black */
+  --text-bold-color: var(--color-VeryDarkOrange);
+  --title-slide-background-color: var(--color-VeryDarkOrange);
+  --title-slide-text-color: var(--color-Tomato);
+  --title-slide-text-color-h1: var(--color-Black);
+  --title-slide-text-color-h2: var(--color-Black);
+  --title-slide-text-color-h3: var(--color-Black);
+}
+
+
+
+
+
+
+
+/* ======================================================================== */
+/* 						SETTING THE STAGE									*/
+/* ======================================================================== */
+
+/* The <body> element contains all the contents of an HTML document, such as headings, paragraphs, images, hyperlinks, tables, lists, etc. */
+body { 
+  /* font-family: Calibri, Verdana, 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif, 'Droid Serif' Arial, 'sans serif', var(--text-font-family), var(--text-font-family-fallback), var(--text-font-base); */
+  font-family: Calibri, Verdana, var(--text-font-family-fallback), var(--text-font-base);
+  font-weight: normal;
+  color: var(--text-color);
+}
+
+h1, h2, h3 {
+  font-family: var(--header-font-family);
+  font-weight: 600;
+  color: var(--header-color);
+}
+
+
+html {
+  font-size: var(--base-font-size);
+}
+
+
+.opacity{ 
+	opacity: 0.5; 
+}
+
+.blur {
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+
+.grayscale img {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+
+::selection {
+  background-color: rgba(85, 235, 188, 0.6);
+}
+
+.fullscreen {
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+
+.course-logo {
+  background-image: url('../images/sna4ds_logo_140.png');
+  background-repeat: no-repeat;
+  background-position: right top;
+}
+
+
+/* fix the help page '?' */
+.remark-help-content td{
+  color: black !important;
+}
+
+.remark-backdrop {
+  background: #988675 !important;
+}
+
+
+
+/******************************************************************************
+* SLIDE CONTENT
+******************************************************************************/
+
+/* The <a> tag defines a hyperlink, which is used to link from one page to another. */
+/* https://www.w3schools.com/tags/tag_a.asp */
+/* https://www.w3schools.com/css/css_link.asp */
+/* link colour */
+a, a > code { 
+    color: var(--link-color);
+    color: #0148A4; /* blue */
+	text-decoration: none;
+} 
+
+/* this is not ideal, but a response to the resising issues
+   discussed https://github.com/yihui/xaringan/issues/62 and
+   https://github.com/yihui/xaringan/issues/143  */
+.mjx-chtml{ font-size: 100% !important; }
+
+/* change the line spread for readability
+   and so that inline code highlighting 
+   doesn't cover text on the line above */
+.remark-slide-content {
+  background-color: var(--background-color);
+  font-size: 1rem;
+  padding: 1rem 3rem 2rem 3rem;
+  width: 100%;
+  height: 100%;
+}
+
+.remark-slide-content p, 
+.remark-slide-content li {
+  line-height: 1.4;
+  /*font-size: 1.1em;*/
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+}
+
+.remark-slide-content h1 {
+  color: var(--header-color);
+  font-style: italic;
+  font-size: var(--header-h1-font-size);
+  font-weight: var(--header-h1-font-weight);
+}
+.remark-slide-content h2 {
+  font-family: var(--h2-font-family);
+  color: var(--h2-color);
+  font-size: var(--header-h2-font-size);
+}
+.remark-slide-content h3 {
+  font-family: var(--h3-font-family);
+  color: var(--h3-color);
+  font-size: var(--header-h3-font-size);
+}
+
+.remark-slide-content h4 {
+  font-family: var(--h4-font-family);
+  color: var(--h4-color);
+  font-size: var(--header-h4-font-size);
+}
+
+/*  Slide margins and spacings */
+.remark-slide-content {
+  padding-top: 25px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 25px;
+}
+
+.remark-slide-content > h1:first-of-type {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.remark-slide-content > h2:first-of-type {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.remark-slide-content > h3:first-of-type {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.remark-slide-content > h4:first-of-type {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+/* Slide Header Background for h1 elements */
+.remark-slide-content.header_background > h1 {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--header-background-color);
+  color: var(--header-background-text-color);
+  padding: 2rem 3rem 1.5rem 3rem;
+  margin-top: 0;
+  box-sizing: border-box;
+}
+.remark-slide-content.header_background {
+  padding-top: 7rem;
+}
+
+
+.rotate-left {
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+    transform: rotate(-2deg); 
+}
+.rotate-right {
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+    transform: rotate(2deg);     
+}
+
+
+
+/* TABLES
+*/
+.remark-slide table {
+  margin: auto;
+  border-top: 1px solid #666;
+  border-bottom: 1px solid #666;
+}
+.remark-slide table thead th {
+  border-bottom: 1px solid #ddd;
+}
+th, td {
+  padding: 5px;
+}
+.remark-slide thead, .remark-slide tfoot, .remark-slide tr:nth-child(even) {
+  background: var(--color-LightGray);
+}
+table.dataTable tbody {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+table.dataTable.display tbody tr.odd {
+  background-color: var(--background-color);
+}
+table.dataTable.display tbody tr.even {
+  background-color: var(--color-LightGray);
+}
+table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+  color: var(--text-color);
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  color: var(--text-color) !important;
+}
+
+
+
+
+
+/******************************************************************************
+* TITLE SLIDE
+******************************************************************************/
+
+.title-slide {
+  color: var(--title-slide-text-color);
+  background-color: var(--title-slide-background-color);
+}
+
+.title-slide h1  {
+  color: var(--title-slide-text-color-h1);
+  font-size: 40px;
+  text-shadow: none;
+  font-weight: 400;
+  text-align: left;
+  margin-left: 15px;
+  padding-top: 80px;
+}
+.title-slide h2  {
+  margin-top: -25px;
+  padding-bottom: -20px;
+  color: var(--title-slide-text-color-h2);
+  text-shadow: none;
+  font-weight: 300;
+  font-size: 35px;
+  text-align: left;
+  margin-left: 15px;
+}
+.title-slide h3  {
+  color: var(--title-slide-text-color-h3);
+  text-shadow: none;
+  font-weight: 300;
+  font-size: 25px;
+  text-align: left;
+  margin-left: 15px;
+  margin-bottom: -30px;
+}
+
+
+/* horizontal ruler */
+/* https://www.w3schools.com/howto/howto_css_style_hr.asp */
+/* https://www.w3schools.com/tags/tag_hr.asp */
+hr, .title-slide h2::after, .mline h1::after {
+  content: '';
+  display: block;
+  border: none;
+  background-color: var(--color-VeryDarkOrange);
+  color: var(--color-Orange); 
+  height: 1px;
+}
+
+hr, .mline h1::after {
+  margin: 1em 15px 0 15px;
+}
+
+.title-slide h2::after {
+  margin: 10px 15px 35px 0;
+}
+
+.mline h1::after {
+  margin: 10px 15px 0 15px;
+}
+
+.title-slide .inverse .remark-slide-content {
+  background-color: #FAFAFA;
+}
+
+/* Remove slide count on title-slide*/
+.title-slide .remark-slide-number {
+  display: none;
+}
+
+
+
+.full-width-screen-black, 
+.full-width-screen-grey,
+.full-width-screen-lynch,
+.full-width-screen-orange,
+.full-width-screen-silver,
+.full-width-screen-silver2,
+.full-width-screen-silversand,
+.full-width-screen-white {
+    display: flex;
+    width: 100%;
+    flex: 1 1 auto;
+}
+
+.full-width-screen-black { background-color: rgba(0, 0, 0, 0.7); }
+.full-width-screen-grey{ background-color: rgba(128, 128, 128, 0.7); }
+.full-width-screen-lynch { background-color: rgba(108, 122, 137, 0.7); }
+.full-width-screen-orange { background-color: rgba(255, 165, 0, 0.7); }
+.full-width-screen-silver { background-color: rgba(192, 192, 192, 0.7); }
+.full-width-screen-silver2 { background-color: rgba(192, 192, 192, 0.85); }
+.full-width-screen-silversand { background-color: rgba(189, 195, 199, 0.7); }
+.full-width-screen-white { background-color: rgba(255, 255, 255, 0.7); }
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************************************
+* CODE
+******************************************************************************/
+
+.hljs-github .hljs {
+  overflow-y: auto;
+}
+ 
+.remark-code {
+  font-family: var(--code-font-family), Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
+  font-size: var(--code-font-size);
+}
+
+.remark-inline-code { 
+  font-family: var(--code-font-family), Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
+  font-size: var(--code-inline-font-size);
+  color: var(--color-code-inline-font-color);
+  /* until the link between code and mathjax 
+  is broken, we need to use transparent */
+  background: transparent; /* #F5F5F5; /* lighter */
+  border-radius: 3px;
+  padding: 2px;
+}
+
+.remark-code-line {
+  font-size: 80%;
+}
+
+/* code higlighting */
+.remark-code-string-highlighted, 
+.remark-code-line-highlighted {
+    background-color: var(--code-highlight-color);
+}
+
+
+.remark-code-span-highlighted {
+	color: var(--color-remark-code-span-highlighted);
+	background: none;
+}
+
+
+
+/*******************************************************
+* FOOTNOTE
+*******************************************************/
+
+/* footnote identifier use: .fn[1] */
+.fn {
+  vertical-align: super;
+  font-size: 60%;
+}
+
+/* the footnote itself */
+.footnote {
+  position: absolute;
+  bottom: 0;
+  padding-right: 8em; /* to avoid the page numbering */ 
+  font-size: 0.7em;
+}
+
+.remark-slide-content .footnote  p, 
+.remark-slide-content .footnote li {
+  font-size: 0.7em!important;
+}
+
+.footnote .remark-code, 
+.footnote .remark-inline-code{ font-size: 0.8em!important; }
+
+
+/******************************************************************************
+* SLIDE NUMBER
+******************************************************************************/
+
+.remark-slide-number {
+  font-size: .8rem;
+  color: var(--slide-number-color);  /* light greyish */
+  opacity: 0.5;    /* 1 is on top, 0.5 is 50% see-through, and 0 is completely transparent */
+  bottom: 8px;
+  right: 16px;
+}
+
+.hide-count .remark-slide-number {
+  display: none;
+}
+
+
+
+/******************************************************************************
+* SLIDE LAYOUT + CLASSES
+******************************************************************************/
+
+
+/* text location */
+center-horizontally { text-align: center; }
+center-vertically, .center-vertically { vertical-align: middle; }
+
+center-full, .center-full {
+  text-align: center;
+  vertical-align: middle;
+}
+
+justify-left, .justify-left {
+  text-align: left;
+}
+
+justify-right, .justify-right {
+  text-align: right;
+}
+
+
+
+/* slide layout */
+
+.columns-2 {
+  -webkit-columns: 2;
+  -moz-columns: 2;
+  columns: 2;
+  -webkit-column-gap: 1em;
+  -moz-column-gap: 1em;
+  column-gap: 1em;
+}
+
+.columns-21 {
+  -webkit-columns: 66%, 33%;
+  -moz-columns: 66%, 33%;
+  columns: 66%, 33%;
+  -webkit-column-gap: 1em;
+  -moz-column-gap: 1em;
+  column-gap: 1em;
+}
+
+
+/* example slide with background colour to distinguish
+it from other content slides */
+.eg {
+  background-color: #F1F1F1;
+  /* rgb(231, 238, 242); */
+}
+
+.eg.nobackground {
+  background-color:white;
+}
+
+/* Two-column layout: to create a sidebar */
+.left-column {
+  /*color: #777;*/
+  width: 20%;
+  height: 92%;
+  float: left;
+}
+
+.left-column h2:last-of-type, .left-column h3:last-child {
+  color: #777;  /* dark grey */
+}
+
+.left-column h2, .left-column h3, .left-column h4 {
+  color: #777;
+}
+
+.left-column h2:last-of-type, .left-column h3:last-child {
+  color: #1A292C;
+}
+
+.right-column {
+  width: 75%;
+  float: right;
+  padding-top: 1em;
+}
+
+/* pull right and left */
+.pull-left {
+  float: left;
+  width: 47%;
+}
+
+.pull-right {
+  float: right;
+  width: 47%;
+}
+
+.pull-right + * {
+  clear: both;
+}
+
+.pull-left-2 {
+  float: left;
+  width: 60%;
+}
+.pull-right-1 {
+  float: right;
+  width: 36%;
+}
+
+.pull-left-1 {
+  float: left;
+  width: 36%;
+}
+.pull-right-2 {
+  float: right;
+  width: 60%;
+}
+
+/* use to position text at the bottom */
+.pull-down {
+  position: absolute;
+  bottom: 50px;
+}
+
+/* useful for scaling the width of a (pulled) column */
+.w00 {width: 00%;}
+.w01 {width: 01%;}
+.w02 {width: 02%;}
+.w03 {width: 03%;}
+.w04 {width: 04%;}
+.w05 {width: 05%;}
+.w06 {width: 06%;}
+.w07 {width: 07%;}
+.w08 {width: 08%;}
+.w09 {width: 09%;}
+.w10 {width: 10%;}
+.w11 {width: 11%;}
+.w12 {width: 12%;}
+.w13 {width: 13%;}
+.w14 {width: 14%;}
+.w15 {width: 15%;}
+.w16 {width: 16%;}
+.w17 {width: 17%;}
+.w18 {width: 18%;}
+.w19 {width: 19%;}
+.w20 {width: 20%;}
+.w21 {width: 21%;}
+.w22 {width: 22%;}
+.w23 {width: 23%;}
+.w24 {width: 24%;}
+.w25 {width: 25%;}
+.w26 {width: 26%;}
+.w27 {width: 27%;}
+.w28 {width: 28%;}
+.w29 {width: 29%;}
+.w30 {width: 30%;}
+.w31 {width: 31%;}
+.w32 {width: 32%;}
+.w33 {width: 33%;}
+.w34 {width: 34%;}
+.w35 {width: 35%;}
+.w36 {width: 36%;}
+.w37 {width: 37%;}
+.w38 {width: 38%;}
+.w39 {width: 39%;}
+.w40 {width: 40%;}
+.w41 {width: 41%;}
+.w42 {width: 42%;}
+.w43 {width: 43%;}
+.w44 {width: 44%;}
+.w45 {width: 45%;}
+.w46 {width: 46%;}
+.w47 {width: 47%;}
+.w48 {width: 48%;}
+.w49 {width: 49%;}
+.w50 {width: 50%;}
+.w51 {width: 51%;}
+.w52 {width: 52%;}
+.w53 {width: 53%;}
+.w54 {width: 54%;}
+.w55 {width: 55%;}
+.w56 {width: 56%;}
+.w57 {width: 57%;}
+.w58 {width: 58%;}
+.w59 {width: 59%;}
+.w60 {width: 60%;}
+.w61 {width: 61%;}
+.w62 {width: 62%;}
+.w63 {width: 63%;}
+.w64 {width: 64%;}
+.w65 {width: 65%;}
+.w66 {width: 66%;}
+.w67 {width: 67%;}
+.w68 {width: 68%;}
+.w69 {width: 69%;}
+.w70 {width: 70%;}
+.w71 {width: 71%;}
+.w72 {width: 72%;}
+.w73 {width: 73%;}
+.w74 {width: 74%;}
+.w75 {width: 75%;}
+.w76 {width: 76%;}
+.w77 {width: 77%;}
+.w78 {width: 78%;}
+.w79 {width: 79%;}
+.w80 {width: 80%;}
+.w81 {width: 81%;}
+.w82 {width: 82%;}
+.w83 {width: 83%;}
+.w84 {width: 84%;}
+.w85 {width: 85%;}
+.w86 {width: 86%;}
+.w87 {width: 87%;}
+.w88 {width: 88%;}
+.w89 {width: 89%;}
+.w90 {width: 90%;}
+.w91 {width: 91%;}
+.w92 {width: 92%;}
+.w93 {width: 93%;}
+.w94 {width: 94%;}
+.w95 {width: 95%;}
+.w96 {width: 96%;}
+.w97 {width: 97%;}
+.w98 {width: 98%;}
+.w99 {width: 99%;}
+
+
+
+.no-margins p,
+.no-margins pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+
+
+/******************************************************************************
+* INVERSE
+******************************************************************************/
+/*
+.inverse {
+  background-color: var(--inverse-background-color);
+  color: var(--inverse-text-color);
+  text-shadow: none; 
+}
+
+.inverse h1, .inverse h2, .inverse h3 {
+  color: var(--inverse-header-color);
+}
+*/ 
+
+
+.inverse .remark-slide-number {
+  display: none;
+}
+
+
+
+
+
+/******************************************************************************
+* BOXES
+******************************************************************************/
+
+/* scroll boxex */
+.scroll-box-8 {
+  height:8em;
+  overflow-y: scroll;
+}
+.scroll-box-10 {
+  height:10em;
+  overflow-y: scroll;
+}
+.scroll-box-12 {
+  height:12em;
+  overflow-y: scroll;
+}
+.scroll-box-14 {
+  height:14em;
+  overflow-y: scroll;
+}
+.scroll-box-16 {
+  height:16em;
+  overflow-y: scroll;
+}
+.scroll-box-18 {
+  height:18em;
+  overflow-y: scroll;
+}
+.scroll-box-20 {
+  height:20em;
+  overflow-y: scroll;
+}
+
+.scroll-box-22 {
+  height:22em;
+  overflow-y: scroll;
+}
+
+.scroll-box-24 {
+  height:24em;
+  overflow-y: scroll;
+}
+
+.scroll-box-26 {
+  height:26em;
+  overflow-y: scroll;
+}
+
+.scroll-box-28 {
+  height:28em;
+  overflow-y: scroll;
+}
+
+.scroll-box-30 {
+  height:30em;
+  overflow-y: scroll;
+}
+
+.scroll-box-32 {
+  height:32em;
+  overflow-y: scroll;
+}
+
+.scroll-output {
+  height: 90%;
+  overflow-y: scroll;
+}
+
+
+
+/* special */
+/* limit vertical size of a code chunk */
+/* dit voegt dan een verticale slider toe */
+
+.limity100 {
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+.limity150 {
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.limity200 {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.limity250 {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.limity300 {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.limity350 {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.limity400 {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.limity450 {
+  max-height: 450px;
+  overflow-y: auto;
+}
+
+.limity500 {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.limity550 {
+  max-height: 550px;
+  overflow-y: auto;
+}
+
+.limity600 {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+
+
+
+
+/******************************************************************************
+ * Colored content boxes
+ *****************************************************************************/
+.content-box { 
+    box-sizing: border-box;
+    background-color: var(--color-contentbox-default);
+}
+
+.content-box-blue,
+.content-box-gray,
+.content-box-grey,
+.content-box-army,
+.content-box-green,
+.content-box-purple,
+.content-box-red,
+.content-box-yellow,
+.content-box-white {
+  box-sizing: border-box;
+  border-radius: 15px;
+  margin: 0 0 15px;
+  overflow: hidden;
+  padding: 0px 20px 0px 20px;
+  width: 100%;
+}
+
+/* the white box needs a border that is non-white */
+.content-box-white {
+	border-color: coral;
+	color: black;
+}
+
+.content-box-army {	background-color: #737a36; }
+.content-box-blue { background-color: rgba(0, 0, 255,.85); }
+.content-box-gray { background-color: rgba(102, 102, 102,.85); }
+.content-box-grey { background-color: rgb(181, 181, 181); }
+.content-box-green { background-color: rgba(161, 183, 13,.85); }
+.content-box-neutral { background-color: #988675; }   /* brownish */ 
+.content-box-orange { background-color: rgba(255, 165, 0, .85); }
+.content-box-purple { background-color: rgba(153, 51, 153, .85) }
+.content-box-red { background-color: rgba(204, 51, 0,.85) }
+.content-box-yellow { background-color: rgba(255, 217, 96, .85) }
+.content-box-white { background-color: white}
+.content-box-army .remark-inline-code,
+.content-box-blue .remark-inline-code,
+.content-box-blue .remark-inline-code,
+.content-box-gray .remark-inline-code,
+.content-box-green .remark-inline-code,
+.content-box-grey .remark-inline-code,
+.content-box-orange .remark-inline-code,
+.content-box-purple .remark-inline-code,
+.content-box-red .remark-inline-code,
+.content-box-yellow .remark-inline-code,
+.content-box-white.remark-inline-code { 
+  background: none;
+}
+
+/* box that fills the full width of the space it is assigned */
+.full-width {
+    display: flex;
+    width: 100%;
+    flex: 1 1 auto;
+}
+
+
+/* useful to rotate boxes or other objects */
+/* might already be superseded by the remark.macros.flip macro */
+.rotate-left {
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+    transform: rotate(-2deg); 
+}
+
+.rotate-right {
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+    transform: rotate(2deg);     
+}
+
+
+
+.top-bar {
+  position: absolute;
+  top: 0;
+  display: flex;
+  width: 100%;
+  flex: 1 1 auto;
+  background-color: red;
+  color: white;
+  font-family: var(--header-font-family);
+  font-style: italic;
+  font-size: var(--header-h1-font-size);
+  font-weight: var(--header-h1-font-weight);
+  padding: 1rem 1rem 1rem 1rem;
+  margin: 0;
+}
+
+
+.top-bar-red, 
+.top-bar-orange,
+.top-bar-blue,
+.top-bar-black {
+  position: absolute;
+  top: 0;
+  display: flex;
+  width: 100%;
+  flex: 1 1 auto;
+  color: white;
+  font-family: var(--header-font-family);
+  font-style: italic;
+  font-size: var(--header-h1-font-size);
+  font-weight: var(--header-h1-font-weight);
+  padding: 1rem 1rem 1rem 1rem;
+  margin: 0;
+}
+
+.top-bar-red { background-color: var(--color-Red); }
+.top-bar-orange { background-color: orange; }
+.top-bar-blue { background-color: blue; }
+.top-bar-black { background-color: black; }
+
+
+
+/* from https://glassmorphism.com/ */
+.glass {
+	background: rgba( 255, 255, 255, 0.45 );
+	box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+	backdrop-filter: blur( 4px );
+	-webkit-backdrop-filter: blur( 4px );
+	border-radius: 10px;
+	border: 1px solid rgba( 255, 255, 255, 0.18 );
+	padding: 1rem;
+}
+
+
+
+/******************************************************************************
+* IMAGES
+******************************************************************************/
+
+
+.center-image {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+
+img, video, iframe {
+  max-width: 100%;
+}
+
+.polaroid img {
+    border: 10px solid #fff;
+    border-bottom: 45px solid #fff;
+    -webkit-box-shadow: 3px 3px 3px #111;
+    -moz-box-shadow: 3px 3px 3px #111;
+    box-shadow: 3px 3px 3px #111;
+}
+.shadow {
+    -moz-border-radius: 5px;
+    -moz-box-shadow: 5px 5px 5px #aaa;
+    -webkit-box-shadow: 5px 5px 5px #aaa;
+    box-shadow: 5px 5px 5px #aaa;
+    border-radius: 2px;  
+}
+
+
+
+
+
+
+/******************************************************************************
+* @@@
+******************************************************************************/
+
+/* disable background colour when printing */
+@page {
+	margin: 0; 
+}
+
+@media print {   /* aanpassen XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+  .inverse, .segue, .segue-yellow, .segue-red, .sydney-blue,
+  .sydney-yellow, .sydney-red {
+    background-color: transparent;
+    color: black;
+    text-shadow: none;
+  }
+  .inverse h1, .inverse h2, .inverse h3, .inverse h4, .inverse h5, .segue {
+    background-color: transparent;
+    color: black;
+    text-shadow: none;
+  }
+  .eg {
+    background-color: transparent;
+  }
+  .remark-slide-scaler {
+    width: 100% !important;
+    height: 100% !important;
+    transform: scale(1) !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
+}
+
+
+
+
+
+/*******************************************************
+* TEXT TRANSFORMATIONS
+*******************************************************/
+
+/********BLOCKQUOTES *********************/
+.blockquote-box, .blockquote-box {
+  display: block;
+  margin-top: 0.1em;
+  margin-bottom: 0.2em;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-left: solid 10px #0148A4;
+  border-top: solid 2px #0148A4;
+  border-bottom: solid 2px #0148A4;
+  border-right: solid 2px #0148A4;
+  box-shadow: 0 0 6px rgba(0,0,0,0.5);
+  /* background-color: #e64626; */
+  color: #e64626;
+  padding: 0.5em;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.blockquote p {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+.blockquote > h1:first-of-type {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+.blockquote > h2:first-of-type {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+.blockquote > h3:first-of-type {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+.blockquote > h4:first-of-type {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+.blockquote {
+  font-family: 'Lato',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  font-size: 75%;
+  color: #c0c8cc;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  -ms-word-break: keep-all;
+  word-break: keep-all;
+}
+
+.blockquote cite::before {
+  content: "—";
+  margin-right: 5px;
+}
+
+
+
+
+.blockquote-marker {
+  font-family: 'Permanent Marker';
+  font-weight: 200;
+  font-style: normal;
+  font-size: 1.5em;
+  color: #6d7e8a;
+  margin-left: 0;
+}
+
+
+
+
+/* highlight some text like with a marker */
+.hl-green { background-image: url('../images/highlight-green.svg'); }
+.hl-orange{ background-image: url('../images/highlight-orange.svg'); }
+.hl-pink { background-image: url('../images/highlight-pink.svg'); }
+.hl-red{ background-image: url('../images/highlight-red.svg'); }
+.hl-silver{ background-image: url('../images/highlight-silver.svg'); }
+.hl-yellow{ background-image: url('../images/highlight-yellow.svg'); }
+
+.hl-green, .hl-orange, .hl-pink, .hl-red, .hl-silver, .hl-yellow {
+  background-size: 0 83%;
+  background-position: bottom left;
+  background-repeat: no-repeat;
+  margin: 0em -0.3em -10px;
+  padding: 0em 0.3em 10px;
+}
+.remark-visible .hl-green, .remark-visible .hl-orange,
+.remark-visible .hl-pink, .remark-visible .hl-red, 
+.remark-visible .hl-silver, .remark-visible .hl-yellow {
+  animation: highlight 1s ease-out;
+  animation-fill-mode: forwards;
+}
+.hl-green:nth-of-type(3), .hl-orange:nth-of-type(3),
+.hl-pink:nth-of-type(3), .hl-red:nth-of-type(3):nth-of-type(3), 
+.hl-silver:nth-of-type(3), .hl-yellow:nth-of-type(3) {
+  animation-delay: 500ms;
+}
+.hl-green:nth-of-type(4), .hl-orange:nth-of-type(4),
+.hl-pink:nth-of-type(4), .hl-red:nth-of-type(4), 
+.hl-silver:nth-of-type(4), .hl-yellow:nth-of-type(4) {
+  animation-delay: 1s;
+}
+.hl-green:nth-of-type(5), .hl-orange:nth-of-type(5),
+.hl-pink:nth-of-type(5), .hl-red:nth-of-type(5), 
+.hl-silver:nth-of-type(5), .hl-yellow:nth-of-type(5) {
+  animation-delay: 1.5s;
+}
+@keyframes highlight {
+  0% {
+    color: var(--text-color);
+    background-size: 0 83%;
+  }
+  50% {
+    background-size: 100% 83%;
+  }
+  100% {
+    color: var(--pink);
+    background-size: 100% 83%;
+  }
+}
+
+
+
+strong { 
+  color: var(--text-bold-color); 
+}
+
+
+.text-shadow {
+  text-shadow: 0 0 4px #424242;
+}
+
+
+.font10 , .code10 .remark-code, .code10 .remark-inline-code{ font-size: 10%; }
+.font20 , .code20 .remark-code, .code20 .remark-inline-code{ font-size: 20%; }
+.font30 , .code30 .remark-code, .code30 .remark-inline-code{ font-size: 30%; }
+.font40 , .code40 .remark-code, .code40 .remark-inline-code{ font-size: 40%; }
+.font50 , .code50 .remark-code, .code50 .remark-inline-code{ font-size: 50%; }
+.font60 , .code60 .remark-code, .code60 .remark-inline-code{ font-size: 60%; }
+.font70 , .code70 .remark-code, .code70 .remark-inline-code{ font-size: 70%; }
+.font75 , .code75 .remark-code, .code75 .remark-inline-code{ font-size: 75%; }
+.font80 , .code80 .remark-code, .code80 .remark-inline-code{ font-size: 80%; }
+.font90 , .code90 .remark-code, .code90 .remark-inline-code{ font-size: 90%; }
+.font100, .code100 .remark-code, .code100 .remark-inline-code{ font-size: 100%; }
+.font110, .code110 .remark-code, .code110 .remark-inline-code{ font-size: 110%; }
+.font120, .code120 .remark-code, .code120 .remark-inline-code{ font-size: 120%; }
+.font130, .code130 .remark-code, .code130 .remark-inline-code{ font-size: 130%; }
+.font140, .code140 .remark-code, .code140 .remark-inline-code{ font-size: 140%; }
+.font150, .code150 .remark-code, .code150 .remark-inline-code{ font-size: 150%; }
+.font160, .code160 .remark-code, .code160 .remark-inline-code{ font-size: 160%; }
+.font170, .code170 .remark-code, .code170 .remark-inline-code{ font-size: 170%; }
+.font175, .code175 .remark-code, .code175 .remark-inline-code{ font-size: 175%; }
+.font180, .code180 .remark-code, .code180 .remark-inline-code{ font-size: 180%; }
+.font190, .code190 .remark-code, .code190 .remark-inline-code{ font-size: 190%; }
+.font200, .code200 .remark-code, .code200 .remark-inline-code{ font-size: 200%; }
+.font225, .code225 .remark-code, .code225 .remark-inline-code{ font-size: 225%; }
+.font250, .code250 .remark-code, .code250 .remark-inline-code{ font-size: 250%; }
+.font275, .code275 .remark-code, .code275 .remark-inline-code{ font-size: 275%; }
+.font300, .code300 .remark-code, .code300 .remark-inline-code{ font-size: 300%; }
+.font325, .code325 .remark-code, .code325 .remark-inline-code{ font-size: 325%; }
+.font350, .code350 .remark-code, .code350 .remark-inline-code{ font-size: 350%; }
+.font375, .code375 .remark-code, .code375 .remark-inline-code{ font-size: 375%; }
+.font400, .code400 .remark-code, .code400 .remark-inline-code{ font-size: 400%; }
+.font600, .code400 .remark-code, .code400 .remark-inline-code{ font-size: 600%; }
+.font800, .code400 .remark-code, .code400 .remark-inline-code{ font-size: 800%; }
+.font1000, .code400 .remark-code, .code400 .remark-inline-code{ font-size: 1000%; }
+
+
+
+
+
+
+
+
+
+.logo {
+  background-image: url(/assets/images/sna4ds_logo_140.png);
+  background-size: 10%;
+  background-position: top 0px right 5px;
+}

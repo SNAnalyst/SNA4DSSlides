@@ -1,0 +1,114 @@
+---
+title: "SNA4DS Slide collection"
+author: "Claudia, Roger, & Gergő"
+date: "2025-2026"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    highlight: github
+    includes:
+      in_header: header.html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+                  echo = FALSE,
+                  out.width = "90%",
+                  fig.height = 6,
+                  fig.path = "assets/images/",
+                  fig.retina = 1.5,
+                  dev = "svg",
+                  message = FALSE,
+                  warning = FALSE)
+
+knitr::opts_knit$set(global.par = TRUE)  # anders worden de margin settings niet overal doorgevoerd
+
+
+# path is the main github under which the slidedeck is published
+# slideDeckFile is the name of the html file (without the ".html") for which the over view is made
+# lectureName is the title that is printed above the overview
+path <- "https://snanalyst.github.io/SNA4DSSlides/"
+make_overview <- function(overview, path, slidedeckFile, lectureName) {
+  Top <- paste0('<h2>', lectureName, 
+                '</h2><div id="full-slide-deck" class="section level3"><h3><a href="', 
+                paste0(path, slidedeckFile, ".html"),
+                '">Full slide deck</a></h3>')
+  
+  if (!is.null(overview)) {
+    Links <- overview |> 
+      glue::glue_data('<a href="{path}{slidedeckFile}.html#{name}">{description}</a>')
+    
+    out <- paste0(Top, "<p>Some shortcuts:<br>",
+           paste0(Links, collapse = " -- "),
+           "</p><hr>")
+  } else {
+    out <- paste0(Top, "<hr>")
+  }
+  
+  return(out)
+}
+
+```
+
+
+```{js, eval = FALSE, echo = FALSE}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E84CP2L725"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E84CP2L725');
+</script>
+```
+
+
+
+
+
+<center>
+![](assets/images/sna4ds_logo_140.png)
+</center>
+
+------------------------------------------------------------------------
+
+Some hints for using these slides:
+
+-   You can use the shortcuts below to jump to a specific section in the slides directly
+
+-   When you have a slidedeck open, you can type `O` on your keyboard to get an overview with miniatures of the slides, to easily visually find a slide you are looking for
+
+-   Inside a slidedeck, type `m` on your keyboard if you want to challenge yourself when viewing the slides
+
+------------------------------------------------------------------------
+
+<!-- SNA4DS cheatsheet -->   
+
+
+Find the [SNA4DS cheatsheet here](https://snanalyst.github.io/SNAfun/)
+
+------------------------------------------------------------------------
+
+
+<!-- Week 01 -- Lecture: Intro to the course -->             
+```{r, include = FALSE}                                      
+overview <- matrix(c(                                        
+"CourseTeam", "Your instructors",                            
+"complex-systems", "Complex systems",                        
+"start_of_sna", "Start of SNA",                              
+"examples-of-actors", "Examples of vertices",                
+"examples-of-relations", "Examples of edges",                
+"SNA4DS_topics", "SNA4DS topics",                            
+"class", "SNA4DS setup"                                      
+), byrow = TRUE, ncol = 2) |>                                
+as.data.frame() |>                                           
+setNames(c("name", "description"))                           
+                                                          
+slidedeckFile <- "Lecture_01a"                               
+lectureName <- "Week 01 -- Lecture: Intro to the course"     
+```                                                          
+                                                          
+`r make_overview(overview, path, slidedeckFile, lectureName)`                                                        
+                                                            
+
