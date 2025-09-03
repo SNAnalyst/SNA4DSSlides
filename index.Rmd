@@ -110,7 +110,31 @@ lectureName <- "Week 01 -- Lecture: Intro to the course"
 ```                                                          
                                                           
 `r make_overview(overview, path, slidedeckFile, lectureName)`                                                        
-                                                      
+    
+
+<!-- Week 01 -- Lecture: Intro to R in this course -->                                       
+```{r, include = FALSE}                                                                      
+overview <- matrix(c(                                                                        
+"intro_r", "Intro to R and RStudio",                                                         
+"mentimeter", "Programming Survey",                                                          
+"Rstudio_installation", "R studio installation and setup",                                   
+"snaverse_setup", "snaverse setup",                                                          
+"tutorials", "Info about tutorials",                                                         
+"bug_reporting", "Bug Reporting",                                                            
+"tutorial1", "T01 programming in R",                                                         
+"Disclaimer", "Keep up with the material"                                                    
+), byrow = TRUE, ncol = 2) |>                                                                
+as.data.frame() |>                                                                           
+setNames(c("name", "description"))                                                           
+                                                                                            
+slidedeckFile <- "D:\\Dropbox\\R\\eigen_packages\\=git\\SNA4DSSlides\\Lecture_01b_Rcoding_CZ"
+lectureName <- "Week 01 -- Lecture: Intro to R in this course"                               
+```                                                                                          
+                                                                                            
+`r make_overview(overview, path, slidedeckFile, lectureName)` 
+
+
+                                                  
 <!-- Week 01 -- Lecture: Network measures -->                
 ```{r, include = FALSE}                                      
 overview <- matrix(c(                                        
