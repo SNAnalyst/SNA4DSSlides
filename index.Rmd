@@ -110,5 +110,37 @@ lectureName <- "Week 01 -- Lecture: Intro to the course"
 ```                                                          
                                                           
 `r make_overview(overview, path, slidedeckFile, lectureName)`                                                        
-                                                            
+                                                      
+<!-- Week 01 -- Lecture: Network measures -->                
+```{r, include = FALSE}                                      
+overview <- matrix(c(                                        
+"gamenet", "Running example graph",                          
+"alreadyknown", "You already learnt these measures/tools",   
+"measures", "The main network measures in this course",      
+"why", "Why?",                                               
+"geodesic", "geodesic",                                      
+"weighted", "weighted networks",                             
+"multiplex", "multiplex networks",                           
+"trains", "train station network",                           
+"degree", "Degree centrality",                               
+"closeness", "Closeness centrality",                         
+"stress", "Stress centrality",                               
+"betweenness", "Betweenness centrality",                     
+"centrality-interpretation", "Interpretation",               
+"centrality-distribution", "Centrality distribution",        
+"takeaway-1", "Takeaway 1",                                  
+"takeaway-2", "Takeaway 2",                                  
+"centralization", "Centralization",                          
+"freeman", "freeman centralization",                         
+"sdcentral", "sd centralization",                            
+"before next lab", "Before the next lab"                                      
+), byrow = TRUE, ncol = 2) |>                                
+as.data.frame() |>                                           
+setNames(c("name", "description"))                           
+                                                        
+slidedeckFile <- "Lecture_Measures"                          
+lectureName <- "Week 01 -- Lecture: Network measures"        
+```                                                          
+                                                        
+`r make_overview(overview, path, slidedeckFile, lectureName)`
 

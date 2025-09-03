@@ -1,0 +1,116 @@
+---
+title: "Homeplay 02 -- Using R for SNA"
+author: "Roger Leenders"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this little homeplay, you are going to familiarize yourself with the SNA4DS 
+cheatsheet and will experience what makes the `snafun` so bloody awesome.
+You'll also gain some experience with using multiple packages as part of 
+your analysis pipeline.
+
+You can find the cheatsheet here: [SNAFUN site](https://snanalyst.github.io/SNAfun/).
+
+You will be asked to calculate several measures. 
+We know that you may not know what these measures mean yet, but that is OK. 
+The exercise is meant to help you find the specific functions quickly and apply 
+them correctly. We'll dive into their actual meaning in the very next lecture 
+of this course.
+
+1. Load the dataset `elegans` from the `SNA4DSData` package
+
+```{r include=FALSE}
+data(elegans, package = "SNA4DSData")
+elegans
+snafun::print(elegans)
+snafun::is_igraph(elegans)
+
+snafun::is_directed(elegans)
+snafun::list_edge_attributes(elegans)
+snafun::list_vertex_attributes(elegans)
+
+snafun::count_vertices(elegans)
+snafun::count_edges(elegans)
+
+snafun::extract_vertex_names(elegans)
+
+#dyad census
+snafun::count_dyads(elegans)
+
+snafun::g_reciprocity(elegans)
+snafun::g_transitivity(elegans)
+snafun::g_density(elegans)
+```
+
+For the next steps (2 - 9), use the `snafun` package only. Even if you can see the 
+answer already from the prinout of the object itself, still use `snafun` functions 
+to verify the result (this will help you become more fluent at the programming part).
+
+2. Print the data object;
+
+1. Extract the number of vertices and the number of edges in the object;
+
+1. Check that the object is of class `igraph` ;
+
+1. Check that the object is directed;
+
+1. List the vertex attributes and the edge attributes;
+
+1. Extract the vertex names;
+
+1. Calculate the dyad census;
+
+1. Calculate the reciprocity, transitivity, and density of the `elegans` object.
+
+1. Now do all of the steps above (from printing the object through calculating its 
+density) using the `igraph` package only.
+
+```{r, include = FALSE}
+elegans
+igraph::is_igraph(elegans)
+igraph::is_directed(elegans)
+igraph::edge_attr_names(elegans)
+igraph::vertex_attr_names(elegans)
+igraph::vcount(elegans)
+igraph::ecount(elegans)
+igraph::V(elegans)$name
+igraph::dyad_census(elegans)
+igraph::reciprocity(elegans)
+igraph::transitivity(elegans, type = "global")
+igraph::edge_density(elegans)
+```
+
+1. Turn `elegans` into an object of class  `network`, using the appropriate function 
+from the`snafun` package. Call the network object `elegans_n`.
+
+1. Do all of the steps from printing the object through calculating its 
+density using the `network` and `sna` packages (use `elegans_n` 
+and check for a `network` object in step 4).
+
+```{r include=FALSE}
+# network
+elegans_n <- snafun::to_network(elegans)
+network::is.network(elegans_n)
+elegans_n
+network::is.directed(elegans_n)
+network::list.edge.attributes(elegans_n)
+network::list.vertex.attributes(elegans_n)
+network::network.edgecount(elegans_n)
+network::network.size(elegans_n)
+network::get.vertex.attribute(elegans_n, "vertex.names")
+sna::dyad.census(elegans_n)
+sna::grecip(elegans_n, measure = "edgewise")
+sna::gtrans(elegans_n, mode = "digraph", measure = "weak")
+sna::gden(elegans_n)
+```
+
+
+Did you manage to do that? I knew you could. Please notice the (reasonable)
+consistency of the `snafun` package API. 
+The `igraph` package is fairly consistent too, but the 
+functions you needed for `elegans_n` are much less consistent in their input, 
+output, and function naming. The `network` package is all over the place.
