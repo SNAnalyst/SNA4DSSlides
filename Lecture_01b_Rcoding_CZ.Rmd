@@ -1,0 +1,616 @@
+---
+title: "SOCIAL NETWORK ANALYSIS<br>for DATA SCIENTISTS"
+topic: "R programming"
+lecture_no: "01B"
+author: "Claudia Zucca"
+date: "September, 2nd, 2025"
+output:
+  xaringan::moon_reader:
+    css:
+      - default
+      # - assets/css/sydney-fonts.css
+      - assets/css/apron.css
+      - assets/css/descartes.css
+      - assets/css/tachyons.min.css
+      - assets/css/RL-fonts.css
+      - assets/css/SNA4DS.css
+      - assets/css/SNA4DS_effects.css
+      - assets/css/kleuren.css # make sure this is the last one
+    self_contained: false
+    lib_dir: assets
+    chakra: assets/remark-latest.min.js
+    seal: false # automatic title slide with YAML information
+    mathjax: "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"
+    includes:
+      in_header:
+        - assets/html/mathjax-equation-numbers.html
+    nature:
+      beforeInit:
+        - assets/js/remark-zoom.js
+        - assets/js/macros.js
+        - https://unpkg.com/shiki
+        - assets/js/
+      highlightStyle: atom-one-light
+      highlightLines: true
+      highlightSpans: true
+      titleSlideClass: [middle, left]
+      countIncrementalSlides: false
+      slideNumberFormat: "- %current% -"
+      ratio: '16:9' # alternatives '16:9' or '4:3' or others e.g. 13:9
+      navigation:
+        scroll: true # slide transitions by scrolling
+---
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+<br><br><br><br><br>
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[`r rmarkdown::metadata$title`]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[`r rmarkdown::metadata$topic` .small-caps.font70[(lecture] .font70[`r rmarkdown::metadata$lecture_no`)]]]
+]
+
+<br>
+.f-abel.White-inline[Your lecturer: `r rmarkdown::metadata$author`]<br>
+.f-abel.White-inline[Playdate: `r rmarkdown::metadata$date`]
+
+
+<!-- setup options start -->
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                  out.width = "90%",
+                  fig.height = 6,
+                  dev = "svg",
+                  message = FALSE,
+                  warning = FALSE)
+# library(htmlwidgets, quietly = TRUE, verbose = FALSE, warn.conflicts = FALSE)
+# library(countdown, quietly = TRUE, verbose = FALSE, warn.conflicts = FALSE)
+
+knitr::opts_knit$set(global.par = TRUE)  # anders worden de margin settings niet overal doorgevoerd
+```
+
+
+```{r, include = FALSE}
+par(mar = c(0,0,0,0) + .05) #it's important to have this in a separate chunk
+```
+
+
+```{r xaringanExtra_settings, include = FALSE}
+xaringanExtra::use_xaringan_extra(c("tile_view"
+                                    , "panelset"
+                                    , "animate"
+                                    , "tachyons"
+                                    , "freezeframe"
+                                    , "broadcast"
+                                    , "scribble"
+                                    , "fit_screen"
+                                    ))
+
+xaringanExtra::use_webcam(300 * 3.5, 300 / 4 * 3 * 3.5)
+xaringanExtra::use_editable(expires = 1)
+xaringanExtra::use_search(show_icon = FALSE, case_sensitive = FALSE)
+xaringanExtra::use_logo("sna4ds_logo_140.png")
+
+# htmltools::tagList(
+#   xaringanExtra::use_clipboard(
+#     button_text = "<i class=\"fa fa-clipboard\"></i>",
+#     success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+#     error_text = "<i class=\"fa fa-times-circle\" style=\"color: #F94144\"></i>"
+#   )
+#   # ,
+#   # rmarkdown::html_dependency_font_awesome()
+# )
+```
+
+
+```{r xaringan-extra-styles, echo = FALSE}
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,         
+  mute_unhighlighted_code = TRUE  
+)
+```
+
+```{css echo=FALSE}
+.highlight-last-item > ul > li, 
+.highlight-last-item > ol > li {
+  opacity: 0.5;
+}
+
+.highlight-last-item > ul > li:last-of-type,
+.highlight-last-item > ol > li:last-of-type {
+  opacity: 1;
+
+.bold-last-item > ul > li:last-of-type,
+.bold-last-item > ol > li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+```
+
+```{js,  eval = TRUE}
+var element = document.getElementById("myCode");
+Shiki.highlight(element);
+```
+
+```{r irrelevant_for_the_template_itself, echo = FALSE}
+`%||%` <- function(x, y) if (is.null(x)) y else x
+
+rewrite_chunk <- function(label, include_label = FALSE, nbt = 3) {
+  chunk <- knitr::knit_code$get(label)
+  opts <- attr(chunk, "chunk_opts")
+  bt <- strrep("`", nbt)
+  engine <- opts$engine %||% "r"
+  exclude <- c("engine")
+  if (is.logical(include_label) && !isTRUE(include_label)) {
+    exclude <- c(exclude, "label")
+  }
+  if (is.character(include_label)) {
+    label <- include_label
+  }
+  opts <- opts[setdiff(names(opts), exclude)]
+  opts <- paste(
+    vapply(names(opts), FUN.VALUE = character(1), function(on) {
+      paste0(
+        if (on != "label") paste(on, "= "), 
+        if (is.character(opts[[on]])) {
+          if (on == "label") label else dQuote(opts[[on]], q = 0) 
+        } else {
+          deparse(opts[[on]])
+        }
+      )
+    }),
+    collapse = ", "
+  )
+  header <- paste0(bt, "{", engine, if (length(opts) && nzchar(opts)) " ", opts, "}")
+  paste(
+    header,
+    paste(chunk, collapse = "\n"),
+    bt,
+    sep = "\n"
+  )
+}
+```
+
+
+
+<!-- setup options end -->
+
+---
+name: intro_r
+description: Intro to R and RStudio
+# R & RStudio 
+
+.flex.h-50[
+.w-50[
+![](assets/images/Rlogo.svg)]
+.w-40[
+![](assets/images/RStudio.png)]]
+
+---
+# Why R?
+<br>
+### R is a programming language specifically thought for 
+- data analysis 
+- statistics
+
+
+
+---
+# Why R?
+<br>
+### R is a programming language specifically thought for 
+- data analysis 
+- statistics
+
+### It is also quite similar to Python in many levels
+- if you are a Pythonist you will 'translate' quickly
+- you can do in R anything that you usually do in Python
+
+
+
+---
+# Why R?
+
+<br>
+
+### R is a programming language specifically thought for 
+
+- data analysis 
+- statistics
+
+
+### It is also quite similar to Python in many levels
+
+- if you are a Pythonist you will 'translate' quickly
+- you can do in R anything that you usually do in Python
+
+## R has already more packages for statistical analysis
+This software choice makes your life easier.
+
+---
+name: mentimeter
+description: Programming Survey
+background-image: url(assets/images/)
+background-size: 450px
+background-position: 50% 50%
+# How about your programming skills?
+<br>
+ 
+www.menti.com
+code:  7203 0239 
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+
+
+---
+name: Rstudio_installation
+description: R studio installation and setup
+# Have you installed R and Rstudio? 
+
+<br>
+
+<br>
+
+## did you run the `snaverse::rstudiofy()` function?
+
+<br>
+## Did you encounter any problems? 
+
+
+---
+
+background-image: url(assets/images/Rstudio_layout.png)
+background-size: 900px
+background-position: 50% 50%
+# R studio set up
+
+
+
+---
+
+background-image: url(assets/images/Rstudio_layout1.png)
+background-size: 900px
+background-position: 50% 50%
+# R studio set up
+
+---
+
+background-image: url(assets/images/Rstudio_layout2.png)
+background-size: 900px
+background-position: 50% 50%
+# R studio set up
+
+
+---
+name: snaverse_setup
+description: snaverse setup
+# Have you installed the snaverse?
+
+<br>
+
+## `snaverse::packagefy()`
+
+<br>
+
+## `snaverse::snaversify()`
+
+
+---
+# Have you installed GERGM?
+
+<br> 
+
+## If it did not work in the regular installation, try:
+
+<br>
+
+## `remotes::install_github("matthewjdenny/GERGM", dependencies = TRUE, force = TRUE)`
+<br>
+
+## If it doesn't work, emails us at `SNA4DS@jads.nl`
+
+(especially mac users)
+
+
+
+---
+# `snaverse` suite
+
+<br>
+
+## snaverse - The sna package to rule them all ;-)
+
+<br>
+
+### Written by Roger and Claudia for the SNA4DS class
+
+<br>
+
+
+### Attempting to make this class more enjoyable :)
+
+## composed of 3 packages
+
+---
+# `sna4tutti`
+
+<br> 
+
+## It contains 9 interactive tutorials
+
+<br>
+
+### It makes easier learning SNA4DS since 
+
+- you study the theory 
+- immediately get to practice it
+
+
+---
+# `snafun`
+
+<br>
+
+## Doing analysis of dyadic data can be quite challenging
+
+## We introduced a set of function that will make your life much easier
+
+## without `snafun` you would have to navigate at least three packages everyday
+
+- `igraph`
+- `sna`
+- `network`
+- ...
+---
+# `SNA4DSData`
+
+<br>
+
+It contains the Data tha we will use for...
+
+* Tutorials
+* Demostration
+* Examples 
+* Houseplay
+* Class play
+
+
+... during the semester
+
+You can also use it to practice for the exam
+
+---
+background-image: url(assets/images/orion_ver_1.jpg)
+background-size: 450px
+background-position: 50% 50%
+# Any questions about the snaverse?
+
+
+
+---
+name: tutorials
+description: Info about tutorials
+# Opening Tutorials 
+
+<br>
+
+<br>
+
+
+## `sna4tutti::open_sna4tutti_tutorials()`
+
+
+## similar to the bootcamp ones
+
+
+<br>
+
+
+## Any Problems/Questions?
+
+
+
+---
+# Solving Possible problems you can encounter
+<br>
+## The tutorial does not open
+
+### .Red-inline[1) Close R studio] 
+
+### .Red-inline[2) Restart R  studio]
+
+### .Red-inline[3) Try again]
+
+## Still not working? 
+
+### .Red-inline[4) Clear the cache]
+
+## Still not working? 
+
+### .Red-inline[5) Contact us]
+
+---
+# Solving Possible problems you can encounter
+
+<br>
+
+## Tutorials have a system to authomatically report errors
+
+In case there is an error, you will see it in two places
+
+- where the error takes place in the tutorial flow
+
+- at the end of the tutorial
+
+## If you see this, copy and paste the error code and email it to us
+
+
+---
+name: bug_reporting
+description: Bug Reporting
+# Bug reporting
+<br>
+
+## First complete version of the suite
+
+## .red[Still, this package is work in progress]
+
+## You might find some bugs as code or text typos
+
+## If you do, please report them to us so we can fix them
+
+### SNA4DS@jads.nl
+
+---
+background-image: url(assets/images/hex-tidyverse.png)
+background-size: 250px
+background-position: 50% 50%
+
+# Forbidden Items
+<br>
+- attaching Libraries 
+
+### `library(igraph)` 
+<br>
+
+- using the suite of packages tidyverse
+
+### `library(dplyr)`
+<br>
+<br>
+<br>
+
+
+## DO NOT DO THAT!
+
+---
+# JUST DO IT 
+<br>
+<br>
+### prefix packages
+### `igraph::degree(net)` OR `stats::lm(Ovar ~ Pred)`
+
+<br>
+### do data analysis and manipulation in R base
+
+### `var$col1` OR `Var[,1]`
+### etc...
+
+## .red[If you attach libraries and/or use tidyverse we will mark you down]
+
+
+---
+name: tutorial1
+description: T01 programming in R
+# Tutorial 01
+
+## Intro to programming in R
+
+### It has been written with two main purposes
+
+- Giving you an overview of the programming skills you need in this class
+- Getting you started with them
+
+## It will take you between 1 and 3 hours to complete the tutorial 
+
+## It depends on your programming level and your R level
+
+### It's not difficult!
+
+### Please do it carefully. -- No LLMs cannot code everything for you!
+
+---
+# Topics in the tutorial (1)
+<br>
+- Checking installation
+- Operators, Variables and Conditions
+- Make your code readable
+- R Objects
+- Looking for help
+- Missing Data
+- Data Structures
+- Reading files into R
+
+
+
+---
+# Topics in the tutorial (2)
+<br>
+- Inspecting Data
+- Data Manipulation
+- Packages in R
+- Functions
+- Loops
+- The `apply` family
+- basics R graphics
+
+---
+# Tutorial 01 is a companion 
+<br>
+## Refer to it everytime you have to code something in R
+<br>
+## There should be everything you need
+<br>
+## No need to remember things if you know where to find them!
+<br>
+## .red[BUT DO FIND THEM!]
+
+---
+# For next week:
+<br>
+
+## - Tutorial 1
+## - Tutorial 2
+## - Homeplay data manipulation in R
+## - Homeplay descriptives
+
+<br>
+<br>
+# You can do it! :)
+
+---
+name: Disclaimer
+description: Keep up with the material
+background-image: url(assets/images/car-racing.jpg)
+background-size: 450px
+background-position: 50% 60%
+# Speed Disclaimer
+<br> 
+## We start FAST -- keep up with the speed!
+
+
+
+
+---
+background-image: url(assets/images/pet-cat-green.jpg)
+background-size: 550px
+background-position: 50% 60%
+## See you next week!
+
+
+---
+
+
+
+
+
+
