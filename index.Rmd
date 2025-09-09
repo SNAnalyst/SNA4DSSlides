@@ -168,3 +168,51 @@ lectureName <- "Week 01 -- Lecture: Network measures"
                                                         
 `r make_overview(overview, path, slidedeckFile, lectureName)`
 
+
+<!-- Week 02 -- Lab: Intro to R in SNA -->                   
+```{r, include = FALSE}                                      
+overview <- matrix(c(                                        
+"menu", "Menu",                                              
+"whyr", "Why use R for SNA",                                 
+"homeplay", "Homeplay coding",                               
+"awesome", "What makes snafun to awesome",                   
+"graphobjects", "Dealing with graph objects",                
+"help", "Getting help"                                       
+), byrow = TRUE, ncol = 2) |>                                
+as.data.frame() |>                                           
+setNames(c("name", "description"))                           
+                                                          
+slidedeckFile <- "Lab_SNA_in_R"                              
+lectureName <- "Week 02 -- Lab: Intro to R in SNA"           
+```                                                          
+                                                          
+`r make_overview(overview, path, slidedeckFile, lectureName)`
+
+
+
+
+<!-- Week 02 -- Lab: Network Measures -->                    
+```{r, include = FALSE}                                      
+overview <- matrix(c(                                        
+"menu", "Menu",                                              
+"descriptives", "Descriptive measures",                      
+"transitivity", "Transitivity",                              
+"walktrap", "Homeplay: communities",                         
+"isolates", "Homeplay: toss them isolates!",                 
+"bonus", "Homeplay bonus question",                          
+"bridge", "Who bridges between the communities",             
+"facility", "Facility location analysis",                    
+"Pagerank", "Pagerank through simulation"                    
+), byrow = TRUE, ncol = 2) |>                                
+as.data.frame() |>                                           
+setNames(c("name", "description"))                           
+                                                          
+slidedeckFile <- "Lab_Measures"                              
+lectureName <- "Week 02 -- Lab: Network Measures"            
+```                                                          
+                                                          
+`r make_overview(overview, path, slidedeckFile, lectureName)`
+
+
+
+
