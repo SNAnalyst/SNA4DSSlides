@@ -1,5 +1,5 @@
 ---
-title: "Homeplay for week 04"
+title: "Homeplay for (intro to) Statistical Network Models"
 output: 
   html_document: 
     toc: true

@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>SOCIAL NETWORK ANALYSIS for DATA SCIENTISTS</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Roger" />
+    <script src="assets/header-attrs-2.29/header-attrs.js"></script>
+    <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="assets/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="assets/tile-view-0.2.6/tile-view.js"></script>
+    <link href="assets/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="assets/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra_fit-screen-0.2.6/fit-screen.js"></script>
+    <link href="assets/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="assets/panelset-0.3.0/panelset.js"></script>
+    <script src="assets/fabric-4.3.1/fabric.min.js"></script>
+    <link href="assets/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="assets/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="assets/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"dc8674e2a4ab44d98ec649db6a822e72","expires":1}</script>
+    <script src="assets/himalaya-1.1.0/himalaya.js"></script>
+    <script src="assets/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="assets/editable-0.2.6/editable.js"></script>
+    <script src="assets/mark.js-8.11.1/mark.min.js"></script>
+    <link href="assets/xaringanExtra-search-0.0.1/search.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-search-0.0.1/search.js"></script>
+    <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"bottom-left","caseSensitive":false,"showIcon":false,"autoSearch":true}) })</script>
+    <script src="assets/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"<i class=\"fa fa-clipboard\"><\/i>","success":"<i class=\"fa fa-check\" style=\"color: #90BE6D\"><\/i>","error":"<i class=\"fa fa-times-circle\" style=\"color: #F94144\"><\/i>"})</script>
+    <link href="assets/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+    <link href="assets/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+    <link href="assets/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="assets/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/apron.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/descartes.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/tachyons.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/xaringan-extra.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/RL-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS_effects.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/kleuren.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/adirondack.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[SOCIAL NETWORK ANALYSIS&lt;br&gt;for DATA SCIENTISTS]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[LECTURE: Network Statistics .small-caps.font70[(lecture] .font70[WEEK 02)]]]
+  ]
+
+&lt;br&gt;
+.f-abel.White-inline[Your lecturer: Roger]&lt;br&gt;
+.f-abel.White-inline[Playdate: September 10, 2025]
+
+
+&lt;!-- setup options start --&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.highlight-last-item &gt; ul &gt; li, 
+.highlight-last-item &gt; ol &gt; li {
+  opacity: 0.5;
+}
+
+.highlight-last-item &gt; ul &gt; li:last-of-type,
+.highlight-last-item &gt; ol &gt; li:last-of-type {
+  opacity: 1;
+
+.bold-last-item &gt; ul &gt; li:last-of-type,
+.bold-last-item &gt; ol &gt; li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+&lt;/style&gt;
+
+&lt;style type="text/css"&gt;
+.remark-inline-code {
+  background: #F5F5F5;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.inverse-red, .inverse-red h1, .inverse-red h2, .inverse-red h3, .inverse-red a, inverse-red a &gt; code {
+	border-top: none;
+	background-color: red;
+	color: white; 
+	background-image: "";
+}
+
+.inverse-orange, .inverse-orange h1, .inverse-orange h2, .inverse-orange h3, .inverse-orange a, inverse-orange a &gt; code {
+	border-top: none;
+	background-color: orange;
+	color: black; 
+	background-image: "";
+}
+
+
+.tab{
+  display: inline-block;
+  margin-left: 40px;
+}
+
+.tab1{tab-size: 2;}
+.tab2{tab-size: 4;}
+.tab3{tab-size: 6;}
+.tab4{tab-size: 8;}
+
+&lt;/style&gt;
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.grid-3-1 {
+  display: grid;
+  height: calc(80%);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1em;
+  padding: 1em;
+}
+&lt;/style&gt;
+
+&lt;!-- setup options end --&gt;
+
+---
+class: course-logo
+layout: true
+
+---
+class: bg-Black
+name: menu
+description: "Menu"
+
+.Gold-inline[
+# Today's menu
+
+1. Statistical Models for Networks
+1. Social Influence modeling
+]
+
+---
+
+# The course sofar
+
+We have performed descriptive and exploratory analysis:
+
+- vertex level indices (betweenness, closeness, pagerank, etc.)
+
+--
+
+- graph level indices (centralization, components/subgroups, et cetera)
+
+--
+
+- Getting to know R with `snafun`, `network`/`sna`, and `igraph`
+
+---
+# From exploration to estimation and testing
+
+- You found *betweenness centralization* of .2. Is this high? Low? Expected? 
+Unexpected? Statistically significant?
+
+--
+
+- You found a 4 communities in the graph. Is this high? Low? Expected? 
+Unexpected? Statistically significant?
+
+--
+
+- You found that more central companies innovate more. But is this expected? 
+Unexpected? Statistically significant?
+
+--
+
+- You found a .4 correlation between friendship and advice-giving. 
+Statistically significant?
+
+--
+
+- How to conclude if friendship promotes advice giving?
+
+--
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.Blue-inline[<svg style="height: 1em; top:.04em; position: relative; fill: #2F4F4F;"
+viewBox="0 0 512 512"><path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm-28.9 143.6l75.5 72.4H120c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24h182.6l-75.5 72.4c-9.7 9.3-9.9 24.8-.4 34.3l11 10.9c9.4 9.4 24.6 9.4 33.9 0L404.3 273c9.4-9.4 9.4-24.6 0-33.9L271.6 106.3c-9.4-9.4-24.6-9.4-33.9 0l-11 10.9c-9.5 9.6-9.3 25.1.4 34.4z"/></svg> we need statistics: *parameter estimation* and *hypothesis testing*.]
+
+---
+name: assumption
+description: Our assumptions from here on out
+
+# We assume that you:
+
+- can easily calculate the appropriate vertex-level and graph-level indices
+
+--
+
+- are comfortable with the basics of statistics (see: .i[bootcamp]):
+
+  + linear regression
+
+  + logistic regression
+
+  + null-hypothesis testing
+
+---
+class: bg-Black center
+name: role
+description: The role of statistics
+
+background-image: url("assets/images/math_scroll.gif")
+background-size: cover
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.Blue-inline.f-caveat.b[.center[.font400[&lt;b&gt;causes &lt;font face="Symbol"&gt;&amp;#222;&lt;/font&gt;
+network &lt;font face="Symbol"&gt;&amp;#222;&lt;/font&gt; outcomes&lt;/b&gt;]]]
+
+---
+class: center
+name: models_in_course
+description: Overview of the statistical models in this course
+
+![:scale 90%](assets/images/stat_models_overview.png)
+
+
+---
+class: clear bg-GoldenRod middle center
+
+background-image: url("assets/images/airport_waitingline.jpg")
+background-size: cover
+
+---
+class: clear bg-GoldenRod
+
+background-image: url("assets/images/Whyte.jpg")
+background-size: cover
+
+
+.footnote.white[Whyte, 1954]
+---
+class: bg-Black
+name: toblerslaw
+description: Tobler's First Law
+
+# Network statistics: Social Influence
+
+## Tobler's first law of Geography
+
+--
+
+&lt;br&gt;&lt;br&gt;
+.f-marker.center.White-inline.font200[Everything is related to everything else, &lt;br&gt;but near things are more related&lt;br&gt;than distant things.]
+
+---
+class: bg-Black
+
+# Tobler's first law of Geography (2m59s video)
+
+.center[
+&lt;iframe src="assets/html/toblers_law_1920.html" width="90%" height="1080px" data-external="1"&gt;&lt;/iframe&gt;
+]
+
+.footnote[[Source](https://www.youtube.com/watch?v=Ck7yVhvSdGM)]
+
+---
+background-image: url("assets/images/Tobler_Waldo-R.jpg")
+background-size: 30%
+background-position: 100% 0%
+
+
+# Tobler's first law
+
+The law basically says two things:
+
+- You interact more often/strongly with whom is "near"
+
+--
+
+- Near things are more alike than distant things
+
+???
+Waldo Tobler (1930 - 2018)
+---
+# Tobler's first law of Geography
+
+&lt;br&gt;&lt;br&gt;
+.f-caveat.center.font200.b[Everything is related to everything else, 
+&lt;br&gt;but near things are more related&lt;br&gt;than distant things.]
+
+
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+<svg style="height: 1em; top:.04em; position: relative; fill: #136CB9;"
+viewBox="0 0 512 512"><path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm-28.9 143.6l75.5 72.4H120c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24h182.6l-75.5 72.4c-9.7 9.3-9.9 24.8-.4 34.3l11 10.9c9.4 9.4 24.6 9.4 33.9 0L404.3 273c9.4-9.4 9.4-24.6 0-33.9L271.6 106.3c-9.4-9.4-24.6-9.4-33.9 0l-11 10.9c-9.5 9.6-9.3 25.1.4 34.4z"/></svg> This is the idea that social network models of social influence are built upon.
+
+---
+class: bg-Black
+
+background-image: url("assets/images/network_colored.png")
+background-size: contain
+
+# Social influence on a network
+
+---
+name: socinf
+description: Social influence on a network
+
+# Social influence on a network
+
+## Network autocorrelation model
+&lt;br&gt;
+.font200[$$y = \rho Wy + X\beta + \epsilon$$]
+
+---
+
+background-image: url("assets/images/nam_y.png")
+background-size: cover
+
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+Here, `\(y\)` is one's preference for a political decision, how much one 
+likes his job, appreciation of a course, liking of a movie, 
+propensity to buy a new model phone, 
+the amount of CO2 one is OK with, et cetera.
+&lt;br&gt;It is a numeric vector with a value for every actor.
+
+---
+
+background-image: url("assets/images/nam_y_x.png")
+background-size: cover
+
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+`\(X\beta\)` is one's .b[intrinsic opinion], the one you would hold without 
+any social influence.
+
+---
+
+background-image: url("assets/images/nam_y_x_w.png")
+background-size: cover
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+`\(\rho Wy\)` captures social influence, it moves people away from their 
+intrinsic positions.
+
+---
+
+background-image: url("assets/images/nam_x.png")
+background-size: cover
+
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+This is the well-known OLS model, without any network effect (so, when: `\(\rho = 0\)`).
+---
+name: nam
+description: Network autocorrelation model
+
+# Social influence on a network
+
+## Network autocorrelation model
+
+
+`$$y = \rho Wy + X\beta + \epsilon$$`
+--
+&lt;br&gt;
+
+`$${y}_1 = \rho ({W}_{12} {y}_2 + {W}_{13} {y}_3 + {W}_{14} {y}_4 + ... + {W}_{1g} {y}_g) + {X}_{11} {\beta}_1 + {X}_{12} {\beta}_2 + ... + + {X}_{1k} {\beta}_k + {\epsilon}_1$$`
+`$${y}_2 = \rho ({W}_{21} {y}_1 + {W}_{23} {y}_3 + {W}_{24} {y}_4 + ... + {W}_{2g} {y}_g) + {X}_{21} {\beta}_1 + {X}_{22} {\beta}_2 + ... + + {X}_{2k} {\beta}_k + {\epsilon}_2$$`
+`$$\vdots$$`
+`$${y}_g = \rho ({W}_{g1} {y}_2 + {W}_{g3} {y}_3 + {W}_{g4} {y}_4 + ... + {W}_{g-1,2} {y}_g) + {X}_{g1} {\beta}_1 + {X}_{g2} {\beta}_2 + ... + + {X}_{gk} {\beta}_k + {\epsilon}_g$$`
+`\(g\)` is the number of actors in the network, `\(X\)` a matrix of `\(k\)` 
+explanatory variables, `\(\rho\)` a scalar comparable to a correlation coefficient.
+
+---
+name: weightmatrix
+description: Weight matrix
+
+# Weight matrix `\(W\)`
+
+The matrix *W* captures the social influence process you want to test.
+
+Cell (*i*, *j*) captures the weight of the influence that *i* receives from *j*. 
+
+The weight matrix is usually (but not necessarily) __row-normalized__ 
+so each row adds to 1 exactly.
+
+--
+
+What does row normalization mean *substantively* here?
+
+--
+
+Mathematically, row or column normalization has the advantages of making the 
+eigenvalues behave nicely, so the likelihood become nice and smooth.
+
+It also restricts `\(rho\)` to the `\((-1, 1)\)` interval, making it easy to interpret.
+
+---
+# Tobler's first law
+
+&lt;br&gt;&lt;br&gt;
+.f-caveat.center.font200.b[Everyone is related to everyone else, &lt;br&gt;but those 
+who are near persons are more related&lt;br&gt;than those who are distant from each other.]
+
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+<svg style="height: 1em; top:.04em; position: relative; fill: #136CB9;"
+viewBox="0 0 512 512"><path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm-28.9 143.6l75.5 72.4H120c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24h182.6l-75.5 72.4c-9.7 9.3-9.9 24.8-.4 34.3l11 10.9c9.4 9.4 24.6 9.4 33.9 0L404.3 273c9.4-9.4 9.4-24.6 0-33.9L271.6 106.3c-9.4-9.4-24.6-9.4-33.9 0l-11 10.9c-9.5 9.6-9.3 25.1.4 34.4z"/></svg> What is "near" in a social network?
+
+---
+
+# Two views on how people influence each other:
+
+* .font130[communication]
+
+* .font130[comparison]
+
+---
+# Small example network
+
+&lt;img src="assets/images/influence_example_graph-1.svg" width="90%" height="570" /&gt;
+
+---
+name: communication
+description: Communication
+
+
+# Communication
+
+&lt;br&gt;&lt;br&gt;
+*Communication* refers to social inﬂuence through the **direct contact** between ego 
+and alter.
+
+- The more frequent and vivid the communication between ego and alter,
+the more likely it is that ego will adopt alter’s ideas and beliefs. 
+
+- Through discussing matters with alter, ego
+comes to an understanding of an issue and adds new information to his own, which 
+may cause ego to develop similar attitudes and understandings.
+
+![](assets/images/influence_example_graph-1-Copy.svg# absolute w-20pct b-0 l-9-12th)
+
+---
+name: comparison
+description: Comparison
+
+![](assets/images/influence_example_graph-1-Copy.svg# absolute w-20pct b-0 l-9-12th)
+
+# Comparison
+
+&lt;br&gt;&lt;br&gt;
+
+- Ego compares himself to those alters whom he considers **similar** to
+him in relevant respects, asking himself ‘what would that other person 
+do if he were in my shoes?’ 
+
+
+- Ego perceives (or assesses) alter’s behavior and assumes that behavior to be the
+‘correct’ behavior for ‘a-person-like-me’ or for 
+‘a-person-in-a-position-like-mine’.
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+This is the world of "influencers" and "role models"&lt;br&gt;.font50[(whether they are 
+aware of having this role or not)]
+
+???
+
+Niet vergeten: reclame!
+Of de winkel naast je
+
+---
+
+# Operationalizing .small-caps.b[communication]
+
+![](assets/images/autocorr_nw_hor.jpg# absolute w-30pct b-0 l-3-12th)
+
+--
+
+* The most straightforward weight matrix is based on the adjacency matrix: 
+you are influenced by those you are tied to directly.
+
+
+.w-50.fl.tl.font80[
+
+``` r
+net_mat
+```
+
+```
+  a c d b e f g h i j
+a 0 1 1 1 0 0 0 0 0 0
+c 1 0 0 1 1 0 0 0 0 0
+d 1 0 0 1 1 0 0 0 0 0
+b 1 1 1 0 0 0 0 0 0 0
+e 0 1 1 0 0 1 0 0 0 0
+f 0 0 0 0 1 0 1 1 0 0
+g 0 0 0 0 0 1 0 0 1 1
+h 0 0 0 0 0 1 0 0 1 1
+i 0 0 0 0 0 0 1 1 0 1
+j 0 0 0 0 0 0 1 1 1 0
+```
+]
+
+.w-50.fr.tl.font80[
+
+``` r
+round(net_mat / rowSums(net_mat), digits = 2)
+```
+
+```
+     a    c    d    b    e    f    g    h    i    j
+a 0.00 0.33 0.33 0.33 0.00 0.00 0.00 0.00 0.00 0.00
+c 0.33 0.00 0.00 0.33 0.33 0.00 0.00 0.00 0.00 0.00
+d 0.33 0.00 0.00 0.33 0.33 0.00 0.00 0.00 0.00 0.00
+b 0.33 0.33 0.33 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+e 0.00 0.33 0.33 0.00 0.00 0.33 0.00 0.00 0.00 0.00
+f 0.00 0.00 0.00 0.00 0.33 0.00 0.33 0.33 0.00 0.00
+g 0.00 0.00 0.00 0.00 0.00 0.33 0.00 0.00 0.33 0.33
+h 0.00 0.00 0.00 0.00 0.00 0.33 0.00 0.00 0.33 0.33
+i 0.00 0.00 0.00 0.00 0.00 0.00 0.33 0.33 0.00 0.33
+j 0.00 0.00 0.00 0.00 0.00 0.00 0.33 0.33 0.33 0.00
+```
+]
+
+---
+
+# Operationalizing .small-caps.b[communication]
+
+There are many alternatives, such as:
+
+* are you members of the same component/subgroup?
+
+* number of two-paths between two people
+
+
+Here, you assume that being in the same work component, 
+advice-sharing component, collaboration component, course team, 
+sitting at the same table, et cetera, makes it more likely that people 
+communicate directly.
+
+---
+
+# Operationalizing .b.small-caps[comparison]
+
+--
+
+&lt;br&gt;&lt;br?&lt;br&gt;
+How would you operationalize whom a network actor would compare 
+himself/herself to?
+
+---
+name: structuralequivalence
+description: Structural equivalence
+
+# structural equivalence
+
+One mathematical way to measure how similar the other person is to you--
+in a "social network sense", is through 
+*structural equivalence*.
+
+
+.pull-left.font80[
+Two nodes are structurally equivalent if they have **precisely** 
+the same relations across all other nodes in the network.
+&lt;br&gt;&lt;br&gt;
+Compare a and b (in red) with e and f (in black). 
+Which pairs are more strongly structurally equivalent?
+]
+
+.pull-right[
+&lt;img src="assets/images/structequiv-1.svg" width="90%" /&gt;
+]
+
+???
+
+The idea is that people who are cognitively similar will end up occupying similar 
+positions in society
+
+Also: ppl who are structurally equivalent are subject to the same "conditions" 
+and will have similar needs and require similar strategies and solutions
+
+---
+name: sedist
+description: snafun::d_structural_equivalence
+
+# Structural equivalence
+
+
+``` r
+distances &lt;- snafun::d_structural_equivalence(net_sna)
+distances
+```
+
+
+
+```
+       a      c      d      b      e      f      g      h      i      j
+a  1.000  0.333  0.333  1.000  0.467 -0.600 -0.600 -0.600 -0.600 -0.600
+c  0.333  1.000  1.000  0.333 -0.333 -0.067 -0.600 -0.600 -0.600 -0.600
+d  0.333  1.000  1.000  0.333 -0.333 -0.067 -0.600 -0.600 -0.600 -0.600
+b  1.000  0.333  0.333  1.000  0.467 -0.600 -0.600 -0.600 -0.600 -0.600
+e  0.467 -0.333 -0.333  0.467  1.000 -0.333 -0.067 -0.067 -0.600 -0.600
+f -0.600 -0.067 -0.067 -0.600 -0.333  1.000 -0.333 -0.333  0.467  0.467
+g -0.600 -0.600 -0.600 -0.600 -0.067 -0.333  1.000  1.000  0.333  0.333
+h -0.600 -0.600 -0.600 -0.600 -0.067 -0.333  1.000  1.000  0.333  0.333
+i -0.600 -0.600 -0.600 -0.600 -0.600  0.467  0.333  0.333  1.000  1.000
+j -0.600 -0.600 -0.600 -0.600 -0.600  0.467  0.333  0.333  1.000  1.000
+```
+
+![](assets/images/influence_example_graph-1-Copy.svg# absolute w-30pct b-0 r-0)
+
+
+This measure runs between (-1, 1), with 1 showing two vertices having&lt;br&gt;
+perfectly identical edges and -1 showing exactly opposite positions. 
+
+
+???
+
+De negatieve strucdist tussen a en j komt omdat a ties heeft met alters waar j juist geen relaties mee heeft en omgekeerd. Maar de corr is niet -1 omdat er ook alters zijn waarmee ze allebei GEEN relatie hebben. Dat verhoogt juist weer hun equiv.
+
+NB: dit betekent ook dat strucdist minder informatief is naarmate het network groter wordt. Immers, omdat je dan steeds meer 'null relaties' gemeenschappelijk zult hebben, zul je weinig sterk negatieve relaties zien en omdat je weinig niet-null ties gemeenschappelijk zult hebben met de meesten is de struct equiv laag. 
+Inderdaad, als je netwerk size laat toenemen terwijl je de dichtheid gelijk houdt, gaat structeq steeds meer naar 0 en wordt de verdeling smaller.
+
+
+&lt;img src="assets/images/notrun-1.svg" width="90%" /&gt;
+
+
+---
+name: lnam
+description: stat_nam function
+
+# Running the autocorrelation model
+
+`$$y = \rho Wy + X\beta + \epsilon$$`
+
+```r
+snafun::stat_nam(y ~ x, W = NULL, model = "lag")
+```
+
+Here, *y* is the dependent variable (a vector), *X* is the matrix with 
+exogenous variables, and `\(W\)` is the weight matrix.
+
+---
+&lt;br&gt;&lt;br&gt;
+
+The model implemented in `snafun::stat_nam`
+
+$$
+`\begin{aligned}
+y &amp;= \rho_1 W y + X\beta + \epsilon\\
+\epsilon &amp;= \rho_2 W_2\epsilon + \nu
+\end{aligned}`
+$$
+
+--
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+What does the model represent if you set `\(W\)` to 0?
+
+---
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+You run the models as follows:
+
+
+
+| Code         | Model          |
+|---------------|:--------------|
+| `snafun::stat_nam(y ~ x, W = NULL, model = 'lag')`    | W = W, W2 = 0 |
+| `snafun::stat_nam(y ~ x, W = NULL, model = 'error')`      | W = 0, W2 = W2  |
+| `snafun::stat_nam(y ~ x, W = NULL, model = 'combined')` | W = W, W2 = W2  |
+
+---
+
+# Running the autocorrelation model
+
+
+
+
+
+
+.panelset[
+
+.panel[.panel-name[Data]
+
+- 100 people read a piece of information 
+and share their thoughts with others through a chatboard about how trustworthy 
+they consider the information
+
+- after the discussion, they each score the trustworthiness of the information 
+on a continuous scale between 0 and 10
+
+- Explanatory variables:
+  + political preference
+  + proportion of waking time spent on social media
+  + expertise on the topic
+  + agreeableness (personality trait)
+]
+
+
+.panel[.panel-name[R code]
+
+``` r
+# communication: direct ties
+# trust_net is the adjacency matrix of the communication
+diag(trust_net) &lt;- 0
+w_adj &lt;- trust_net / rowSums(trust_net)
+
+nam &lt;- snafun::stat_nam(trust_y ~ ., W = w_adj, data = trust)
+summary(nam)
+```
+]
+
+.panel[.panel-name[Output]
+.font70.scroll-box-24[
+
+```
+
+Call:spatialreg::lagsarlm(formula = formula, data = data, listw = W, 
+    na.action = na.action, Durbin = Durbin, quiet = quiet, zero.policy = zero.policy)
+
+Residuals:
+       Min         1Q     Median         3Q        Max 
+-2.0390625 -0.6160851  0.0022923  0.5660169  2.5077752 
+
+Type: lag 
+Coefficients: (asymptotic standard errors) 
+               Estimate Std. Error  z value  Pr(&gt;|z|)
+(Intercept)    0.339855   0.342785   0.9915 0.3214655
+media_use      1.087801   0.316341   3.4387 0.0005845
+expertise     -0.504861   0.023336 -21.6345 &lt; 2.2e-16
+politics       0.206052   0.037757   5.4573 4.834e-08
+agreeableness  0.512199   0.315279   1.6246 0.1042499
+
+Rho: 0.56058, LR test value: 6.2892, p-value: 0.012148
+Asymptotic standard error: 0.1863
+    z-value: 3.009, p-value: 0.0026213
+Wald statistic: 9.0539, p-value: 0.0026213
+
+Log likelihood: -133.6848 for lag model
+ML residual variance (sigma squared): 0.84416, (sigma: 0.91878)
+Number of observations: 100 
+Number of parameters estimated: 7 
+AIC: 281.37, (AIC for lm: 285.66)
+LM test for residual autocorrelation
+test value: 0.16173, p-value: 0.68757
+```
+]
+]
+
+]
+
+---
+class: bg-Black
+
+background-image: url('assets/images/question_mark_4.jpg')
+background-size: contain
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; .orange.f-marker.font200[QUESTIONS?]
+
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="assets/remark-latest.min.js"></script>
+<script src="assets/js/remark-zoom.js"></script>
+<script src="assets/js/macros.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "atom-one-light",
+  "highlightLines": true,
+  "highlightSpans": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": "- %current% -",
+  "ratio": "16:9",
+  "navigation": {
+    "scroll": true
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

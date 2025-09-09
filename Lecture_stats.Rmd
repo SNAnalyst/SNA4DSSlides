@@ -1,9 +1,9 @@
 ---
 title: "SOCIAL NETWORK ANALYSIS<br>for DATA SCIENTISTS"
 topic: "LECTURE: Network Statistics"
-lecture_no: "WEEK 04"
+lecture_no: "WEEK 02"
 author: "Roger"
-playdate: "September 16, 2024"
+playdate: "September 10, 2025"
 output:
   xaringan::moon_reader:
     css:
@@ -292,13 +292,13 @@ Statistically significant?
 name: assumption
 description: Our assumptions from here on out
 
-# We assume
+# We assume that you:
 
-- you can easily calculate the appropriate vertex-level and graph-level indices
+- can easily calculate the appropriate vertex-level and graph-level indices
 
 --
 
-- you are comfortable with the basics of statistics (see: .i[bootcamp]):
+- are comfortable with the basics of statistics (see: .i[bootcamp]):
 
   + linear regression
 
@@ -512,16 +512,16 @@ who are near persons are more related<br>than those who are distant from each ot
 
 ---
 
-## Two views on how people influence each other:
+# Two views on how people influence each other:
 
-* communication
+* .font130[communication]
 
-* comparison
+* .font130[comparison]
 
 ---
 # Small example network
 
-```{r influence_example_graph, echo = FALSE,  out.height = 500}
+```{r influence_example_graph, echo = FALSE,  out.height = 570}
 igraph::plot.igraph(net_igraph, vertex.color = c("red", "blue", "blue", "red", "black", "black", "green", "green", "orange", "orange"), 
      vertex.label.color = "white", 
      layout = igraph::layout_with_fr(net_igraph))
@@ -679,8 +679,8 @@ snafun::d_structural_equivalence(net_sna)
 ![](assets/images/influence_example_graph-1-Copy.svg# absolute w-30pct b-0 r-0)
 
 
-THis measure runs between (-1, 1), with 1 showing two vertices having perfectly 
-identical edges and -1 showing exactly opposite positions. 
+This measure runs between (-1, 1), with 1 showing two vertices having<br>
+perfectly identical edges and -1 showing exactly opposite positions. 
 
 
 ???
@@ -728,7 +728,7 @@ exogenous variables, and $W$ is the weight matrix.
 ---
 <br><br>
 
-### The model implemented in `snafun::stat_nam`
+The model implemented in `snafun::stat_nam`
 
 $$
 \begin{aligned}
@@ -739,7 +739,8 @@ $$
 
 --
 <br><br><br><br>
-What does the model represent if you use $W_2$ and set $W$ to 0?
+
+What does the model represent if you set $W$ to 0?
 
 ---
 <br><br><br>
