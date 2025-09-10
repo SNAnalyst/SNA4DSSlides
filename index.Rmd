@@ -127,7 +127,7 @@ overview <- matrix(c(
 as.data.frame() |>                                                                           
 setNames(c("name", "description"))                                                           
                                                                                             
-slidedeckFile <- "D:\\Dropbox\\R\\eigen_packages\\=git\\SNA4DSSlides\\Lecture_01b_Rcoding_CZ"
+slidedeckFile <- "Lecture_01b_Rcoding_CZ"
 lectureName <- "Week 01 -- Lecture: Intro to R in this course"                               
 ```                                                                                          
                                                                                             
@@ -214,7 +214,7 @@ lectureName <- "Week 02 -- Lab: Network Measures"
 `r make_overview(overview, path, slidedeckFile, lectureName)`
 
 
-<!-- Week 02 -- Lecture: Introducrtion fo Statistical Network Models -->        
+<!-- Week 02 -- Lecture: Introduction to Statistical Network Models -->        
 ```{r, include = FALSE}                                                         
 overview <- matrix(c(                                                           
 "menu", "Menu",                                                                 
@@ -235,7 +235,7 @@ as.data.frame() |>
 setNames(c("name", "description"))                                              
                                                                                
 slidedeckFile <- "Lecture_stats"                                                
-lectureName <- "Week 02 -- Lecture: Introducrtion fo Statistical Network Models"
+lectureName <- "Week 02 -- Lecture: Introduction to Statistical Network Models"
 ```                                                                             
                                                                                
 `r make_overview(overview, path, slidedeckFile, lectureName)` 
