@@ -1,9 +1,9 @@
 ---
 title: "SOCIAL NETWORK ANALYSIS<br>for DATA SCIENTISTS"
 topic: "LAB: Introduction to Statistical Modeling with Networks"
-lecture_no: "Week 04"
+lecture_no: "Week 03"
 author: "Roger"
-playdate: "September 18, 2024"
+playdate: "September 16, 2025"
 output:
   xaringan::moon_reader:
       # - assets/css/adirondack.css
@@ -657,11 +657,11 @@ class: bg-Black
 # Let's see if you have this mastered
 
 
-.GoldenRod.center-image.b.f-abel.font125[www.menti.com<br>code: 3232 9816]
+.GoldenRod.center-image.b.f-abel.font125[www.menti.com<br>code: 3933 1244]
 
 <br><br><br><br><br><br><br><br>
 ```{r qr, echo = FALSE, out.width="30%"}
-qrcode::qr_code("https://www.menti.com/alfw2c91j221") |> qrcode:::plot.qr_code()
+qrcode::qr_code("https://www.menti.com/alw2sxr14emo") |> qrcode:::plot.qr_code()
 ```
 
 ---

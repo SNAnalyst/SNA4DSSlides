@@ -241,3 +241,28 @@ lectureName <- "Week 02 -- Lecture: Introduction to Statistical Network Models"
 `r make_overview(overview, path, slidedeckFile, lectureName)` 
 
 
+
+
+<!-- Week 03 -- Lab: Intro to statistical network models -->        
+```{r, include = FALSE}                                             
+overview <- matrix(c(                                               
+"menu", "Menu",                                                     
+"extract_vertex_attributes", "Extract vertex attributes",           
+"louisiana", "Louisiana results",                                   
+"pvalues", "Empirical <i>p</i>-values",                             
+"table", "Which method to use when?",                               
+"FIFA_networks", "FIFA networks",                                   
+"advanced", "Advanced CUG use",                                     
+"stat", "Statistically modeling networks"                           
+), byrow = TRUE, ncol = 2) |>                                       
+as.data.frame() |>                                                  
+setNames(c("name", "description"))                                  
+                                                                 
+slidedeckFile <- "Lab_stats"                                        
+lectureName <- "Week 03 -- Lab: Intro to statistical network models"
+```                                                                 
+                                                                 
+`r make_overview(overview, path, slidedeckFile, lectureName)` 
+
+
+
