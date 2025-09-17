@@ -1,0 +1,703 @@
+---
+title: "SOCIAL NETWORK ANALYSIS<br>for DATA SCIENTISTS"
+topic: "LAB: Introduction to Statistical Modeling with Networks"
+lecture_no: "Week 03"
+author: "Roger"
+playdate: "September 16, 2025"
+output:
+  xaringan::moon_reader:
+      # - assets/css/adirondack.css
+    css:
+      - default
+      - assets/css/animate.css
+      - assets/css/apron.css
+      - assets/css/descartes.css
+      - assets/css/tachyons.min.css
+      - assets/css/xaringan-extra.css
+      - assets/css/RL-fonts.css
+      - assets/css/SNA4DS.css
+      - assets/css/SNA4DS_effects.css
+      - assets/css/kleuren.css # make sure this is the last one
+    self_contained: false
+    lib_dir: assets
+    chakra: assets/remark-latest.min.js
+    seal: false # automatic title slide with YAML information
+    mathjax: "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"
+    includes:
+      in_header:
+        - assets/html/mathjax-equation-numbers.html
+    nature:
+        # - assets/js/shiki-addon.js
+      beforeInit:
+        - assets/js/remark-zoom.js
+        - assets/js/macros.js
+      highlightStyle: atom-one-light
+      highlightLines: true
+      highlightSpans: true
+      titleSlideClass: [middle, left]
+      countIncrementalSlides: false
+      slideNumberFormat: "- %current% -"
+      ratio: '16:9' # alternatives '16:9' or '4:3' or others e.g. 13:9
+      navigation:
+        scroll: true # slide transitions by scrolling
+editor_options: 
+  chunk_output_type: console
+---
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+<br><br><br><br><br>
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[`r rmarkdown::metadata$title`]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[`r rmarkdown::metadata$topic` .small-caps.font70[(lab] .font70[`r rmarkdown::metadata$lecture_no`)]]]
+  ]
+
+<br>
+.f-abel.White-inline[Your lecturer: `r rmarkdown::metadata$author`]<br>
+.f-abel.White-inline[Playdate: `r rmarkdown::metadata$playdate`]
+
+
+<!-- setup options start -->
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                  comment = "",   # otherwise '##' is added in front of each output row
+                  out.width = "90%",
+                  fig.height = 6,
+                  fig.path = "assets/images/",
+                  fig.retina = 2,
+                  dev = "svg",
+                  message = FALSE,
+                  warning = FALSE)
+# library(htmlwidgets, quietly = TRUE, verbose = FALSE, warn.conflicts = FALSE)
+library(countdown, quietly = TRUE, verbose = FALSE, warn.conflicts = FALSE)
+
+knitr::opts_knit$set(global.par = TRUE)  # anders worden de margin settings niet overal doorgevoerd
+
+remedy::remedy_opts$set(name = paste0("stats_07", "_"))
+
+data(louis, package = "SNA4DSData")
+data(fifa2006, package = "SNA4DSData")
+load("assets/data/nam_mods.Rdata")
+load("assets/data/fifa_mods.Rdata")
+```
+
+
+```{r marset, include = FALSE}
+par(mar = c(2,2,2,2) + .05) #it's important to have this in a separate chunk
+```
+
+
+```{r xaringanExtra_settings, include = FALSE}
+xaringanExtra::use_xaringan_extra(c("tile_view"
+                                    , "panelset"
+                                    , "animate"
+                                    , "tachyons"
+                                    , "freezeframe"
+                                    # , "broadcast"
+                                    , "scribble"
+                                    , "fit_screen"
+                                    ))
+
+xaringanExtra::use_webcam(200, 150)
+xaringanExtra::use_editable(expires = 1)
+xaringanExtra::use_search(show_icon = FALSE, case_sensitive = FALSE)
+xaringanExtra::use_clipboard()
+
+# htmltools::tagList(
+#   xaringanExtra::use_clipboard(
+#     button_text = "<i class=\"fa fa-clipboard\"></i>",
+#     success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+#     error_text = "<i class=\"fa fa-times-circle\" style=\"color: #F94144\"></i>"
+#   ),
+#   rmarkdown::html_dependency_font_awesome()
+# )
+```
+
+
+```{r xaringan-extra-styles, echo = FALSE}
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,         
+  mute_unhighlighted_code = TRUE  
+)
+```
+
+```{css echo=FALSE}
+.highlight-last-item > ul > li, 
+.highlight-last-item > ol > li {
+  opacity: 0.5;
+}
+
+.highlight-last-item > ul > li:last-of-type,
+.highlight-last-item > ol > li:last-of-type {
+  opacity: 1;
+
+.bold-last-item > ul > li:last-of-type,
+.bold-last-item > ol > li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+```
+
+```{css}
+.remark-inline-code {
+  background: #F5F5F5;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.inverse-red, .inverse-red h1, .inverse-red h2, .inverse-red h3, .inverse-red a, inverse-red a > code {
+	border-top: none;
+	background-color: red;
+	color: white; 
+	background-image: "";
+}
+
+.inverse-orange, .inverse-orange h1, .inverse-orange h2, .inverse-orange h3, .inverse-orange a, inverse-orange a > code {
+	border-top: none;
+	background-color: orange;
+	color: black; 
+	background-image: "";
+}
+
+.tab{
+  display: inline-block;
+  margin-left: 40px;
+}
+
+.tab1{tab-size: 2;}
+.tab2{tab-size: 4;}
+.tab3{tab-size: 6;}
+.tab4{tab-size: 8;}
+
+```
+
+
+```{r some_handy_functions, echo = FALSE}
+source("assets/R/components.R")
+```
+
+
+```{css}
+.grid-2-2 {
+  display: grid;
+  height: calc(80%);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1em;
+  padding: 1em;
+}
+```
+
+<!-- setup options end -->
+
+---
+
+class: bg-Black course-logo
+
+background-image: url(assets/images/chris-montgomery-smgTvepind4-unsplash-L.jpg)
+background-position: 100% 0%
+background-size: cover
+background-color: #000000
+
+### .White-inline.font350.b[<br>Turn your<br>cameras on!]
+
+
+.footnote[[Credit](https://unsplash.com/@cwmonty)]
+
+---
+class: course-logo
+layout: true
+
+---
+class: bg-Black
+name: menu
+description: "Menu"
+
+.Gold-inline[
+# Today's menu
+
+
+1. Homeplay
+
+1. QAP findings
+
+1. CUG findings and extension
+
+1. Assessment and practical overview of the methods
+
+]
+
+---
+class: bg-Black course-logo center
+
+background-image: url(assets/images/question-mark-2492009_1920.jpg)
+background-position: 100% 0%
+background-size: cover
+background-color: #000000
+
+<br><br><br><br><br><br><br><br>
+.font300.Orange-inline.f-caveat.b[Any SNA4DS-related questions?]
+
+.footnote[[Credit](https://pixabay.com/illustrations/question-mark-pile-questions-symbol-2492009/)]
+
+---
+class: bg-Black course-logo
+
+# .Gold-inline[Today's menu]
+
+<div class="grid-2-2">
+<div class="extension-tile tileview animated flipInY"><div>Homeplay</div></div>
+</div>
+
+
+---
+class: bg-Black
+
+.orange.b.font150.f-abel.center-image[How did the tutorial and homeplay go?<br>All clear?<br>Challenges?]
+
+---
+name: extract_vertex_attributes
+description: Extract vertex attributes
+
+# Useful function to extract vertex attributes
+
+<br>
+```{r stats_07_01, echo = TRUE, results='hide'}
+attrs <- snafun::extract_all_vertex_attributes(louis)
+attrs
+```
+
+.font90[
+.limity400[
+```{r stats_07_02, echo = FALSE}
+print(attrs, width = 160)
+```
+<br><br>
+]
+]
+
+---
+name: louisiana
+description: Louisiana results
+
+
+.panelset[
+
+.panel[.panel-name[R code NAM]
+
+
+<br>
+```{r stats_07_03, echo = TRUE, eval = TRUE}
+adj <- snafun::to_matrix(louis)
+w_adj <- adj/rowSums(adj)
+
+mod <- snafun::stat_nam(democratic ~ perc_black + 
+                          perc_cath + perc_urban + black_political_equality, 
+                          data = attrs, W = w_adj)
+```
+
+]
+
+
+
+.panel[.panel-name[NAM Output]
+.font80[
+.limity500[
+```{r stats_07_05, eval = TRUE, echo = FALSE}
+summary(mod)
+```
+]]
+
+]   # end of panel 2
+
+]
+
+
+
+---
+name: pvalues
+description: Empirical <i>p</i>-values
+
+class: bg-Black
+
+.center-image.font200.f-abel.orange[What again is a *p*-value and why do we need it?]
+
+---
+
+<br>
+Two ways to computationally derive the empirical distribution of 
+statistics and parameter estimates:
+
+1. conditionally uniform graphs (CUG)
+1. quadratic assignment procedure (QAP)
+
+--
+<br>
+****
+
+__CUG__ is a __random__ graph with specific overall traits (such as a given 
+size, number of edges, degree distribution, et cetera). 
+
+CUG is especially useful to test the significance of a specific network measure 
+for a single specific network.
+
+--
+
+****
+
+__QAP__ generates graphs based on the *permutation of an actually __observed__ graph*. 
+This maintains some of the structure of the original graph and stays closer to 
+the "nature" of the observed network.
+
+It is not meant to generate networks, but to generate the empirical distribution of a 
+statistic, under a null hypothesis.
+
+---
+class: bg-Black
+
+# .Gold-inline[Today's menu]
+
+<div class="grid-2-2">
+<div class="extension-tile tileview"><div>Homeplay</div></div>
+<div class="extension-tile panelset-tile animated flipInX"><div>What to<br>use when?</div></div>
+</div>
+
+---
+name: table
+description: Which method to use when?
+class: bg-Black
+
+
+# General approach
+
+<br><br>
+
+.font80[
+<table class=" lightable-material" style='color: black; font-family: "Source Sans Pro", helvetica, sans-serif; margin-left: auto; margin-right: auto;'>
+<thead> <tr> <th style="text-align:left;font-weight: bold;color: white !important;background-color: rgba(215, 38, 30, 255) !important;"> When </th> <th style="text-align:left;font-weight: bold;color: white !important;background-color: rgba(215, 38, 30, 255) !important;"> Which approach </th> <th style="text-align:left;font-weight: bold;color: white !important;background-color: rgba(215, 38, 30, 255) !important;"> function </th> </tr> </thead>
+
+<tbody>
+
+<tr bgcolor = "#f2f3f4"> <td style="text-align:left;"> Statistic on a single network </td> </td> <td style="text-align:left;"> Conditionally Uniform Graph </td> <td style="text-align:left;"> sna::cug.test </td> </tr>
+
+<tr> <td style="text-align:left;"> Association between two networks </td> <td style="text-align:left;"> QAP </td> <td style="text-align:left;"> sna::qaptest </td> </tr>
+
+<tr bgcolor = "#f2f3f4"> <td style="text-align:left;"> A valued dependent network and one or more explanatory networks </td> <td style="text-align:left;"> QAP linear model </td> <td style="text-align:left;"> sna::netlm </td> </tr>
+
+<tr> <td style="text-align:left;"> A binary dependent network and one or more explanatory networks </td> <td style="text-align:left;"> QAP logistic model </td> <td style="text-align:left;"> sna::netlogit </td> </tr>
+
+</tbody> </table>
+]
+
+
+---
+class: bg-Black
+name: FIFA_networks
+description: FIFA networks
+
+# FIFA 2006 and 2015 networks
+
+.orange.b.font150.f-abel.center-image[What were your findings for these networks?]
+
+---
+
+# Transitivity: conditioning on edges
+
+```{r plot_overwrite, echo = FALSE, eval = TRUE}
+plot <- sna:::plot.cug.test
+```
+
+
+
+.panelset[
+
+.panel[.panel-name[R code]
+
+.scroll-box-36[
+```{r stats_07_10 , echo = TRUE, eval = FALSE}
+trans_f <- function(x, directed = FALSE) {
+  x <- snafun::fix_cug_input(x, directed = directed)
+  snafun::g_transitivity(x)
+}
+
+cug_trans_15 <- sna::cug.test(fifa2015, mode = "graph", 
+                                     FUN = trans_f, 
+                                     cmode = "edges", reps = 1000)
+cug_trans_15
+```
+
+OR
+
+```{r stats_07_07a, echo = TRUE, eval = FALSE}
+cug_trans_15 <- sna::cug.test(fifa2015, 
+                              FUN = sna::gtrans, 
+                              cmode = "edges",
+                              reps = 1000, 
+                              FUN.args = list(mode = "graph"))
+cug_trans_15
+```
+
+]
+]
+
+.panel[.panel-name[Output]
+
+```{r stats_07_07}
+cug_trans_15
+```
+
+]
+
+.panel[.panel-name[Output plot]
+
+.scroll-box-22.pull-left[
+```{r trans_plot_fifa15, echo=TRUE, out.height="300px"}
+plot(cug_trans_15)
+```
+]
+
+.pull-right[
+Exceptionally strong friend-of-a-friend tendencies!
+]
+
+]
+
+]
+
+---
+
+# Betweenness centralization
+
+.panelset[
+.panel[.panel-name[R code]
+
+```{r stats_07_12, echo = TRUE, eval = FALSE}
+### Conditioning on the dyad census
+
+betw_f <- function(x, directed = FALSE) {  # note: directed = FALSE!
+  x <- snafun::fix_cug_input(x, directed = directed)
+  snafun::g_centralize(x, measure = "betweenness", directed = directed)$centralization
+}
+
+cug_betw_06_ds <- sna::cug.test(fifa2006, 
+                                 mode = "graph", FUN = betw_f, 
+                                 cmode = "dyad.census", reps = 200)
+cug_betw_06_ds
+```
+
+OR
+
+```{r stats_07_14, echo = TRUE, eval = FALSE}
+cug_betw_06_ds <- sna::cug.test(fifa2006, FUN = sna::centralization,
+                                          FUN.arg=list(FUN = sna::betweenness),
+                                          mode="graph",
+                                          reps = 200,
+                                          cmode="dyad.census")
+```
+
+]
+
+.panel[.panel-name[Output]
+
+.limity500[
+```{r stats_07_14a}
+cug_betw_06_ds
+```
+]
+]
+
+.panel[.panel-name[Plot output]
+
+.pull-left.limity500[
+```{r stats_07_14b, echo = TRUE, out.height="300px"}
+plot(cug_betw_06_ds)
+```
+]
+
+.pull-right[
+We see exceptionally strong betweenness centralization in FIFA.<br> 
+What does this imply about how FIFA operates?
+]
+
+]
+
+
+]
+
+---
+class: bg-Black
+
+# .Gold-inline[Today's menu]
+
+<div class="grid-2-2">
+<div class="extension-tile tileview"><div>Homeplay</div></div>
+<div class="extension-tile panelset-tile"><div>What to<br>use when?</div></div>
+<div class="extension-tile webcam animated bounceInDown"><div>CUG advanced</div></div>
+</div>
+
+---
+name: advanced
+description: Advanced CUG use
+
+# Advanced CUG use
+
+## Use your own measure for sna::cug.test
+
+.panelset[
+
+.panel[.panel-name[Intuition]
+You can define your own measures to use inside `sna::cug.test`, so you are not 
+confined to only the measures implemented in `sna`.
+For example, you can test if the number of walktrap communities in the network 
+is statistically significant.
+
+]
+
+
+
+.panel[.panel-name[Challenge]
+Test if the number of walktrap communities in the network is statistically 
+significant for the `fifa2015` network.
+
+You can use previous code as a template:
+
+```{r, echo = TRUE, eval = FALSE}
+trans_f <- function(x, directed = FALSE) {
+  x <- snafun::fix_cug_input(x, directed = directed)
+  snafun::g_transitivity(x)
+}
+
+sna::cug.test(fifa2015, mode = "graph", FUN = trans_f, cmode = "edges", reps = 1000)
+```
+
+
+
+<br><br><br><br><br>
+```{r countdown_2, echo = FALSE, eval = TRUE}
+countdown::countdown(
+  minutes = 6,
+  seconds = 0,
+  right = 0,
+  bottom = 0
+)
+```
+
+]
+
+
+
+
+.panel[.panel-name[R code]
+```
+walktrap_num_f <- function(x, directed = FALSE) {  # note: directed = FALSE!
+  x <- snafun::fix_cug_input(x, directed = directed)
+  snafun::extract_comm_walktrap(x) |> length()
+}
+
+fifa_coms <- sna::cug.test(fifa2015, FUN = walktrap_num_f, mode = "graph", 
+                           diag = FALSE, cmode = "edges", reps = 1000)
+
+fifa_coms
+plot(fifa_coms)
+```
+
+]
+
+.panel[.panel-name[Output]
+
+```{r print_fifa_coms, echo = TRUE, eval = TRUE}
+print(fifa_coms)
+```
+
+`r arrow_right("blue")` There are more information-trapping communities (statistically significant) 
+than you would expect of a network of this size and density.
+
+]
+
+
+.panel[.panel-name[Plot output]
+
+```{r fifa_walk_plot, out.height="300px"}
+plot(fifa_coms)
+```
+
+]
+]
+
+
+---
+class: bg-Black
+
+# .Gold-inline[Today's menu]
+
+<div class="grid-2-2">
+<div class="extension-tile tileview"><div>Homeplay</div></div>
+<div class="extension-tile panelset-tile"><div>What to<br>use when?</div></div>
+<div class="extension-tile webcam"><div>CUG advanced</div></div>
+<div class="extension-tile editable animated fadeInRight"><div>Overview</div></div>
+</div>
+
+
+---
+class: bg-Black
+
+# Let's see if you have this mastered
+
+
+.GoldenRod.center-image.b.f-abel.font125[www.menti.com<br>code: 3933 1244]
+
+<br><br><br><br><br><br><br><br>
+```{r qr, echo = FALSE, out.width="30%"}
+qrcode::qr_code("https://www.menti.com/alw2sxr14emo") |> qrcode:::plot.qr_code()
+```
+
+---
+name: stat
+description: Statistically modeling networks
+
+# Statistically modeling networks
+
+### Testing hypotheses
+
+- use the simplest statistical model that suits your hypothesis test
+  
+  + QAP, MRQAP, Logistic QAP, and CUG are often great for simple 
+  hypotheses
+  
+  + use ERGM's to test more complex expectations
+
+--
+
+### Estimating parameters
+
+- MRQAP, Logistic QAP, and ERGM's allow for parameter estimation
+
+--
+  
+### Uncovering what the drivers are of the observed network
+
+- ERGM's model the network as a whole and allow for much more modeling 
+  flexibility and options
+  
+  + this comes at the challenge of fitting a more complex model
+    
+---
+class: bg-JADSbrown
+
+# Questions?
+
+<br><br>
+.center[![:scale 45%](assets/images/group_with_questions_800_clr_3122.png)]

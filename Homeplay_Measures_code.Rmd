@@ -1,0 +1,132 @@
+---
+title: "Homeplay for week 02's lab: code"
+output: 
+  html_document: 
+    toc: true
+    toc_float:
+      collapsed: true
+      smooth_scroll: true
+      number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, ###########################
+  eval = TRUE
+)
+
+data(blogosphere, package = "SNA4DSData")
+```
+
+# Blogosphere
+
+Let's look at the blogosphere data we have now seen a few times. 
+You haven't actually touched the data, so we are going to do that now.
+
+1. Load the `blogosphere` network from the `SNA4DSData` package.
+
+1. Clean it up a bit: there are some blogs that refer to themselves ("loops"). 
+That is not what we want, so remove these loops. How do I do that, you ask? 
+Well, search through the documentation for `igraph`. 
+Alternatively, see if you can find the solution in the course cheatsheet. 
+From here on, continue with this cleaned graph.
+
+
+```{r simplify}
+blog1 <- igraph::simplify(blogosphere)
+```
+
+
+1. Calculate summary statistics for this network. 
+At least determine:
+  - mean distance
+  - diameter
+  - dyad census
+  - reciprocity
+  - transitivity
+  - density
+  
+Interpret these numbers, do you understand what they mean? 
+Are they what you would expect?
+
+
+```{r eda}
+# mean distance
+snafun::g_mean_distance(blog1)
+# diameter
+snafun::g_diameter(blog1)
+
+# dyad census
+snafun::count_dyads(blog1)
+
+# reciprocity
+snafun::g_reciprocity(blog1)
+
+# transitivity
+snafun::g_transitivity(blog1)
+
+# density
+snafun::g_density(blog1)
+```
+
+# Communities
+
+I already told you that the network is quite polarized: republican 
+blogs see to refer mainly to other republican blogs, and the same 
+holds for democratic blogs. So, you would expect some clear subgroups 
+in this network. 
+
+1. Use the walktrap algorithm to determine communities in the 
+blogosphere network. How many communities do you get? Does the 
+partitioning make sense? What do you notice about the result?
+(hint: use the cheatsheet to see how you can combine `snafun` and `igraph` here)
+
+
+```{r blog1}
+walk <- snafun::extract_comm_walktrap(blog1)
+igraph::membership(walk) |> table()
+igraph::sizes(walk)
+igraph::sizes(walk) |> length()
+igraph::modularity(walk)
+```
+
+1. One thing that might affect the result is that a bunch of the blogs do not point to another blog and no other blog points to them. In SNA we call these nodes *isolates*. 
+
+1. What do you think would happen to the results if you would remove those isolates first? First, think about this. Then actually remove the isolates from the graph and run the walktrap again. Check if you were correct.
+
+```{r blog0}
+blog0 <- snafun::remove_isolates(blog1)
+walk0 <- snafun::extract_comm_walktrap(blog0)
+igraph::membership(walk0) |> table()
+igraph::modularity(walk0)
+igraph::sizes(walk0) |> length()
+```
+
+# Bonus
+Continue with this smaller network. You should have 1224 vertices left and 19022 edges between them.
+
+1. Add the group membership (which you get with `igraph::membership`) to the network as a vertex attribute. Call this new vertex attribute `community`.
+
+1. Run the following function: `snafun::make_mixingmatrix(graph_without_isolates, "community")` and check the help documentation of `snafun::make_mixingmatrix` to interpret the result. Does it make sense? What does this tell you about the boundaries around the communities? (obviously, replace `graph_without_isolates` with the actual object name you are using).
+
+1. Extract all of the vertex attributes using `snafun::extract_all_vertex_attributes` and explore whether it is indeed the case that like-minded blogs tend cluster together inside the communities you found. (hint: the simplest approach is to use a table)
+
+```{r blog0_bonus}
+blog0 <- snafun::add_vertex_attributes(blog0, "community", value = igraph::membership(walk0))
+# alternatively
+# igraph::V(blog0)$community <- igraph::membership(walk0)
+
+# mixing matrix
+snafun::make_mixingmatrix(blog0, "community")
+
+# alternative, outside of the graph object
+all_attr <- snafun::extract_all_vertex_attributes(blog0)
+table(all_attr$community, all_attr$party)
+```
+
+Overall, you shouldn't be surprised about the strong political
+divide in the USA at the moment. This was already apparent in the 2004 elections... You just showed that yourself!
+
+```{r subgroup_2, echo = FALSE, fig.align='center'}
+knitr::include_graphics('assets/images/subgroup_2.png')
+```

@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>SOCIAL NETWORK ANALYSIS for DATA SCIENTISTS</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Roger" />
+    <script src="assets/header-attrs-2.29/header-attrs.js"></script>
+    <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="assets/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="assets/tile-view-0.2.6/tile-view.js"></script>
+    <link href="assets/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="assets/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra_fit-screen-0.2.6/fit-screen.js"></script>
+    <link href="assets/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="assets/panelset-0.3.0/panelset.js"></script>
+    <script src="assets/js-cookie-3.0.0/js.cookie.js"></script>
+    <script src="assets/peerjs-1.3.1/peerjs.min.js"></script>
+    <script src="assets/tiny.toast-1.0.0/toast.min.js"></script>
+    <link href="assets/xaringanExtra-broadcast-0.2.6/broadcast.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-broadcast-0.2.6/broadcast.js"></script>
+    <script src="assets/fabric-4.3.1/fabric.min.js"></script>
+    <link href="assets/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="assets/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="assets/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script src="assets/xaringanExtra-webcam-0.0.1/webcam.js"></script>
+    <script id="xaringanExtra-webcam-options" type="application/json">{"width":"175","height":"131.25","margin":"1em"}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x14e0a41b6374a8089551b03b7a25588","expires":1}</script>
+    <script src="assets/himalaya-1.1.0/himalaya.js"></script>
+    <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="assets/editable-0.2.6/editable.js"></script>
+    <script src="assets/mark.js-8.11.1/mark.min.js"></script>
+    <link href="assets/xaringanExtra-search-0.0.1/search.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-search-0.0.1/search.js"></script>
+    <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"bottom-left","caseSensitive":false,"showIcon":false,"autoSearch":true}) })</script>
+    <script src="assets/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"<i class=\"fa fa-clipboard\"><\/i>","success":"<i class=\"fa fa-check\" style=\"color: #90BE6D\"><\/i>","error":"<i class=\"fa fa-times-circle\" style=\"color: #F94144\"><\/i>"})</script>
+    <link href="assets/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+    <link href="assets/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+    <link href="assets/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <link href="assets/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+    <script src="assets/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+    <link href="assets/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="assets/datatables-binding-0.33/datatables.js"></script>
+    <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <link href="assets/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="assets/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="assets/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+    <link href="assets/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="assets/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+    <link href="assets/countdown-0.4.0/countdown.css" rel="stylesheet" />
+    <script src="assets/countdown-0.4.0/countdown.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="animate.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/apron.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/descartes.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/tachyons.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/xaringan-extra.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/RL-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS_effects.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/kleuren.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[SOCIAL NETWORK ANALYSIS&lt;br&gt;for DATA SCIENTISTS]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[LAB: Network Measures .small-caps.font70[(lecture] .font70[Week 02)]]]
+  ]
+
+&lt;br&gt;
+.f-abel.White-inline[Your lecturer: Roger]&lt;br&gt;
+.f-abel.White-inline[Playdate: September 09, 2025]
+
+
+&lt;!-- setup options start --&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.highlight-last-item &gt; ul &gt; li, 
+.highlight-last-item &gt; ol &gt; li {
+  opacity: 0.5;
+}
+
+.highlight-last-item &gt; ul &gt; li:last-of-type,
+.highlight-last-item &gt; ol &gt; li:last-of-type {
+  opacity: 1;
+
+.bold-last-item &gt; ul &gt; li:last-of-type,
+.bold-last-item &gt; ol &gt; li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+&lt;/style&gt;
+
+&lt;style type="text/css"&gt;
+.remark-inline-code {
+  background: #F5F5F5;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.inverse-red, .inverse-red h1, .inverse-red h2, .inverse-red h3, .inverse-red a, inverse-red a &gt; code {
+	border-top: none;
+	background-color: red;
+	color: white; 
+	background-image: "";
+}
+
+.inverse-orange, .inverse-orange h1, .inverse-orange h2, .inverse-orange h3, .inverse-orange a, inverse-orange a &gt; code {
+	border-top: none;
+	background-color: orange;
+	color: black; 
+	background-image: "";
+}
+&lt;/style&gt;
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.grid-3-1 {
+  display: grid;
+  height: calc(80%);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1em;
+  padding: 1em;
+}
+
+
+.grid-3-2a {
+  display: grid;
+  height: calc(90%);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1em;
+  padding: 1em;
+}
+&lt;/style&gt;
+
+
+
+&lt;!-- setup options end --&gt;
+
+
+---
+class: bg-Black course-logo
+
+background-image: url(assets/images/chris-montgomery-smgTvepind4-unsplash-L.jpg)
+background-position: 100% 0%
+background-size: cover
+background-color: #000000
+
+### .White-inline.font350.b[&lt;br&gt;Turn your&lt;br&gt;cameras on!]
+
+
+.footnote[[Credit](https://unsplash.com/@cwmonty)]
+
+---
+class: course-logo
+layout: true
+
+---
+class: bg-JADSbrown
+name: menu
+description: "Menu"
+
+.Gold-inline[
+# Today's menu
+
+1. Homeplay
+1. Bridging
+1. Quiz time!
+1. Pagerank
+]
+
+---
+layout: false
+class: course-logo bg-Black
+
+# .Gold-inline[Today's menu]
+
+&lt;div class="grid-3-2a"&gt;
+&lt;div class="extension-tile panelset-tile animated zoomInLeft"&gt;&lt;div&gt;Homeplay&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+---
+
+# The dataset
+
+
+``` r
+data(blogosphere, package = "SNA4DSData")
+snafun::print(blogosphere)
+```
+
+```
+IGRAPH 3254f1f D--- 1490 19090 -- 
++ attr: id (v/n), label (v/c), value (v/n), source (v/c), party (v/c),
+| color (v/c), within (e/l), within_republican (e/l), within_democrat
+| (e/l)
++ edges from 3254f1f:
+ [1]  267-&gt;1394  267-&gt; 483  267-&gt;1051  904-&gt;1479  904-&gt; 919  904-&gt;1045
+ [7]  904-&gt;1330  904-&gt;1108  904-&gt; 995  904-&gt; 963  904-&gt;1000  904-&gt;1192
+[13]  904-&gt;1067  904-&gt;1270  904-&gt;1437  904-&gt;1037  903-&gt; 855  903-&gt;1008
+[19]  982-&gt;1429  982-&gt; 952  982-&gt; 892  982-&gt;1479  982-&gt; 956  982-&gt;1306
+[25]  982-&gt; 810  982-&gt;1437  982-&gt;1112  982-&gt;1051  982-&gt; 826  982-&gt;1478
+[31]  982-&gt; 979  982-&gt;1255 1167-&gt; 963 1167-&gt; 802 1167-&gt; 842 1167-&gt;1408
++ ... omitted several edges
+```
+
+.fr.w-30[
+![](assets/images/blogosphere.png)
+]
+
+---
+name: descriptives
+description: Descriptive measures
+
+# Some descriptives
+
+
+
+.scroll-box-20[
+
+``` r
+# mean distance
+snafun::g_mean_distance(blog1)
+```
+
+```
+[1] 3.390184
+```
+
+``` r
+# diameter
+snafun::g_diameter(blog1)
+```
+
+```
+[1] 9
+```
+
+``` r
+# dyad census
+snafun::count_dyads(blog1)
+```
+
+```
+ Mutual Asymmetric    Null
+   2307      14408 1092590
+```
+
+``` r
+# reciprocity
+snafun::g_reciprocity(blog1)
+```
+
+```
+[1] 0.2425612
+```
+
+``` r
+# transitivity
+snafun::g_transitivity(blog1)
+```
+
+```
+[1] 0.2395381
+```
+
+``` r
+# density
+snafun::g_density(blog1)
+```
+
+```
+[1] 0.008573837
+```
+]
+
+---
+name: transitivity
+description: Transitivity
+
+# Transitivity
+
+*A friend of a friend is also my friend*
+
+This is *pure transitivity*, but it often doesn't happen that strongly.
+
+--
+
+Often more accurate:
+
+&gt; If John is friends with Susan and Susan is friends with Ali, then it is 
+*more likely* that Ali and John are friends than not.
+
+If this third edge is there, we say that Ali and John *close the triad*.
+
+.pull-left[
+&lt;img src="assets/images/gfl-1.svg" width="250" /&gt;
+&lt;br&gt;Open triad
+
+]
+
+
+.pull-right[
+&lt;img src="assets/images/gfl2-1.svg" width="250" /&gt;
+
+Closed triad
+
+]
+
+
+---
+
+# Transitivity
+
+.pull-left[
+&lt;img src="assets/images/gfl3-1.svg" width="90%" height="200" /&gt;
+
+&lt;img src="assets/images/gfl4-1.svg" width="90%" height="200" /&gt;
+
+]
+
+.pull-right[
+
+- John -- Susan -- Ali form a path of length 2
+
+- A closed triad forms a cycle of length 3
+
+- we look at each set of 3 vertices that have a path of length 2 and count the 
+proportion of them that form the full cycle (ie. that are *closed*),
+
+`\(Transitivity = \frac{no. closed  triads}{no. paths  of  length  2}\)`
+
+(so: the proportion of friends-of-my-friend who are **also** my friend)
+
+This is often also called the "clustering coefficient".
+
+Transitivity = 1 implies perfect transitivity&lt;br&gt;
+Transitivity = 0 implies no closed triads
+
+]
+
+
+---
+
+# Transitivity
+
+Look at this network. What is the transitivity in this network?
+
+
+
+.pull-left[
+![:scale 80%](assets/images/transitivity_network.png)
+]
+
+--
+
+.pull-right[
+
+Transitivity = 0.6
+
+Triads with a two-path in them:
+
++ y-x-z: closed
++ y-z-x: closed
++ x-y-z: closed
++ w-z-y: open
++ w-z-x: open
+
+So, 3 out of 5 (= 60%) are closed.
+
+]
+
+--
+
+check: 
+
+
+``` r
+snafun::create_manual_graph(w--z--y--x--z) |&gt; snafun::g_transitivity()
+```
+
+```
+[1] 0.6
+```
+
+
+
+???
+
+Can you see the similarity with reciprocity? 
+There, we count the proportion of dyads with at least 1 edge that have 2 edges.
+
+Here, we count the proportion of triads with at least 2 edges, that have 3 edges.
+
+---
+
+# Transitivity
+
+Recall that 
+
+
+``` r
+snafun::g_transitivity(blog1)
+```
+
+```
+[1] 0.2395381
+```
+
+What does this tell us about the network?
+
+???
+
+Really high. Shows strong in-crowd: I connect to my friend and my friend's 
+friend is also my friend. 
+
+---
+
+# Transitivity
+
+In *directed* networks, we need to take into account in which direction the 
+friendship flows.
+
+However, it is common to consider directed ties _as being undirected_ when 
+determining transitivity.
+
+`snafun::g_transitivity` and `igraph::transitivity` consider
+every graph to be *undirected*.
+
+`sna::gtrans` allows you to choose between directed or undirected.
+
+We will come back to transitivity in directed graphs in the second half 
+of the course when discussing ERGM's.
+
+---
+name: walktrap
+description: "Homeplay: communities"
+
+# walktrap communities
+
+Back to the blogosphere.
+Is the walktrap a meaningful approach for this network?
+
+--
+
+How many communities did you find?
+Do you find that surprisingly few, surprisingly many, as-expected?
+
+--
+&lt;br&gt;&lt;br&gt;
+<svg style="height: 1em; top:.04em; position: relative; fill: #136CB9;"  viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256c0 141.4 114.6 256 256 256s256-114.6 256-256C512 114.6 397.4 0 256 0zM406.6 278.6l-103.1 103.1c-12.5 12.5-32.75 12.5-45.25 0s-12.5-32.75 0-45.25L306.8 288H128C110.3 288 96 273.7 96 256s14.31-32 32-32h178.8l-49.38-49.38c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l103.1 103.1C414.6 241.3 416 251.1 416 256C416 260.9 414.6 270.7 406.6 278.6z"/></svg> 
+The walktrap algorithm tends to return more communities than alternative algorithms.
+Often, you want to discard small walktrap communities.
+
+---
+class: course-logo
+
+.scroll-box-24[
+
+
+``` r
+walk &lt;- snafun::extract_comm_walktrap(blog1)
+igraph::sizes(walk) |&gt; length()
+```
+
+```
+[1] 278
+```
+
+``` r
+igraph::modularity(walk)
+```
+
+```
+[1] 0.4302334
+```
+
+``` r
+igraph::sizes(walk)
+```
+
+```
+Community sizes
+  1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20 
+560   4 640   2   2   4   2   2   2   2   2   2   1   1   1   1   1   1   1   1 
+ 21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+ 41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58  59  60 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+ 61  62  63  64  65  66  67  68  69  70  71  72  73  74  75  76  77  78  79  80 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+ 81  82  83  84  85  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276 277 278 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+```
+
+]
+
+
+---
+
+## Modularity
+
+A moderately useful measure of the fit of the partitioning.
+
+&lt;br&gt;Partition the set of vertices into _c_ communities. 
+Modularity measures how good this division is by comparing within-community edges 
+with between-community edges as follows for an unweighted undirected graph:
+
+`$$Q = \sum_{i = 1}^{c} (e_{i} - a_{i}^2)$$`
+
+where `\(e_{ii}\)` is the fraction of all edges that remain within community _i_
+and `\(a_{i}^2\)` is the fraction of all between community _i_ and other communities. 
+
+
+and for a directed graph:
+
+`$$Q = \sum_{i = 1}^{c} (e_i - a_{i}^{in} * a_{i}^{out})$$`
+
+
+
+- The modularity for unweighted and undirected graphs lies in the range 
+`\({\displaystyle [-1/2,1]}\)`. For unweighted and directed graphs also about this range.
+
+- Modularity is positive if the number of edges within communities exceeds the number 
+expected in a graph with the same number of vertices and where each vertex keeps 
+its degree (but edges are randomly attached). 
+
+- In practice, a value above about 0.3 tends to indicate a good community structure 
+in a graph.
+
+.font70[
+Note: the computation is somewhat adapted when the edges are weighed, but the 
+concept remains the same.
+]
+
+
+???
+Wikipedia: https://en.wikipedia.org/wiki/Modularity_(networks)
+Resolution limit
+Modularity compares the number of edges inside a cluster with the expected number of edges that one would find in the cluster if the network were a random network with the same number of nodes and where each node keeps its degree, but edges are otherwise randomly attached. This random null model implicitly assumes that each node can get attached to any other node of the network. This assumption is however unreasonable if the network is very large, as the horizon of a node includes a small part of the network, ignoring most of it. Moreover, this implies that the expected number of edges between two groups of nodes decreases if the size of the network increases. So, if a network is large enough, the expected number of edges between two groups of nodes in modularity's null model may be smaller than one. If this happens, a single edge between the two clusters would be interpreted by modularity as a sign of a strong correlation between the two clusters, and optimizing modularity would lead to the merging of the two clusters, independently of the clusters' features. So, even weakly interconnected complete graphs, which have the highest possible density of internal edges, and represent the best identifiable communities, would be merged by modularity optimization if the network were sufficiently large.[10] For this reason, optimizing modularity in large networks would fail to resolve small communities, even when they are well defined. This bias is inevitable for methods like modularity optimization, which rely on a global null model.[11]
+
+Multiresolution methods
+There are two main approaches which try to solve the resolution limit within the modularity context: the addition of a resistance r to every node, in the form of a self-loop, which increases (r&gt;0) or decreases (r&lt;0) the aversion of nodes to form communities;[12] or the addition of a parameter γ&gt;0 in front of the null-case term in the definition of modularity, which controls the relative importance between internal links of the communities and the null model.[7] Optimizing modularity for values of these parameters in their respective appropriate ranges, it is possible to recover the whole mesoscale of the network, from the macroscale in which all nodes belong to the same community, to the microscale in which every node forms its own community, hence the name multiresolution methods. However, it has been shown that these methods have limitations when communities are very heterogeneous in size.[13]
+---
+layout: true
+class: course-logo
+
+# Isolates
+
+### Toss them isolates!
+
+---
+name: isolates
+description: "Homeplay: toss them isolates!"
+
+(because they form communities by themselves, creating lots of single-vertex 
+communities--which is not useful)
+
+
+``` r
+hist(snafun::v_degree(blog1), breaks = 50, 
+     xlab = "Degree of the political blogs", main = "Histogram of degree")
+```
+
+.pull-left[
+&lt;img src="assets/images/DEGREE_DISTRIBUTION_wk04.png" width="350" height="350" /&gt;
+]
+
+.pull-right[
+There are many blogs with no connections!
+
+
+``` r
+sum(snafun::v_degree(blog1) == 0)
+```
+
+```
+[1] 266
+```
+
+
+``` r
+blog0 &lt;- snafun::remove_isolates(blog1)
+```
+
+
+``` r
+sum(snafun::v_degree(blog0) == 0)
+```
+
+```
+[1] 0
+```
+
+]
+
+---
+
+How many communities did you find for the "pruned" network?
+Do you find that surprisingly few, surprisingly many, as-expected?
+
+--
+
+.scroll-box-20[
+
+``` r
+blog0 &lt;- snafun::remove_isolates(blog1)
+walk0 &lt;- snafun::extract_comm_walktrap(blog0)
+igraph::membership(walk0) |&gt; table()
+```
+
+```
+
+  1   2   3   4   5   6   7   8   9  10  11  12 
+560   4 640   2   2   4   2   2   2   2   2   2 
+```
+
+``` r
+igraph::modularity(walk0)
+```
+
+```
+[1] 0.4302334
+```
+
+``` r
+igraph::sizes(walk0) |&gt; length()
+```
+
+```
+[1] 12
+```
+]
+
+
+---
+class: bg-Black course-logo
+layout: false
+
+# .Gold-inline[Today's menu]
+
+&lt;div class="grid-3-2a"&gt;
+&lt;div class="extension-tile panelset-tile"&gt;&lt;div&gt;Homeplay&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile webcam animated flipInX"&gt;&lt;div&gt;Homeplay&lt;br&gt;bonus&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+---
+class: course-logo
+name: bonus
+description: Homeplay bonus question
+
+# Bonus question
+
+.panelset[
+
+.panel[.panel-name[assignment]
+
+Continue with this smaller network. 
+
+1. Add the group membership (which you get with `igraph::membership`) as a vertex attribute. 
+
+2. Run `snafun::make_mixingmatrix(graph_without_isolates, "community")` and interpret the result. Does it make sense? What does this tell you about the boundaries around the communities?.
+
+3. Extract all vertex attributes using `snafun::extract_all_vertex_attributes` and explore whether it is indeed the case that like-minded blogs tend cluster together inside the communities you found.
+
+] # end of panel 1
+
+
+
+
+.panel[.panel-name[mixing matrix]
+
+.scroll-box-16[
+
+``` r
+blog0 &lt;- snafun::add_vertex_attributes(blog0, "community", value = igraph::membership(walk0))
+```
+
+
+
+``` r
+# mixing matrix
+snafun::make_mixingmatrix(blog0, "community")
+```
+
+```
+     to
+from      1     2     3     4     5     6     7     8     9    10    11    12
+  1    8339     1   633     0     1     0     0     0     0     2     1     0
+  2       2     3     3     0     0     0     0     0     0     0     0     0
+  3     675     0  9338     0     0     1     0     1     1     0     0     0
+  4       1     0     1     1     0     0     0     0     0     0     0     0
+  5       1     0     0     0     1     0     0     0     0     0     0     0
+  6       0     0     0     0     0     5     0     0     0     0     0     0
+  7       1     0     0     0     0     0     1     0     0     0     0     0
+  8       0     0     0     0     0     0     0     1     0     0     0     0
+  9       0     0     0     0     0     0     0     0     1     0     0     0
+  10      2     0     0     0     0     0     0     0     0     2     0     0
+  11      1     0     0     0     0     0     0     0     0     0     1     0
+  12      0     0     0     0     0     0     0     0     0     0     0     1
+  Sum  9022     4  9975     1     2     6     1     2     2     4     2     1
+     to
+from    Sum
+  1    8977
+  2       8
+  3   10016
+  4       3
+  5       2
+  6       5
+  7       2
+  8       1
+  9       1
+  10      4
+  11      2
+  12      1
+  Sum 19022
+```
+
+
+]
+] # end panel 2
+
+
+.panel[.panel-name[table]
+
+.scroll-box-16[
+
+``` r
+# get all attributes from the network object
+all_attr &lt;- snafun::extract_all_vertex_attributes(blog0)
+
+table(all_attr$community, all_attr$party)
+```
+
+```
+    
+     conservative liberal
+  1            23     537
+  2             1       3
+  3           604      36
+  4             2       0
+  5             0       2
+  6             4       0
+  7             0       2
+  8             0       2
+  9             2       0
+  10            0       2
+  11            0       2
+  12            0       2
+```
+
+]
+
+] # end panel 2
+
+
+]
+
+
+---
+class: course-logo
+layout: true
+
+---
+layout: false
+class: course-logo bg-Black
+
+# .Gold-inline[Today's menu]
+
+&lt;div class="grid-3-2a"&gt;
+&lt;div class="extension-tile panelset-tile"&gt;&lt;div&gt;Homeplay&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile webcam"&gt;&lt;div&gt;Homeplay&lt;br&gt;bonus&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile slide animated jackInTheBox"&gt;&lt;div&gt;Bridging&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+---
+name: bridge
+description: Who bridges between the communities
+
+# Who bridges between the communities?
+
+Let's find the blogs that refer the most to blogsites in the "opposite" community.
+
+How could we do this?
+
+--
+
+One strategy:
+
+- find those edges that cross boundaries
+
+- find which vertices are part of those edges
+
+- look at the most active ones
+
+---
+
+Let us first limit ourselves to the two main communities, since the others are so small.
+&lt;br&gt;How could we do this?
+
+--
+
+.panelset[
+
+.panel[.panel-name[Approach 1]
+
+1. identify the vertices that are in communities 1 or 3
+
+1. take the subset of the network that only includes these vertices (and the edges between them)--this is the so-called ***induced subgraph***.
+
+.scroll-box-14[
+
+``` r
+# TRUE / FALSE: is a vertex in 1 or 3
+in_1_3 &lt;- snafun::extract_vertex_attribute(blog0, "community") %in% c(1, 3)
+small_net &lt;- snafun::extract_subgraph(blog0, v_to_keep = in_1_3)
+snafun::print(small_net)
+```
+
+```
+IGRAPH efc1180 D--- 1200 18985 -- 
++ attr: id (v/n), label (v/c), value (v/n), source (v/c), party (v/c),
+| color (v/c), community (v/n)
++ edges from efc1180:
+ [1] 1-&gt;  21 1-&gt;  48 1-&gt;  70 1-&gt; 123 1-&gt; 245 1-&gt; 278 1-&gt; 330 1-&gt; 366 1-&gt; 439
+[10] 1-&gt; 485 1-&gt; 486 1-&gt; 488 1-&gt; 505 1-&gt; 987 1-&gt;1154 2-&gt;   1 2-&gt;  16 2-&gt;  22
+[19] 2-&gt;  26 2-&gt;  46 2-&gt;  48 2-&gt;  82 2-&gt; 116 2-&gt; 122 2-&gt; 123 2-&gt; 127 2-&gt; 137
+[28] 2-&gt; 142 2-&gt; 160 2-&gt; 182 2-&gt; 189 2-&gt; 245 2-&gt; 252 2-&gt; 275 2-&gt; 294 2-&gt; 296
+[37] 2-&gt; 328 2-&gt; 341 2-&gt; 362 2-&gt; 366 2-&gt; 375 2-&gt; 416 2-&gt; 417 2-&gt; 428 2-&gt; 430
+[46] 2-&gt; 431 2-&gt; 432 2-&gt; 436 2-&gt; 474 2-&gt; 485 2-&gt; 486 2-&gt; 488 2-&gt; 494 2-&gt; 505
+[55] 2-&gt; 508 2-&gt; 522 2-&gt; 569 2-&gt; 571 3-&gt; 393 3-&gt; 547 3-&gt;1156 4-&gt; 559 6-&gt;  37
++ ... omitted several edges
+```
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+]
+
+] # end of panel 1
+
+
+.panel[.panel-name[Approach 2]
+
+1. identify the vertices that are *not* in communities 1 or 3
+
+1. remove those vertices from the network (and the orphan edges)
+
+.scroll-box-14[
+
+``` r
+# TRUE / FALSE: is a vertex in 1 or 3
+not_in_1_3 &lt;- !in_1_3
+small_net2 &lt;- snafun::remove_vertices(blog0, v = not_in_1_3)
+snafun::print(small_net2)
+```
+
+```
+IGRAPH efc2b26 D--- 1200 18985 -- 
++ attr: id (v/n), label (v/c), value (v/n), source (v/c), party (v/c),
+| color (v/c), community (v/n)
++ edges from efc2b26:
+ [1] 1-&gt;  21 1-&gt;  48 1-&gt;  70 1-&gt; 123 1-&gt; 245 1-&gt; 278 1-&gt; 330 1-&gt; 366 1-&gt; 439
+[10] 1-&gt; 485 1-&gt; 486 1-&gt; 488 1-&gt; 505 1-&gt; 987 1-&gt;1154 2-&gt;   1 2-&gt;  16 2-&gt;  22
+[19] 2-&gt;  26 2-&gt;  46 2-&gt;  48 2-&gt;  82 2-&gt; 116 2-&gt; 122 2-&gt; 123 2-&gt; 127 2-&gt; 137
+[28] 2-&gt; 142 2-&gt; 160 2-&gt; 182 2-&gt; 189 2-&gt; 245 2-&gt; 252 2-&gt; 275 2-&gt; 294 2-&gt; 296
+[37] 2-&gt; 328 2-&gt; 341 2-&gt; 362 2-&gt; 366 2-&gt; 375 2-&gt; 416 2-&gt; 417 2-&gt; 428 2-&gt; 430
+[46] 2-&gt; 431 2-&gt; 432 2-&gt; 436 2-&gt; 474 2-&gt; 485 2-&gt; 486 2-&gt; 488 2-&gt; 494 2-&gt; 505
+[55] 2-&gt; 508 2-&gt; 522 2-&gt; 569 2-&gt; 571 3-&gt; 393 3-&gt; 547 3-&gt;1156 4-&gt; 559 6-&gt;  37
++ ... omitted several edges
+```
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+]
+
+]  # end of panel 2
+
+]
+
+---
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+Now that we only have the vertices from communities 1 and 3 left, 
+how do we find the most active connectors?
+&lt;br&gt;&lt;br&gt;
+
+<svg style="height: 1em; top:.04em; position: relative; fill: #136CB9;"  viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256c0 141.4 114.6 256 256 256s256-114.6 256-256C512 114.6 397.4 0 256 0zM406.6 278.6l-103.1 103.1c-12.5 12.5-32.75 12.5-45.25 0s-12.5-32.75 0-45.25L306.8 288H128C110.3 288 96 273.7 96 256s14.31-32 32-32h178.8l-49.38-49.38c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l103.1 103.1C414.6 241.3 416 251.1 416 256C416 260.9 414.6 270.7 406.6 278.6z"/></svg> 
+There is a function called `igraph::crossing` that indicates for 
+every edge whether 
+it connects two communities (`TRUE`/`FALSE`).
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;(you find this by going through the `igraph` help or 
+by browsing the cheatsheet.)
+
+---
+
+
+
+.panelset[
+
+.panel[.panel-name[Approach]
+    
+One approach:
+
+- identify all "crossing" edges
+
+- for each edge, identify the sender
+
+- create a table of the number of times each sender occurs
+
+- done!
+    
+] # end of panel 1
+
+
+
+.panel[.panel-name[R code]
+    
+.scroll-box-16[
+
+``` r
+small_walk &lt;- snafun::extract_comm_walktrap(small_net)
+crossing &lt;- igraph::crossing(small_walk, small_net) |&gt; which()
+
+senders &lt;- igraph::ends(small_net, crossing)[, 1]
+
+sort(table(senders), decreasing = TRUE)
+```
+
+```
+senders
+ 362 1158   12  513  224  553  821  625  120  252  411 1146  209  292  394  479 
+  25   20   18   17   16   16   16   15   13   13   13   13   12   12   12   12 
+ 508  579  726  878  467  657 1057   99  363  458  190  426  684 1177  174  295 
+  12   12   12   12   11   11   11   10   10   10    9    9    9    9    8    8 
+ 348  463  719  904 1103   28   74   97  108  486  563  727  831   19   95  284 
+   8    8    8    8    8    7    7    7    7    7    7    7    7    6    6    6 
+ 299  318  355  391  569  593  598  734  956 1054 1085 1113 1121   20  121  160 
+   6    6    6    6    6    6    6    6    6    6    6    6    6    5    5    5 
+ 165  184  193  333  356  370  401  417  471  488  552  559  629  678  970 1029 
+   5    5    5    5    5    5    5    5    5    5    5    5    5    5    5    5 
+1178 1185 1191   14   84  142  170  182  240  366  438  456  512  578  642  756 
+   5    5    5    4    4    4    4    4    4    4    4    4    4    4    4    4 
+ 786  872  905  949  976  988  991 1021 1056 1104 1115   43   57   66   67   77 
+   4    4    4    4    4    4    4    4    4    4    4    3    3    3    3    3 
+ 128  133  139  147  149  151  169  245  308  328  354  359  367  379  381  398 
+   3    3    3    3    3    3    3    3    3    3    3    3    3    3    3    3 
+ 407  428  439  447  491  602  640  677  683  693  746  814  818  819  851  865 
+   3    3    3    3    3    3    3    3    3    3    3    3    3    3    3    3 
+ 873  896  939  947  959  963  980 1083 1149 1160    1   21   22   29   37   50 
+   3    3    3    3    3    3    3    3    3    3    2    2    2    2    2    2 
+  69   83   93  107  114  124  145  164  175  200  260  265  270  302  312  330 
+   2    2    2    2    2    2    2    2    2    2    2    2    2    2    2    2 
+ 343  347  350  364  373  388  427  429  433  434  435  444  453  470  472  485 
+   2    2    2    2    2    2    2    2    2    2    2    2    2    2    2    2 
+ 523  539  540  548  550  564  568  570  585  658  662  676  694  704  712  757 
+   2    2    2    2    2    2    2    2    2    2    2    2    2    2    2    2 
+ 760  800  833  868  871  874  884  914  926  930  977 1014 1047 1055 1078 1129 
+   2    2    2    2    2    2    2    2    2    2    2    2    2    2    2    2 
+1130 1133 1144 1148 1162 1164 1175 1190    2    3    7    8   13   16   17   18 
+   2    2    2    2    2    2    2    2    1    1    1    1    1    1    1    1 
+  24   25   30   31   32   33   39   40   53   62   72   76   86   91   94  101 
+   1    1    1    1    1    1    1    1    1    1    1    1    1    1    1    1 
+ 105  116  119  129  131  140  141  143  150  152  158  161  163  171  177  191 
+   1    1    1    1    1    1    1    1    1    1    1    1    1    1    1    1 
+ 197  214  217  230  232  237  249  254  261  262  273  285  287  293  298  300 
+   1    1    1    1    1    1    1    1    1    1    1    1    1    1    1    1 
+ 304  307  314  315  317  319  322  325  326  329  335  346  375  378  384  385 
+   1    1    1    1    1    1    1    1    1    1    1    1    1    1    1    1 
+ 387  396  397  403  410  412  416  430  432  442  446  448  449  454  457  459 
+   1    1    1    1    1    1    1    1    1    1    1    1    1    1    1    1 
+ 460  461  466  500  501  504  515  520  526  538  555  565  576  587  594  604 
+   1    1    1    1    1    1    1    1    1    1    1    1    1    1    1    1 
+ 608  612  614  615  616  623  627  633  634  635  639  641  661  666  685  689 
+   1    1    1    1    1    1    1    1    1    1    1    1    1    1    1    1 
+ 691  698  702  706  716  725  729  738  740  743  750  752  755  758  761  762 
+   1    1    1    1    1    1    1    1    1    1    1    1    1    1    1    1 
+ 763  767  778  782  784  785  789  808  811  812  816  820  824  828  840  861 
+   1    1    1    1    1    1    1    1    1    1    1    1    1    1    1    1 
+ 880  907  915  916  918  924  927  929  933  934  950  958  962  968  981  994 
+   1    1    1    1    1    1    1    1    1    1    1    1    1    1    1    1 
+ 995  996  998  999 1010 1013 1015 1028 1034 1041 1045 1073 1079 1087 1094 1123 
+   1    1    1    1    1    1    1    1    1    1    1    1    1    1    1    1 
+1132 1140 1141 1188 
+   1    1    1    1 
+```
+]
+    
+    
+] # end of panel 2
+
+
+.panel[.panel-name[Gimme details!]
+
+.font70[
+
+``` r
+table_all &lt;- sort(table(senders), decreasing = TRUE) |&gt; names()  # table column names
+
+snafun::extract_all_vertex_attributes(small_net)[table_all, c("label", "party", "community")]
+```
+]
+óÓ
+.scroll-box-24.font70[
+<div class="datatables html-widget html-fill-item" id="htmlwidget-9512676c76bbc89cdb7b" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-9512676c76bbc89cdb7b">{"x":{"filter":"none","vertical":false,"data":[["362","1158","12","513","224","553","821","625","120","252","411","1146","209","292","394","479","508","579","726","878","467","657","1057","99","363","458","190","426","684","1177","174","295","348","463","719","904","1103","28","74","97","108","486","563","727","831","19","95","284","299","318","355","391","569","593","598","734","956","1054","1085","1113","1121","20","121","160","165","184","193","333","356","370","401","417","471","488","552","559","629","678","970","1029","1178","1185","1191","14","84","142","170","182","240","366","438","456","512","578","642","756","786","872","905","949","976","988","991","1021","1056","1104","1115","43","57","66","67","77","128","133","139","147","149","151","169","245","308","328","354","359","367","379","381","398","407","428","439","447","491","602","640","677","683","693","746","814","818","819","851","865","873","896","939","947","959","963","980","1083","1149","1160","1","21","22","29","37","50","69","83","93","107","114","124","145","164","175","200","260","265","270","302","312","330","343","347","350","364","373","388","427","429","433","434","435","444","453","470","472","485","523","539","540","548","550","564","568","570","585","658","662","676","694","704","712","757","760","800","833","868","871","874","884","914","926","930","977","1014","1047","1055","1078","1129","1130","1133","1144","1148","1162","1164","1175","1190","2","3","7","8","13","16","17","18","24","25","30","31","32","33","39","40","53","62","72","76","86","91","94","101","105","116","119","129","131","140","141","143","150","152","158","161","163","171","177","191","197","214","217","230","232","237","249","254","261","262","273","285","287","293","298","300","304","307","314","315","317","319","322","325","326","329","335","346","375","378","384","385","387","396","397","403","410","412","416","430","432","442","446","448","449","454","457","459","460","461","466","500","501","504","515","520","526","538","555","565","576","587","594","604","608","612","614","615","616","623","627","633","634","635","639","641","661","666","685","689","691","698","702","706","716","725","729","738","740","743","750","752","755","758","761","762","763","767","778","782","784","785","789","808","811","812","816","820","824","828","840","861","880","907","915","916","918","924","927","929","933","934","950","958","962","968","981","994","995","996","998","999","1010","1013","1015","1028","1034","1041","1045","1073","1079","1087","1094","1123","1132","1140","1141","1188"],["obsidianwings.blogs.com","truthprobe.blogspot.com","aintnobaddude.com","thetalkingdog.com","iwantmycountryback.org","washingtonmonthly.com","instapundit.com","balloon-juice.com","crookedtimber.org","kensain.com","qando.net","thomasgalvin.blogspot.com","iddybud.blogspot.com","madkane.com/notable.html","politics.feedster.com","strangedoctrines.typepad.com","thepoorman.net","acertainslantoflight.blogspot.com","dalythoughts.com","lonewacko.com","southknoxbubba.net/skblog","blogsofwar.com","scha-den-freu-de.blogspot.com","buzzmachine.com","oddhours.blogspot.com","shotofpolitics.blogspot.com","grupo-utopia.com/blog/isou","rhetoricrhythm.blogspot.com","celluloid-wisdom.com/pw/","vodkapundit.com","flagrancy.net","marcbrazeau.blogspot.com","newleftblogs.blogspot.com","smithersmpls.com","cynicalnation.com","michaeltotten.com","tagorda.com","amptoons.com/blog","blogs.salon.com/0002874","bushmisunderestimated.blogspot.com","chiron.typepad.com","talkleft.com","wonkette.com","danieldrezner.com/blog","janegalt.net","althippo.blogspot.com","burntorangereport.com","loadedmouth.com","markarkleiman.com","michaelphillips.blogspot.com","norbizness.com","politicalstrategy.org","xnerg.blogspot.com","alphapatriot.com","americanfuture.typepad.com","decision08.blogspot.com","outsidethebeltway.com","samizdata.net/blog","southernappeal.blogspot.com","theamericanmind.com","theglitteringeye.com","alvintostig.typepad.com","crooksandliars.com","electablog.com","emptyisform.com","goose3five.blogspot.com","hellafaded.blogspot.com","mysterypollster.com/main","noseyonline.com","oxblog.blogspot.com","presidentboxer.blogspot.com","reachm.com/amstreet","stalinism.com/shot-by-both-sides","tbogg.blogspot.com","warandpiece.com","whyareweback.blogspot.com","beldar.blogs.com/beldarblog","cayankee.blogs.com","pejmanesque.com","rightonred.net","volokh.com","wholewheatblogger.com","wizbangblog.com","alicublog.blogspot.com","boloboffin.blogspot.com","digbysblog.blogspot.com","fafblog.blogspot.com","gisleson.com/blog","joebrent.blogspot.com","oliverwillis.com","roxanne.typepad.com","shininglight.us","thetalentshow.org","acepilots.com/mt","bitheads.blogspot.com","dynamist.com/weblog","gmscorner.blogspot.com","libertarianjackass.blogspot.com","michellemalkin.com","okieonthelam.com","poliblogger.com","powerpundit.com","professorbainbridge.com","republog.net","sayanythingblog.com","talesofawanderingmind.blogspot.com","thecommonvirtue.com","archpundit.com","beastsbelly.blogspot.com","blog.mintruth.com","blog01.kintera.com/dnccblog","blosteam.blogspot.com","dawnofnewamerica.blogspot.com","demagogue.blogspot.com","dems2004.org/blog","discourse.net","dneiwert.blogspot.com","dohiyimir.typepad.com","etherealgirl.blogspot.com","juancole.com","mayflowerhill.blogspot.com","msnbc.msn.com/id/3449870","nomoremister.blogspot.com","notgeniuses.com","one38.org","penheaded.blogspot.com","permanentred.com","polstate.com","prospect.org/weblog","rising-hegemon.blogspot.com","rudepundit.blogspot.com","scottcsmith.net","thatcoloredfellasweblog.bloghorn.com","americanwarmonger.blogspot.com","billrice.org","catscape.com","celluloid-wisdom.com/pw","claycalhoun.com","dissectleft.blogspot.com","hughhewitt.com","incite1.blogspot.com","indcjournal.com","kalblog.com","lashawnbarber.com","littlegreenfootballs.com/weblog","mattresspolice.com","nicedoggie.net","ofthemind.blogspot.com","pajamajournalist.blogspot.com","patrickmcclarty.blogspot.com","politicalmusings.net","sondrak.com","timblair.spleenville.com","tsrightdominion.blogspot.com","100monkeystyping.com","americablog.blogspot.com","americablog.org","anarchyxero.robfindlay.org","anoldsoul.blogspot.com","awards5.tripod.com/tarasblog","bloganonymous.com","boffo.typepad.com","btcnews.com/btcnews","chepooka.com","conservativessuck.blogspot.com","dailywarnews.blogspot.com","dimmykarras.blogspot.com","emergingdemocraticmajorityweblog.com/donkeyrising","folkbum.blogspot.com","home.earthlink.net/~kevin.omeara","lawdork.blogspot.com","leftinthereign.blogspot.com","lennonreport.blogspot.com","maruthecrankpot.blogspot.com","mediajunkie.com/edgewise","mydd.com","netpolitik.blogspot.com","newdonkey.com","nielsenhayden.com/makinglight","offthekuff.com/mt","pandagon.net","pinkofeministhellcat.typepad.com/pinko_feminist_hellcat","righthandthief.blogspot.com","risinghegemon.blogspot.com","robot-invasion.com","robschumacher.blogspot.com","rogerailes.blogspot.com","sccdp.org/blog.php","shakespearessister.blogspot.com","stagefour.typepad.com/commonprejudice","stcfoundation.blogspot.com","talkingpointsmemo.com","thomasblog.typepad.com/bloggg","uberdude.blogspot.com","uggabugga.blogspot.com","virginiaprogressive.blogspot.com","waitingfordorothy.blogspot.com","worldonfire.typepad.com/world_on_fire","x-pollen.com/many/blog.html","yarsrevenge.blogspot.com","alarmingnews.com","blogspirator.blogspot.com","bluestates.blogspot.com","captainsquartersblog.com/mt","claytoncorner.blogspot.com","conservativelife.com/blog","conservativezone.blogspot.com","economicswithaface.com/weblog","electionprojection.com","healingiraq.blogspot.com","jeffblanco.blogdrive.com","lawguy.blogspot.com","legendgames.net/myblog.asp","littlegreenfootballs.com/weblog/weblog.php","made4theinternet.blogspot.com","mtvirtus.blogspot.com","nationalbird.net","nationalreview.com/thecorner/corner.asp","polipundit.com","rednyc.blogspot.com","rogerlsimon.com","sarcasticsoutherner.blogspot.com","slowplay.com","thepaytons.org/essays/considerettes","thepoliticalanimal.com","therightcoast.blogspot.com","thinkingright.us","timblair.net","twentyfirstcenturyrepublican.blogspot.com","unconventionalwisdom.typepad.com","vikingpundit.blogspot.com","windsofchange.net","12thharmonic.com/wordpress","750volts.blogspot.com","achingandspinning.blogspot.com","ackackack.com","ajbenjaminjr.blogspot.com","allspinzone.blogspot.com","alphapredator.com/wdtgw.htm","alternateworlds.blogspot.com","americanpolitics.com","americansforbayh.blogspot.com","andifeelfine.blogspot.com","andymatic.com","angrybear.blogspot.com","angrydesi.typepad.com","answerguy.blogspot.com","anybodybutbushyall.blogspot.com","barkingdingo.blogspot.com","blog.dccc.org","blogfreeordie.blogspot.com","blogslut.com","boston.com/news/blogs/dnc","brilliantatbreakfast.blogspot.com","bullmooseblog.com","cbaker.org/blog","charleypatton.blogspot.com","corrente.blogspot.com","criticalviewer.com","deathpenaltyusa.blogspot.com","dedspace.blogspot.com","denisdekat.com","dewar.journalspace.com","digestiblenews.blogspot.com","dogfight04.typepad.com","dolphinsdock.com/blog","elayneriggs.blogspot.com","elemming2.blogspot.com","emergingdemocraticmajority.com","fairshot.org","frederickclarkson.com","hal9000report.blogdrive.com","higherpieproductions.com","ihatepatrobertson.com","interestingtimes.blogspot.com","janm.blogspot.com","jdeeth.blogspot.com","jimtreacher.com","karlhenderson.blogspot.com","kicktheleftist.blogspot.com","leanleft.com","left2right.typepad.com","liberalavenger.com","lorenjavier.blogspot.com","lowrentrat.blogdrive.com","maggiespants.co.uk","markadams.blogdrive.com","markschmitt.typepad.com/decembrist","mathewgross.com/blog","maxspeak.org/mt","messengerpuppet.com/blog","metropol47.blogspot.com","michaelberube.com","mickikrimmel.com/redcarpet","mirocat.com","montages.blogspot.com","moxiegrrrl.com","mstabile.blogspot.com","nathancallahan.com","newdemocrat.blogdrive.com","patriotboy.blogspot.com","peacegarden.blogspot.com","philoponia.blogspot.com","philosophers-stone.blogspot.com","phoblographer.com","polizeros.com","pollsterseek.blogspot.com","profgoose.blogspot.com","purplestates.blogspot.com","question-dean.blogspot.com","raedinthemiddle.blogspot.com","rittenhouse.blogspot.com","roadtosurfdom.com","sadlyno.com","scoobiedavis.blogspot.com","scripting.com","scrutinyhooligans.blogspot.com","shamelessantagonist.blogspot.com","shoegal.modblog.com","shrillblog.blogspot.com","simbaud.blogspot.com","simplyappalling.blogspot.com","soonerthought.com","theblogwarrior.blogspot.com","theblueview.blogspot.com","thefulcrum.blogspot.com","theworldaroundyou.com","thirdredeye.blogspot.com","tobyemden.blogspot.com","turnspit.com","waveflux.net","wpblog.ohpinion.com","ace.mu.nu","aldaynet.org","althouse.blogspot.com","amradio.blogspot.com","angrygwn.blogspot.com","antijohnkerry.blogspot.com","apologiesdemanded.blogspot.com","arkanssouri.blogspot.com","armchairgeneralist.typepad.com","babytrollblog.com","beautifulatrocities.com","bensworld.patriotforum.org","bernardmoon.blogspot.com","betsyspage.blogspot.com","billhobbs.com","billroggio.com/easongate","bluegoldfish.blogs.com/surface","brainshavings.com","centinel.blogspot.com","chiefsblog.blogspot.com","christian-patriot.blogspot.com","commonsenserunswild.typepad.com","conservativedialysis.com","conservativeobserver.blogspot.com","crankyneocon.com/crankyneocon","daisycutter.blogspot.com","dartblog.com","devildawg.blogspot.com","diggersrealm.com/mt","discerningtexan.blogspot.com","donaldsensing.com","drudgereport.com","dummocrats.com","eeg3.com","electricvenom.com","elevendayempire.com/movabletype","emilythedog.blogspot.com","evangelicaloutpost.com","gaypatriot.blogspot.com","gerberatetra.blogspot.com","ghostofaflea.com","gindy.blogspot.com","gopandthecity.blogspot.com","holecard.blogspot.com","homespunbloggers.blogspot.com","homicidalmaniak.com","ikilledcheguevara.blogspot.com","indepundit.com","iowageek.blogspot.com","itscomedowntothis.blogspot.com","johnkerrymustlose.com","ladymac.com","lt-smash.us","mikesamerica.blogspot.com","mudandphud.blogspot.com","mudvillegazette.com","mwilliams.info","mypetjawa.mu.nu","nationalcenter.org/blog.html","nationalreview.com/thecorner","nerepublican.blogspot.com","neverwrongnever.blogspot.com","oldfashionedwhippersnapper.blogspot.com","pajamahadin.com","pardonmyenglish.com","patriotsforbush.com","politicalpie.modblog.com","prosandcons.us","punditguy.com","punditz.journalspace.com","quante.blogspot.com","quibbles-n-bits.com","realordeal.blogspot.com","redmindbluestate.blogspot.com","redstate.org","rightmoment.blogspot.com","rightwingbastardo.blogspot.com","rightword.blogspot.com","rockpaperscissor.blogspot.com","sistertoldjah.com","slublog.blogspot.com","southernwatch.blogspot.com","stix1972.blogspot.com","thelastword.blogdrive.com","therightblog.blogspot.com","thetemplarpundit.blogspot.com","theunderscore.blogspot.com","winceandnod.blogspot.com"],["liberal","conservative","liberal","liberal","liberal","liberal","conservative","conservative","liberal","liberal","liberal","conservative","liberal","liberal","liberal","liberal","liberal","conservative","conservative","conservative","liberal","conservative","conservative","liberal","liberal","liberal","liberal","liberal","conservative","conservative","liberal","liberal","liberal","liberal","conservative","conservative","conservative","liberal","liberal","liberal","liberal","liberal","liberal","conservative","conservative","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","conservative","conservative","conservative","conservative","conservative","conservative","conservative","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","liberal","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative","conservative"],[1,3,1,1,3,1,3,3,1,3,3,3,1,1,3,1,1,3,3,3,1,3,3,3,1,3,1,1,3,3,1,3,1,1,3,3,3,1,1,1,1,1,1,3,3,1,1,1,1,1,1,1,1,3,3,3,3,3,3,3,3,1,1,1,1,1,1,3,1,3,1,1,1,1,1,1,3,3,3,3,3,3,3,1,1,1,1,1,1,1,1,3,1,3,3,3,3,3,3,3,3,3,3,3,3,3,3,1,1,1,1,1,1,1,1,1,1,1,1,1,3,1,1,1,1,3,1,1,1,1,1,1,1,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,3,1,3,1,3,3,3,3,3,3,3,3,3,3,3,1,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,1,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,1,1,1,1,1,1,1,1,1,1,1,1,3,1,1,1,1,1,1,1,1,1,1,1,1,1,3,1,3,1,1,1,1,1,1,1,1,3,1,1,1,1,1,1,1,1,1,1,3,1,1,1,1,1,3,3,3,1,3,3,3,3,1,3,3,3,3,3,3,3,3,3,3,3,3,3,3,1,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,1,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>id<\/th>\n      <th>label<\/th>\n      <th>party<\/th>\n      <th>community<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"autoWidth":true,"pageLength":10,"scrollY":"300px","columnDefs":[{"className":"dt-right","targets":3},{"name":"id","targets":0},{"name":"label","targets":1},{"name":"party","targets":2},{"name":"community","targets":3}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+]
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+] # end of panel 3
+    
+] 
+
+
+---
+layout: false
+class: course-logo bg-Black
+
+# .Gold-inline[Today's menu]
+
+&lt;div class="grid-3-2a"&gt;
+&lt;div class="extension-tile panelset-tile"&gt;&lt;div&gt;Homeplay&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile webcam"&gt;&lt;div&gt;Homeplay&lt;br&gt;bonus&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile slide"&gt;&lt;div&gt;Bridging&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile editable animated rotateIn"&gt;&lt;div&gt;Quiz&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+---
+layout: true
+class: course-logo
+
+# Facility location analysis
+
+---
+name: facility
+description: Facility location analysis
+
+__Facility location analysis__ deals finding optimal locations for
+one or more facilities in a given environment. 
+Location problems are classical optimization problems with applications in industry 
+and economy. 
+
+--
+
+The spatial location of facilities often take place in the context of a given 
+transportation, communication, or transmission system, which may be represented as a
+network.
+
+This is also known as a [street network](https://en.wikipedia.org/wiki/Street_network).
+
+---
+
+Consider a spatial network, where
+
+  + vertices = (potential) locations
+
+  + edges = roads/connections between locations
+
+the distance between two locations  = geodesic between these vertices
+
+---
+
+## street network of Piedmont, California
+
+.center[![:scale 55%](assets/images/Lab04_insertimage_1.png)]
+
+.font50[.bottom[[Boeing, 2019, Urban Street Network Analysis in a Computational Notebook, Region 6(3): 39-51.](https://openjournals.wu-wien.ac.at/region/paper_278/278.html)]]
+---
+class: bg-Black
+
+&lt;br&gt;
+## .White-inline[.center[please go to]]
+
+## .Gold-inline[.center[www.menti.com]]
+
+## .center[.White-inline[code:] .Gold-inline[49197653]]
+
+
+
+&lt;img src="assets/images/qr-1.svg" width="30%" /&gt;
+
+
+---
+
+## Situation 1
+
+![](assets/images/sna4ds_on_fire_sml.png# absolute w-20pct b-0 l-9-12th)
+
+Consider the location of a _fire station_. When a fire occurs, a firetruck should 
+be able to arrive to any potential fire location as soon as possible.
+
+&lt;br&gt;&lt;br&gt;
+_Which centrality measure finds you an optimal location
+(with respect to this single objective)?_
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+www.menti.com / code: 49197653
+
+
+
+???
+
+Of course, additional objectives and restrictions can be added. But that is
+beyond this lecture today.
+
+Eccentricity: this measures the longest path to any of the other locations.
+
+This is called a __minimax__ optimization problem
+
+---
+
+This is called a __minimax location problem__. 
+
+This is captured by _eccentricity_.
+
+---
+
+## Situation 2
+
+![](assets/images/shopping_smaller.jpg# absolute w-30pct b-1-12th l-8-12th)
+
+Find a spot for a shopping mall, such that the entire pool of customers have a 
+minimal distance to the mall.
+
+This increases access for the general population and minimizes fuel consumption 
+of customers traveling to the mall.
+
+&lt;br&gt;
+_Which centrality measure finds you an optimal location
+(with respect to this single objective)?_
+
+
+---
+
+This is called a __minisum location problem__. 
+
+This is captured by _closeness centrality_.
+
+.w-70.fl[
+![:scale 80%](assets/images/Lab04_insertimage_2.png)
+]
+
+--
+
+.w-30.fr.tl[
+Total distances in this network. Note that nodes _v_ and _w_ have lower eccentricity.
+]
+
+---
+class: bg-black
+
+### .Gold-inline[Piedmont, California]
+
+.center[![:scale 60%](assets/images/Lab04_insertimage_4.png)]
+
+.font40[.Red-inline[https://geoffboeing.com/2018/01/urban-street-network-centrality/]]
+
+???
+
+Closeness centrality values
+
+---
+background-image: url("assets/images/billboard_sna4ds2.png")
+background-position: bottom right
+background-size: contain
+
+## Situation 3
+
+.w-70.fl.tl[
+Consider the placement of a billboard. The best placement &lt;br&gt;is that point in the 
+city where most cars will pass by. 
+
+For today, assume, for simplicity, that all locations are &lt;br&gt;
+equally attractive as (final) locations for travelers. 
+
+&lt;br&gt;&lt;br&gt;
+_Which centrality measure finds you an optimal&lt;br&gt;
+location (with respect to this single objective)?_
+]
+
+???
+
+Stress centrality, as that is the spot that people will pass by the most, assuming
+they prefer to travel the shortest routes.
+
+---
+
+This is called an __absolute value__ problem. 
+
+This is captured by _stress centrality_.
+
+Stress centrality captures the vertex that is most visited, assuming travel is 
+preferred by shortest routes.
+
+---
+layout: false
+class: course-logo bg-Black
+
+# .Gold-inline[Today's menu]
+
+&lt;div class="grid-3-2a"&gt;
+&lt;div class="extension-tile panelset-tile"&gt;&lt;div&gt;Homeplay&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile webcam"&gt;&lt;div&gt;Homeplay&lt;br&gt;bonus&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile slide"&gt;&lt;div&gt;Bridging&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile editable"&gt;&lt;div&gt;Quiz&lt;/div&gt;&lt;/div&gt;
+&lt;div class="extension-tile animate animated wobble"&gt;&lt;div&gt;Pagerank&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+---
+layout: true
+class: course-logo
+
+# .Gold-inline[PageRank]: alternative approach
+
+---
+name: Pagerank
+description: Pagerank through simulation
+
+In the tutorial, you calculated PageRank centrality based on diffusion of
+importance between webpages (the vertices), through their links (=the edges).
+
+--
+
+An alternative approach to calculate the importance of webpages is by 
+*simulating the behavior* of websurfers.
+
+1. start at a random webpage
+
+1. click to the next page, following the outgoing links of the page (fully
+randomly)
+
+1. continue clicking to the next pages for a while, then start over from step 1
+
+Then: &lt;br&gt;
+
+.center[*PageRank = proportion of times a specific page is visited out of all
+pages visited.*]
+
+---
+
+## How to include damping:
+
+1. start at a random page (all pages have the same probability)
+
+1. with probability _damping_, follow a link to the next page (randomly picking 
+one of the outgoing links from the current page)
+
+1. with probability 1 - _damping_, jump to a random page in the network
+
+1. PageRank = proportion of times you visit each page
+
+1. repeat from step 1 until convergence
+
+This simulates the behavior of a surfer getting "bored" with her current pages 
+after a while and going to a different site for new inspiration/fun.
+
+---
+
+## Let's simulate 
+
+1. Download the file __PageRank_SNA4DS.html__ to your computer, from 
+the modules section on our Canvas page (modules, this week).
+
+2. Save it to a location on your computer and open it from there.
+
+---
+
+Start a simulation by FIRST clicking __setup__ (to create a network) and then
+__step__ (for a single step), or __go__ (for continuous running).
+You can change the speed of the simulation using the speed slider on top.
+
+### Exercise:
+
+- Compare the "random-surfer" and "diffusion" methods: 
+__random surfer__ is the method just explained, __diffusion__ is the method explained in the tutorial.
+  + How do their results compare?
+  + Which one is faster?
+ 
+- Play with the _damping factor_ to how it affects the process and outcome. 
+  + Try at least values 0, .85, 1.
+
+- Look at the tutorial networks ("Tutorial network" and "Tutorial network 2"), 
+&lt;br&gt;but also try the other networks. What do you notice?
+
+
+<div class="countdown" id="timer_0e9093d4" data-warn-when="30" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;margin:5%;font-size:3em;">
+<div class="countdown-controls"><button class="countdown-bump-down">&minus;</button><button class="countdown-bump-up">&plus;</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+
+Some things to notice:
+
+--
+
+- In the “Example 1” network, five of the pages have no inbound links. 
+Did you notice the effect?
+
+--
+
+- The diffusion model is a lot faster than the random surfer method.
+(but it has an advantage computationally for really large networks)
+
+--
+
+- When damping factor = 1, the methods do not always converge to the same results.
+
+--
+
+- When damping factor = 0, all pages get equal PageRank
+
+---
+layout: false
+class: course-logo bg-Black
+
+background-image: url(assets/images/pexels-olya-kobruseva-5428828.jpg)
+background-size: contain
+
+.font400.yellow.center-image[QUESTIONS?]
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="assets/remark-latest.min.js"></script>
+<script src="assets/js/remark-zoom.js"></script>
+<script src="assets/js/macros.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "atom-one-light",
+  "highlightLines": true,
+  "highlightSpans": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": "- %current% -",
+  "ratio": "16:9",
+  "navigation": {
+    "scroll": true
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

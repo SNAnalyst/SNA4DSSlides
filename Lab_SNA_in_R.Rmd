@@ -1,0 +1,577 @@
+---
+title: "SOCIAL NETWORK ANALYSIS<br>for DATA SCIENTISTS"
+topic: "LAB: Introduction to SNA in R"
+lecture_no: "02"
+author: "Roger"
+playdate: "September 09, 2025"
+output:
+  xaringan::moon_reader:
+    css:
+      - default
+      - assets/css/apron.css
+      - assets/css/descartes.css
+      - assets/css/tachyons.min.css
+      - assets/css/xaringan-extra.css
+      - assets/css/RL-fonts.css
+      - assets/css/SNA4DS.css
+      - assets/css/SNA4DS_effects.css
+      - assets/css/kleuren.css # make sure this is the last one
+    self_contained: false
+    lib_dir: assets
+    chakra: assets/remark-latest.min.js
+    seal: false # automatic title slide with YAML information
+    mathjax: "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"
+    includes:
+      in_header:
+        - assets/html/mathjax-equation-numbers.html
+    nature:
+      beforeInit:
+        - assets/js/remark-zoom.js
+        - assets/js/macros.js
+      highlightStyle: atom-one-light
+      highlightLines: true
+      highlightSpans: true
+      titleSlideClass: [middle, left]
+      countIncrementalSlides: false
+      slideNumberFormat: "- %current% -"
+      ratio: '16:9' # alternatives '16:9' or '4:3' or others e.g. 13:9
+      navigation:
+        scroll: true # slide transitions by scrolling
+anomia:
+  combo:
+    prefix: "lab_SNAR"
+    pattern:
+      - colors
+      - [animals, fruits]
+      - adverbs
+    sep: "_"
+    case: "upper"
+---
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+<br><br><br><br><br>
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[`r rmarkdown::metadata$title`]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[`r rmarkdown::metadata$topic` .small-caps.font70[(lecture] .font70[`r rmarkdown::metadata$lecture_no`)]]]
+  ]
+
+<br>
+.f-abel.White-inline[Your lecturer: `r rmarkdown::metadata$author`]<br>
+.f-abel.White-inline[Playdate: `r rmarkdown::metadata$playdate`]
+
+
+<!-- setup options start -->
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                  out.width = "90%",
+                  fig.height = 6,
+                  fig.path = "assets/images/",
+                  fig.retina = 2,
+                  dev = "svg",
+                  message = FALSE,
+                  warning = FALSE)
+# library(htmlwidgets, quietly = TRUE, verbose = FALSE, warn.conflicts = FALSE)
+library(countdown, quietly = TRUE, verbose = FALSE, warn.conflicts = FALSE)
+
+knitr::opts_knit$set(global.par = TRUE)  # anders worden de margin settings niet overal doorgevoerd
+
+blogosphere <- SNA4DSData::blogosphere
+
+```
+
+
+```{r remedy01, include = FALSE}
+par(mar = c(0,0,0,0) + .05) #it's important to have this in a separate chunk
+```
+
+
+```{r xaringanExtra_settings, include = FALSE}
+xaringanExtra::use_xaringan_extra(c("tile_view"
+                                    , "panelset"
+                                    , "animate"
+                                    , "tachyons"
+                                    , "freezeframe"
+                                    # , "broadcast"
+                                    , "scribble"
+                                    , "fit_screen"
+                                    ))
+
+xaringanExtra::use_webcam(50 * 3.5, 50 / 4 * 3 * 3.5)
+xaringanExtra::use_editable(expires = 1)
+# xaringanExtra::use_search(show_icon = FALSE, case_sensitive = FALSE)
+xaringanExtra::use_clipboard()
+```
+
+
+```{r xaringan-extra-styles, echo = FALSE}
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,         
+  mute_unhighlighted_code = TRUE  
+)
+```
+
+```{css echo=FALSE}
+.highlight-last-item > ul > li, 
+.highlight-last-item > ol > li {
+  opacity: 0.5;
+}
+
+.highlight-last-item > ul > li:last-of-type,
+.highlight-last-item > ol > li:last-of-type {
+  opacity: 1;
+
+.bold-last-item > ul > li:last-of-type,
+.bold-last-item > ol > li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+```
+
+
+```{r some_handy_functions, echo = FALSE}
+source("assets/R/components.R")
+```
+
+
+```{css}
+.remark-inline-code {
+  background: #F5F5F5;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.inverse-red, .inverse-red h1, .inverse-red h2, .inverse-red h3, .inverse-red a, inverse-red a > code {
+	border-top: none;
+	background-color: red;
+	color: white; 
+	background-image: "";
+}
+
+.inverse-orange, .inverse-orange h1, .inverse-orange h2, .inverse-orange h3, .inverse-orange a, inverse-orange a > code {
+	border-top: none;
+	background-color: orange;
+	color: black; 
+	background-image: "";
+}
+```
+
+
+
+```{css}
+.grid-3-2a {
+  display: grid;
+  height: calc(90%);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1em;
+  padding: 1em;
+}
+```
+
+
+
+<!-- setup options end -->
+
+---
+class: bg-Black course-logo
+
+background-image: url(assets/images/chris-montgomery-smgTvepind4-unsplash-L.jpg)
+background-position: 100% 0%
+background-size: cover
+background-color: #000000
+
+### .White-inline.font350.b[<br>Turn your<br>cameras on!]
+
+
+.footnote[[Credit](https://unsplash.com/@cwmonty)]
+
+---
+class: course-logo
+layout: true
+
+---
+class: bg-JADSbrown
+name: menu
+description: "Menu"
+
+.Gold-inline[
+# Today's menu
+
+- R for Social Network Analysis
+
+- Homeplay
+
+- Network objects
+
+- Navigating network objects
+
+- Some exercises
+]
+
+---
+class: bg-Black
+
+# .Gold-inline[Today's menu]
+
+<div class="grid-3-2a">
+<div class="extension-tile tileview animated flipInY"><div>R for SNA</div></div>
+</div>
+
+---
+layout: true
+class: course-logo
+
+# Why use `r rproj()` for SNA
+
+---
+name: whyr
+description: "Why use R for SNA"
+
+### Huge ecosystem of network libraries
+
+- `r rproj()` has BY FAR the largest ecosystem of 
+packages for network manipulation, network analysis, network visualization, and 
+specialized applications of all software platforms.
+
+.font70[(Currently, there are 1061 packages ***on CRAN alone*** that use `igraph`, `sna`, 
+`network`, or any of the other SNA packages we use in this course.
+)]
+
+- They are scattered across [CRAN](https://cran.r-project.org/web/packages/), 
+[bioconductor](https://www.bioconductor.org/packages/release/BiocViews.html#___Network), [github](https://github.com), and smaller repositories.
+
+- It is open source + it is free
+
+<br><br>
+
+> Use the best tool for the job! No computing environment comes close to `r rproj()` when it comes to network analysis and statistical modeling.
+
+---
+layout: false
+class: bg-Black course-logo
+
+# .Gold-inline[Today's menu]
+
+<div class="grid-3-2a">
+<div class="extension-tile tileview"><div>R for SNA</div></div>
+<div class="extension-tile panelset-tile animated flipInX"><div>Homeplay</div></div>
+</div>
+
+---
+class: course-logo
+layout: true
+
+---
+
+background-image: url('assets/images/question_mark_1.jpg')
+background-size: cover
+
+<br><br><br><br><br>
+### .Gold-inline.font250.center[Any general questions<br>about the homeplay?]
+
+---
+name: homeplay
+description: "Homeplay coding"
+
+
+.panelset[
+.panel[.panel-name[snafun]
+.scroll-box-24[
+```{r homeplay_snafun, echo = TRUE, evalk = TRUE}
+data(elegans, package = "SNA4DSData")
+elegans
+snafun::print(elegans)
+snafun::is_igraph(elegans)
+
+snafun::is_directed(elegans)
+snafun::list_edge_attributes(elegans)
+snafun::list_vertex_attributes(elegans)
+
+snafun::count_vertices(elegans)
+snafun::count_edges(elegans)
+
+snafun::extract_vertex_names(elegans)
+
+#dyad census
+snafun::count_dyads(elegans)
+
+snafun::g_reciprocity(elegans)
+snafun::g_transitivity(elegans)
+snafun::g_density(elegans)
+```
+<br><br><br><br><br><br><br> <br>
+]
+]
+.panel[.panel-name[igraph object]
+.scroll-box-32[
+```{r homeplay_igraph, echo = TRUE, evalk = TRUE}
+data(elegans, package = "SNA4DSData")
+snafun::print(elegans)
+snafun::is_igraph(elegans)
+snafun::is_network(elegans)
+
+snafun::is_directed(elegans)
+snafun::list_edge_attributes(elegans)
+snafun::list_vertex_attributes(elegans)
+
+snafun::count_vertices(elegans)
+snafun::count_edges(elegans)
+
+snafun::extract_vertex_names(elegans)
+
+#dyad census
+snafun::count_dyads(elegans)
+
+snafun::g_reciprocity(elegans)
+snafun::g_transitivity(elegans)
+snafun::g_density(elegans)
+```
+<br><br><br><br><br><br><br> <br>
+]
+]
+.panel[.panel-name[network object]
+.scroll-box-32[
+```{r homeplay_network, echo = TRUE, evalk = TRUE}
+elegans_n <- snafun::to_network(elegans)
+snafun::print(elegans_n)
+snafun::is_igraph(elegans_n)
+snafun::is_network(elegans_n)
+
+snafun::is_directed(elegans_n)
+snafun::list_edge_attributes(elegans_n)
+snafun::list_vertex_attributes(elegans_n)
+
+snafun::count_vertices(elegans_n)
+snafun::count_edges(elegans_n)
+
+snafun::extract_vertex_names(elegans_n)
+
+#dyad census
+snafun::count_dyads(elegans_n)
+
+snafun::g_reciprocity(elegans_n)
+snafun::g_transitivity(elegans_n)
+snafun::g_density(elegans_n)
+```
+<br><br><br><br><br><br><br> <br>
+]
+]
+]
+
+
+
+
+
+---
+name: awesome
+description: What makes snafun to awesome
+
+# What makes `snafun` so awesome
+
+- `snafun` works on either object, both `igraph` and `network`
+
+- no need to convert between the classes
+
+- can convert between the classes where necessary
+
+- can be extended based on your needs/requests
+
+--
+
+<br><br>
+As a previous student wrote to us:
+
+.f-marker.font150[the snafun package is .Red-inline[ frickin' awesome], 
+the .Red-inline[lucky basterds!]]
+
+---
+layout: false
+class: bg-Black course-logo
+
+# .Gold-inline[Today's menu]
+
+<div class="grid-3-2a">
+<div class="extension-tile tileview"><div>R for SNA</div></div>
+<div class="extension-tile panelset-tile"><div>Homeplay</div></div>
+<div class="extension-tile webcam animated bounceInDown"><div>Graph objects</div></div>
+</div>
+
+---
+class: course-logo
+layout: true
+
+---
+name: graphobjects
+description: "Dealing with graph objects"
+
+# Zachary's karate club network
+
+```{r remedy02, echo = TRUE}
+# install.packages("igraphdata")
+data(karate, package = "igraphdata")
+class(karate)
+```
+
+---
+
+# Let's print the object
+
+.font80[
+```{r remedy03, comment = ""}
+igraph::print.igraph(karate)
+```
+]
+
+This shows an overview of the attributes of the network, the vertices, and edges
+and prints the first couple of edges.
+
+---
+
+# `igraph` object
+
+The description of an `igraph` object starts with up to four letters:
+
+- __D__ or __U__, for a directed or undirected graph
+- __N__ for a named graph (= vertices have a name attribute)
+- __W__ for a weighted graph (= edges have a weight attribute)
+- __B__ for a bipartite (two-mode) graph (= where nodes have a type attribute)
+
+The two numbers that follow refer to the number of nodes and edges in the graph.
+The description also lists node & edge attributes:
+
+.w-50.fl.tl[
+`(g/c)`: graph-level character attribute<br>
+`(v/c)`: vertex-level character attribute<br>
+`(e/n)`: edge-level numeric attribute
+]
+
+--
+
+.w-50.fr.tl[
+.code70[
+```{r lab02_01, comment = ""}
+igraph::print.igraph(karate)
+```
+]
+]
+
+---
+class: bg-Black course-logo
+
+# .Gold-inline[Today's menu]
+
+<div class="grid-3-2a">
+<div class="extension-tile tileview"><div>R for SNA</div></div>
+<div class="extension-tile panelset-tile"><div>Homeplay</div></div>
+<div class="extension-tile webcam"><div>Graph objects</div></div>
+<div class="extension-tile editable"><div>How to know?</div></div>
+</div>
+
+
+---
+
+# 'fastgreedy' community detection
+
+.panelset[
+
+.panel[.panel-name[Question]
+
+.b[CHALLENGE:]
+
+How do you run a 'fast greedy' community detection on `karate`?
+
+Find two ways.
+
+] # end panel 1
+
+
+.panel[.panel-name[Method 1]
+
+
+```{r lab02__03a, echo = TRUE}
+snafun::extract_comm_fastgreedy(karate)
+```
+
+] # end panel 2
+
+.panel[.panel-name[Method 2]
+
+```{r lab02__03b, echo = TRUE}
+igraph::fastgreedy.community(karate)
+```
+]
+
+.panel[.panel-name[Bonus]
+
+.scroll-box-20[
+```{r lab02__03c, echo = TRUE, error=TRUE}
+karate_n <- snafun::to_network(karate)
+igraph::fastgreedy.community(karate_n)
+snafun::extract_comm_fastgreedy(karate_n)
+```
+
+Note: the `snafun` function works on both object classes, the `igraph` function
+works only for `igraph` objects.
+So, make sure to always pass an object of the correct class when you use an 
+`igraph` function or a `network` function!
+
+<br><br>
+]
+]
+
+]
+
+
+---
+name: help
+description: Getting help
+
+
+# How do you expect me to know all that?
+
+### Multiple ways:
+
+--
+
+First, make sure you know and understand the concepts, so you know what to search for.
+
+- `help(package = "snafun")`
+
+- `help(package = "igraph")` or `help(package = "sna")` or `help(package = "network")`, et cetera
+
+- [snafun info page](https://snanalyst.github.io/SNAfun/)
+
+--
+
+- use autocompletion in RStudio
+
+--
+
+- `?function_name` (prepend the package name, so: `?snafun::print`)
+
+--
+
+- `??pattern` (e.g., `??"cliques"`)
+![](assets/images/help_cliques.jpg# absolute w-30pct b-3-12th l-9-12th)
+
+--
+
+- `RSiteSearch(string)` (e.g., `RSiteSearch("cliques")`)
+
+--
+
+- ask Claudia and Roger
