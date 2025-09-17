@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>SOCIAL NETWORK ANALYSIS for DATA SCIENTISTS</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Claudia" />
+    <script src="assets/header-attrs-2.29/header-attrs.js"></script>
+    <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="assets/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="assets/tile-view-0.2.6/tile-view.js"></script>
+    <link href="assets/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="assets/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra_fit-screen-0.2.6/fit-screen.js"></script>
+    <link href="assets/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="assets/panelset-0.3.0/panelset.js"></script>
+    <script src="assets/fabric-4.3.1/fabric.min.js"></script>
+    <link href="assets/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="assets/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="assets/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"xa2783606d7f44f8a664834a4db4801c","expires":1}</script>
+    <script src="assets/himalaya-1.1.0/himalaya.js"></script>
+    <script src="assets/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="assets/editable-0.2.6/editable.js"></script>
+    <script src="assets/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="assets/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="assets/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/apron.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/descartes.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/tachyons.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/xaringan-extra.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/RL-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS_effects.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/kleuren.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[SOCIAL NETWORK ANALYSIS&lt;br&gt;for DATA SCIENTISTS]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[LECTURE: ERGM I .small-caps.font70[(lecture] .font70[Week 3)]]]
+  ]
+
+&lt;br&gt;
+.f-abel.White-inline[Your lecturer: Claudia]&lt;br&gt;
+.f-abel.White-inline[Playdate: September, 17th, 2025]
+
+
+&lt;!-- setup options start --&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.highlight-last-item &gt; ul &gt; li, 
+.highlight-last-item &gt; ol &gt; li {
+  opacity: 0.5;
+}
+
+.highlight-last-item &gt; ul &gt; li:last-of-type,
+.highlight-last-item &gt; ol &gt; li:last-of-type {
+  opacity: 1;
+
+.bold-last-item &gt; ul &gt; li:last-of-type,
+.bold-last-item &gt; ol &gt; li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+&lt;/style&gt;
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.remark-inline-code {
+  background: #F5F5F5;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.inverse-red, .inverse-red h1, .inverse-red h2, .inverse-red h3, .inverse-red a, inverse-red a &gt; code {
+	border-top: none;
+	background-color: red;
+	color: white; 
+	background-image: "";
+}
+
+.inverse-orange, .inverse-orange h1, .inverse-orange h2, .inverse-orange h3, .inverse-orange a, inverse-orange a &gt; code {
+	border-top: none;
+	background-color: orange;
+	color: black; 
+	background-image: "";
+}
+
+.tab{
+  display: inline-block;
+  margin-left: 40px;
+}
+
+.tab1{tab-size: 2;}
+.tab2{tab-size: 4;}
+.tab3{tab-size: 6;}
+.tab4{tab-size: 8;}
+
+&lt;/style&gt;
+
+
+
+&lt;style type="text/css"&gt;
+.grid-3-2a {
+  display: grid;
+  height: calc(90%);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1em;
+  padding: 1em;
+}
+&lt;/style&gt;
+
+&lt;!-- setup options end --&gt;
+
+
+
+
+
+
+
+---
+class: course-logo
+layout: true
+---
+background-image: url(assets/images/stepbystep.jpg)
+background-size: 350px
+background-position: 85% 55%
+# Goal for today:
+&lt;br&gt;
+## Introducing Exponential Random Graph models
+
+These models are going to stay with us for a while
+
+yes, they are in the exam
+
+yes, you MUST use them in the project
+
+## Today we cover 
+
+- what the model is (for)
+- theory
+
+So that we make sure that you create a solid connection :)
+
+In the following weeks we will touch data, R package, code, so on and so forth
+
+---
+# Disclaimer!
+
+.center[![:scale 60%](assets/images/platypus.jpg)]
+
+.footnote[It seems weird, but when you get used to it, it is just another animal :)]
+---
+# Menu' for today
+
+&lt;br&gt;
+
+1. Causal Inference Mindset
+2. A matter of outcome variable
+3. Evolving toward the ERGM
+4. A matter of predictors
+5. How the model works 
+6. More about the predictors
+7. Let's observe a case!
+8. Software info
+
+
+ 
+---
+&lt;br&gt; 
+&lt;br&gt; 
+&lt;br&gt; 
+&lt;br&gt; 
+&lt;br&gt; 
+&lt;br&gt; 
+# 1. Causal Inference Mindset
+
+
+---
+background-image: url(assets/images/meter.jpg)
+background-size: 350px
+background-position: 95% 55%
+
+# NETWORKS
+
+### We
+    
+    observed them 
+
+    conceptualized them
+
+    described them 
+
+    analyzed their parts and components
+
+### STILL
+
+### Are we truly understanding them? 
+
+### Is a description always enough?
+
+## WE CAN DO MORE
+
+---
+# Understanding Networks
+
+&lt;br&gt;
+### .center[Why is a network the way it is?]
+&lt;br&gt;
+
+- Networks conceptualize relationships of many different kinds
+- Relationships are not random
+
+    you don't have random friends
+    
+    you don't marry someone at random
+    
+    two atoms are not connected at random
+    
+    streets don't connect random parts of the city
+   
+### Describing these relationships is not enough. 
+### What causes this specific connections? 
+
+---
+# Causal Inference for networks
+&lt;br&gt;
+
+## Do you remember .red[causal inference]?
+
+You had a class with Claudia in the .red[Bootcamp]! 
+
+### .center[Prediction VS Inference]
+
+
+## Inference = Deducing 
+
+&lt;br&gt;
+
+### You already know that you can deduce the causes that generated a network
+
+You had a class with Roger in .red[SNA4DS] --- statistical models for networks!
+
+### .center[Inductive VS Deductive]
+
+
+---
+name: Causal_inference_recap
+description: Causal inference models we did so far
+# Causal inference RECAP
+
+
+- for IID data (non network)
+    
+    OLS
+    
+    T-test
+    
+    GLM -- Logistic regressions
+
+- for networks 
+
+    NetLogit
+    
+    MRQAP
+    
+    LNAM 
+
+Today we add ERGMs to the list
+
+.red[ERGMs are a class of network models for causal inference]
+
+.red[They are a class of models to deduce the cause of an observed relational phenomenon that we observe/conceptualize as a network.]
+
+---
+name: Causal_inference_recap2
+description: Causality
+# Causal inference RECAP 2a
+
+## Correlation and causation RECAP
+&lt;br&gt;
+### 2 variables: body weight, gender
+&lt;br&gt;
+- correlation: body weight &amp; gender (order does not matter)
+- causation 
+ .center[formula for option 1: body weight ~ gender]
+ .center[formula for option 2: gender ~ body weight]
+
+&lt;br&gt;
+### Which one makes sense? 
+
+---
+name: Causal_inference_recap3
+description: Causality explanation of example
+# Causal inference RECAP 2b
+
+If 0 is male and 1 is female
+## gender ~ body weight
+
+our hypothesis is: 
+
+- If a pregnant woman eats a lot is going to give birth to a girl
+&lt;br&gt;
+.red[You do realize that this makes no sense, right?]
+&lt;br&gt; 
+ 
+## body weight ~ gender
+
+Our model can only test the other hypothesis: 
+
+- Men tend to be bigger than women
+&lt;br&gt; 
+.red[OBVIOUSLY the only Hypothesis you can test here]
+
+
+## Causality Matters!
+
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# 2. A matter of outcome variable
+
+
+---
+# Explaining network structure
+&lt;br&gt;
+
+## ERGMS, as any other statistical model, work with the hypothesis testing (causal) mindset and have:
+
+&lt;br&gt;
+### .red[Outcome variable] &lt;- what do we want to explain
+
+### .red[Predictors] &lt;- what we believe could explaining it
+
+&lt;br&gt;
+The hypothesis is a sentence that explains how you believe that predictor affects the outcome
+
+We are explaining network structure, right? 
+
+### .red[Our outcome variable MUST be a network]
+
+---
+name: conceptualizing_ergm_outcome_var
+description: ergm outcome variable is always a network, it can be seen as a dummy variable
+# How do you put a network as an outcome variable?
+&lt;br&gt;
+## A network describes two things
+&lt;br&gt;
+### relationship --- edge [1] 
+
+### no relationship  --- no edge [0]
+
+&lt;br&gt;
+
+## Does this sound familiar to you? 
+
+
+
+---
+# How do you put a network as an outcome variable?
+&lt;br&gt;
+## A network describes two things
+&lt;br&gt;
+### relationship --- edge [1] 
+
+### no relationship  --- no edge [0]
+
+&lt;br&gt;
+
+## Does this sound familiar to you? 
+
+A logistic regression
+
+
+---
+# Statistical Mindset RECAP 2.0
+&lt;br&gt;
+
+- In  non-network regression models (OLS, GLM, ...) we test whether one or more covariates/predictors predict the outcome variable (coef, p-value).
+- This is intended to test whether an hypothesized causal relationships exists 
+- Did the predictor(s) affect the outcome? (first: theory; second: math)
+- Our p-value is the probability that we can exclude that a certain effect is random 
+- Our p-value is NOT a probability of the hypothesis being true, it is the conditional probability of being able to reject the null hypothesis given the data
+  - We repeat the experiment 1000 times. 
+  - We compare our real data to the 1000 experimental results 
+  - If real data = 1000 repetitions it happened by chance
+  - If real data != 1000 repetitions we can exclude that what we observe happened by chance in our data. 
+
+---
+# Statistical Mindset - Moving on
+&lt;br&gt;
+### It seems the same thing that we are doing here, right?
+&lt;br&gt;
+### Can we use a Logistic regression for networks? 
+
+---
+# Statistical Mindset - Moving on
+&lt;br&gt;
+### It seems the same thing that we are doing here, right?
+&lt;br&gt;
+### Can we use a Logistic regression for networks? 
+&lt;br&gt;
+&lt;br&gt;
+# NO 
+
+
+---
+# Assumption Violation
+
+&lt;br&gt;
+&lt;br&gt;
+## Observations must be Independent and Identically Distributed (IID for friends)
+&lt;br&gt;
+## If you use a non network model your errors estimations will be incorrect!
+&lt;br&gt;
+...explaining a network takes more work than explaining a regular variable!
+
+---
+background-image: url(assets/images/SPmachine.jpg)
+background-size: 450px
+background-position: 50% 50%
+
+
+# We need a new solving problem machine! 
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+# The ERGM
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# 3. Evolving toward the ERGM
+
+---
+background-image: url(assets/images/erdos_renyi.png)
+background-size: 350px
+background-position: 85% 75%
+# Erdos Renyi Game
+&lt;br&gt;
+
+## they introduced the "game" of creating random network given fixed parameters
+
+- N - number of nodes
+- E - number of edges (or probability of edge formation)
+
+
+---
+name: Erdos_Renyi
+description: Erdos Renyi model
+# A very simple ERGM
+&lt;br&gt;
+## Looking at the structure of the network
+
+### What is the probability that we observe a network with that specific connections out of all the possible combinations?
+
+In probability terms this is: 
+
+`\(log P_{ij} (0/1) = λ_{ij}\)`
+
+Where 
+
+- `\(P_{ij} (0, 1)\)` is the probability of having or not having an edge between each pair of nodes.
+- `\(λ_{ij}\)` a parameter that expresses a rate for edge propagation (in our case N of edges)
+
+
+We compare an observed network against random networks generated with the same parameters.
+
+---
+name: Erdos_Renyi1
+description: Erdos Renyi model example
+
+## Research design
+&lt;br&gt;
+### General example
+
+RQ: Given the number of nodes in my network, how likely it is that my number of edges is random? 
+
+H1: The number of edges I observe is not random
+
+H0: The number of edges is random
+
+### Specific example
+
+RQ: Given that in this class there are 80 students, how likely it is that they are friends with anyone? 
+
+H1: I observe THIS number of friendships between pairs of students given by the fact that they get along
+
+H0: I observe THIS number of friendships between pairs of students and there is no reason for it
+
+
+
+
+
+---
+background-image: url(assets/images/Hack_Day.jpg)
+background-size: 200px
+background-position: 90% 10%
+# More complex example
+&lt;br&gt;
+### Consider all the students at JADS as nodes 
+
+## Let's say that JADS organizes an Hackathon with 5K euros at stake 
+
+## You have to form groups to work together every day
+
+### If you study together there is an edge between each pair of you
+
+### I map down the study-together dynamics two days before the Hackathon
+
+
+.red[If I compare that network to random ones, do you think my observed one will show some particular features?]
+
+---
+background-image: url(assets/images/Hack_Day.jpg)
+background-size: 200px
+background-position: 90% 10%
+# More complex example
+&lt;br&gt;
+### Consider all the students at JADS as nodes 
+
+## Let's say that JADS organizes an Hackathon with 5K euros at stake 
+
+## You have to form groups to work together every day
+
+### If you study together there is an edge between each pair of you
+
+### I map down the study-together dynamics two days before the Hackathon
+
+
+.red[If I compare that network to random ones, do you think my observed one will show some particular features?]
+
+Yes. Connections will be different than random, they are driven by a purpose (e.g., everyone wants to connect with good coders etc...)
+
+
+---
+background-image: url(assets/images/Instagram_logo_2016.svg.png)
+background-size: 450px
+background-position: 90% 50%
+name: P1_model
+description: P1 model
+# Let's use more predictors (P1 model)
+
+Let's do something a little more juicy, shall we? 
+
+### We have a directed network such as Instagram followers. 
+
+You might follow me, but i might not follow you. 
+
+We can observe: 
+
+- senders (followers) A --&gt; B
+- receivers (followed) A &lt;-- B
+- mutual (followers &amp; receivers together)  A &lt;--&gt; B
+
+P(0, 0) = no edge 
+
+P(1, 0) = send an edge
+
+P(0, 1) = receive an edge 
+
+P(1, 1) = mutual
+
+
+
+---
+# This model in math [P1 model]
+&lt;br&gt;
+
+`\(log P_{ij} (1/0) = λ_{ij} + α_i + β_j + α_j + β_i + 2θ + ρ_{ij}\)`
+
+&lt;br&gt;
+
+`\(λ_{ij}\)` probability of the density (N of edges) ER
+
+`\(α_i\)` sender i
+
+`\(β_j\)` receiver j
+
+`\(α_j\)` sender j
+
+`\(β_i\)` receiver i
+
+`\(2θ + ρ_{ij}\)` mutual 
+
+We want to observe these parameters and see whether they are or not random in the network
+
+
+---
+# Expanding our horizons
+
+If we can measure density, sender, receiver, and mutual, 
+
+Why not the rest?
+
+## You know how to measure networks
+
+
+
+Dyad Census
+
+Triad Census
+
+...
+
+Are these effects random or are these effect driven by some reason? 
+
+
+In the ERGM we can estimate the probability of particular descriptive measures that we extract from the network to be non-random (reject the null) 
+
+-- we still don't know the cause, but we can assume it is a good one.
+
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+# 4. A matter of predictors
+---
+background-image: url(assets/images/storm2.png)
+background-size: 750px
+background-position: 85% 85%
+name: Predictors
+description: Exogeneous and Endogeneous effects
+# Two main Different types of predictors 
+
+&lt;br&gt;
+## Exogenous: Outside
+
+## Endogenous: Inside
+
+
+---
+# Endogenous 
+&lt;br&gt;
+## Effects occurring within the outcome network of interest
+&lt;br&gt;
+(what happens inside the house in the picture -- inside the network)
+&lt;br&gt;
+### We already saw
+
+- edge
+- sender
+- receiver
+- mutual 
+- ...
+- other measures of interest
+
+---
+# Exogenous
+&lt;br&gt;
+## Effects occurring outside of the outcome network 
+
+(like the hurricane)
+
+&lt;br&gt;
+
+### Intuitively, this type of variables correspond to the extra information that is not naturally embedded in the network - They are outside of the network
+
+For example:
+
+
+If we want to explain the reason why JADS students might play football together using the variable "How much do you like football" 1-5 might already help, right? 
+
+ 
+
+
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+# 5. How the model works
+
+
+
+
+
+---
+name: ergm_math
+description: Mathematical model of the ERGM
+# Exponential Random Graph Model (P*)
+
+&lt;br&gt;
+
+## `\(P(N,\theta) = \frac{exp\{\theta^T h(N)\}}{\sum_{N^*\in \mathcal{N}} exp\{\theta^T h(N^*) \}^T}\)`
+
+---
+# Exponential Random Graph Model (P*)
+
+&lt;br&gt;
+
+## `\(P(N,\theta) = \frac{exp\{\theta^T h(N)\}}{\sum_{N^*\in \mathcal{N}} exp\{\theta^T h(N^*) \}^T}\)`
+
+- `\(P(N,\theta)\)` - Probability of observing this real Network, with these coefficients
+
+---
+# Exponential Random Graph Model (P*)
+
+&lt;br&gt;
+
+## `\(P(N,\theta) = \frac{exp\{\theta^T h(N)\}}{\sum_{N^*\in \mathcal{N}} exp\{\theta^T h(N^*) \}^T}\)`
+
+- `\(P(N,\theta)\)` - Probability of observing this real Network, with these coefficients
+- `\(h(N)\)` - Using a combination of network statistics taken from the observed network
+
+
+---
+# Exponential Random Graph Model (P*)
+
+&lt;br&gt;
+
+## `\(P(N,\theta) = \frac{exp\{\theta^T h(N)\}}{\sum_{N^*\in \mathcal{N}} exp\{\theta^T h(N^*) \}^T}\)`
+
+- `\(P(N,\theta)\)` - Probability of observing this real Network, with these coefficients
+- `\(h(N)\)` - Using a combination of network statistics taken from the observed network
+- `\(\theta^T\)` - Estimating this/these parameter(s)
+
+---
+# Exponential Random Graph Model (P*)
+
+&lt;br&gt;
+
+## `\(P(N,\theta) = \frac{exp\{\theta^T h(N)\}}{\sum_{N^*\in \mathcal{N}} exp\{\theta^T h(N^*) \}^T}\)`
+
+- `\(P(N,\theta)\)` - Probability of observing this real Network, with these coefficients
+- `\(h(N)\)` - Using a combination of network statistics taken from the observed network
+- `\(\theta^T\)` - Estimating this/these parameter(s)
+- `\(N^*\)` - Confronting the real network with all the permutations that are possible
+---
+# Exponential Random Graph Model (P*)
+
+&lt;br&gt;
+
+## `\(P(N,\theta) = \frac{exp\{\theta^T h(N)\}}{\sum_{N^*\in \mathcal{N}} exp\{\theta^T h(N^*) \}^T}\)`
+
+- `\(P(N,\theta)\)` - Probability of observing this real Network, with these coefficients
+- `\(h(N)\)` - Using a combination of network statistics taken from the observed network
+- `\(\theta^T\)` - Estimating this/these parameter(s)
+- `\(N^*\)` - Confronting the real network with all the permutations that are possible
+- `\(\sum_{N^*\in \mathcal{N}} exp\{\theta^T h(N^*) \}^T\)` normalizing coefficient: Exponential function of the summation of all possible permutation weighted for all the coefficients estimated with the given data 
+
+
+---
+# Exponential Random Graph Model (P*)
+
+&lt;br&gt;
+
+## `\(P(N,\theta) = \frac{exp\{\theta^T h(N)\}}{\sum_{N^*\in \mathcal{N}} exp\{\theta^T h(N^*) \}^T}\)`
+
+- `\(P(N,\theta)\)` - Probability of observing this real Network, with these coefficients
+- `\(h(N)\)` - Using a combination of network statistics taken from the observed network
+- `\(\theta^T\)` - Estimating this/these parameter(s)
+- `\(N^*\)` - Confronting the real network with all the permutations that are possible
+- `\(\sum_{N^*\in \mathcal{N}} exp\{\theta^T h(N^*) \}^T\)` normalizing coefficient: Exponential function of the summation of all possible permutation weighted for all the coefficients estimated with the given data 
+
+*Permutation: check all the possible combination that exist between each pair of nodes 
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# 6. More about the predictors
+
+---
+name: ergm_effects
+description: intuitive idea of ergm effects within the model
+# Model Terms or Effects
+&lt;br&gt;
+## IID linear model (GLM): We can test hypotheses with predictors and controls 
+
+&lt;br&gt;
+
+You get an .red[estimate] and check whether the outcome variable
+
+.red[increases] or .red[decreases]
+
+When predictor/control variates
+
+These predictors/controls are always information about something
+
+## You already saw that, but with ERGMs we can be more flexible. 
+
+## .red[We can customize model terms as much as we like! including both information (exogenous) and network structure (endogenous)]
+
+
+---
+# Plug in effects in the equation
+&lt;br&gt;
+&lt;br&gt;
+## Many things that you can observe in a network can be inserted in an ERGM
+
+## `\(h(N)\)` - Using a combination of network statistics
+&lt;br&gt;
+## We can plug in effects in the equation here (see the full equation above).
+
+---
+background-image: url(assets/images/reciprocity.png)
+background-size: 550px
+background-position: 85% 85%
+# Example: Mutual
+&lt;br&gt; 
+### In the P1 model we already saw the mutual term 
+
+### .red[Reciprocity]: If I follow you on Instagram, what is the probability that you will follow me back?
+&lt;br&gt; 
+&lt;br&gt;
+### In Math
+
+### `\(h = \sum_{i&lt;j} N_{ij} N_{ji}\)`
+
+---
+# ERGM with Reciprocity effect
+&lt;br&gt; 
+substititute the reciprocity formula in the generic parameter `\(h(N)\)`
+&lt;br&gt; 
+&lt;br&gt;
+## `\(P(N,\theta) = \frac{exp\{\theta^T (\sum_{i&lt;j} N_{ij} N_{ji})\}}{\sum_{N^*\in \mathcal{N}} exp\{\theta^T (\sum_{i&lt;j} N_{ij}^* N_{ji}^*)\}^T}\)`
+
+&lt;br&gt; 
+
+If you insert more than one effect you keep adding them up - here it is edges + mutual
+
+## `\(P(N,\theta) = \frac{\exp\{\theta^T (\sum_{i \neq j} N_{ij} + \sum_{i&lt;j} N_{ij} N_{ji})\}}{\sum_{N^*\in \mathcal{N}} \exp\{\theta^T (\sum_{i \neq j} N^*_{ij} + \sum_{i&lt;j} N^*_{ij} N^*_{ji})\}^T}\)`
+
+
+---
+background-image: url(assets/images/tailor.jpg)
+background-size: 350px
+background-position: 85% 55%
+name: ergm_theory
+description: How to theoretically approach an ergm
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+## What you ultimately want is to reconstruct &lt;br&gt; a list of parameters that explain in the best &lt;br&gt; possible way what is going on with your data.
+
+&lt;br&gt;
+&lt;br&gt;
+Same as tailors with their client!
+
+---
+# Sim city
+&lt;br&gt;
+
+.center[![:scale 50%](assets/images/simcity.png)]
+
+&lt;br&gt;
+&lt;br&gt;
+
+### In other words, it is like playing Sim City. It's just that you don't see the graphic interface, but model parameters :)
+
+
+
+
+
+---
+name: ergm_recap
+description: ergm model features
+# Recap
+
+Outcome variable: Always a .red[Network]
+
+Predictors: Exogenous and Endogenous 
+
+Effects: for both kind of predictors, several effects to look at
+
+Prediction: Linear Model
+
+Specification: Theory driven (Research question, hypothesis testing)
+
+How it works: 
+
+- We specify a model that we believe generates the synthetic reality we care for
+
+- The model expresses a probability distribution that generate networks that behave as the observed one
+
+- We compare real data to the generated data 
+
+- We can make some conclusions on what caused the relationships observed in the network (test the hypothesis)
+
+How does this run? We will talk about the algorithm to estimate these models in the following lessons. 
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# 7. Let's observe a case!
+
+---
+background-image: url(assets/images/school_ergm.jpg)
+background-size: 350px
+background-position: 85% 55%
+name: ergm_reasoning_example
+description: How to approach a research design with ergms
+# Data
+&lt;br&gt;
+We collected network data in a school since we are interested in understanding the dynamics of friendship.
+&lt;br&gt;
+We have three nodal attributes
+
+- their gender
+- their age
+- who is a smoker
+
+
+
+
+
+---
+# Questions and Hypothesis 
+&lt;br&gt;
+## (thinking in regressions mindset -- causal mindset)
+&lt;br&gt;
+RQ: What are the drivers of friendship in this school?
+&lt;br&gt;
+After doing some research we believe that young people are 
+
+
+- more likely to make friends with people of the same gender
+- more likely to make friends with people closer to their age
+- smokers are more likely to be friends with other smokers
+
+---
+# Questions and Hypothesis 
+&lt;br&gt;
+## (thinking in regressions mindset -- causal mindset)
+&lt;br&gt;
+RQ: What are the drivers of friendship in this school?
+&lt;br&gt;
+After doing some research we believe that young people are 
+
+- more likely to make friends with people of the same gender
+- more likely to make friends with people closer to their age
+- smokers are more likely to be friends with other smokers
+
+
+## These hypotheses all refer to exogenous predictors!
+
+---
+# Exogenous effects 
+&lt;br&gt;
+- more likely to make friends with people of the same gender
+
+.red[HOMOPHILY]
+
+---
+# Exogenous effects 
+&lt;br&gt;
+- more likely to make friends with people of the same gender
+
+.red[HOMOPHILY]
+
+- more likely to make friends with people closer to their age
+
+.red[ABSOLUTE DIFFERENCE IN AGE]
+
+---
+# Exogenous effects 
+&lt;br&gt;
+- more likely to make friends with people of the same gender
+
+.red[HOMOPHILY]
+
+- more likely to make friends with people closer to their age
+
+.red[ABSOLUTE DIFFERENCE IN AGE]
+
+- smokers are more likely to be friends with other smokers
+
+.red[HOMOPHILY]
+
+---
+# Questions and Hypothesis (thinking ergm)
+
+&lt;br&gt;
+
+We know that friendship in a school does not have homogeneous patterns (== to random)
+
+- There are some people that are more popular than others 
+- There are some people that are more social than others
+
+---
+# Questions and Hypothesis (thinking ergm)
+&lt;br&gt;
+We know that friendship in a school does not have homogeneous patterns (== to random)
+
+- There are some people that are more popular than others 
+- There are some people that are more social than others
+
+## These hypotheses all refer to endogenous predictors!
+
+---
+# Endogenous effects 
+&lt;br&gt;
+- There are some people that are more popular than others
+
+.red[POPULARITY] -- preferential attachment (Barabasi and Albert)
+
+Receiving ties
+
+---
+# Endogenous effects 
+&lt;br&gt;
+- There are some people that are more popular than others
+
+.red[POPULARITY] -- preferential attachment (Barabasi and Albert)
+
+Receiving ties
+
+- There are some people that are more social than others
+
+.red[SOCIALITY]
+
+Sending ties 
+
+---
+# Model specification
+&lt;br&gt;
+After we did this research design we would know what to insert in our model 
+
+In PROTO-CODE, the model would be something like that
+
+&lt;br&gt;
+
+school ~ .red[HOMOPHILY] (Gender) + .red[ABSOLUTE DIFFERENCE] (Age) + .red[HOMOPHILY] (Smokers) + .red[POPULARITY] + .red[SOCIALITY]
+
+&lt;br&gt;
+
+For this round I leave the math to you since this starts to be quite long :)
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# 8. Software info
+
+
+---
+background-image: url(assets/images/statnet.png)
+background-size: 450px
+background-position: 85% 85%
+name: statnet
+description: Introducing statnet
+
+# statnet
+
+
+### Suite of R packages for the management, exploration, statistical analysis, simulation and visualization of network data. 
+
+
+http://statnet.org/
+
+
+&lt;br&gt;
+
+&lt;br&gt;
+
+&lt;br&gt;
+
+It takes objects of class `networks`
+
+It does NOT take objects of class `igraph`
+
+---
+# And now it is time for tea!
+
+.center[![:scale 60%](assets/images/time_for_tea.jpg)]
+
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="assets/remark-latest.min.js"></script>
+<script src="assets/js/remark-zoom.js"></script>
+<script src="assets/js/macros.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "atom-one-light",
+  "highlightLines": true,
+  "highlightSpans": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": "- %current% -",
+  "ratio": "16:9",
+  "navigation": {
+    "scroll": true
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
