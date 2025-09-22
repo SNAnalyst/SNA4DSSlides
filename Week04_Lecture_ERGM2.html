@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>SOCIAL NETWORK ANALYSIS for DATA SCIENTISTS</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Claudia" />
+    <script src="assets/header-attrs-2.29/header-attrs.js"></script>
+    <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="assets/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="assets/tile-view-0.2.6/tile-view.js"></script>
+    <link href="assets/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="assets/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra_fit-screen-0.2.6/fit-screen.js"></script>
+    <link href="assets/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="assets/panelset-0.3.0/panelset.js"></script>
+    <script src="assets/fabric-4.3.1/fabric.min.js"></script>
+    <link href="assets/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="assets/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="assets/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"xa5e2f077c144752842df07f802fb571","expires":1}</script>
+    <script src="assets/himalaya-1.1.0/himalaya.js"></script>
+    <script src="assets/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="assets/editable-0.2.6/editable.js"></script>
+    <script src="assets/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="assets/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="assets/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/apron.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/descartes.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/tachyons.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/xaringan-extra.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/RL-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS_effects.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/kleuren.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[SOCIAL NETWORK ANALYSIS&lt;br&gt;for DATA SCIENTISTS]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[LECTURE: ERGM II .small-caps.font70[(lecture] .font70[Week 4)]]]
+  ]
+
+&lt;br&gt;
+.f-abel.White-inline[Your lecturer: Claudia]&lt;br&gt;
+.f-abel.White-inline[Playdate: September, 24th, 2025]
+
+
+&lt;!-- setup options start --&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.highlight-last-item &gt; ul &gt; li, 
+.highlight-last-item &gt; ol &gt; li {
+  opacity: 0.5;
+}
+
+.highlight-last-item &gt; ul &gt; li:last-of-type,
+.highlight-last-item &gt; ol &gt; li:last-of-type {
+  opacity: 1;
+
+.bold-last-item &gt; ul &gt; li:last-of-type,
+.bold-last-item &gt; ol &gt; li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+&lt;/style&gt;
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.remark-inline-code {
+  background: #F5F5F5;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.inverse-red, .inverse-red h1, .inverse-red h2, .inverse-red h3, .inverse-red a, inverse-red a &gt; code {
+	border-top: none;
+	background-color: red;
+	color: white; 
+	background-image: "";
+}
+
+.inverse-orange, .inverse-orange h1, .inverse-orange h2, .inverse-orange h3, .inverse-orange a, inverse-orange a &gt; code {
+	border-top: none;
+	background-color: orange;
+	color: black; 
+	background-image: "";
+}
+
+.tab{
+  display: inline-block;
+  margin-left: 40px;
+}
+
+.tab1{tab-size: 2;}
+.tab2{tab-size: 4;}
+.tab3{tab-size: 6;}
+.tab4{tab-size: 8;}
+
+&lt;/style&gt;
+
+
+
+&lt;style type="text/css"&gt;
+.grid-3-2a {
+  display: grid;
+  height: calc(90%);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1em;
+  padding: 1em;
+}
+&lt;/style&gt;
+
+
+&lt;!--scroll box set up --&gt;
+&lt;style type="text/css"&gt;
+./* Allow slides to show overflowing content */
+.remark-slide-content {
+  overflow: visible !important;
+}
+
+/* Scroll box */
+.scroll-box-18 {
+  display: block;           /* make it a block element */
+  max-height: 18em;         /* height of scroll box */
+  overflow-y: auto;         /* vertical scroll */
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fafafa;
+  box-sizing: border-box;   /* include padding in height */
+}
+
+/* Optional: nicer scrollbar */
+.scroll-box-18::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-box-18::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.scroll-box-18::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+
+&lt;/style&gt;
+
+&lt;!-- setup options end --&gt;
+
+
+
+---
+class: course-logo
+layout: true
+
+
+---
+
+# Disclaimer: The LLB conundrum
+&lt;br&gt;
+&lt;br&gt;
+## Lectures + Labs + Books = Good preparation 
+&lt;br&gt;
+
+### I'm not covering the book in class
+
+### The lab puts in practice what we do in class (including the tricks to run the models)
+
+---
+name: Menu
+description: Topics we cover today
+# Menu' for today
+&lt;br&gt;
+- Recap of the previous episode
+- How to fit the models in R
+- Classification of the types of effects
+- Finding your way in the term/effect Jungle
+- Fitting ERGMs with exogenous terms
+
+
+---
+name: ERGM_pronunciation
+description: How to pronounce the name of these models 
+background-image: url(assets/images/Dutch_speaker.jpg)
+background-size: 500px
+background-position: 90% 50%
+# ERGM for a Dutch speaker
+
+&lt;br&gt;
+## Phonetic pronunciation for Dutch speakers
+
+## "eurcoom" 
+
+or
+
+## "eurghum"
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# Recap of the previous episode
+
+---
+name: Recap_ERGM1
+description: Recap of the previous ERGM class
+# Lecture ERGM 1
+&lt;br&gt;
+- ERGMs are models for causal inference - if you do not have Hypotheses to test they make no sense
+
+- Inferential network analysis test Hypotheses about why an observed network is the way it is.
+
+- Two types of effects:
+    
+    - Endogenous: structural - terms that predict the probability of observing a certain network structure
+    
+    - Exogenous: as in GLM - variables external to the network that predict the occurrence of ties
+    
+- ERGM with edges term (Erdos Renyi model)
+- ERGM with edges + sender + receiver + mutual terms (P1 model)
+- ERGM concepts and math 
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# How to fit the models in R
+
+---
+# Data set: Florentine Families
+
+### 16 Families - each node is a family that lived in Florence in the 15th century
+Acciaiuoli - Albizzi - Barbadori - Bischeri - Castellani - Ginori - Guadagni - Lamberteschi - Medici - Pazzi - Peruzzi - Pucci - Ridolfi - Salviati - Strozzi - Tornabuoni
+
+
+### Data collected by historian John Padgett. 
+
+###Two networks: 1) business 2) marriage
+
+
+Attributes: 
+- Wealth (v/n): how reach
+- Number Priorates (v/n): How many times a member of their family was Prior of Florence between 1282 and 1344
+- Weight (e/n): number of times two families do business/marry to each other
+---
+name: Fitting_ER
+description: Fitting an Erdos Renyi model
+# ERGM with edges term (Erdos Renyi)
+
+## Florentine Marriage 
+- 16 nodes - 20 edges - UNDIRECTED
+- We observe a marriage pattern (certain network structure). Is it random?
+- RQ: Do these Florentine families get married in a random way? .red[Is love blind?]
+- H1: Love is not blind in Renaissance Florence
+
+
+
+.center[![:scale 29%](assets/images/Flo-marriage.png)]
+
+
+
+---
+
+## RQ: Is love blind in Renaissance Florence? 
+
+## H: Love is not blind in Renaissance Florence
+
+
+
+
+
+``` r
+flomodel.01 &lt;- ergm::ergm(flomarriage ~ edges)
+summary(flomodel.01)
+```
+
+```
+## Call:
+## ergm::ergm(formula = flomarriage ~ edges)
+## 
+## Maximum Likelihood Results:
+## 
+##       Estimate Std. Error MCMC % z value Pr(&gt;|z|)    
+## edges  -1.6094     0.2449      0  -6.571   &lt;1e-04 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+##      Null Deviance: 166.4  on 120  degrees of freedom
+##  Residual Deviance: 108.1  on 119  degrees of freedom
+##  
+## AIC: 110.1  BIC: 112.9  (Smaller is better. MC Std. Err. = 0)
+```
+
+## Love has very good sight (The p-value is significant)
+
+### negative coefficient in this case means that the network is sparse. 
+
+---
+# ERGM with the edge term (ER)
+
+&lt;br&gt;
+ 
+### Very simple model 
+
+### We can use it to see whether the edges are random or if they exist for a reason
+
+### You will insert the `edge` term in every model -always important
+
+## We use it as the intercept of the model - still it has a meaning
+
+### This will be the first term in every model you run
+
+
+ 
+---
+name: Fitting_P1
+description: Fitting an ERGM with 4 terms - P1 model
+# ERGM with 4 endogenous parameters (P1) 
+## Holland and Leinhardt analyzed Sampson’s monks dataset 
+
+- Ethnographic study of community structure in a New England monastery by Samuel F. Sampson 1968.
+- Social relationships among a group of men (novices) who were preparing to join a monastic order.
+- Simplified data set - 18 nodes - 88 edges - DIRECTED
+
+
+
+.center[![:scale 50%](assets/images/Sampson.png)]
+
+---
+## Holland and Leinhardt analyzed Sampson’s monks dataset (P1 model)
+&lt;br&gt;
+## .red[RQ: Are the social relationships between these monks random or driven by specific social dynamics?]
+## .red[H1: Monks are not friends with everyone (friendship between monks is not random) ]
+
+looking at
+- Probability of forming edges (ER model: edges are not random)
+- probability of a monk wanting to be friends with another monk (sender)
+- Probability that the other monks want to be friends with the first one  (receiver)
+- Probability that the two monks mutually want to be each other's friends (mutual)
+
+
+---
+## Hypothesis testing on Sampson data with P1 formulation 
+
+- NB: multiple terms for one hypothesis 
+- Look at p-values to see whether we can discard the null Hypothesis
+- Look at the coefficient to appraise the intensity of the effect
+- Relate results of sender and receiver to the focal node only (!!!) 
+
+
+
+.scroll-box-18[
+
+``` r
+p1 &lt;- ergm::ergm(sampson ~ edges + sender + receiver + mutual) 
+
+summary(p1)
+```
+
+```
+## Call:
+## ergm::ergm(formula = sampson ~ edges + sender + receiver + mutual)
+## 
+## Monte Carlo Maximum Likelihood Results:
+## 
+##            Estimate Std. Error MCMC % z value Pr(&gt;|z|)    
+## edges      -2.92437    0.90438      0  -3.234  0.00122 ** 
+## sender2    -0.54652    1.12866      0  -0.484  0.62823    
+## sender3     0.25538    1.06199      0   0.240  0.80997    
+## sender4    -0.35179    1.05470      0  -0.334  0.73872    
+## sender5    -0.22805    1.10388      0  -0.207  0.83633    
+## sender6     0.02975    1.13023      0   0.026  0.97900    
+## sender7    -0.50708    1.14970      0  -0.441  0.65917    
+## sender8    -1.13585    1.10660      0  -1.026  0.30469    
+## sender9     0.29277    1.05838      0   0.277  0.78207    
+## sender10   -0.70883    1.11023      0  -0.638  0.52318    
+## sender11   -1.37664    1.11139      0  -1.239  0.21547    
+## sender12   -0.02909    1.08122      0  -0.027  0.97853    
+## sender13    0.30468    1.07278      0   0.284  0.77640    
+## sender14   -0.02732    1.09496      0  -0.025  0.98009    
+## sender15    0.30170    1.04629      0   0.288  0.77307    
+## sender16   -0.01438    1.07077      0  -0.013  0.98929    
+## sender17    0.02841    1.09585      0   0.026  0.97932    
+## sender18    0.28250    1.07952      0   0.262  0.79356    
+## receiver2   1.13637    1.06856      0   1.063  0.28758    
+## receiver3  -0.76478    1.49469      0  -0.512  0.60889    
+## receiver4   1.67601    1.03031      0   1.627  0.10380    
+## receiver5   0.66373    1.10084      0   0.603  0.54656    
+## receiver6   0.03278    1.15977      0   0.028  0.97745    
+## receiver7   1.13880    1.06866      0   1.066  0.28659    
+## receiver8   2.21283    1.00565      0   2.200  0.02778 *  
+## receiver9  -0.87033    1.43752      0  -0.605  0.54488    
+## receiver10  1.51826    1.05344      0   1.441  0.14952    
+## receiver11  2.72756    0.99830      0   2.732  0.00629 ** 
+## receiver12  0.06470    1.21953      0   0.053  0.95769    
+## receiver13 -0.83182    1.42229      0  -0.585  0.55866    
+## receiver14  0.07106    1.19578      0   0.059  0.95261    
+## receiver15 -0.86525    1.39924      0  -0.618  0.53633    
+## receiver16  0.06275    1.19123      0   0.053  0.95799    
+## receiver17  0.04868    1.19893      0   0.041  0.96762    
+## receiver18 -0.82386    1.32464      0  -0.622  0.53398    
+## mutual      3.13065    0.68036      0   4.601  &lt; 1e-04 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+##      Null Deviance: 424.2  on 306  degrees of freedom
+##  Residual Deviance: 227.1  on 270  degrees of freedom
+##  
+## AIC: 299.1  BIC: 433.2  (Smaller is better. MC Std. Err. = 0.26)
+```
+]
+
+---
+# Individuals  VS network structure
+&lt;br&gt;
+## Sender and Receiver provide you with results about each node other than the focal one
+
+## .red[They are an exception!]
+
+## .center[most terms inform us about the network overall]
+
+## .center[statistical models are  mostly about collective behavior]
+
+## .center[rather than individual behavior]
+
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# Classification of the types of terms/effects
+
+---
+name: ERGM_Effects
+description: More about ERGM Effects and estimation
+# Classification of the types of terms/effects
+
+## classif. 1
+
+.center[![:scale 60%](assets/images/storm2.png)] 
+
+---
+
+# Classification of the types of terms/effects
+
+## classif. 2
+
+.center[![:scale 70%](assets/images/dyadicDepIndep.png)] 
+
+
+---
+# Estimation VS Simulation
+
+&lt;br&gt;
+### .red[Independence]
+- Mathematically tractable
+- Solved by Maximum Likelihood Estimation MLE 
+- (or other, it depends)
+
+### .red[Interdependence] 
+- Mathematically INtractable
+- Solved with approximation via simulation using Markov Chains Monte Carlo MCMC 
+- (or other, it depends)
+
+---
+# Example
+
+## TERM Mutual
+
+- endogenous  
+- dyadic interdependent (or dependent)
+- Mathematically INtractable: Solved with approximation via simulation using Markov Chains Monte Carlo MCMC
+
+## TERMS edges/sender/receiver
+
+- endogenous 
+- dyadic independent
+- Mathematically tractable: Solved by Maximum Likelihood Estimation MLE 
+
+
+---
+# Other classifications
+ &lt;br&gt;
+- Unipartite - Bipartite
+
+- Directed - Undirected
+
+   D:  istar - ostar 
+    
+   UND:  star
+
+- Quadratic - Markovian
+
+    triangles
+    
+    GWESP (geometrically weighted edgewise shared partners)
+    
+- Binary - Weighted
+
+- ...
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# Finding your way in the Term/Effect Jungle
+
+---
+name: Finding_Effects
+description: How to find ERGM term/effects in the help files
+# A term/effect Jungle
+.center[![:scale 80%](assets/images/toomanyeffects.png)]
+
+---
+# Use the help file!
+
+
+.center[![:scale 80%](assets/images/ergm-term-helpfile.png)]
+
+.footnote[https://cran.r-project.org/web/packages/ergm/vignettes/ergm-term-crossRef.html]
+
+
+---
+# Use the help file!
+
+### `ergm::search.ergmTerms(keyword, net, categories, name)`
+
+### Arguments
+
+.red[search]: optional character search term to search for in the text of the term descriptions. Only matching terms will be returned. Matching is case insensitive.
+
+.red[net]: a network object that the term would be applied to, used as template to determine directedness, bipartite, etc
+
+.red[keywords]: optional character vector of keyword tags to use to restrict the results (i.e. 'curved', 'triad-related')
+
+.red[name]: optional character name of a specific term to return
+
+.red[packages]: optional character vector indicating the subset of packages in which to search
+
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# Fitting ERGMs with exogenous terms
+
+
+
+
+
+
+
+
+---
+name: Fitting_ERGM_exogenous
+description: Fitting ERGMs with exogenous terms
+# Fitting an ergm with exo terms 
+
+## So far, we only explored endogenous terms. Let's explore exogenous
+
+- something that comes from the outside of the network structure
+
+Wealth of the Florentine families. 
+
+
+.center[![:scale 40%](assets/images/wealthFlorentine.png)]
+Exogenous covariates make the ERG model equivalent to logistic regressions. no simulation (MCMC)
+
+
+
+
+---
+# One Exogenous Dyadic independent term
+
+&lt;br&gt;
+
+### Q: Are rich people more likely to get married?
+
+### H1: The richer a family is, the more likely its members are to marry into other families 
+
+### TERM: `nodecov()` Probability of a tie given the receiver having the similar attribute. 
+
+&lt;br&gt;
+
+
+``` r
+flo.wealth &lt;- ergm::ergm(flomarriage ~ edges + nodecov("Wealth"))
+```
+
+---
+# Results
+
+- `edges` is (like) the intercept
+- `nodecov("Wealth")` is like any other numeric variable in a Logistic regression
+ 
+
+
+``` r
+summary(flo.wealth)
+```
+
+```
+## Call:
+## ergm::ergm(formula = flomarriage ~ edges + nodecov("Wealth"))
+## 
+## Maximum Likelihood Results:
+## 
+##                 Estimate Std. Error MCMC % z value Pr(&gt;|z|)    
+## edges          -2.594929   0.536056      0  -4.841   &lt;1e-04 ***
+## nodecov.Wealth  0.010546   0.004674      0   2.256   0.0241 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+##      Null Deviance: 166.4  on 120  degrees of freedom
+##  Residual Deviance: 103.1  on 118  degrees of freedom
+##  
+## AIC: 107.1  BIC: 112.7  (Smaller is better. MC Std. Err. = 0)
+```
+
+---
+# Other option
+&lt;br&gt;
+## Likelihood to marry in general or to marry whom?
+
+&lt;br&gt;
+## RQ: Do families of equal wealth seek marital alliances with one another?
+## H1: Families of equal wealth tend to form marital alliances with one another.
+&lt;br&gt;
+
+### TERM: `absdiff` - Probability of a tie given the similarity between sender and receiver. 
+
+
+``` r
+flo.wealth1 &lt;- ergm::ergm(flomarriage ~ edges  + absdiff("Wealth"))
+```
+
+---
+# Results second hypothesis
+
+
+
+``` r
+flo.wealth1 &lt;- ergm::ergm(flomarriage ~ edges + absdiff("Wealth"))
+
+summary(flo.wealth1)
+```
+
+```
+## Call:
+## ergm::ergm(formula = flomarriage ~ edges + absdiff("Wealth"))
+## 
+## Maximum Likelihood Results:
+## 
+##                 Estimate Std. Error MCMC % z value Pr(&gt;|z|)    
+## edges          -2.302042   0.401906      0  -5.728   &lt;1e-04 ***
+## absdiff.Wealth  0.015519   0.006157      0   2.521   0.0117 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+##      Null Deviance: 166.4  on 120  degrees of freedom
+##  Residual Deviance: 102.0  on 118  degrees of freedom
+##  
+## AIC: 106  BIC: 111.5  (Smaller is better. MC Std. Err. = 0)
+```
+
+---
+# Final Model and Results
+
+## Can we reject the two null Hypotheses? 
+
+
+``` r
+flo.wealth2 &lt;- ergm::ergm(flomarriage ~ edges + nodecov("Wealth") + absdiff("Wealth"))
+
+summary(flo.wealth2)
+```
+
+```
+## Call:
+## ergm::ergm(formula = flomarriage ~ edges + nodecov("Wealth") + 
+##     absdiff("Wealth"))
+## 
+## Maximum Likelihood Results:
+## 
+##                 Estimate Std. Error MCMC % z value Pr(&gt;|z|)    
+## edges          -2.527091   0.535994      0  -4.715   &lt;1e-04 ***
+## nodecov.Wealth  0.004506   0.006791      0   0.664    0.507    
+## absdiff.Wealth  0.011143   0.008950      0   1.245    0.213    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+##      Null Deviance: 166.4  on 120  degrees of freedom
+##  Residual Deviance: 101.5  on 117  degrees of freedom
+##  
+## AIC: 107.5  BIC: 115.9  (Smaller is better. MC Std. Err. = 0)
+```
+
+---
+# Model Comparison
+
+
+``` r
+texreg::screenreg(list(flo.wealth,flo.wealth1, flo.wealth2))
+```
+
+```
+## 
+## ==================================================
+##                 Model 1     Model 2     Model 3   
+## --------------------------------------------------
+## edges            -2.59 ***   -2.30 ***   -2.53 ***
+##                  (0.54)      (0.40)      (0.54)   
+## nodecov.Wealth    0.01 *                  0.00    
+##                  (0.00)                  (0.01)   
+## absdiff.Wealth                0.02 *      0.01    
+##                              (0.01)      (0.01)   
+## --------------------------------------------------
+## AIC             107.11      105.95      107.52    
+## BIC             112.68      111.53      115.88    
+## Log Likelihood  -51.55      -50.98      -50.76    
+## ==================================================
+## *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05
+```
+
+
+---
+background-image: url(assets/images/Sheldon.jpg)
+background-size: 450px
+background-position: 70% 70%
+## Conclusions?
+
+&lt;br&gt;
+### Is love in the air? Or is money in the bank?
+
+---
+background-image: url(assets/images/ReadingResultsLogScale.png)
+background-size: 750px
+background-position: 50% 70%
+# Reading Results -significance
+&lt;br&gt;
+## ERGMs results are interpreted the same way as logistic regressions' results.
+
+## Is it significant?
+
+---
+# Reading Results -intensity
+&lt;br&gt;
+## If the effect is significant, move on checking the intensity. 
+
+## Two options: 
+
+- odds ratios .red[exp(coef)]
+- probability .red[I'll give you the formula later :)]
+
+---
+
+# How to use ERGMs
+
+## Multiple hypotheses to test
+
+## Combine endogenous and exogenous terms (always)
+
+## DO NOT FIT ERGM with Exogenous variables only (!!!) - in case it was not clear
+
+## Check the combination of your terms
+
+## Make hypotheses as sharp as possible (in this example either nodecov or absdiff)
+
+
+---
+# See you next week!
+
+.center[![:scale 40%](assets/images/Lorenzo_de_Medici.jpg)]
+
+
+
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="assets/remark-latest.min.js"></script>
+<script src="assets/js/remark-zoom.js"></script>
+<script src="assets/js/macros.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "atom-one-light",
+  "highlightLines": true,
+  "highlightSpans": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": "- %current% -",
+  "ratio": "16:9",
+  "navigation": {
+    "scroll": true
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
