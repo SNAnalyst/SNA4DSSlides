@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>SOCIAL NETWORK ANALYSIS for DATA SCIENTISTS</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Gergő" />
+    <script src="assets/header-attrs-2.29/header-attrs.js"></script>
+    <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="assets/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="assets/tile-view-0.2.6/tile-view.js"></script>
+    <link href="assets/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="assets/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra_fit-screen-0.2.6/fit-screen.js"></script>
+    <link href="assets/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="assets/panelset-0.3.0/panelset.js"></script>
+    <script src="assets/fabric-4.3.1/fabric.min.js"></script>
+    <link href="assets/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="assets/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="assets/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"xd7f2525a2bb4106b5f1340c00f6b493","expires":1}</script>
+    <script src="assets/himalaya-1.1.0/himalaya.js"></script>
+    <script src="assets/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="assets/editable-0.2.6/editable.js"></script>
+    <script src="assets/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="assets/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="assets/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/apron.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/descartes.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/tachyons.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/xaringan-extra.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/RL-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS_effects.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/kleuren.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[SOCIAL NETWORK ANALYSIS&lt;br&gt;for DATA SCIENTISTS]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[NETWORK VISUALIZATIONS .small-caps.font70[(lecture] .font70[LAB Week 05)]]]
+  ]
+
+&lt;br&gt;
+.f-abel.White-inline[Your lecturer: Gergő]&lt;br&gt;
+.f-abel.White-inline[Playdate: September, 23rd, 2025]
+
+
+&lt;!-- setup options start --&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.highlight-last-item &gt; ul &gt; li, 
+.highlight-last-item &gt; ol &gt; li {
+  opacity: 0.5;
+}
+
+.highlight-last-item &gt; ul &gt; li:last-of-type,
+.highlight-last-item &gt; ol &gt; li:last-of-type {
+  opacity: 1;
+
+.bold-last-item &gt; ul &gt; li:last-of-type,
+.bold-last-item &gt; ol &gt; li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+&lt;/style&gt;
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.remark-inline-code {
+  background: #F5F5F5;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.inverse-red, .inverse-red h1, .inverse-red h2, .inverse-red h3, .inverse-red a, inverse-red a &gt; code {
+	border-top: none;
+	background-color: red;
+	color: white; 
+	background-image: "";
+}
+
+.inverse-orange, .inverse-orange h1, .inverse-orange h2, .inverse-orange h3, .inverse-orange a, inverse-orange a &gt; code {
+	border-top: none;
+	background-color: orange;
+	color: black; 
+	background-image: "";
+}
+
+.tab{
+  display: inline-block;
+  margin-left: 40px;
+}
+
+.tab1{tab-size: 2;}
+.tab2{tab-size: 4;}
+.tab3{tab-size: 6;}
+.tab4{tab-size: 8;}
+
+&lt;/style&gt;
+
+
+
+&lt;style type="text/css"&gt;
+.grid-3-2a {
+  display: grid;
+  height: calc(90%);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1em;
+  padding: 1em;
+}
+&lt;/style&gt;
+
+&lt;!-- setup options end --&gt;
+
+
+
+---
+class: course-logo
+layout: true
+
+---
+name: Menu
+description: Topics covered in today's lab
+# Menu' for today
+&lt;br&gt;
+&lt;br&gt;
+1. In the making of a viz
+  1. What
+  2. Why
+  3. How
+2. Homeplay
+3. Tricks or treats
+4. Final Remarks
+
+
+
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+&gt; "As network researchers our biggest advantage in communicating our impact is the really pretty pictures we can make."  
+\-  _Anonymous Network Scholar at a conference_
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# 1. In the making of a viz
+---
+name: Thinking_Viz
+description: How to conceptualize visualizations before plotting them
+# What's a viz?
+
+.center[![:scale 70%](assets/images/viz.concept.png)]
+---
+# What's a viz?
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+## VISUALIZATION = MESSAGE
+&lt;br&gt;
+### Metaphor for some parts of reality or concepts that we are explaining
+
+---
+# Anatomy of a visualization 
+&lt;br&gt;
+## **What** are you working with?
+&lt;br&gt;
+## **Why** are you making the viz?
+&lt;br&gt;
+## **How** can you best achieve this goal?
+
+
+.footnote[Excellent book on visualizations: Munzner, T. (2015). Visualization analysis &amp; design. CRC Press. https://doi.org/10.1201/b17511 ]
+
+---
+# What are you working with?
+
+---
+# What are you working with?
+&lt;br&gt;
+## Taking stock of your resources
+
+---
+# What are you working with?
+&lt;br&gt;
+## Taking stock of your resources
+
+## You have a network
+
+---
+# What are you working with?
+&lt;br&gt;
+## Taking stock of your resources
+
+## You have a network
+
+### What about attributes?
+- Nodes/edges? 
+- Categorical? Continuous? Ordinal? 
+- Temporal stuff?
+- Missing data?
+
+---
+# What are you working with?
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+## Taking stock of your raw materials is the foundation of the visualization process.
+
+---
+# Why are you making the visualization?
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+## What's the goal of the viz?
+  
+## What is the message you want to get across?
+  
+## Who is your audience?
+
+---
+# Why are you making the visualization?
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+## Discover? Present? Enjoy? 
+
+
+---
+# Why are you making the visualization?
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+## Discover? Present? Enjoy? 
+## Compare? Identify? Summarize? 
+
+---
+# Why are you making the visualization?
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+## Discover? Present? Enjoy? 
+## Compare? Identify? Summarize? 
+&lt;br&gt;
+&lt;br&gt;
+## No right or wrong, just make sure you're clear on this.
+
+---
+
+# Some skin in the game: my visualizations
+
+
+
+
+![:scale 45%](assets/images/network_subs_plot.png)  ![:scale 45%](assets/images/sharing_plot 1.png)
+
+---
+# **How** you can best achieve these goals?
+
+&lt;br&gt;
+## In this class it's `igraph`. Still, which `igraph` functions are most useful for your goals?
+
+## Get to know your tool, make the most of it. 
+
+---
+# c. Does your strategy work with your data and with your tool? 
+&lt;br&gt;
+
+.center[![:scale 60%](assets/images/puzzle.jpg)]
+
+ 
+---
+background-image: url(assets/images/green_edges.jpg)
+background-size: 350px
+background-position: 50% 85%
+# Example 1 
+&lt;br&gt;
+## You want to show passages in a network of football players.
+
+### Since the football court is green you decide it would be impactful to use the color green for the edges (passages). 
+    
+ 
+
+.footnote[Match the idea with the reality of the tools you have: It is theoretically a nice, but impossible to read it.]
+
+
+---
+background-image: url(assets/images/curved_edges.jpg)
+background-size: 350px
+background-position: 50% 85%
+# Example 2
+&lt;br&gt;
+
+## You are plotting a network of dancers and you decide that using curved edges is more romantic.
+
+.footnote[Match the idea with the reality of the tools you have: You might be artistically right, but it gets really hard to see where the edges are going] 
+
+
+---
+# d. Fancy versus functional
+&lt;br&gt;
+&lt;br&gt;
+## You want to insert too much information in a very elaborated way
+   
+- many colors
+- weird node shapes
+- labels on the nodes and edges
+- ...
+    
+## Networks are a bit too powerful for their (your) own good.
+  
+---
+# Tutorials plot: &lt;br&gt; What's the message? Is it clear?
+
+.center[![:scale 40%](assets/images/PlotDsStudentsHomophily.png)]
+
+
+
+.footnote[Can you see social dynamics? Can you plot it better to show homophily?]
+
+---
+.center[![:scale 40%](assets/images/LessIsMore.png)]
+
+---
+# Better?
+
+.center[![:scale 40%](assets/images/homophily_by_year.jpg)]
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# 2. Homeplay
+
+---
+name: homeplay
+description: Discussing the homeplay
+# What is this network about?
+
+&lt;br&gt;
+### Load the network “UKfaculty”
+
+### 81 nodes
+
+### 817 edges
+
+### 1 nodes attribute (school affiliation)
+
+### 1 edge attribute (how often they are in contact)
+
+---
+# Very simple story
+
+&lt;br&gt;
+### There are people working in a university and they are organized in three groups. 
+[same as JADS: we have three units]
+
+## Story/Goal
+
+### You want to be able to show the pattern of contacts within groups and accross groups
+
+---
+# Plot 1 Instruction
+&lt;br&gt;
+
+### make a visualization using 
+
+* one edge attribute
+
+* one node attribute
+
+
+### that are able to tell what is happening in this network. 
+
+### Decide what is the best way to represent this story first and plot after.
+
+---
+&lt;div style="
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+  justify-items: center;
+"&gt;
+
+  &lt;img src="assets/images/real-1.png" style="max-width: 100%; height: auto; border-radius: 5px;"&gt;
+
+  &lt;img src="assets/images/real-2.png" style="max-width: 100%; height: auto; border-radius: 5px;"&gt;
+
+  &lt;img src="assets/images/real-3.png" style="max-width: 100%; height: auto; border-radius: 5px;"&gt;
+
+  &lt;img src="assets/images/real-4.png" style="max-width: 100%; height: auto; border-radius: 5px;"&gt;
+
+  &lt;img src="assets/images/real-5.png" style="max-width: 80%; height: auto; border-radius: 5px;"&gt;
+
+  &lt;img src="assets/images/real.png" style="max-width: 50%; height: auto; border-radius: 5px;"&gt;
+
+&lt;/div&gt;
+
+---
+
+## Too powerful for it's own good?
+
+![](assets/images/funny-6.png)
+
+
+---
+# Plot 2 Instruction
+&lt;br&gt;
+
+### Plot the same graph, but with
+
+
+* a lattice layout (just for fun) 
+* nodes with a rectangular shape
+* black nodes
+* white nodes labels
+* a surprise element of your choice!
+
+
+
+
+
+---
+
+&lt;!-- Container for the entire grid --&gt;
+&lt;div style="width: 100%; margin: 0 auto;"&gt;
+
+&lt;div style="
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin: 20px 0;
+  justify-items: center;
+  align-items: center;
+"&gt;
+
+  &lt;img src="assets/images/funny-1.png" style="max-width: 100%; max-height: 320px; object-fit: contain;"&gt;
+
+  &lt;img src="assets/images/funny-2.png" style="max-width: 100%; max-height: 320px; object-fit: contain;"&gt;
+
+  &lt;img src="assets/images/funny-3.png" style="max-width: 100%; max-height: 320px; object-fit: contain;"&gt;
+
+  &lt;img src="assets/images/funny-4.png" style="max-width: 100%; max-height: 320px; object-fit: contain;"&gt;
+
+  &lt;img src="assets/images/funny-5.png" style="max-width: 100%; max-height: 320px; object-fit: contain;"&gt;
+
+  &lt;img src="assets/images/funny.png" style="max-width: 100%; max-height: 320px; object-fit: contain;"&gt;
+
+&lt;/div&gt;
+
+
+---
+# Plot 2 from one of your former colleagues 
+
+.center[![:scale 80%](assets/images/SNA_plot_bad.png)]
+
+---
+# Plot 2 from some of last year's students ^_^
+
+.center[![:scale 80%](assets/images/MergegViz2.png)]
+
+
+
+
+---
+background-image: url(assets/images/Homeplay_funnyPlot.jpg)
+background-size: 500px
+background-position: 50% 85%
+# I'm funny and I know it!
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# 3. Tricks or treats
+
+---
+# Storing the color in the graph
+
+### In the tutorial: node color scale plot 
+
+.scroll-box-18[
+
+``` r
+# # Generate colors based on how often they hang out:
+# colrs &lt;- c("cadetblue", "dodgerblue", "dodgerblue3", "blue", "darkblue" )
+# # create a new attribute with the color
+# igraph::V(net)$color &lt;- colrs[igraph::V(net)$Hang.Out] # we attribute each category to a colour
+# 
+# plot(net,
+#      edge.arrow.size = .2, 
+#      edge.color = "gray80",
+#      vertex.frame.color = "#ffffff",#node perimeter
+#      vertex.label = igraph::V(net)$gender, 
+#      vertex.label.cex = 0.6,  # vertex label size
+#      vertex.label.color = "black", 
+#      vertex.size = igraph::V(net)$DS*2,
+# ) 
+```
+]
+
+
+---
+name: Storing_plot_features
+description: Alternative way of plotting with storing plot parameters in the graph
+# Storing plot features BEFORE the function
+
+In general, you can also set your preferences before the plot 
+
+###  Add attributes with the parameter names the same way you would add columns to a data frame
+In the second way parameters remain stored
+.scroll-box-18[
+
+``` r
+################################################################################
+#                         As we did it so far
+################################################################################
+# 
+# plot(UKfaculty,
+#      vertex.shape="circle",
+#      vertex.label = NA,
+#      vertex.color = igraph::V(UKfaculty)$Group,
+#      edge.width = igraph::E(UKfaculty)$weight*0.5,
+#      edge.arrow.size = 0.1,
+#      layout = igraph::layout_on_grid,
+#      main= "Homophilic behavior by group")
+
+################################################################################
+#                          Alternative way
+################################################################################
+#
+# igraph::V(UKfaculty)$color &lt;-  igraph::V(UKfaculty)$Group
+# igraph::E(UKfaculty)$width &lt;-  igraph::E(UKfaculty)$weight*0.5
+# igraph::graph_attr(UKfaculty, "layout") &lt;- igraph::layout_on_grid
+# 
+# plot(UKfaculty,
+#      vertex.shape="circle",
+#      vertex.label = NA,
+#      edge.arrow.size = 0.1,
+#      main= "Homophilic behavior by group")
+```
+]
+
+---
+name: edge_as_color_scale
+description: Plotting a color scale on the edges
+# Storing the weight of the edges as color
+
+.center[![:scale 60%](assets/images/UKfaculty_edgecolorscale.png)]
+
+---
+# DIY
+
+.scroll-box-18[
+
+``` r
+###### edge weight in color 
+
+# table(igraph::E(UKfaculty)$weight)
+# 
+# 
+# igraph::E(UKfaculty)$Ecolor &lt;- ifelse(igraph::E(UKfaculty)$weight &lt;= 5, "cadetblue",
+#                                       ifelse(igraph::E(UKfaculty)$weight &gt; 5 &amp; igraph::E(UKfaculty)$weight &lt;= 10, "dodgerblue",
+#                                              ifelse(igraph::E(UKfaculty)$weight &gt; 10 &amp; igraph::E(UKfaculty)$weight &lt;= 15, "blue",
+#                                                     ifelse(igraph::E(UKfaculty)$weight &gt; 15, "darkblue", NA))))
+# 
+#                                       
+# table(igraph::E(UKfaculty)$Ecolor)
+# 
+# 
+# plot(UKfaculty,
+#      edge.arrow.size = .5, 
+#      edge.size = 2,
+#      edge.color = igraph::E(UKfaculty)$Ecolor,
+#      vertex.color = igraph::V(UKfaculty)$Group, 
+#      vertex.frame.color = "#ffffff",#node perimeter
+#      vertex.label = NA, 
+#      vertex.size = 6, 
+#      layout = igraph::layout.fruchterman.reingold, 
+#      main = "UKfaculty: Groups and relationships"
+# ) 
+# 
+# colrs &lt;- c("cadetblue", "dodgerblue", "blue", "darkblue")
+# graphics::legend(x = -1.5, y = -1.1, c("below 5 times","between 5 and 10 times", 
+#                  "between 10 and 15 times", "over 15 times"), pch = 21,
+#                  col = "#777777", pt.bg = colrs, pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+# 
+# 
+```
+]
+
+
+
+---
+name: layout_customization
+description: How to manually customize a layout
+background-image: url(assets/images/HomeplayplotLwfr.jpg)
+background-size: 500px
+background-position: 75% 85%
+# Beyond the standard layout
+&lt;br&gt;
+&lt;br&gt;
+## This can be improved! 
+&lt;br&gt;
+&lt;br&gt;
+`igraph::layout_with_fr`
+
+---
+# How does the layout work?
+
+
+
+### The layout in igraph is defined in a matrix with 2 columns and a row for each node. 
+&lt;br&gt;
+- The first column indicates its x position
+- the second its y position
+
+``` r
+l &lt;-igraph::layout_with_fr(UKfaculty) 
+
+head(l)
+```
+
+```
+##            [,1]       [,2]
+## [1,]  4.0739535  0.1090275
+## [2,]  0.8193353 -0.9541154
+## [3,]  5.0157268 -1.1062330
+## [4,]  4.0789881 -0.8188556
+## [5,]  1.1625098  0.8588182
+## [6,] -0.5412988  0.3943771
+```
+
+---
+# Modify an existing layout
+The scale is not relevant (it is always re-scaled to fit a -1 to 1 plotting area. 
+
+You can get this layout before plotting by just calling the layout function on the graph:
+
+
+``` r
+l &lt;- igraph::layout_on_grid(UKfaculty) 
+ 
+l[1, ] &lt;- c(-1, -1)
+ 
+# plot(UKfaculty, 
+#       vertex.shape="rectangle",
+#       vertex.label.color = "white",
+#       vertex.color = "black",
+#       layout = l, 
+#       main= "My plot")
+```
+---
+# Beyond the layout
+
+.center[![:scale 70%](assets/images/Layout_changed.png)]
+
+
+---
+name: tkplot
+description: Usage of the manual layout function
+# Move! 
+
+This cannot work in the slides! 
+
+
+``` r
+# igraph::tkplot(UKfaculty)
+```
+
+
+---
+name: Color_palette
+description: Finding colors for plots in R
+# Color palette
+
+- hexadecimal color codes
+- `demo("colors")` that are inbuilt in R `grDevices`
+- several packages
+
+.center[![:scale 40%](assets/images/RbaseColors.png)]
+
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# 4. Final Remarks
+---
+# Your Book
+&lt;br&gt;
+### ... is plotting using `network` 
+
+### that code won't work with `igraph` objects. 
+&lt;br&gt;
+
+### Still, the logic is very similar
+
+### `snafun::to_igraph` &amp; `snafun::plot` 
+
+### OR you can always use `intergraph` and plot in `igraph`
+
+### OR look up the corresponding paramenters and plot in `network`
+
+
+
+---
+name: Parameter_summary
+description: A summary of the most useful parameters for plotting in igraph
+## .red[Parameters RECAP] there are many more. These are the essentials
+
+### vertex:
+- `vertex.shape`
+- `vertex.color`
+- `vertex.label`
+- `vertex.size`
+- `vertex.frame.color`
+
+### edge:
+- `edge.arrow.size`
+- `edge.color`
+- `edge.width`
+
+### overall:  `layout`
+
+
+---
+name: Viz2022Data
+description: Visualization of 2022 cohort data
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# Some more JADS students Viz!
+
+.center[![:scale 30%](assets/images/ice-cream_sundaes_royal-banana-split.jpg)]
+
+---
+&lt;br&gt;
+# The tutorial data is from 2 years ago! 
+&lt;br&gt;
+## Still...
+&lt;br&gt;
+## .center[.red[Let's take a look to JADS data!]]
+
+
+---
+# What does this image tell us?
+
+.center[![:scale 60%](assets/images/FriendNatFreq.jpg)]
+
+---
+# What does this image tell us?
+
+.center[![:scale 60%](assets/images/NatDSCloseness.jpg)]
+
+---
+# Etenstijd!
+
+.center[![:scale 70%](assets/images/School-Lunch-Inspiration.jpg)]
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="assets/remark-latest.min.js"></script>
+<script src="assets/js/remark-zoom.js"></script>
+<script src="assets/js/macros.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "atom-one-light",
+  "highlightLines": true,
+  "highlightSpans": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": "- %current% -",
+  "ratio": "16:9",
+  "navigation": {
+    "scroll": true
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
