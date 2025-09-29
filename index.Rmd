@@ -266,3 +266,89 @@ lectureName <- "Week 03 -- Lab: Intro to statistical network models"
 
 
 
+                                                                                                                 
+<!-- Week 03 -- Lecture: ERGM I -->                                                                                 
+```{r, include = FALSE}                                                                                             
+overview <- matrix(c(                                                                                               
+"Causal_inference_recap", "Causal inference models we did so far",                                                  
+"Causal_inference_recap2", "Causality",                                                                             
+"Causal_inference_recap3", "Causality explanation of example",                                                      
+"conceptualizing_ergm_outcome_var", "ergm outcome variable is always a network, it can be seen as a dummy variable",
+"Erdos_Renyi", "Erdos Renyi model",                                                                                 
+"Erdos_Renyi1", "Erdos Renyi model example",                                                                        
+"P1_model", "P1 model",                                                                                             
+"Predictors", "Exogeneous and Endogeneous effects",                                                                 
+"ergm_math", "Mathematical model of the ERGM",                                                                      
+"ergm_effects", "intuitive idea of ergm effects within the model",                                                  
+"ergm_theory", "How to theoretically approach an ergm",                                                             
+"ergm_recap", "ergm model features",                                                                                
+"ergm_reasoning_example", "How to approach a research design with ergms",                                           
+"statnet", "Introducing statnet"                                                                                    
+), byrow = TRUE, ncol = 2) |>                                                                                       
+as.data.frame() |>                                                                                                  
+setNames(c("name", "description"))                                                                                  
+                                                                                                                 
+slidedeckFile <- "Week03_Lecture_ERGM1"                                                                             
+lectureName <- "Week 03 -- Lecture: ERGM I"                                                                         
+```                                                                                                                 
+                                                                                                                 
+`r make_overview(overview, path, slidedeckFile, lectureName)` 
+
+
+<!-- Week 04 -- Lab: Network Visualization -->                                                   
+```{r, include = FALSE}                                                                          
+overview <- matrix(c(                                                                            
+"Menu", "Topics covered in today's lab",                                                         
+"Thinking_Viz", "How to conceptualize visualizations before plotting them",                      
+"homeplay", "Discussing the homeplay",                                                           
+"Storing_plot_features", "Alternative way of plotting with storing plot parameters in the graph",
+"edge_as_color_scale", "Plotting a color scale on the edges",                                    
+"layout_customization", "How to manually customize a layout",                                    
+"tkplot", "Usage of the manual layout function",                                                 
+"Color_palette", "Finding colors for plots in R",                                                
+"Parameter_summary", "A summary of the most useful parameters for plotting in igraph",           
+"Viz2022Data", "Visualization of 2022 cohort data"                                               
+), byrow = TRUE, ncol = 2) |>                                                                    
+as.data.frame() |>                                                                               
+setNames(c("name", "description"))                                                               
+                                                                                              
+slidedeckFile <- "Week04-Lab-Visualizations"                                                     
+lectureName <- "Week 04 -- Lab: Network Visualization"                                           
+```                                                                                              
+                                                                                              
+`r make_overview(overview, path, slidedeckFile, lectureName)` 
+
+
+
+
+<!-- Week 04 -- Lecture: ERGM II -->                                 
+```{r, include = FALSE}                                              
+overview <- matrix(c(                                                
+"Menu", "Topics we cover today",                                     
+"ERGM_pronunciation", "How to pronounce the name of these models",   
+"Recap_ERGM1", "Recap of the previous ERGM class",                   
+"Fitting_ER", "Fitting an Erdos Renyi model",                        
+"Fitting_P1", "Fitting an ERGM with 4 terms - P1 model",             
+"ERGM_Effects", "More about ERGM Effects and estimation",            
+"Finding_Effects", "How to find ERGM term/effects in the help files",
+"Fitting_ERGM_exogenous", "Fitting ERGMs with exogenous terms"       
+), byrow = TRUE, ncol = 2) |>                                        
+as.data.frame() |>                                                   
+setNames(c("name", "description"))                                   
+                                                                  
+slidedeckFile <- "Week04_Lecture_ERGM2"                              
+lectureName <- "Week 04 -- Lecture: ERGM II"                         
+```                                                                  
+                                                                  
+`r make_overview(overview, path, slidedeckFile, lectureName)`   
+
+
+
+
+
+
+
+
+
+
+
