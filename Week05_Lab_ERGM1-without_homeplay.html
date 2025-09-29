@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>SOCIAL NETWORK ANALYSIS for DATA SCIENTISTS</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Claudia" />
+    <script src="assets/header-attrs-2.29/header-attrs.js"></script>
+    <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="assets/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="assets/tile-view-0.2.6/tile-view.js"></script>
+    <link href="assets/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="assets/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra_fit-screen-0.2.6/fit-screen.js"></script>
+    <link href="assets/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="assets/panelset-0.3.0/panelset.js"></script>
+    <script src="assets/fabric-4.3.1/fabric.min.js"></script>
+    <link href="assets/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="assets/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="assets/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x7641e92ed504ef18cfcbf127255594a","expires":1}</script>
+    <script src="assets/himalaya-1.1.0/himalaya.js"></script>
+    <script src="assets/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="assets/editable-0.2.6/editable.js"></script>
+    <script src="assets/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="assets/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="assets/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/apron.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/descartes.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/tachyons.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/xaringan-extra.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/RL-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS_effects.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/kleuren.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[SOCIAL NETWORK ANALYSIS&lt;br&gt;for DATA SCIENTISTS]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[LAB: ERGM I .small-caps.font70[(lecture] .font70[Week 5)]]]
+  ]
+
+&lt;br&gt;
+.f-abel.White-inline[Your lecturer: Claudia]&lt;br&gt;
+.f-abel.White-inline[Playdate: September, 30th, 2025]
+
+
+&lt;!-- setup options start --&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.highlight-last-item &gt; ul &gt; li, 
+.highlight-last-item &gt; ol &gt; li {
+  opacity: 0.5;
+}
+
+.highlight-last-item &gt; ul &gt; li:last-of-type,
+.highlight-last-item &gt; ol &gt; li:last-of-type {
+  opacity: 1;
+
+.bold-last-item &gt; ul &gt; li:last-of-type,
+.bold-last-item &gt; ol &gt; li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+&lt;/style&gt;
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.remark-inline-code {
+  background: #F5F5F5;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.inverse-red, .inverse-red h1, .inverse-red h2, .inverse-red h3, .inverse-red a, inverse-red a &gt; code {
+	border-top: none;
+	background-color: red;
+	color: white; 
+	background-image: "";
+}
+
+.inverse-orange, .inverse-orange h1, .inverse-orange h2, .inverse-orange h3, .inverse-orange a, inverse-orange a &gt; code {
+	border-top: none;
+	background-color: orange;
+	color: black; 
+	background-image: "";
+}
+
+.tab{
+  display: inline-block;
+  margin-left: 40px;
+}
+
+.tab1{tab-size: 2;}
+.tab2{tab-size: 4;}
+.tab3{tab-size: 6;}
+.tab4{tab-size: 8;}
+
+&lt;/style&gt;
+
+
+
+&lt;style type="text/css"&gt;
+.grid-3-2a {
+  display: grid;
+  height: calc(90%);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1em;
+  padding: 1em;
+}
+&lt;/style&gt;
+
+
+&lt;!--scroll box set up --&gt;
+&lt;style type="text/css"&gt;
+./* Allow slides to show overflowing content */
+.remark-slide-content {
+  overflow: visible !important;
+}
+
+/* Scroll box */
+.scroll-box-18 {
+  display: block;           /* make it a block element */
+  max-height: 18em;         /* height of scroll box */
+  overflow-y: auto;         /* vertical scroll */
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fafafa;
+  box-sizing: border-box;   /* include padding in height */
+}
+
+/* Optional: nicer scrollbar */
+.scroll-box-18::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-box-18::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.scroll-box-18::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+&lt;/style&gt;
+
+
+&lt;!-- setup options end --&gt;
+
+
+
+---
+class: course-logo
+layout: true
+
+---
+name: menu
+description: List of content for today's lab
+# Menu'
+&lt;br&gt;
+
+- Homeplay Discussion
+- Markovian Terms
+- Exogenous Terms
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# Homeplay Discussion
+
+---
+# Q1 -explore the network
+
+Explore the network (N, E, attributes, D or U) and run the necessary descriptive statistics (remember to check the class and type of each attribute).
+
+
+
+
+.scroll-box-18[
+
+``` r
+snafun::g_summary(Hookups)
+```
+
+```
+## $number_of_vertices
+## [1] 44
+## 
+## $number_of_edges
+## [1] 46
+## 
+## $density
+## [1] 0.049
+## 
+## $reciprocity
+## [1] 1
+## 
+## $transitivity
+## [1] 0
+## 
+## $mean_distance
+## [1] Inf
+## 
+## $number_of_isolates
+## [1] 0
+## 
+## $dyad_census
+##   Mutual Null
+## 1     46  900
+## 
+## $triad_census
+##     003 012  102 021D 021U 021C 111D 111U 030T 030C 201 120D 120U 120C 210 300
+## 1 11426   0 1704    0    0    0    0    0    0    0 114    0    0    0   0   0
+```
+]
+
+---
+# Q2: What are the hypotheses formulated in the book for this example?
+
+---
+# Q2: What are the hypotheses formulated in the book for this example?
+
+&lt;br&gt;
+
+1. Characters hookup with other characters of similar age
+ 
+2. Characters hookup with other characters in the same job position
+ 
+3. Characters hookup with other characters of the same race
+
+4. Characters hookup with other characters of different sex
+ 
+5. Younger characters have more hookups
+
+6. Characters in the show for a short time had less opportunity for hookups
+
+---
+# Q2: What are the hypotheses formulated in the book for this example?
+
+&lt;br&gt;
+
+1. Characters hookup with other characters of similar age .red[absdiff]
+ 
+2. Characters hookup with other characters in the same job position .red[nodematch]
+ 
+3. Characters hookup with other characters of the same race .red[nodematch]
+
+4. Characters hookup with other characters of different sex .red[nodematch]
+ 
+5. Younger characters have more hookups .red[nodecov]
+
+6. Characters in the show for a short time had less opportunity for hookups .red[nodecov]
+
+
+---
+# Q3
+
+&lt;br&gt;
+### Open page 73 and insert the terms specified in the example in a series of nested models. The model on page 73 is your final complete model—nest at least 3 of them to explore the effects of the terms one by one.
+
+### 3a) which is the best model? 
+
+### 3b) Can you tell whether each model is dyadic (inter)dependent or independent? 
+
+### 3c) Is each of these variables exogenous or endogenous?
+
+### 3d) Comment on the results. What is the substantive meaning of each of these terms? Are the hypotheses supported? Comment on the odd ratios too. 
+
+### 3e) What is the difference between absdif and nodecov estimated on birthyear?
+
+---
+# Q4
+
+## Formulate one additional hypothesis on the network’s structure and then nest another model, adding one variable to explore the network’s structure and test this final hypothesis.
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# Markovian Terms
+---
+background-image: url(assets/images/MarkovGraph.png)
+background-size: 350px
+background-position: 85% 55%
+name: markovian_graph
+description: The effects in the neighborhood
+
+# Markovian effects
+
+&lt;br&gt;
+### Effects in a Markov graph 
+
+- It is hypothesized that only neighboring nodes impact &lt;br&gt; the odds of a link
+
+- This level of dependence is also referred to as a &lt;br&gt; nearest-neighbors level of dependence
+
+- or .red[dyadic dependence].
+
+- we need to find all structures that are subject to a &lt;br&gt; Markov (or nearest-neighbor) level of dependence
+
+- Key words: Markovian, structural, dyadic dependent, &lt;br&gt; structure of neighboring nodes
+
+.footnote[Johannes van der Pol. Introduction to network modeling using Exponential Random Graph models
+(ERGM). 2017. hal-01284994v2]
+---
+name: structural_undirected_terms
+description: structural undirected terms
+## Undirected structural/Markovian/endogenous/dyadic dependent terms
+&lt;br&gt;
+.center[![:scale 60%](assets/images/undir_str.jpg)]
+.footnote[http://math.iisc.ernet.in/~imi/downloads/NBSSE/Noshir%20Contractor/Lecture%2007.pdf]
+
+---
+# Terms for undirected structural
+
+&lt;br&gt;
+Probability that that number of the observed undirected pattern is statistically significant
+&lt;br&gt;
+
+- `edges` - probability that the number of observed edges is statistically significant.
+- `kstar(2)` - probability that the number of observed 2-stars is statistically significant.
+- `kstar(3)` - probability that the number of observed 3-stars is statistically significant.
+- `kstar(K)` - probability that the number of observed K-stars is statistically significant.
+- `triangles` - probability that the number of observed triangles is statistically significant.
+
+---
+name: structural_directed_terms
+description: Structural Directed terms
+## Directed structural/Markovian/endogenous/dyadic dependent terms
+&lt;br&gt;
+.center[![:scale 60%](assets/images/dir-strparam.jpg)]
+
+
+.footnote[http://math.iisc.ernet.in/~imi/downloads/NBSSE/Noshir%20Contractor/Lecture%2007.pdf]
+---
+# Terms for directed structural
+&lt;br&gt;
+Probability that that number of the observed directed pattern is statistically significant
+&lt;br&gt;
+
+- `asymmetric` &lt;- arc - Probability that that number of the observed asymmetric dyads is statistically significant
+- `mutual` &lt;- reciprocity -  Probability that that number of the observed mutual dyads is statistically significant
+- `istar(2)` &lt;- 2 in star -  Probability that that number of the observed in 2 two stars  is statistically significant
+- `ostar(2)` &lt;- 2 out star - Probability that that number of the observed out 2 two stars is statistically significant
+- `m2star` &lt;- mixed 2 star - Probability that that number of the observed mixed 2 two stars is statistically significant
+- `istar(k)` &lt;- k in star - Probability that that number of the observed in K two stars is statistically significant
+- `ostar(k)` &lt;- k out star - Probability that that number of the observed out k two stars is statistically significant
+
+---
+name: shared_partners
+description: Egdewise and dyadwise shared partners
+# Edgewise and dyadwise shared partners 
+
+&lt;br&gt;
+
+.center[![:scale 60%](assets/images/shared_partners.png)]
+
+
+.footnote[Johannes van der Pol. Introduction to network modeling using Exponential Random Graph models
+(ERGM). 2017. hal-01284994v2]
+
+---
+# Terms for shared partners 
+
+### Edgewise shared partners 
+
+- `esp` - undirected
+- `desp` - directed (5 options) 1) outgoing two path, 2) incoming two path, 3) reciprocated 2 path 4) outgoing shared partner, 5) incoming shared partner.
+
+
+
+### Absence of connections in a structure where these connections would be possible
+
+- `nsp` - undirected edgewise NON-shared partners
+
+- `dnsp` - directed edgewise NON-shared partners.
+
+### Dyadwise shared partners
+
+- `dsp` -  undirected dyadwise shared partner
+- `ddsp` - directed dyadwise shared partner
+
+---
+name: terms_triads
+description: Terms for triads 
+# More about triangles: the triad census
+
+3 digits [mutual][asymmetric][no-edge]
+
+.center[![:scale 50%](assets/images/triadcensus.jpg)]
+
+.footnote[Davis and Leinhardt (1972) ]
+---
+# Undirected networks 
+
+### 4 options (no edge or reciprocated edges)
+
+- 003, 102, 201, 300
+.center[![:scale 50%](assets/images/triadcensus.jpg)]
+
+---
+# Terms for triads
+
+- `triadcensus` - inserts all the 16 options in the model (rarely a good idea)
+.center[![:scale 50%](assets/images/triadcensus.jpg)]
+
+---
+# Terms for triads
+
+- `ctriple` - 030C - Cyclic triples: defined as a set of edges of the form ( i→j ), (j→k ), (k→i)
+.center[![:scale 50%](assets/images/triadcensus.jpg)]
+
+---
+# Terms for triads
+
+
+- `ttriple` - 030T - transitive triples: defined as a set of edges ( i→j ), (j→k ), (i→k)
+.center[![:scale 50%](assets/images/triadcensus.jpg)]
+
+---
+# Terms for triads
+
+- `intransitive` - 111D, 201, 111U, 021C - Intransitive triads
+
+.center[![:scale 50%](assets/images/triadcensus.jpg)]
+
+---
+# Terms for triads
+
+
+- `transitive` - 120D, 120U, 300, also 030T, 030C - Transitive triads
+.center[![:scale 50%](assets/images/triadcensus.jpg)]
+---
+# Terms for triads
+- `balance` - 102, 300
+
+.center[![:scale 50%](assets/images/triadcensus.jpg)]
+
+
+---
+name: cycle
+description: term for kcycle
+# Cycles
+&lt;br&gt;
+`cycle(k)` &lt;- k can be any number. 
+
+`cycle(3)` == `ctriple`
+&lt;br&gt;
+&lt;br&gt;
+.center[![:scale 60%](assets/images/kcycle.png)]
+
+---
+name: exogenous_effects
+description: Terms for exogenous effects
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# Exogenous Terms 
+
+
+
+---
+## Extent to which the attribute values influence edge formation so that &lt;br&gt; it is non-random under that condition. 
+
+&lt;br&gt;
+- `nodecov` - undirected - numeric var
+- `nodeicov` - directed in - numeric var
+- `nodeocov` - directed out - numeric var
+&lt;br&gt;
+
+Florentine family example:
+
+The extent to which being wealthier increases the probability of getting married.
+
+.red[same as in a logit model]
+
+---
+## The extent to which being in a certain category influences edge formation so that tie formation is non-random under that condition
+&lt;br&gt;
+- `nodefactor` - undirected - categorical var
+- `nodeifactor` - directed in - categorical var
+- `nodeofactor` - directed out - categorical var
+
+&lt;br&gt;
+.red[same as in a logit model]
+---
+## Extent to which common features measured in terms of distance similarity influence edge formation, so that edge formation is non-random under that condition. 
+&lt;br&gt;
+`absdiff` - numeric var
+&lt;br&gt;
+
+*Florentine family example:*
+
+The extent to which being equally wealthy increases the probability of getting married.
+
+- poor marry poor
+- rich marry rich
+
+This term implicitly attributes a weight to edges since the two connected nodes share the absolute difference
+
+For this reason it is inserted in the model as a matrix rather than as a vector
+
+(even if you don't see this happening)
+
+---
+## Extent to which nodes characterized by a specific category belonging to a certain attribute form ties with other node characterized by the same &lt;br&gt; category, so that tie formation under that condition is non-random
+
+&lt;br&gt;
+
+`nodematch` - categorical var
+
+&lt;br&gt;
+
+This term measures .red[homophily]. The probability of a tie due to similarity
+
+- If the coefficient `\(\theta\)` estimated in the model is negative it is measuring heterophily: the probability of a tie due to differences. 
+
+Examples:
+
+- friends in primary school, it is likely that girls are friend with girls (homophily due to sex)
+- heterosexual romantic relationships a tie is due to heterophily in sex
+
+---
+## Extent to which nodes denoted by different categories of an attribute form &lt;br&gt; ties, so that tie formation under these circumstances is non-random. 
+&lt;br&gt;
+&lt;br&gt;
+`nodemix` - disassortative mixing - categorical var
+
+This term measures .red[heterophily]. The probability of a tie due to dissimilarity
+
+- If the coefficient `\(\theta\)` estimated in the model is negative it is measuring homophily: the probability of a tie due to similarity.
+
+Same example as the previous slide
+
+
+
+---
+## Extent to which the ties formed in another context influence tie formation in the context of the current model, so that tie formation under that circumstances is non-random. 
+
+&lt;br&gt;
+`edgecov` - Matrix attribute. 
+&lt;br&gt;
+
+It can be used to insert edge attributes in the model. They need to be specified as a matrix 
+
+E.g., how often two students study together can be inserted in the model as a weighted matrix
+&lt;br&gt;
+NOTE: using `edgecov` you can run a QAP logistic model using ERGMs!
+
+
+---
+name: mixing_matrix
+description: Cross tabulation for variables and edges
+## Cross tabulation between edge formation and attributes of interest
+
+
+Mixing matrix. THIS IS NOT A MODEL TERM
+
+`snafun::make_mixingmatrix()`
+
+
+
+
+
+
+``` r
+snafun::make_mixingmatrix(floM, "Wealth")
+```
+
+```
+##      from
+## to     3  8 10 20 27 32 36 42 44 48 49 55 103 146 Sum
+##   3    0  0  0  0  0  0  0  0  0  0  0  0   0   0   0
+##   8    0  0  0  0  0  0  1  1  1  1  0  0   0   0   4
+##   10   0  0  0  0  0  0  0  0  0  1  0  0   2   0   3
+##   20   0  0  0  0  0  0  0  0  0  0  1  1   0   1   3
+##   27   0  0  0  0  0  0  0  0  0  1  0  0   1   1   3
+##   32   0  0  0  0  0  0  1  0  0  0  0  0   0   0   1
+##   36   0  1  0  0  0  1  0  0  0  0  0  0   1   0   3
+##   42   0  1  0  0  0  0  0  0  0  0  0  0   0   0   1
+##   44   0  1  0  0  0  0  0  0  0  0  1  0   0   1   3
+##   48   0  1  1  0  1  0  0  0  0  0  0  0   1   0   4
+##   49   0  0  0  1  0  0  0  0  1  0  0  0   0   1   3
+##   55   0  0  0  1  0  0  0  0  0  0  0  0   1   0   2
+##   103  0  0  2  0  1  0  1  0  0  1  0  1   0   0   6
+##   146  0  0  0  1  1  0  0  0  1  0  1  0   0   0   4
+##   Sum  0  4  3  3  3  1  3  1  3  4  3  2   6   4  20
+```
+
+---
+# BYe ByE
+.center[![:scale 50%](assets/images/say_hi.jpg)]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="assets/remark-latest.min.js"></script>
+<script src="assets/js/remark-zoom.js"></script>
+<script src="assets/js/macros.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "atom-one-light",
+  "highlightLines": true,
+  "highlightSpans": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": "- %current% -",
+  "ratio": "16:9",
+  "navigation": {
+    "scroll": true
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
