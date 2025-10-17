@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>SOCIAL NETWORK ANALYSIS for DATA SCIENTISTS</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Claudia &amp; Gergo" />
+    <script src="assets/header-attrs-2.29/header-attrs.js"></script>
+    <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="assets/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="assets/tile-view-0.2.6/tile-view.js"></script>
+    <link href="assets/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="assets/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra_fit-screen-0.2.6/fit-screen.js"></script>
+    <link href="assets/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="assets/panelset-0.3.0/panelset.js"></script>
+    <script src="assets/fabric-4.3.1/fabric.min.js"></script>
+    <link href="assets/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="assets/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="assets/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"f3eb53bae6154df697d251b318628152","expires":1}</script>
+    <script src="assets/himalaya-1.1.0/himalaya.js"></script>
+    <script src="assets/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="assets/editable-0.2.6/editable.js"></script>
+    <script src="assets/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="assets/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="assets/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/apron.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/descartes.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/tachyons.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/xaringan-extra.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/RL-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS_effects.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/kleuren.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[SOCIAL NETWORK ANALYSIS&lt;br&gt;for DATA SCIENTISTS]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[LECTURE: ERGM III .small-caps.font70[(lecture] .font70[Week 7)]]]
+  ]
+
+&lt;br&gt;
+.f-abel.White-inline[Your lecturer: Claudia &amp; Gergo]&lt;br&gt;
+.f-abel.White-inline[Playdate: October, 15th, 2025]
+
+
+&lt;!-- setup options start --&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.highlight-last-item &gt; ul &gt; li, 
+.highlight-last-item &gt; ol &gt; li {
+  opacity: 0.5;
+}
+
+.highlight-last-item &gt; ul &gt; li:last-of-type,
+.highlight-last-item &gt; ol &gt; li:last-of-type {
+  opacity: 1;
+
+.bold-last-item &gt; ul &gt; li:last-of-type,
+.bold-last-item &gt; ol &gt; li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+&lt;/style&gt;
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.remark-inline-code {
+  background: #F5F5F5;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.inverse-red, .inverse-red h1, .inverse-red h2, .inverse-red h3, .inverse-red a, inverse-red a &gt; code {
+	border-top: none;
+	background-color: red;
+	color: white; 
+	background-image: "";
+}
+
+.inverse-orange, .inverse-orange h1, .inverse-orange h2, .inverse-orange h3, .inverse-orange a, inverse-orange a &gt; code {
+	border-top: none;
+	background-color: orange;
+	color: black; 
+	background-image: "";
+}
+
+.tab{
+  display: inline-block;
+  margin-left: 40px;
+}
+
+.tab1{tab-size: 2;}
+.tab2{tab-size: 4;}
+.tab3{tab-size: 6;}
+.tab4{tab-size: 8;}
+
+&lt;/style&gt;
+
+
+
+&lt;style type="text/css"&gt;
+.grid-3-2a {
+  display: grid;
+  height: calc(90%);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1em;
+  padding: 1em;
+}
+&lt;/style&gt;
+
+&lt;!--scroll box set up --&gt;
+&lt;style type="text/css"&gt;
+./* Allow slides to show overflowing content */
+.remark-slide-content {
+  overflow: visible !important;
+}
+
+/* Scroll box */
+.scroll-box-18 {
+  display: block;           /* make it a block element */
+  max-height: 18em;         /* height of scroll box */
+  overflow-y: auto;         /* vertical scroll */
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fafafa;
+  box-sizing: border-box;   /* include padding in height */
+}
+
+/* Optional: nicer scrollbar */
+.scroll-box-18::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-box-18::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.scroll-box-18::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+
+&lt;/style&gt;
+
+
+&lt;!-- setup options end --&gt;
+
+
+
+---
+class: course-logo
+layout: true
+
+---
+name: menu
+description: List of contents for today's lecture
+# Menu'
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+- ERGMs Estimation
+
+- Model diagnostics
+
+- Curved Terms (to solve degeneracy problem)
+
+- Goodness of fit
+
+
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# ERGMs Estimation
+
+
+
+
+---
+name: ERGMestimation
+description: An intuitive description of how the estimation works
+# Estimation
+&lt;br&gt;
+&lt;br&gt;
+## The estimation allows for the identification of the parameters that maximize the likelihood of a graph.
+
+Finding the `\(\theta\)` of the terms that maximize the probability of simulating graphs like the observed real one
+
+- We discussed how to insert terms and how to specify the models
+
+- We still need to check if the specification we inserted is doing its job
+
+- Since the algorithm takes care of the estimation we need to understand it a bit better
+
+---
+# ERGM algorithms 
+&lt;br&gt;
+## .red[Dyadic independent ERGM]: estimated as a logit model with Maximum (pseudo) Likelihood Estimation (MLE or MPLE)
+
+- We need to check the goodness of fit as we did with logit models 
+
+- We do that using the `ergm::gof()` function
+
+## .red[Dyadic (inter)dependent]: we need to estimate parameters using Markov chains Monte Carlo MCMC simulations
+
+- We still need to check the goodness of fit but also we need to check whether the simulation worked as we wanted to. We need to check two indicators
+
+    - `ergm::gof()`
+    - `ergm::mcmc.diagnostics()`
+
+
+---
+# Intuitive estimation -Dyadic dependent 
+
+## Explaining a Markov Chain Maximum Likelihood estimation 
+
+- We simulate Markov Chains using a Monte Carlo (random) method.
+
+- A Markov chain is a sequence of random variables such that the value taken by the random variable only depends upon the value taken by the previous variable.
+
+- By switching the entries in the matrix representing the network (0-1) we generate a series of graphs that differ from each other only by one edge and that depend from the previous graph.
+
+- This sequence of generated graphs is a Markov chain. 
+
+- Within this generation of chains the Metropolis-Hastings algorithm or the Gibbs sampler decide which entries (0-1) change state. 
+
+- These algorithms start picking a variable at random and change its state
+
+- They retain the change of state only if the new graph increases the likelihood
+
+- Finally the Robbins-Monroe algorithm estimates the parameters in the model. 
+
+---
+name: ERGMmath
+description: How the math of ERGM estimation works
+background-image: url(assets/images/ERGM_math_class_slides/ERGM_math_class_slides-01.jpg)
+background-size: 1000px
+background-position: 50% 50%
+
+
+---
+
+background-image: url(assets/images/ERGM_math_class_slides/ERGM_math_class_slides-02.jpg)
+background-size: 1000px
+background-position: 50% 50%
+
+---
+
+background-image: url(assets/images/ERGM_math_class_slides/ERGM_math_class_slides-03.jpg)
+background-size: 1000px
+background-position: 50% 50%
+
+---
+
+background-image: url(assets/images/ERGM_math_class_slides/ERGM_math_class_slides-04.jpg)
+background-size: 1000px
+background-position: 50% 50%
+
+---
+
+background-image: url(assets/images/ERGM_math_class_slides/ERGM_math_class_slides-05.jpg)
+background-size: 1000px
+background-position: 50% 50%
+
+---
+
+background-image: url(assets/images/ERGM_math_class_slides/ERGM_math_class_slides-06.jpg)
+background-size: 1000px
+background-position: 50% 50%
+
+---
+
+background-image: url(assets/images/ERGM_math_class_slides/ERGM_math_class_slides-07.jpg)
+background-size: 1000px
+background-position: 50% 50%
+
+---
+
+background-image: url(assets/images/ERGM_math_class_slides/ERGM_math_class_slides-08.jpg)
+background-size: 1000px
+background-position: 50% 50%
+
+---
+
+background-image: url(assets/images/ERGM_math_class_slides/ERGM_math_class_slides-09.jpg)
+background-size: 1000px
+background-position: 50% 50%
+
+---
+
+background-image: url(assets/images/ERGM_math_class_slides/ERGM_math_class_slides-10.jpg)
+background-size: 1000px
+background-position: 50% 50%
+
+---
+
+background-image: url(assets/images/ERGM_math_class_slides/ERGM_math_class_slides-11.jpg)
+background-size: 1000px
+background-position: 50% 50%
+
+---
+
+background-image: url(assets/images/ERGM_math_class_slides/ERGM_math_class_slides-12.jpg)
+background-size: 1000px
+background-position: 50% 50%
+
+---
+
+background-image: url(assets/images/ERGM_math_class_slides/ERGM_math_class_slides-13.jpg)
+background-size: 1000px
+background-position: 50% 50%
+
+---
+
+background-image: url(assets/images/ERGM_math_class_slides/ERGM_math_class_slides-14.jpg)
+background-size: 1000px
+background-position: 50% 50%
+
+---
+
+background-image: url(assets/images/ERGM_math_class_slides/ERGM_math_class_slides-15.jpg)
+background-size: 1000px
+background-position: 50% 50%
+
+
+---
+
+background-image: url(assets/images/ERGM_math_class_slides/ERGM_math_class_slides-16.jpg)
+background-size: 1000px
+background-position: 50% 50%
+
+
+---
+
+background-image: url(assets/images/ERGM_math_class_slides/ERGM_math_class_slides-17.jpg)
+background-size: 1000px
+background-position: 50% 50%
+
+
+---
+
+background-image: url(assets/images/ERGM_math_class_slides/ERGM_math_class_slides-18.jpg)
+background-size: 1000px
+background-position: 50% 50%
+
+
+---
+
+background-image: url(assets/images/ERGM_math_class_slides/ERGM_math_class_slides-19.jpg)
+background-size: 1000px
+background-position: 50% 50%
+
+
+---
+
+background-image: url(assets/images/ERGM_math_class_slides/ERGM_math_class_slides-20.jpg)
+background-size: 1000px
+background-position: 50% 50%
+
+
+---
+name: convergence
+description: What is the convergence of a model
+# Convergence
+ &lt;br&gt;
+ &lt;br&gt;
+ 
+- Chains should evolve toward increasing the likelihood of producing networks similar to the observed one.
+
+- If the process goes according to plans, we say that the model .red[converged]
+
+- If you look at the simulation output you will see a series of lines with different trends that chain after chain become similar and overlap (We will see it in a few minutes)
+
+- If the model does .red[not converge] the chains never become similar and parallel universe continue to exist until the model fails (We will also see that in a few minutes)
+
+---
+name: burnin
+description: What is the model burn-in
+# Burn-in
+&lt;br&gt;
+&lt;br&gt;
+
+- In the beginning, the model will have a time for the Metropolis-Hasting algorithm or the Gibbs sampler to increase the likelihood of the chains to resemble the real network
+
+- This is the .red[burn-in]
+
+- The burn-in represents the number of simulations that are removed from the MCMC in order to make the chain "forget" the (random) starting point
+
+
+
+---
+name: sample_size
+description: What is the model sample size
+# MCMC sample size
+&lt;br&gt;
+&lt;br&gt;
+
+- If the model struggles at convergence it is a good idea to give it the opportunity to be more accurate. 
+
+- Increasing the sample size, the Metropolis-Hasting algorithm or the Gibbs sampler can source more information about the previous chain and increase the accuracy of the following one.
+
+- It does not always work. If your terms are not capturing the dynamics of the real network it will never work.
+
+- It increases your computational time, so careful when you use it
+
+
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# Model diagnostics
+
+---
+name: mcmc_diagnostics
+description: How to perform and interpret mcmc diagnostics
+## Checking the simulation in Dyadic dependent Models
+
+
+
+&lt;br&gt;
+### Model using Florentine Business network 
+&lt;br&gt;
+
+`fit &lt;- ergm::ergm(floB ~ edges + degree(1))`
+
+`ergm::mcmc.diagnostics(fit)`
+
+&lt;br&gt;
+This function outputs three things:
+
+- Text that explains the diagnostics 
+- A series of relevant measures
+- Plots the MCMC diagnostics
+
+---
+## MCMC Diagnostics
+.scroll-box-18[
+
+``` r
+fitFlo.01 &lt;- ergm::ergm(floB ~ edges + degree(1), 
+                     control = ergm::control.ergm(
+                    MCMC.samplesize = 5000,
+                    MCMC.burnin = 1000, 
+                    MCMLE.maxit = 10,
+                    parallel = 6,
+                    parallel.type = "PSOCK"
+                  ))
+
+ergm::mcmc.diagnostics(fitFlo.01)
+```
+
+&lt;img src="assets/images/Les09_2-1.svg" width="90%" /&gt;
+
+```
+## Sample statistics summary:
+## 
+## Iterations = 22016:427008
+## Thinning interval = 512 
+## Number of chains = 6 
+## Sample size per chain = 792 
+## 
+## 1. Empirical mean and standard deviation for each variable,
+##    plus standard error of the mean:
+## 
+##             Mean    SD Naive SE Time-series SE
+## edges   -0.12668 3.709  0.05380        0.05323
+## degree1 -0.08607 1.645  0.02387        0.02387
+## 
+## 2. Quantiles for each variable:
+## 
+##         2.5% 25% 50% 75% 97.5%
+## edges     -7  -3   0   2     7
+## degree1   -3  -1   0   1     4
+## 
+## 
+## Are sample statistics significantly different from observed?
+##                  edges       degree1       (Omni)
+## diff.      -0.12668350 -0.0860690236           NA
+## test stat. -2.42095165 -3.6062890876 3.196208e+01
+## P-val.      0.01547994  0.0003106071 1.214553e-07
+## 
+## Sample statistics cross-correlations:
+##              edges    degree1
+## edges    1.0000000 -0.4094632
+## degree1 -0.4094632  1.0000000
+## 
+## Sample statistics auto-correlation:
+## Chain 1 
+##                 edges     degree1
+## Lag 0     1.000000000  1.00000000
+## Lag 512  -0.050229872 -0.04464302
+## Lag 1024  0.012649259 -0.02714022
+## Lag 1536 -0.005547301 -0.01425986
+## Lag 2048 -0.049769404 -0.02490343
+## Lag 2560  0.026939588  0.04272499
+## Chain 2 
+##                edges     degree1
+## Lag 0     1.00000000  1.00000000
+## Lag 512   0.02012265  0.04272865
+## Lag 1024 -0.01119045 -0.03771155
+## Lag 1536  0.05577044 -0.02339644
+## Lag 2048  0.03319709  0.02210250
+## Lag 2560 -0.01537531 -0.01906059
+## Chain 3 
+##                 edges      degree1
+## Lag 0     1.000000000  1.000000000
+## Lag 512   0.054378600  0.025388047
+## Lag 1024 -0.006666041  0.001337244
+## Lag 1536  0.056042049  0.004906226
+## Lag 2048 -0.038249434 -0.035761633
+## Lag 2560 -0.009363599  0.011997121
+## Chain 4 
+##                 edges      degree1
+## Lag 0     1.000000000  1.000000000
+## Lag 512  -0.016460688  0.028173433
+## Lag 1024  0.046642042 -0.012865402
+## Lag 1536 -0.009012951 -0.005443685
+## Lag 2048 -0.026478992  0.014796603
+## Lag 2560 -0.070563895 -0.052849503
+## Chain 5 
+##                edges      degree1
+## Lag 0     1.00000000  1.000000000
+## Lag 512  -0.01327782  0.040964647
+## Lag 1024  0.05425289 -0.016706422
+## Lag 1536 -0.04677117 -0.035510165
+## Lag 2048 -0.01715686 -0.046027419
+## Lag 2560 -0.05894280 -0.007746463
+## Chain 6 
+##                edges      degree1
+## Lag 0     1.00000000  1.000000000
+## Lag 512   0.05286432  0.021884800
+## Lag 1024 -0.01925408 -0.014307511
+## Lag 1536  0.03565164  0.030795395
+## Lag 2048 -0.02538556 -0.035747964
+## Lag 2560 -0.02821548  0.005437019
+## 
+## Sample statistics burn-in diagnostic (Geweke):
+## Chain 1 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##     edges   degree1 
+## 0.2117642 0.6673743 
+## 
+## Individual P-values (lower = worse):
+##     edges   degree1 
+## 0.8322910 0.5045331 
+## Joint P-value (lower = worse):  0.6961887 
+## Chain 2 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##      edges    degree1 
+## -0.1896437 -1.7619618 
+## 
+## Individual P-values (lower = worse):
+##      edges    degree1 
+## 0.84958832 0.07807575 
+## Joint P-value (lower = worse):  0.09227384 
+## Chain 3 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##      edges    degree1 
+##  0.6864974 -1.9831237 
+## 
+## Individual P-values (lower = worse):
+##      edges    degree1 
+## 0.49239952 0.04735362 
+## Joint P-value (lower = worse):  0.1950227 
+## Chain 4 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##      edges    degree1 
+## -0.4369361 -0.6793304 
+## 
+## Individual P-values (lower = worse):
+##     edges   degree1 
+## 0.6621577 0.4969286 
+## Joint P-value (lower = worse):  0.5565196 
+## Chain 5 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##      edges    degree1 
+## -0.3885685 -0.1680772 
+## 
+## Individual P-values (lower = worse):
+##     edges   degree1 
+## 0.6975953 0.8665226 
+## Joint P-value (lower = worse):  0.8665206 
+## Chain 6 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##      edges    degree1 
+## 0.09468028 1.65813392 
+## 
+## Individual P-values (lower = worse):
+##      edges    degree1 
+## 0.92456878 0.09729044 
+## Joint P-value (lower = worse):  0.1898487 
+## 
+## Note: MCMC diagnostics shown here are from the last round of simulation, prior to computation of final
+##   parameter estimates. Because the final estimates are refinements of those used for this simulation run,
+##   these diagnostics may understate model performance. To directly assess the performance of the final
+##   model on in-model statistics, please use the GOF command: gof(ergmFitObject, GOF=~model).
+```
+]
+
+---
+
+## Understanding the `mcmc.diagnostics` output
+&lt;br&gt;
+### You need to know that
+
+- your diagnostic analyses the iterations of the last chain produced
+- ERGMs, as OLS, is predicting mean values of parameters
+- The mean in the diagostics should be 0
+- the standard deviation should form a bell curve
+
+### "Quantiles for each variable":  2.5% 25% 50% 75% 97.5%
+-8, -2, 0, 2, 8 Would be an ideal scenario
+
+### "Are sample statistics significantly different from observed?"
+You want your p-value here to be as high as possible
+
+---
+
+.center[![:scale 100%](assets/images/MCMCtraceplot.png)]
+
+
+
+---
+# Trace Plot shape: fuzzy caterpillar
+
+.center[![:scale 70%](assets/images/fuzzy-caterpillar.jpg)]
+
+---
+background-image: url(assets/images/faux.magnolia.high.jpg)
+background-size: 450px
+background-position: 50% 85%
+# Bad model example
+
+
+
+## Faux Magnolia High. Data simulated from an American High School
+
+- Nodes: 1461
+
+- Edges: 974
+
+- Sparse
+
+- Undirected
+
+---
+# Bad model example
+
+Running this model we will get an error
+
+``` r
+# fitMag.01 &lt;- ergm::ergm(magnolia ~ edges + triangles,
+#                    control = ergm::control.ergm(
+#                      MCMC.samplesize = 5000,
+#                      MCMC.burnin = 1000, 
+#                      MCMLE.maxit = 10,
+#                      parallel = 6,
+#                      parallel.type = "PSOCK"
+#                    ))
+```
+
+`Error in ergm.MCMLE(init, nw, model, initialfit = (initialfit &lt;- NULL),  :`
+
+`Number of edges in a simulated network exceeds that in the observed by a factor of more than 20. This is a strong indicator of model degeneracy or a very poor starting parameter configuration. If you are reasonably certain that neither of these is the case, increase the MCMLE.density.guard control.ergm() parameter.`
+
+## This is called model DEGENERACY
+---
+name: model_degeneracy
+description: What is the model degeneracy
+# The term `triangles` caused &lt;br&gt;Degeneracy
+
+
+Instead of converging, the algorithm heads off into networks that
+are much much more dense than the observed network. This is
+such a clear indicator of a degenerate model specification that
+the algorithm stops after 3 iterations, to avoid heading off into
+areas that would cause memory issues.
+
+We can run the model limiting the number of iterations so it will converge and we can see what are the problems
+Since the 3rd iteration was the last one in the model output we stop it at 1
+
+
+``` r
+# fitMag.01 &lt;- ergm::ergm(magnolia ~ edges + triangles,
+#                    control = ergm::control.ergm(
+#                      MCMC.samplesize = 5000,
+#                      MCMC.burnin = 1000,
+#                      MCMLE.maxit = 1,
+#                      parallel = 6,
+#                      parallel.type = "PSOCK")
+#                    )
+# 
+# ergm::mcmc.diagnostics(fitMag.01)
+```
+
+Since sometimes this does not converge I'm not running the code in the slides
+---
+# Bad model trace plot (where is the 0?!)
+Chains are not mixing well!
+
+.center[![:scale 70%](assets/images/bad_model.jpg)]
+
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+# Curved Terms (to solve degeneracy problem)
+
+---
+name: curved_terms
+description: Terms to improve model convergence and predictive power
+# How do we make the model converge?
+
+We substitute the Markovian term with a curved one
+
+.scroll-box-18[
+
+``` r
+set.seed(000023)
+Magfit.02 &lt;- ergm::ergm(magnolia ~ edges + gwesp(0.25, fixed = TRUE),
+                   control = ergm::control.ergm(
+                     MCMC.samplesize = 5000,
+                     MCMC.burnin = 1000,
+                     MCMLE.maxit = 1,
+                     parallel = 6,
+                     parallel.type = "PSOCK")
+                   )
+
+ergm::mcmc.diagnostics(Magfit.02)
+```
+
+&lt;img src="assets/images/Les09_6-1.svg" width="90%" /&gt;
+
+```
+## Sample statistics summary:
+## 
+## Iterations = 239616:854016
+## Thinning interval = 1024 
+## Number of chains = 6 
+## Sample size per chain = 601 
+## 
+## 1. Empirical mean and standard deviation for each variable,
+##    plus standard error of the mean:
+## 
+##                   Mean    SD Naive SE Time-series SE
+## edges            880.9 81.62    1.359         10.720
+## gwesp.fixed.0.25 841.6 80.12    1.334          9.324
+## 
+## 2. Quantiles for each variable:
+## 
+##                   2.5%   25%   50%   75% 97.5%
+## edges            726.0 828.0 879.0 930.0  1070
+## gwesp.fixed.0.25 691.1 789.5 839.7 890.8  1022
+## 
+## 
+## Are sample statistics significantly different from observed?
+##                edges gwesp.fixed.0.25        (Omni)
+## diff.      880.86356        841.58604            NA
+## test stat.  85.88881         91.34572  5.464618e+03
+## P-val.       0.00000          0.00000 9.569065e-138
+## 
+## Sample statistics cross-correlations:
+##                      edges gwesp.fixed.0.25
+## edges            1.0000000        0.9498604
+## gwesp.fixed.0.25 0.9498604        1.0000000
+## 
+## Sample statistics auto-correlation:
+## Chain 1 
+##              edges gwesp.fixed.0.25
+## Lag 0    1.0000000        1.0000000
+## Lag 1024 0.9719626        0.9490526
+## Lag 2048 0.9450242        0.9075889
+## Lag 3072 0.9171463        0.8790429
+## Lag 4096 0.8888736        0.8508125
+## Lag 5120 0.8602069        0.8278482
+## Chain 2 
+##              edges gwesp.fixed.0.25
+## Lag 0    1.0000000        1.0000000
+## Lag 1024 0.9566999        0.9345597
+## Lag 2048 0.9208442        0.8881038
+## Lag 3072 0.8899346        0.8540345
+## Lag 4096 0.8595424        0.8243210
+## Lag 5120 0.8283652        0.8015894
+## Chain 3 
+##              edges gwesp.fixed.0.25
+## Lag 0    1.0000000        1.0000000
+## Lag 1024 0.9816964        0.9697450
+## Lag 2048 0.9638244        0.9433249
+## Lag 3072 0.9490539        0.9213236
+## Lag 4096 0.9355189        0.8997916
+## Lag 5120 0.9213032        0.8819764
+## Chain 4 
+##              edges gwesp.fixed.0.25
+## Lag 0    1.0000000        1.0000000
+## Lag 1024 0.9449561        0.9110156
+## Lag 2048 0.8959977        0.8473695
+## Lag 3072 0.8513826        0.7949280
+## Lag 4096 0.8094078        0.7438186
+## Lag 5120 0.7770060        0.7205811
+## Chain 5 
+##              edges gwesp.fixed.0.25
+## Lag 0    1.0000000        1.0000000
+## Lag 1024 0.9656112        0.9400042
+## Lag 2048 0.9352592        0.8939877
+## Lag 3072 0.9114950        0.8552231
+## Lag 4096 0.8885414        0.8239038
+## Lag 5120 0.8675925        0.8041417
+## Chain 6 
+##              edges gwesp.fixed.0.25
+## Lag 0    1.0000000        1.0000000
+## Lag 1024 0.9590079        0.9342892
+## Lag 2048 0.9228991        0.8735566
+## Lag 3072 0.8884881        0.8170767
+## Lag 4096 0.8525526        0.7699125
+## Lag 5120 0.8128827        0.7258011
+## 
+## Sample statistics burn-in diagnostic (Geweke):
+## Chain 1 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##            edges gwesp.fixed.0.25 
+##         1.159956         1.366937 
+## 
+## Individual P-values (lower = worse):
+##            edges gwesp.fixed.0.25 
+##        0.2460667        0.1716450 
+## Joint P-value (lower = worse):  0.8070695 
+## Chain 2 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##            edges gwesp.fixed.0.25 
+##        0.4259494        0.2415205 
+## 
+## Individual P-values (lower = worse):
+##            edges gwesp.fixed.0.25 
+##        0.6701447        0.8091517 
+## Joint P-value (lower = worse):  0.4207078 
+## Chain 3 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##            edges gwesp.fixed.0.25 
+##        -1.618740        -1.488302 
+## 
+## Individual P-values (lower = worse):
+##            edges gwesp.fixed.0.25 
+##        0.1055032        0.1366714 
+## Joint P-value (lower = worse):  0.08770356 
+## Chain 4 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##            edges gwesp.fixed.0.25 
+##        -1.157423        -1.155824 
+## 
+## Individual P-values (lower = worse):
+##            edges gwesp.fixed.0.25 
+##        0.2470998        0.2477532 
+## Joint P-value (lower = worse):  0.5844994 
+## Chain 5 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##            edges gwesp.fixed.0.25 
+##         2.478114         2.892925 
+## 
+## Individual P-values (lower = worse):
+##            edges gwesp.fixed.0.25 
+##      0.013207911      0.003816729 
+## Joint P-value (lower = worse):  0.02985871 
+## Chain 6 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##            edges gwesp.fixed.0.25 
+##       -0.0754675        0.2425561 
+## 
+## Individual P-values (lower = worse):
+##            edges gwesp.fixed.0.25 
+##        0.9398428        0.8083493 
+## Joint P-value (lower = worse):  0.7343804 
+## 
+## Note: MCMC diagnostics shown here are from the last round of simulation, prior to computation of final
+##   parameter estimates. Because the final estimates are refinements of those used for this simulation run,
+##   these diagnostics may understate model performance. To directly assess the performance of the final
+##   model on in-model statistics, please use the GOF command: gof(ergmFitObject, GOF=~model).
+```
+]
+
+---
+# Curved terms 
+&lt;br&gt;
+
+- do the same job as the Markovian terms
+- but they have been mathematically improved to avoid degeneracy and improve model fit
+
+&lt;br&gt;
+
+When you use a Markovian term that does not work swap it for the curved equivalent.
+
+- DISCLAIMER: Markovian terms will work only for very small and simple networks. 
+
+Keep your Curved equivalent handy. 
+
+---
+# Most common Curved terms
+
+
+
+- `gwesp(decay = 0.25, fixed = FALSE)` - it can be used in place of `triangles` or `esp`
+
+- `gwdsp(decay = 1, fixed = FALSE)` - it can be used in place of  `dsp`
+
+- `gwnsp(decay = 1, fixed = FALSE)` - it can be used in place of  `nsp`
+
+- `gwdegree(decay = 0.5, fixed = FALSE)` - it can be used in place of `degree`, but careful, this is degree distribution.
+
+- `gwidegree(decay = 0.5, fixed = FALSE)` - it can be used in place of `idegree`, but careful, this is degree distribution.
+
+- `gwodegree(decay = 0.5, fixed = FALSE)` - it can be used in place of `odegree`, but careful, this is degree distribution.
+
+
+- there are also curved terms that don't gave a direct correspondence to the Markovian one. E.g., `dgwdsp(decay, fixed=FALSE` - it can be used as a sum of `gwnsp` and `gwesp`
+
+The optional argument fixed indicates whether the decay parameter is fixed at the given value, or is to be fit as a curved exponential family model. AKA: it uses different algorithms. At this stage, try both and keep the best one.
+
+---
+# How to find curved terms?
+
+.scroll-box-18[
+
+``` r
+ergm::search.ergmTerms(search = "curved")
+```
+
+```
+## Found  16  matching ergm terms:
+## altkstar(lambda, fixed=FALSE) (binary)
+##     Alternating k-star
+## 
+## Curve(formula, params, map, gradient=NULL, minpar=-Inf, maxpar=+Inf, cov=NULL) (binary, valued)
+## Parametrise(formula, params, map, gradient=NULL, minpar=-Inf, maxpar=+Inf, cov=NULL) (binary, valued)
+## Parametrize(formula, params, map, gradient=NULL, minpar=-Inf, maxpar=+Inf, cov=NULL) (binary, valued)
+##     Impose a curved structure on term parameters
+## 
+## gwb1degree(decay, fixed=FALSE, attr=NULL, cutoff=30, levels=NULL) (binary)
+##     Geometrically weighted degree distribution for the first mode in a bipartite network
+## 
+## gwb1dsp(decay=0, fixed=FALSE, cutoff=30) (binary)
+##     Geometrically weighted dyadwise shared partner distribution for dyads in the first bipartition
+## 
+## gwb2degree(decay, fixed=FALSE, attr=NULL, cutoff=30, levels=NULL) (binary)
+##     Geometrically weighted degree distribution for the second mode in a bipartite network
+## 
+## gwb2dsp(decay=0, fixed=FALSE, cutoff=30) (binary)
+##     Geometrically weighted dyadwise shared partner distribution for dyads in the second bipartition
+## 
+## gwdegree(decay, fixed=FALSE, attr=NULL, cutoff=30, levels=NULL) (binary)
+##     Geometrically weighted degree distribution
+## 
+## dgwdsp(decay, fixed=FALSE, cutoff=30, type="OTP") (binary)
+## gwdsp(decay, fixed=FALSE, cutoff=30, type="OTP") (binary)
+##     Geometrically weighted dyadwise shared partner distribution
+## 
+## dgwesp(decay, fixed=FALSE, cutoff=30, type="OTP") (binary)
+## gwesp(decay, fixed=FALSE, cutoff=30, type="OTP") (binary)
+##     Geometrically weighted edgewise shared partner distribution
+## 
+## gwidegree(decay, fixed=FALSE, attr=NULL, cutoff=30, levels=NULL) (binary)
+##     Geometrically weighted in-degree distribution
+## 
+## dgwnsp(decay, fixed=FALSE, cutoff=30, type="OTP") (binary)
+## gwnsp(decay, fixed=FALSE, cutoff=30, type="OTP") (binary)
+##     Geometrically weighted non-edgewise shared partner distribution
+## 
+## gwodegree(decay, fixed=FALSE, attr=NULL, cutoff=30, levels=NULL) (binary)
+##     Geometrically weighted out-degree distribution
+## 
+## Label(formula, label, pos) (binary, valued)
+##     Modify terms' coefficient names
+## 
+## Offset(formula, coef, which) (binary)
+##     Terms with fixed coefficients
+## 
+## Prod(formulas, label) (binary, valued)
+##     A product (or an arbitrary power combination) of one or more formulas
+## 
+## Sum(formulas, label) (binary, valued)
+##     A sum (or an arbitrary linear combination) of one or more formulas
+```
+]
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# Goodness of fit
+
+---
+name: gof
+description: How to perform and interpret goodness of fit
+# GOF
+
+Let's get back to our pretty Florentine Business network
+
+.scroll-box-18[
+
+``` r
+FloFit.01 &lt;- ergm::ergm(floB ~ edges + degree(1))
+fit.gof&lt;- ergm::gof(FloFit.01)
+fit.gof
+```
+
+```
+## 
+## Goodness-of-fit for degree 
+## 
+##         obs min mean max MC p-value
+## degree0   5   0 2.82   7       0.32
+## degree1   3   0 3.15   8       1.00
+## degree2   2   0 5.51  10       0.08
+## degree3   2   0 2.92   8       0.88
+## degree4   3   0 1.34   5       0.30
+## degree5   1   0 0.19   3       0.28
+## degree6   0   0 0.07   1       1.00
+## 
+## Goodness-of-fit for edgewise shared partner 
+## 
+##      obs min  mean max MC p-value
+## esp0   3   6 11.90  19       0.00
+## esp1   9   0  2.68  10       0.06
+## esp2   3   0  0.25   7       0.04
+## 
+## Goodness-of-fit for minimum geodesic distance 
+## 
+##     obs min  mean max MC p-value
+## 1    15   7 14.83  24       1.00
+## 2    18   5 19.97  41       0.94
+## 3    11   2 17.88  37       0.52
+## 4     8   0 11.15  26       0.70
+## 5     3   0  5.10  15       0.84
+## 6     0   0  2.24  12       0.88
+## 7     0   0  0.72   6       1.00
+## 8     0   0  0.20   5       1.00
+## 9     0   0  0.05   4       1.00
+## 10    0   0  0.02   2       1.00
+## Inf  65   0 47.84 104       0.66
+## 
+## Goodness-of-fit for model statistics 
+## 
+##         obs min  mean max MC p-value
+## edges    15   7 14.83  24          1
+## degree1   3   0  3.15   8          1
+```
+
+``` r
+snafun::stat_plot_gof(fit.gof)
+```
+
+&lt;img src="assets/images/Les09_8-1.svg" width="90%" /&gt;&lt;img src="assets/images/Les09_8-2.svg" width="90%" /&gt;&lt;img src="assets/images/Les09_8-3.svg" width="90%" /&gt;&lt;img src="assets/images/Les09_8-4.svg" width="90%" /&gt;
+]
+
+
+
+
+---
+# GOF output 
+&lt;br&gt;
+&lt;br&gt;
+### Output: 4 Parts
+
+1. Goodness of fit for degree (always)
+2. Goodness of fit for edgewise shared partner (always)
+3. Goodness of fit for minimum geodesic distance (always)
+4. Goodness of fit for model statistics (changes with model specifications)
+
+&lt;br&gt;
+
+It is possible to customize some other parameters
+
+---
+
+
+.center[![:scale 100%](assets/images/gof1.png)]
+
+
+
+---
+
+.center[![:scale 100%](assets/images/gof2.png)]
+
+
+
+---
+
+
+
+.center[![:scale 100%](assets/images/gof3.png)]
+
+---
+
+.center[![:scale 100%](assets/images/gof4.png)]
+
+
+---
+
+.center[![:scale 100%](assets/images/EndERGM3.png)]
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="assets/remark-latest.min.js"></script>
+<script src="assets/js/remark-zoom.js"></script>
+<script src="assets/js/macros.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "atom-one-light",
+  "highlightLines": true,
+  "highlightSpans": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": "- %current% -",
+  "ratio": "16:9",
+  "navigation": {
+    "scroll": true
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

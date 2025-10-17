@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>SOCIAL NETWORK ANALYSIS for DATA SCIENTISTS</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Claudia" />
+    <script src="assets/header-attrs-2.29/header-attrs.js"></script>
+    <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="assets/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="assets/tile-view-0.2.6/tile-view.js"></script>
+    <link href="assets/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="assets/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra_fit-screen-0.2.6/fit-screen.js"></script>
+    <link href="assets/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="assets/panelset-0.3.0/panelset.js"></script>
+    <script src="assets/fabric-4.3.1/fabric.min.js"></script>
+    <link href="assets/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="assets/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="assets/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x903370fb5a14bebb44362bd042ba49b","expires":1}</script>
+    <script src="assets/himalaya-1.1.0/himalaya.js"></script>
+    <script src="assets/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="assets/editable-0.2.6/editable.js"></script>
+    <script src="assets/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="assets/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="assets/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/apron.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/descartes.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/tachyons.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/xaringan-extra.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/RL-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS_effects.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/kleuren.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[SOCIAL NETWORK ANALYSIS&lt;br&gt;for DATA SCIENTISTS]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[Lecture: Collecting Network Data .small-caps.font70[(lecture] .font70[Week 06)]]]
+  ]
+
+&lt;br&gt;
+.f-abel.White-inline[Your lecturer: Claudia]&lt;br&gt;
+.f-abel.White-inline[Playdate: October 8th, 2025]
+
+
+&lt;!-- setup options start --&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.highlight-last-item &gt; ul &gt; li, 
+.highlight-last-item &gt; ol &gt; li {
+  opacity: 0.5;
+}
+
+.highlight-last-item &gt; ul &gt; li:last-of-type,
+.highlight-last-item &gt; ol &gt; li:last-of-type {
+  opacity: 1;
+
+.bold-last-item &gt; ul &gt; li:last-of-type,
+.bold-last-item &gt; ol &gt; li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+&lt;/style&gt;
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.remark-inline-code {
+  background: #F5F5F5;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.inverse-red, .inverse-red h1, .inverse-red h2, .inverse-red h3, .inverse-red a, inverse-red a &gt; code {
+	border-top: none;
+	background-color: red;
+	color: white; 
+	background-image: "";
+}
+
+.inverse-orange, .inverse-orange h1, .inverse-orange h2, .inverse-orange h3, .inverse-orange a, inverse-orange a &gt; code {
+	border-top: none;
+	background-color: orange;
+	color: black; 
+	background-image: "";
+}
+
+.tab{
+  display: inline-block;
+  margin-left: 40px;
+}
+
+.tab1{tab-size: 2;}
+.tab2{tab-size: 4;}
+.tab3{tab-size: 6;}
+.tab4{tab-size: 8;}
+
+&lt;/style&gt;
+
+
+
+&lt;style type="text/css"&gt;
+.grid-3-2a {
+  display: grid;
+  height: calc(90%);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1em;
+  padding: 1em;
+}
+&lt;/style&gt;
+
+
+&lt;!--scroll box set up --&gt;
+&lt;style type="text/css"&gt;
+./* Allow slides to show overflowing content */
+.remark-slide-content {
+  overflow: visible !important;
+}
+
+/* Scroll box */
+.scroll-box-18 {
+  display: block;           /* make it a block element */
+  max-height: 18em;         /* height of scroll box */
+  overflow-y: auto;         /* vertical scroll */
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fafafa;
+  box-sizing: border-box;   /* include padding in height */
+}
+
+/* Optional: nicer scrollbar */
+.scroll-box-18::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-box-18::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.scroll-box-18::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+
+&lt;/style&gt;
+
+&lt;!-- setup options end --&gt;
+
+
+
+
+
+
+
+---
+class: course-logo
+layout: true
+---
+background-image: url(assets/images/topo.jpg)
+background-size: 450px
+background-position: 50% 70%
+# Let's collect some data!
+
+&lt;br&gt;
+
+canvas -&gt; modules -&gt; week 6 -&gt; link
+
+https://tilburghumanities.eu.qualtrics.com/jfe/form/SV_e9YKCcujyVw8iPA
+
+---
+
+# Agenda for today's lecture 
+&lt;br&gt;
+
+### 1) Think and Reflect on the Survey Questions
+
+### 2) Explore network data collection strategies
+
+### 3) Discuss how do you process newly collected data 
+
+
+
+
+---
+# This are the relationships in the cohort of three years ago
+
+
+
+
+&lt;img src="assets/images/L4_2-1.svg" width="90%" /&gt;
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# 1) Think and Reflect on the Survey Questions
+---
+# Think and Reflect
+
+&lt;br&gt;
+
+- Q1 Why are these questions suitable for collecting network data?
+
+- Q2 Which question collects what kind of data?
+
+- Q3 What could be a bias for this data collection? 
+
+- Q4 What are the possible ethical concerns that might arise?
+
+---
+# Overview of the Survey questions 
+&lt;br&gt;
+### This survey is about understanding how to collect data
+&lt;br&gt;
+###- Can you please select your name from the list below? 
+###- How much do you like data science?
+###- Would you please select the name of the one coursemate with whom you interact the most?
+###- How often do you interact?
+---
+
+background-image: url(assets/images/friendship2.jpg)
+background-size: 250px
+background-position: 85% 55%
+# Q1 Why are these questions suitable for collecting network data?
+&lt;br&gt;
+---
+
+background-image: url(assets/images/friendship2.jpg)
+background-size: 250px
+background-position: 85% 55%
+# Q1 Why are these questions suitable for collecting network data?
+&lt;br&gt;
+.center[This questions are suitable for collecting network data about friendship]
+.center[not every kind of network data]
+
+&lt;br&gt;
+- collecting info about friendship (RELATIONSHIP - network)
+- collecting information about respondents (RESPONDENTS ATTRIBUTES)
+- collecting information about the relationship between pair of respondents (RELATIONSHIP ATTRIBUTE)
+
+### There is no universally valid questionnaire
+
+---
+background-size: 500px
+background-position: 85% 55%
+
+# Q2 Which question collects what data?
+
+---
+background-image: url(assets/images/)
+background-size: 500px
+background-position: 85% 55%
+
+# Q2 Which question collects what data?
+
+&lt;br&gt;
+## Levels 
+
+- network info 
+- node attribute
+- edge attribute
+
+## Mentimeter! 
+### 7268 6485
+### www.menti.com
+### https://www.menti.com/al3jcf1aiwgp
+---
+background-image: url(assets/images/small-example.png)
+background-size: 600px
+background-position: 90% 35%
+name: DataTypes_slide
+description: collect data about network, nodes and edge attributes
+# "Types" of data
+&lt;br&gt;
+
+- Network Attribute 
+    - respondent/ego
+    - alter
+- node Attribute: attributes of the respondent/ego
+- edge Attribute: attributes of the relationship
+
+&lt;br&gt;
+&lt;br&gt;
+### You collect what you need to answer your research question.
+
+---
+# Examples of research questions
+## Which types of data you need?
+
+---
+# Examples of research questions
+## Which types of data you need?
+
+## .red[Does the gender affect the likelihood of pupils playing together in kindergarten?]
+
+
+---
+# Examples of research questions
+## Which types of data you need?
+
+## .red[Does the gender affect the likelihood of pupils playing together in kindergarten?]
+### Network 
+### Node attribute
+
+---
+# Examples of research questions
+## Which types of data you need?
+
+## .red[Does the gender affect the likelihood of pupils playing together in kindergarten?]
+### Network 
+### Node attribute
+
+## .red[Are people that retweet each other more likely to have the same opinion?]
+
+---
+# Examples of research questions
+## Which types of data you need?
+
+## .red[Does the gender affect the likelihood of pupils playing together in kindergarten?]
+### Network 
+### Node attribute
+
+## .red[Are people that retweet each other more likely to have the same opinion?]
+### Network (retweet)
+### Edge Attribute (opinion in the tweet - categorical)
+
+
+---
+# Q3 What could be a bias for this data collection? 
+&lt;br&gt;
+I left a few "problems" in the survey, let's see if you catch them
+
+
+---
+# Q3 What could be a bias for this data collection? 
+&lt;br&gt;
+I left a few "problems" in the survey, let's see if you catch them
+
+## .red[The number of friends. ]
+### Is 3 a good number? 
+
+
+
+
+
+---
+# Q3 What could be a bias for this data collection? 
+&lt;br&gt;
+I left a few "problems" in the survey, let's see if you catch them
+
+## .red[The number of friends. ]
+### Is 3 a good number? 
+
+## .red[What is a friend?]
+### Are these questions capturing 'friendship'? Is a colleague a friend?
+
+"To what extent do you consider this person your friend compared to your friends outside uni?"
+it could mean too many things
+
+Maybe this is fine, but we need to make sure to define what we are measuring before
+---
+name: Design_Bias
+description: how to make an unbiased study design
+
+# Unbiased design
+## .red[Think carefully]
+
+### - Define your target relationship
+### - Decide what is the right number of connections per respondent to collect
+### - Make sure your research design is linked to the research question
+### - Ask the questions in a specific way 
+- make sure you do not ask two questions in one. 
+
+### - Make sure that you end up with measurable answers 
+
+- preferably use Likert scales with odd numbers of points (3, 5, 7, 11)
+
+## .red[Remember: A fully unbiased study does not exist!]
+
+---
+name: Sampling_Bias
+description: Decide on the right approach for your sample
+
+# Sampling 
+## - Do you have access to the entire population?
+### yes? Run a survey like the one we used 
+
+- targeted a group with a boundary (SNA4DS students)
+- Not everyone responded, but this is simply .red[missing data]
+
+
+### No? You need to use an egonet approach
+You ask them to provide the name of their relationship since you might not even know how many are they
+
+### entire sample: Roster with names
+### egonet: "snowballing" data
+.red[Access to the entire population with missing data DIFFERS from access to a sample]
+
+---
+name: egonets
+description: example of egonets
+# Egonets simple
+
+- Who are your friends?
+- Are they friends among each other?
+
+
+.center[![:scale 70%](assets/images/egonet_simple.jpg)]
+
+---
+background-image: url(assets/images/egonet_weigth.png)
+background-size: 750px
+background-position: 50% 60%
+# Egonets advanced design
+- You can tailor the design to your needs
+
+---
+# Q4 What are the possible ethical &lt;br&gt; concerns that might arise?
+
+
+---
+# Q4 What are the possible ethical &lt;br&gt; concerns that might arise?
+
+
+- .red[Anonyminity and confidentiality]
+    - network data is particularly sensitive on this perspective
+    - you need to anonymize it and store it properly
+
+
+
+---
+# Q4 What are the possible ethical &lt;br&gt; concerns that might arise?
+
+
+- .red[Anonyminity and confidentiality]
+    - network data is particularly sensitive on this perspective
+    - you need to anonymize it and store it properly
+
+- .red[Sensitive questions] 
+    - such as gender, or medical information
+
+---
+# Q4 What are the possible ethical &lt;br&gt; concerns that might arise?
+
+
+- .red[Anonyminity and confidentiality]
+    - network data is particularly sensitive on this perspective
+    - you need to anonymize it and store it properly
+
+- .red[Sensitive questions] 
+    - such as gender, or medical information
+
+- .red[Be aware of your intended sample and protect it]
+    - Are you recruiting a sensitive sample? Make sure no one is in danger (e.g. AIDS patients)
+    - make sure no one is recognizable even 10 years later
+
+
+---
+name: ethical_issues
+description: Designing an ethics compliant study
+# Q4 What are the possible ethical &lt;br&gt; concerns that might arise?
+
+
+- .red[Anonyminity and confidentiality]
+    - network data is particularly sensitive on this perspective
+    - you need to anonymize it and store it properly
+
+- .red[Sensitive questions] 
+    - such as gender, or medical information
+
+- .red[Know who is your intended sample and protect it]
+    - Are you recruiting a sensitive sample? Make sure no one is in danger (e.g. AIDS patients)
+    - make sure no one is recognizable even 10 years later
+
+- .red[GDPR]
+    - Get consent and agreement 
+
+---
+name: collection_strategies
+description: How to approach a data collection problem
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# 2) Explore network data collection strategies
+
+---
+background-image: url(assets/images/sociogram-edges.png)
+background-size: 550px
+background-position: 50% 85%
+
+# Sofware
+
+For running a survey you can use regular platforms not specifically meant for 
+networks (Qualtrics, Survey Monkey etc...)
+
+But there are software specifically designed to collect network data. For instance .red[Network Canvas]
+
+ego or entire sample
+
+
+
+
+
+.footnote.DarkOrange-inline[M. Birkett, J. Melville, P. Janulis, G. Phillips, N. Contractor, B. Hogan,
+Network Canvas: Key decisions in the design of an interviewer-assisted network data collection software suite, Social Networks, Volume 66, 2021, Pages 114-124.]
+
+---
+background-image: url(assets/images/fieldwork.jpg)
+background-size: 550px
+background-position: 80% 70%
+# Data collection strategies for people: &lt;br&gt; online survey &amp; fieldwork 
+
+## .red[We explored the online Survey data collection]
+A survey does not get you everywhere
+
+kids?
+elderly people? 
+
+## You might need to do fieldwork
+
+yes paper and pen! or Network canvas
+
+
+
+---
+# Data collection strategies for people: &lt;br&gt; online data
+## Spotify: Scrape data. 
+
+
+
+.scroll-box-18[
+
+``` r
+# selected features
+str(fsel)
+```
+
+```
+## 'data.frame':	2 obs. of  39 variables:
+##  $ artist_name                 : chr  "100 gecs" "100 gecs"
+##  $ artist_id                   : chr  "6PfSUFtkMVoDkx4MQkzOi3" "6PfSUFtkMVoDkx4MQkzOi3"
+##  $ album_id                    : chr  "0qnExDZfz0kVeBjixPsyjS" "0qnExDZfz0kVeBjixPsyjS"
+##  $ album_type                  : chr  "album" "album"
+##  $ album_images                :List of 2
+##   ..$ :'data.frame':	3 obs. of  3 variables:
+##   .. ..$ height: int  640 300 64
+##   .. ..$ url   : chr  "https://i.scdn.co/image/ab67616d0000b273f91a3040f0be854026ad2dd0" "https://i.scdn.co/image/ab67616d00001e02f91a3040f0be854026ad2dd0" "https://i.scdn.co/image/ab67616d00004851f91a3040f0be854026ad2dd0"
+##   .. ..$ width : int  640 300 64
+##   ..$ :'data.frame':	3 obs. of  3 variables:
+##   .. ..$ height: int  640 300 64
+##   .. ..$ url   : chr  "https://i.scdn.co/image/ab67616d0000b273f91a3040f0be854026ad2dd0" "https://i.scdn.co/image/ab67616d00001e02f91a3040f0be854026ad2dd0" "https://i.scdn.co/image/ab67616d00004851f91a3040f0be854026ad2dd0"
+##   .. ..$ width : int  640 300 64
+##  $ album_release_date          : chr  "2020-07-10" "2020-07-10"
+##  $ album_release_year          : num  2020 2020
+##  $ album_release_date_precision: chr  "day" "day"
+##  $ danceability                : num  0.344 0.849
+##  $ energy                      : num  0.737 0.473
+##  $ key                         : int  6 8
+##  $ loudness                    : num  -4.78 -7.55
+##  $ mode                        : int  1 1
+##  $ speechiness                 : num  0.237 0.2
+##  $ acousticness                : num  0.442 0.115
+##  $ instrumentalness            : num  1.05e-05 0.00
+##  $ liveness                    : num  0.0693 0.0488
+##  $ valence                     : num  0.623 0.616
+##  $ tempo                       : num  132 107
+##  $ track_id                    : chr  "1rpYWdbwuSl8YLfXKxshvJ" "2T93MtJuKMzcGRTR8fdizV"
+##  $ analysis_url                : chr  "https://api.spotify.com/v1/audio-analysis/1rpYWdbwuSl8YLfXKxshvJ" "https://api.spotify.com/v1/audio-analysis/2T93MtJuKMzcGRTR8fdizV"
+##  $ time_signature              : int  1 4
+##  $ artists                     :List of 2
+##   ..$ :'data.frame':	2 obs. of  6 variables:
+##   .. ..$ href                 : chr  "https://api.spotify.com/v1/artists/6PfSUFtkMVoDkx4MQkzOi3" "https://api.spotify.com/v1/artists/335TWGWGFan4vaacJzSiU8"
+##   .. ..$ id                   : chr  "6PfSUFtkMVoDkx4MQkzOi3" "335TWGWGFan4vaacJzSiU8"
+##   .. ..$ name                 : chr  "100 gecs" "A. G. Cook"
+##   .. ..$ type                 : chr  "artist" "artist"
+##   .. ..$ uri                  : chr  "spotify:artist:6PfSUFtkMVoDkx4MQkzOi3" "spotify:artist:335TWGWGFan4vaacJzSiU8"
+##   .. ..$ external_urls.spotify: chr  "https://open.spotify.com/artist/6PfSUFtkMVoDkx4MQkzOi3" "https://open.spotify.com/artist/335TWGWGFan4vaacJzSiU8"
+##   ..$ :'data.frame':	4 obs. of  6 variables:
+##   .. ..$ href                 : chr  "https://api.spotify.com/v1/artists/6PfSUFtkMVoDkx4MQkzOi3" "https://api.spotify.com/v1/artists/25uiPmTg16RbhZWAqwLBy5" "https://api.spotify.com/v1/artists/2OaHYHb2XcFPvqL3VsyPzU" "https://api.spotify.com/v1/artists/6OqhFYFJDnBBHas02HopPT"
+##   .. ..$ id                   : chr  "6PfSUFtkMVoDkx4MQkzOi3" "25uiPmTg16RbhZWAqwLBy5" "2OaHYHb2XcFPvqL3VsyPzU" "6OqhFYFJDnBBHas02HopPT"
+##   .. ..$ name                 : chr  "100 gecs" "Charli XCX" "Rico Nasty" "Kero Kero Bonito"
+##   .. ..$ type                 : chr  "artist" "artist" "artist" "artist"
+##   .. ..$ uri                  : chr  "spotify:artist:6PfSUFtkMVoDkx4MQkzOi3" "spotify:artist:25uiPmTg16RbhZWAqwLBy5" "spotify:artist:2OaHYHb2XcFPvqL3VsyPzU" "spotify:artist:6OqhFYFJDnBBHas02HopPT"
+##   .. ..$ external_urls.spotify: chr  "https://open.spotify.com/artist/6PfSUFtkMVoDkx4MQkzOi3" "https://open.spotify.com/artist/25uiPmTg16RbhZWAqwLBy5" "https://open.spotify.com/artist/2OaHYHb2XcFPvqL3VsyPzU" "https://open.spotify.com/artist/6OqhFYFJDnBBHas02HopPT"
+##  $ available_markets           :List of 2
+##   ..$ : chr  "AD" "AE" "AG" "AL" ...
+##   ..$ : chr  "AD" "AE" "AG" "AL" ...
+##  $ disc_number                 : int  1 1
+##  $ duration_ms                 : int  192338 214529
+##  $ explicit                    : logi  TRUE FALSE
+##  $ track_href                  : chr  "https://api.spotify.com/v1/tracks/1rpYWdbwuSl8YLfXKxshvJ" "https://api.spotify.com/v1/tracks/2T93MtJuKMzcGRTR8fdizV"
+##  $ is_local                    : logi  FALSE FALSE
+##  $ track_name                  : chr  "money machine - A.G. Cook Remix" "ringtone (Remix) [feat. Charli XCX, Rico Nasty, Kero Kero Bonito]"
+##  $ track_preview_url           : chr  "https://p.scdn.co/mp3-preview/f1a93abaeba56cb2f4d49708a44cf1f9e97f798b?cid=3ff0fcc4caa24f17ba75c3861c5afb32" "https://p.scdn.co/mp3-preview/757f71f94b11a870fef83a6457ae58d83de5e00f?cid=3ff0fcc4caa24f17ba75c3861c5afb32"
+##  $ track_number                : int  1 2
+##  $ type                        : chr  "track" "track"
+##  $ track_uri                   : chr  "spotify:track:1rpYWdbwuSl8YLfXKxshvJ" "spotify:track:2T93MtJuKMzcGRTR8fdizV"
+##  $ external_urls.spotify       : chr  "https://open.spotify.com/track/1rpYWdbwuSl8YLfXKxshvJ" "https://open.spotify.com/track/2T93MtJuKMzcGRTR8fdizV"
+##  $ album_name                  : chr  "1000 gecs and The Tree of Clues" "1000 gecs and The Tree of Clues"
+##  $ key_name                    : chr  "F#" "G#"
+##  $ mode_name                   : chr  "major" "major"
+##  $ key_mode                    : chr  "F# major" "G# major"
+```
+]
+
+---
+# Spotify: Where is the network?
+
+.scroll-box-18[
+
+``` r
+# artist one
+
+# ego
+fsel$artist_name[1]
+```
+
+```
+## [1] "100 gecs"
+```
+
+``` r
+# alter (list nested into data frame)
+str(fsel$artists[1])
+```
+
+```
+## List of 1
+##  $ :'data.frame':	2 obs. of  6 variables:
+##   ..$ href                 : chr [1:2] "https://api.spotify.com/v1/artists/6PfSUFtkMVoDkx4MQkzOi3" "https://api.spotify.com/v1/artists/335TWGWGFan4vaacJzSiU8"
+##   ..$ id                   : chr [1:2] "6PfSUFtkMVoDkx4MQkzOi3" "335TWGWGFan4vaacJzSiU8"
+##   ..$ name                 : chr [1:2] "100 gecs" "A. G. Cook"
+##   ..$ type                 : chr [1:2] "artist" "artist"
+##   ..$ uri                  : chr [1:2] "spotify:artist:6PfSUFtkMVoDkx4MQkzOi3" "spotify:artist:335TWGWGFan4vaacJzSiU8"
+##   ..$ external_urls.spotify: chr [1:2] "https://open.spotify.com/artist/6PfSUFtkMVoDkx4MQkzOi3" "https://open.spotify.com/artist/335TWGWGFan4vaacJzSiU8"
+```
+]
+
+## .red[You loop through to extract the information that you need]
+
+### Other examples of online sources of network data: Twitter (old data), Instagram, Facebook, ...
+
+---
+background-image: url(assets/images/wearable-sensors.png)
+background-size: 750px
+background-position: 50% 70%
+# Data collection strategies for alive creatures
+Wearable sensors VS direct observation
+
+
+
+.footnote.DarkOrange-inline[Gelardi V, Godard J, Paleressompoulle D, Claidiere N, Barrat A. 2020
+Measuring social networks in primates: wearable sensors versus direct observations. Proc. R. Soc. A 476: 20190737. http://dx.doi.org/10.1098/rspa.2019.0737]
+---
+background-image: url(assets/images/service-networks.png)
+background-size: 550px
+background-position: 50% 80%
+# Data collection strategies for not alive creatures
+- Private info: Questionnaire (Service Networks)
+- Public info: Observation (Dutch train line or internet network)
+
+.footnote.DarkOrange-inline[Clarke, Z. et al., 2019, Needs Assessment: Substance Use, Blood Borne Virus &amp; Sexual Health in Midlothian &amp; East Lothian, NHS Lothians &amp; MELDAP]
+
+---
+background-image: url(assets/images/Semantic_Net.png)
+background-size: 550px
+background-position: 50% 80%
+# Data collection strategies for computational networks
+Semantic networks (it does not "exist", it is a "theoretical" concept)
+
+
+---
+name: collection_strategies
+description: How to approach a data collection problem
+# Summary of data collection strategies
+
+## .red[If possible:]
+### Observe ---&gt; public available data more or less hard to access
+    [in order of complexity]
+    - just observe something or someone
+    - scrape
+    - use text analysis
+    - use sensors
+    - ...
+## .red[If NOT possible to observe:]    
+### Ask questions ---&gt; private information 
+    [in order of complexity]
+    - Online 
+    - fieldwork (MOST COMPLEX AND EXPENSIVE STRATEGY OF THEM ALL)
+    
+---
+# Data? Where to find it - 
+
+&lt;br&gt;
+
+## - Kaggle
+
+## - Harvard DataVerse
+
+## - SNAP Stanford
+
+## - Pajek Dataset
+
+## - UciNet Datasets
+
+---
+name: processing_data
+description: How to turn into a network the data we collect
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+
+# 3) Discuss how do you process newly collected data 
+
+---
+# How do you process newly collected data?
+&lt;br&gt;
+## Your data looks like this (you want your data to look like this):
+
+
+
+
+``` r
+survey
+```
+
+```
+##   respondent alter1 alter2 gender cinemaW1 cinemaW2
+## 1       Anna  David   Luke      F        1        0
+## 2        Ben     NA     NA      M       NA       NA
+## 3       Cleo   Anna  David      O        2        2
+```
+
+## To analyse it as a network we need to process it 
+
+### Let's explore one way to do it
+
+---
+# Creating an edge list
+
+### Let's do the process manually first 
+
+- match: respondent -- alter 1
+
+- match: respondent -- alter 2
+
+- append them
+
+
+``` r
+(EdgeList &lt;- data.frame(rbind(cbind(survey$respondent, survey$alter1), 
+                              cbind(survey$respondent, survey$alter2))))
+```
+
+```
+##     X1    X2
+## 1 Anna David
+## 2  Ben    NA
+## 3 Cleo  Anna
+## 4 Anna  Luke
+## 5  Ben    NA
+## 6 Cleo David
+```
+
+## If you have many columns this could get nasty. Better to loop 
+
+---
+# Edge List via for loop
+
+
+``` r
+col &lt;- survey[ , 1:3] #&lt;- select the columns respondent, alter1, alter2
+
+EdgeList &lt;- data.frame()
+temp &lt;- data.frame()
+
+for (i in 2:ncol(col)) {
+  temp &lt;- cbind(col[, 1], col[, i])
+  EdgeList &lt;- rbind(EdgeList, temp)
+}
+
+EdgeList
+```
+
+```
+##     V1    V2
+## 1 Anna David
+## 2  Ben    NA
+## 3 Cleo  Anna
+## 4 Anna  Luke
+## 5  Ben    NA
+## 6 Cleo David
+```
+
+### Are we done? We are definitely not. An edge list does not consider isolates. 
+
+---
+# Make a node list 
+
+### Let's do the process manually: We need to make sure that all the nodes are included, but one time only
+
+
+
+``` r
+(NodeList &lt;- unique(c(survey$respondent, survey$alter1, survey$alter2)))
+```
+
+```
+## [1] "Anna"  "Ben"   "Cleo"  "David" "NA"    "Luke"
+```
+
+
+
+
+
+
+
+
+``` r
+NodeList &lt;- na.omit(NodeList) # always remove NAs
+```
+
+Unless we use also a node list, Ben would disappear from the sample
+
+.red[A for loop would make your life better in this case too]
+
+---
+# So, now what?
+&lt;br&gt;
+## Now we turn it into a network
+
+
+
+
+``` r
+EdgeList &lt;- na.omit(EdgeList)
+surveynet &lt;- igraph::graph_from_data_frame(EdgeList, NodeList, directed = TRUE)
+```
+
+&lt;br&gt;
+### Disclaimer: there are many other ways, but this is a very useful one
+&lt;br&gt;
+### Still, explore the functions in `igraph` and `network` for creating networks
+---
+# Result
+
+
+``` r
+plot(surveynet)
+```
+
+&lt;img src="assets/images/L4_13-1.svg" width="90%" /&gt;
+
+And the attributes? Edge attributes are processed the same way as the edge list, while node attributes needs to be processed as vectors (consider that you will have missing data for the alters)
+
+
+
+---
+name: SNA4DS_dataprocessing
+description: How to process survey data using `snafun`
+# To spead up the process
+
+
+
+.scroll-box-18[
+
+``` r
+# select columns with network info as df
+net &lt;- data.frame(survey[,1:3])
+
+# select columns with edge attributes as df
+eAttr &lt;- data.frame(cbind(survey$cinemaW1, survey$cinemaW2))
+
+# prepare a vector with node attribute
+nAttr &lt;- survey$gender
+
+# Make the edge list
+EdgeList &lt;- snafun::make_edgelist(net, eAttr)
+EdgeList &lt;- na.omit(EdgeList)
+
+# Make the node list 
+NodeList &lt;- snafun::make_nodelist(net, nAttr)
+
+# turn it into a network
+surveynet &lt;- igraph::graph_from_data_frame(EdgeList, NodeList, directed = TRUE)
+surveynet
+```
+
+```
+## IGRAPH b551b05 DN-- 5 4 -- 
+## + attr: name (v/c), attribute (v/c), attribute (e/n)
+## + edges from b551b05 (vertex names):
+## [1] Anna-&gt;David Cleo-&gt;Anna  Anna-&gt;Luke  Cleo-&gt;David
+```
+]
+---
+background-image: url(assets/images/dogs_strings.jpg)
+background-size: 700px
+background-position: 50% 50%
+# Enjoy your data hunt! 
+
+
+---
+background-image: url(assets/images/Copy-skates.jpg)
+background-size: 750px
+background-position: 50% 50%
+# That's all folks!
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="assets/remark-latest.min.js"></script>
+<script src="assets/js/remark-zoom.js"></script>
+<script src="assets/js/macros.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "atom-one-light",
+  "highlightLines": true,
+  "highlightSpans": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": "- %current% -",
+  "ratio": "16:9",
+  "navigation": {
+    "scroll": true
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
