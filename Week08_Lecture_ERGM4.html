@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>SOCIAL NETWORK ANALYSIS for DATA SCIENTISTS</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Claudia" />
+    <script src="assets/header-attrs-2.29/header-attrs.js"></script>
+    <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="assets/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="assets/tile-view-0.2.6/tile-view.js"></script>
+    <link href="assets/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="assets/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra_fit-screen-0.2.6/fit-screen.js"></script>
+    <link href="assets/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="assets/panelset-0.3.0/panelset.js"></script>
+    <script src="assets/fabric-4.3.1/fabric.min.js"></script>
+    <link href="assets/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="assets/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="assets/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"xc521b0caed546818794eb3f399baedf","expires":1}</script>
+    <script src="assets/himalaya-1.1.0/himalaya.js"></script>
+    <script src="assets/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="assets/editable-0.2.6/editable.js"></script>
+    <script src="assets/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="assets/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="assets/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/apron.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/descartes.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/tachyons.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/xaringan-extra.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/RL-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS_effects.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/kleuren.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[SOCIAL NETWORK ANALYSIS&lt;br&gt;for DATA SCIENTISTS]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[LECTURE: ERGM IV .small-caps.font70[(lecture] .font70[Week 10)]]]
+  ]
+
+&lt;br&gt;
+.f-abel.White-inline[Your lecturer: Claudia]&lt;br&gt;
+.f-abel.White-inline[Playdate: October, 22nd, 2025]
+
+
+&lt;!-- setup options start --&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.highlight-last-item &gt; ul &gt; li, 
+.highlight-last-item &gt; ol &gt; li {
+  opacity: 0.5;
+}
+
+.highlight-last-item &gt; ul &gt; li:last-of-type,
+.highlight-last-item &gt; ol &gt; li:last-of-type {
+  opacity: 1;
+
+.bold-last-item &gt; ul &gt; li:last-of-type,
+.bold-last-item &gt; ol &gt; li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+&lt;/style&gt;
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.remark-inline-code {
+  background: #F5F5F5;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.inverse-red, .inverse-red h1, .inverse-red h2, .inverse-red h3, .inverse-red a, inverse-red a &gt; code {
+	border-top: none;
+	background-color: red;
+	color: white; 
+	background-image: "";
+}
+
+.inverse-orange, .inverse-orange h1, .inverse-orange h2, .inverse-orange h3, .inverse-orange a, inverse-orange a &gt; code {
+	border-top: none;
+	background-color: orange;
+	color: black; 
+	background-image: "";
+}
+
+.tab{
+  display: inline-block;
+  margin-left: 40px;
+}
+
+.tab1{tab-size: 2;}
+.tab2{tab-size: 4;}
+.tab3{tab-size: 6;}
+.tab4{tab-size: 8;}
+
+&lt;/style&gt;
+
+
+
+&lt;style type="text/css"&gt;
+.grid-3-2a {
+  display: grid;
+  height: calc(90%);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1em;
+  padding: 1em;
+}
+&lt;/style&gt;
+
+&lt;!--scroll box set up --&gt;
+&lt;style type="text/css"&gt;
+./* Allow slides to show overflowing content */
+.remark-slide-content {
+  overflow: visible !important;
+}
+
+/* Scroll box */
+.scroll-box-18 {
+  display: block;           /* make it a block element */
+  max-height: 18em;         /* height of scroll box */
+  overflow-y: auto;         /* vertical scroll */
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fafafa;
+  box-sizing: border-box;   /* include padding in height */
+}
+
+/* Optional: nicer scrollbar */
+.scroll-box-18::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-box-18::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.scroll-box-18::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+
+&lt;/style&gt;
+
+
+&lt;!-- setup options end --&gt;
+
+
+
+---
+class: course-logo
+layout: true
+
+---
+name: menu
+description: List of contents for today's lecture
+# Menu'
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+- Bipartite ERGMs
+- Weighted ERGMs
+
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# Bipartite ERGMs
+
+---
+name: Bipartite_graph
+description: Recap about bipartite graphs
+# Recap: What's a bipartite graph?
+
+- 2 sets of objects 
+- connections are allowed across sets
+- connections are forbidden within set
+
+.center[![:scale 30%](assets/images/Simple-bipartite-graph.png)]
+
+---
+# Classic Examples
+&lt;br&gt;
+## People --- Events
+&lt;br&gt;
+- Kids to birthday parties
+
+- Men to knitting club meetings
+
+- Women to football practices
+
+---
+# Less Common Examples
+&lt;br&gt;
+## Two groups of people 
+&lt;br&gt;
+- heterosexual relationships
+
+- consultants and customers
+
+- doctors and patients
+
+- manager and employees 
+
+- professors and students
+
+
+---
+name: modelling_Bipartite_graph
+description: Modelling bipartite graphs
+# Unimodal (regular) ERGMs
+&lt;br&gt;
+
+### Deal with one set of nodes (each one can connect to each other)
+
+to make it work for bipartite data you can project it 
+
+- set 1 are the nodes and being pairwise connected to a node in set 2 creates an edge on this one projection
+- set 2 are the nodes and being pairwise connected to a node in set 1 creates an edge on the other projection
+
+### Both projection would be undirected by definition
+
+Usually bipartite connections go in one direction only
+
+Otherwise, you can use Bipartite ERGMs
+---
+# Bipartite ERGMs
+&lt;br&gt;
+
+### Conceptually the same as the unimodal
+- It's a unimodal with some constraints
+- Same formula
+- Special terms same concepts 
+
+### They are cumbersome ergm
+
+- It takes much longer to run
+- You need to use the advanced options to make the model work
+
+---
+name: Bipartite_model_terms
+description: Terms for bipartite models
+# Bipartite terms
+
+
+.center[![:scale 100%](assets/images/bipartite_terms.png)]
+
+4 cycle: Bi-cliques
+
+
+---
+# Bipartite terms
+&lt;br&gt;
+`ergm::search.ergmTerms(search = 'bipartite')`
+
+Found  36  matching ergm terms
+
+### Some examples
+
+- `nodecov` --&gt; `b1cov` &amp; `b2cov`
+- `nodefactor` --&gt; `b1factor` &amp; `b2factor`
+- `nodematch` --&gt; `b1nodematch` &amp; `b2nodematch`
+- `star(k)` --&gt; `b1star(k)` &amp;  `b2star(k)`
+- `gwdsp()` --&gt; `gwb1dsp()` &amp; `gwb2dsp()`
+- etc., ...
+---
+background-image: url(assets/images/kids_toy_bip_example.jpg)
+background-size: 450px
+background-position: 90% 60%
+name: Bipartite_model_example
+description: Bipartite model example
+# Toy Example
+
+### convergence time is higher than the unimodal ERGM so, tiny data set
+
+### Kids going to events 
+
+- 7 kids 
+- 3 events
+- 6 edges 
+- 1 attribute (clubs red and yellow)
+
+Let's assume we already have 
+- RQs
+- Hs
+- chosen model terms
+
+Let's run 
+
+
+---
+# Baseline model
+
+
+
+
+
+.scroll-box-18[
+
+``` r
+m0 &lt;- ergm::ergm(kids ~ edges)
+summary(m0)
+```
+
+```
+## Call:
+## ergm::ergm(formula = kids ~ edges)
+## 
+## Maximum Likelihood Results:
+## 
+##       Estimate Std. Error MCMC % z value Pr(&gt;|z|)  
+## edges  -0.9163     0.4830      0  -1.897   0.0578 .
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+##      Null Deviance: 29.11  on 21  degrees of freedom
+##  Residual Deviance: 25.13  on 20  degrees of freedom
+##  
+## AIC: 27.13  BIC: 28.17  (Smaller is better. MC Std. Err. = 0)
+```
+]
+---
+# Dyadic independent term
+
+.scroll-box-18[
+
+``` r
+m1 &lt;- ergm::ergm(kids ~ edges  + b1factor("color", levels = -1))
+summary(m1)
+```
+
+```
+## Call:
+## ergm::ergm(formula = kids ~ edges + b1factor("color", levels = -1))
+## 
+## Maximum Likelihood Results:
+## 
+##                       Estimate Std. Error MCMC % z value Pr(&gt;|z|)
+## edges                  -0.6931     0.6124      0  -1.132    0.258
+## b1factor.color.yellow  -0.5596     1.0089      0  -0.555    0.579
+## 
+##      Null Deviance: 29.11  on 21  degrees of freedom
+##  Residual Deviance: 24.81  on 19  degrees of freedom
+##  
+## AIC: 28.81  BIC: 30.9  (Smaller is better. MC Std. Err. = 0)
+```
+]
+
+
+---
+# Dyadic dependent terms
+
+.scroll-box-18[
+
+``` r
+m2 &lt;- ergm::ergm(kids ~ edges  + b1factor("color", levels = -1) + b1star(2))
+summary(m2)
+```
+
+```
+## Call:
+## ergm::ergm(formula = kids ~ edges + b1factor("color", levels = -1) + 
+##     b1star(2))
+## 
+## Monte Carlo Maximum Likelihood Results:
+## 
+##                       Estimate Std. Error MCMC % z value Pr(&gt;|z|)
+## edges                  0.06656    1.11520      0   0.060    0.952
+## b1factor.color.yellow -0.91698    1.25167      0  -0.733    0.464
+## b1star2               -1.15261    1.70684      0  -0.675    0.499
+## 
+##      Null Deviance: 29.11  on 21  degrees of freedom
+##  Residual Deviance: 23.94  on 18  degrees of freedom
+##  
+## AIC: 29.94  BIC: 33.08  (Smaller is better. MC Std. Err. = 0.02779)
+```
+]
+
+---
+# Are we done?
+
+&lt;br&gt;
+## We inserted all the terms, are we done? 
+&lt;br&gt;
+### In this toy example, we might, but in a real bipartite ergm, hardly.
+
+The function `ergm::ergm` is set to run simulation on every possible combination
+
+Here, every possible combination is simply not possible, then why not saving some computational time?
+
+&lt;br&gt;
+## We need to .red[constraint] the model 
+
+---
+name: Model_constraints
+description: Model constraints 
+# Constraints
+&lt;br&gt;
+`ergmConstraint -- Sample Space Constraints for Exponential-Family Random Graph Models`
+
+p. 122, ergm user manual .link[https://cran.r-project.org/web/packages/ergm/ergm.pdf]
+&lt;br&gt;
+### Model the distribution telling to the simulation what needs to stay stable or vary 
+
+- "+" increase the constraint
+
+- "-" decrease the constraint 
+
+Several options there. Example:
+
+bd &lt;- sets a min and a max for degree
+
+---
+# Constraining for degree 
+
+- min 0 -- isolates
+- max 7 -- number of nodes that can attend party
+
+
+.scroll-box-18[
+
+``` r
+# network::get.vertex.attribute(kids, "color")
+
+m3 &lt;- ergm::ergm(kids ~ edges  + b1factor("color", levels = -1) + b1star(2),
+                 constraints= ~ bd(minout = 0, maxout = 7))
+summary(m3)
+```
+
+```
+## Call:
+## ergm::ergm(formula = kids ~ edges + b1factor("color", levels = -1) + 
+##     b1star(2), constraints = ~bd(minout = 0, maxout = 7))
+## 
+## Monte Carlo Maximum Likelihood Results:
+## 
+##                       Estimate Std. Error MCMC % z value Pr(&gt;|z|)
+## edges                   0.1390     1.1613      0   0.120    0.905
+## b1factor.color.yellow  -0.9903     1.3228      0  -0.749    0.454
+## b1star2                -1.3510     1.4806      0  -0.913    0.361
+## 
+##      Null Deviance:  0.000  on 21  degrees of freedom
+##  Residual Deviance: -5.094  on 18  degrees of freedom
+##  
+## Note that the null model likelihood and deviance are defined to be 0.
+## This means that all likelihood-based inference (LRT, Analysis of
+## Deviance, AIC, BIC, etc.) is only valid between models with the same
+## reference distribution and constraints.
+## 
+## AIC: 0.9059  BIC: 4.039  (Smaller is better. MC Std. Err. = 0.09991)
+```
+]
+
+---
+# Another point of view
+&lt;br&gt;
+
+### Example: you want to model relationships between bosses and employees as a bipartite
+
+- Connections not allowed within the same work category for your study purposes
+
+- This is bipartite in nature
+
+- Rather than model it as a bipartite though, you insert the network as a unimodal 
+
+- Then you .red[constraint] for impossible relationships between bosses and employees
+
+- you do that using the argument `blocks` e.g., `ergm::ergm(formula, constrainsts = ~ blocks(...)`
+
+
+---
+name: Offset
+description: Offset a term in model specification
+# Offset
+&lt;br&gt;
+## Another advanced option in ergm specification 
+
+### You can use it to improve convergence. 
+
+### Rather than removing a term that messes with your simulation, you fix its coefficient to something
+&lt;br&gt;
+
+Enclosing a model term in offset() fixes its value to one specified
+in offset.coef. (A second argument—a logical or numeric index vector—can
+be used to select which of the parameters within the term are offsets.)
+
+
+---
+name: Ergm_control
+description: Function for control ergm 
+# Control ergm
+&lt;br&gt;
+
+Since your simulation very likely is still clunky, you need to set up these parameters too
+
+.scroll-box-18[
+
+``` r
+# network::get.vertex.attribute(kids, "color")
+
+m4 &lt;- ergm::ergm(kids ~ edges  + b1factor("color", levels = -1) + b1star(2),
+                 constraints= ~ bd(minout = 0, maxout = 7),
+                 control = ergm::control.ergm(
+                    MCMC.samplesize = 5000,
+                    MCMC.burnin = 1000, 
+                    MCMLE.maxit = 10,
+                    parallel = 6,
+                    parallel.type = "PSOCK"
+                  ) )
+summary(m4)
+```
+
+```
+## Call:
+## ergm::ergm(formula = kids ~ edges + b1factor("color", levels = -1) + 
+##     b1star(2), constraints = ~bd(minout = 0, maxout = 7), control = ergm::control.ergm(MCMC.samplesize = 5000, 
+##     MCMC.burnin = 1000, MCMLE.maxit = 10, parallel = 6, parallel.type = "PSOCK"))
+## 
+## Monte Carlo Maximum Likelihood Results:
+## 
+##                       Estimate Std. Error MCMC % z value Pr(&gt;|z|)
+## edges                  0.07821    1.16692      0   0.067    0.947
+## b1factor.color.yellow -0.88655    1.33790      0  -0.663    0.508
+## b1star2               -1.29135    1.53179      0  -0.843    0.399
+## 
+##      Null Deviance:  0.000  on 21  degrees of freedom
+##  Residual Deviance: -5.172  on 18  degrees of freedom
+##  
+## Note that the null model likelihood and deviance are defined to be 0.
+## This means that all likelihood-based inference (LRT, Analysis of
+## Deviance, AIC, BIC, etc.) is only valid between models with the same
+## reference distribution and constraints.
+## 
+## AIC: 0.8276  BIC: 3.961  (Smaller is better. MC Std. Err. = 0.02102)
+```
+]
+
+
+---
+name: diagnostics_bipartite
+description: diagnostics for bipartite 
+# MCMC.diagnostics
+&lt;br&gt;
+### The usual way
+
+.scroll-box-18[
+
+``` r
+ergm::mcmc.diagnostics(m4)
+```
+
+&lt;img src="assets/images/w11_05-1.svg" width="90%" /&gt;
+
+```
+## Sample statistics summary:
+## 
+## Iterations = 44032:854016
+## Thinning interval = 1024 
+## Number of chains = 6 
+## Sample size per chain = 792 
+## 
+## 1. Empirical mean and standard deviation for each variable,
+##    plus standard error of the mean:
+## 
+##                           Mean    SD Naive SE Time-series SE
+## edges                  0.06166 1.623  0.02354        0.02251
+## b1factor.color.yellow -0.06503 1.021  0.01481        0.01421
+## b1star2                0.04609 1.001  0.01453        0.01435
+## 
+## 2. Quantiles for each variable:
+## 
+##                       2.5% 25% 50% 75% 97.5%
+## edges                   -3  -1   0   1     3
+## b1factor.color.yellow   -2  -1   0   1     2
+## b1star2                 -1  -1   0   1     2
+## 
+## 
+## Are sample statistics significantly different from observed?
+##                  edges b1factor.color.yellow     b1star2       (Omni)
+## diff.      0.061658249         -6.502525e-02 0.046085859           NA
+## test stat. 2.790760688         -4.635628e+00 3.216389287 6.624821e+01
+## P-val.     0.005258434          3.558550e-06 0.001298146 3.433414e-14
+## 
+## Sample statistics cross-correlations:
+##                           edges b1factor.color.yellow   b1star2
+## edges                 1.0000000             0.6180320 0.7142229
+## b1factor.color.yellow 0.6180320             1.0000000 0.2413499
+## b1star2               0.7142229             0.2413499 1.0000000
+## 
+## Sample statistics auto-correlation:
+## Chain 1 
+##                 edges b1factor.color.yellow      b1star2
+## Lag 0     1.000000000          1.0000000000  1.000000000
+## Lag 1024  0.001994299         -0.0315618606 -0.002455123
+## Lag 2048 -0.046385141         -0.0766254191 -0.024435722
+## Lag 3072  0.037661454          0.0895172220 -0.001492168
+## Lag 4096  0.047326416         -0.0064659132 -0.021955848
+## Lag 5120  0.066657512         -0.0006787659  0.034437726
+## Chain 2 
+##                 edges b1factor.color.yellow      b1star2
+## Lag 0     1.000000000           1.000000000  1.000000000
+## Lag 1024 -0.060955973           0.004142652 -0.034778184
+## Lag 2048 -0.001641312          -0.017985441  0.030728374
+## Lag 3072 -0.002036507          -0.005363361 -0.026218049
+## Lag 4096  0.010373645          -0.002853502  0.010244487
+## Lag 5120 -0.023020740          -0.035292439 -0.006739983
+## Chain 3 
+##                 edges b1factor.color.yellow       b1star2
+## Lag 0     1.000000000          1.0000000000  1.0000000000
+## Lag 1024  0.009486814          0.0381307509  0.0493839800
+## Lag 2048 -0.005691983         -0.0278328014 -0.0324855895
+## Lag 3072 -0.030575737         -0.0469756772 -0.0005457213
+## Lag 4096 -0.060367587         -0.0145970644 -0.0439130450
+## Lag 5120 -0.029732863          0.0009994532  0.0071940493
+## Chain 4 
+##                edges b1factor.color.yellow      b1star2
+## Lag 0     1.00000000           1.000000000  1.000000000
+## Lag 1024 -0.02904037           0.033465804 -0.003724346
+## Lag 2048 -0.01359379          -0.025420880  0.045483569
+## Lag 3072 -0.01706628          -0.001695828 -0.015975499
+## Lag 4096  0.03279898           0.019071385  0.023672328
+## Lag 5120 -0.05195740          -0.100957150 -0.062369822
+## Chain 5 
+##                edges b1factor.color.yellow     b1star2
+## Lag 0     1.00000000            1.00000000  1.00000000
+## Lag 1024 -0.07958853           -0.04173347 -0.07812984
+## Lag 2048 -0.01823197           -0.02118230  0.01325300
+## Lag 3072 -0.01961137           -0.06770466  0.01578593
+## Lag 4096 -0.06405654           -0.05743206 -0.01513143
+## Lag 5120 -0.05433651            0.01579680 -0.04082462
+## Chain 6 
+##                edges b1factor.color.yellow      b1star2
+## Lag 0     1.00000000           1.000000000  1.000000000
+## Lag 1024  0.03205098           0.003789137 -0.012681641
+## Lag 2048  0.01499786          -0.027740866 -0.002080706
+## Lag 3072  0.01089989          -0.011390346 -0.027563207
+## Lag 4096  0.02808540           0.002606113  0.030618424
+## Lag 5120 -0.03316282          -0.013562268 -0.022942200
+## 
+## Sample statistics burn-in diagnostic (Geweke):
+## Chain 1 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##                 edges b1factor.color.yellow               b1star2 
+##            -2.5735368            -2.5464434            -0.7540952 
+## 
+## Individual P-values (lower = worse):
+##                 edges b1factor.color.yellow               b1star2 
+##            0.01006649            0.01088269            0.45079205 
+## Joint P-value (lower = worse):  0.01144864 
+## Chain 2 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##                 edges b1factor.color.yellow               b1star2 
+##            -0.4531348             0.3003537            -0.7237836 
+## 
+## Individual P-values (lower = worse):
+##                 edges b1factor.color.yellow               b1star2 
+##             0.6504517             0.7639074             0.4691986 
+## Joint P-value (lower = worse):  0.8306628 
+## Chain 3 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##                 edges b1factor.color.yellow               b1star2 
+##            -1.2489752            -1.5706080            -0.4845173 
+## 
+## Individual P-values (lower = worse):
+##                 edges b1factor.color.yellow               b1star2 
+##             0.2116741             0.1162737             0.6280188 
+## Joint P-value (lower = worse):  0.4387128 
+## Chain 4 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##                 edges b1factor.color.yellow               b1star2 
+##             0.7858591            -0.2266894             1.0582022 
+## 
+## Individual P-values (lower = worse):
+##                 edges b1factor.color.yellow               b1star2 
+##             0.4319500             0.8206653             0.2899633 
+## Joint P-value (lower = worse):  0.6104055 
+## Chain 5 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##                 edges b1factor.color.yellow               b1star2 
+##            0.53098791           -0.01345756            2.43533216 
+## 
+## Individual P-values (lower = worse):
+##                 edges b1factor.color.yellow               b1star2 
+##            0.59542716            0.98926275            0.01487813 
+## Joint P-value (lower = worse):  0.1884595 
+## Chain 6 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##                 edges b1factor.color.yellow               b1star2 
+##            -1.7116442            -0.7167026            -1.3018173 
+## 
+## Individual P-values (lower = worse):
+##                 edges b1factor.color.yellow               b1star2 
+##            0.08696226            0.47355765            0.19297886 
+## Joint P-value (lower = worse):  0.458048 
+## 
+## Note: MCMC diagnostics shown here are from the last round of
+##   simulation, prior to computation of final parameter estimates.
+##   Because the final estimates are refinements of those used for this
+##   simulation run, these diagnostics may understate model performance.
+##   To directly assess the performance of the final model on in-model
+##   statistics, please use the GOF command: gof(ergmFitObject,
+##   GOF=~model).
+```
+]
+
+---
+name: gof_bipartite
+description: goodness of fit for bipartite 
+# GOF
+&lt;br&gt;
+### The usual way
+.scroll-box-18[
+
+``` r
+ergm::gof(m4)
+```
+
+```
+## 
+## Goodness-of-fit for model statistics 
+## 
+##                       obs min mean max MC p-value
+## edges                   6   3 6.02  11          1
+## b1factor.color.yellow   2   0 2.06   5          1
+## b1star2                 1   0 0.94   5          1
+## 
+## Goodness-of-fit for minimum geodesic distance 
+## 
+##     obs min  mean max MC p-value
+## 1     6   3  6.02  11       1.00
+## 2     7   1  6.05  17       0.76
+## 3     3   0  2.48  10       0.82
+## 4     0   0  1.64   8       1.00
+## 5     0   0  0.30   5       1.00
+## 6     0   0  0.17   6       1.00
+## Inf  29   0 28.34  41       0.84
+## 
+## Goodness-of-fit for bipartition 1 degree 
+## 
+##   obs min mean max MC p-value
+## 0   2   0 1.90   4          1
+## 1   4   2 4.20   7          1
+## 2   1   0 0.88   4          1
+## 3   0   0 0.02   1          1
+## 
+## Goodness-of-fit for bipartition 2 degree 
+## 
+##   obs min mean max MC p-value
+## 0   0   0 0.34   2       1.00
+## 1   2   0 0.68   2       0.26
+## 2   0   0 1.01   3       0.46
+## 3   0   0 0.68   3       0.88
+## 4   1   0 0.19   2       0.36
+## 5   0   0 0.08   1       1.00
+## 6   0   0 0.02   1       1.00
+## 
+## Goodness-of-fit for edgewise shared partner 
+## 
+##        obs        min       mean        max MC p-value 
+##       6.00       3.00       6.02      11.00       1.00
+```
+]
+
+---
+# Interpreting Results
+&lt;br&gt;
+The advanced `ergm` options improved the IAC and BIC
+.scroll-box-18[
+
+``` r
+texreg::screenreg(list(m0, m1, m2, m3, m4))
+```
+
+```
+## 
+## ==================================================================
+##                        Model 1  Model 2  Model 3  Model 4  Model 5
+## ------------------------------------------------------------------
+## edges                   -0.92    -0.69     0.07    0.14     0.08  
+##                         (0.48)   (0.61)   (1.12)  (1.16)   (1.17) 
+## b1factor.color.yellow            -0.56    -0.92   -0.99    -0.89  
+##                                  (1.01)   (1.25)  (1.32)   (1.34) 
+## b1star2                                   -1.15   -1.35    -1.29  
+##                                           (1.71)  (1.48)   (1.53) 
+## ------------------------------------------------------------------
+## AIC                     27.13    28.81    29.94    0.91     0.83  
+## BIC                     28.17    30.90    33.08    4.04     3.96  
+## Log Likelihood         -12.56   -12.41   -11.97    2.55     2.59  
+## ==================================================================
+## *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05
+```
+]
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# Weighted ERGMs
+
+
+
+---
+name: weighted_networks
+description: Recap Weighted networks
+# Weighted Networks 
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+## A weighted network is a network where the edges express the weight or intensity of the relationship.
+&lt;br&gt;
+## It is still unimodal, but it contains more information.
+
+
+---
+# Different kinds of weight 
+&lt;br&gt;
+
+## Example 1: Friendship network 
+
+### Built using two questions 
+    
+- Who are your closest friends? --&gt; ties
+    
+- How many times per week do you see them? --&gt; weight
+    
+In this case if you don't consider the weight you can still predict tie formation.
+
+It makes sense. 
+
+The weight is more like an attribute. 
+
+An helpful but not essential extra info 
+
+The network is not fully connected
+
+---
+# Different kinds of weight 
+&lt;br&gt;
+
+## Example 2: Financial Exhange Network
+
+- Nodes: countries 
+- Edges: whether money moves from one to the other
+
+### This network is fully connected
+
+### The weight ($$$) makes all the difference. 
+
+---
+# Type two
+&lt;br&gt;
+## How to ask causal questions (edge formation) on this type 2 weighted networks?
+
+Option 1: You find a meaningful threshold and remove the weight. 
+
+- Above N (dollars) -- edge between 2 countries 
+- Below N (dollars) -- no edge between 2 countries 
+
+It might work, but you are wasting lot of information
+
+### The right thing to do would be explaining edge formation with a ERGM specifically designed for weighted data.
+
+
+---
+# Yes, How? 
+&lt;br&gt;
+### Mathematically, the weight adds complexity to the problem. 
+
+### The ERGM formula needs to be expanded to include this new bit. 
+
+### How?
+
+It depends on how the problem is formulated in the first place 
+
+## DUH!
+
+---
+name: weight_types
+description: Types of Weighted networks 
+# Get to know your weight!
+&lt;br&gt;
+## Variables.
+&lt;br&gt;
+### What kind of variable is your weight? 
+
+- Count 
+
+- Continuous (either bounded, bounded on one side, or unbouded )
+
+---
+name: weight_count
+description: Weighted networks Count
+# Count 
+
+Sampson Monks, 3 networks: 
+
+- Like each other in time 1 
+- Like each other in time 2
+- Like each other in time 3
+
+"Like" can have 3 values (if connected at all)
+
+- 1 liked at some point (so not much overall)
+- 2 liked most of the time (likelihood with some issues)
+- 3 real friendship (likelihood lasts over time)
+
+### If you have a case like this you have a count weight [1,2,3, ..., N) -- bounded on one side
+
+### May `statnet` be with you (`ergm.count` packages)
+
+---
+name: weight_continuous
+description: Weighted networks continuous 
+# Continuous 
+
+### Financial exchange 
+
+Continuous (...Dollars...) Unbounded. 
+
+Any amount of money (also negative)
+
+### This is a more general case that encompasses the one before as well. 
+
+### `statnet` does not help us anymore 
+
+We need a new environment to estimate the probability of forming "financial edges" between pairs of countries.
+
+### We have the Generalized Exponential Random Graph Model (GERGM) 
+
+[introduced by the authors of your text book]
+
+.footnote[Desmarais, B. A., Cranmer, S.J. (2012), Statistical Inference for valued-edge networks: The Generalized Exponential Random Graph Model, PLOS ONE]
+
+
+
+---
+name: GERGM
+description: package for weighted network ERGMs 
+# GERGM
+&lt;br&gt;
+## Even if the analogy with the GLM is obvious, it is not really the same thing. 
+
+In the GERGM the network is always a fully connected one. Hence it cannot handle every type of network as the name suggests. 
+
+### A GERGM is defined by two equations respectively representing:
+
+1. Effect of covariates on the edge formation together with the marginal distribution properties of the edges (the old familiar equation)
+2. The relationships among the edges
+
+The probability distribution is conditioned on two parameters `\(\theta\)` and `\(\gamma\)`
+
+---
+name: weighted_network_math
+description: GERGM mathematical specification
+# GERGM Math
+&lt;br&gt;
+### Original ERGM equation 
+### `\(P(N,\theta) = \frac{exp\{\theta^T h(N)\}}{\sum_{N^*\in \mathcal{N}} exp\{\theta^T h(N^*) \}^T}\)`
+
+
+### GERGM
+### `\(fX(x|\theta) = \frac{exp\{\theta^T h(x)\}}{\int_{[0,1]^m} exp(\theta^T h(z) )dz^T}\)`  
+
+With `\(x \in [O,I]^m\)` that represents the way the edges values relate to each other.
+
+`\(\mathcal{N}\)` does not denote anymore the adjancency matrix  since the network is fully connected. 
+
+We refer at this network with `\(X\)` instead. 
+
+
+
+---
+# GERGM Math: bonus equation 
+&lt;br&gt;
+
+Up to this point  we can handle 
+
+- a fully connected network with weights bounded between 0 and 1
+- parameters ranging from 0 and 1
+
+We want more! Hence, here is your bonus equation!
+
+
+### `\(f_Y(y | \theta, \gamma) = \frac{exp(\theta^T h(T(y | \gamma))}{\int_{[0,1]^m} exp(\theta^T h(z) )dz^T} \prod_{i,j} t_{i,j}(y_{i,j}| \gamma )\)`
+
+This equation models the distribution of the edge weights and the parameters.
+
+---
+name: GERGM_package
+description: A package for weighted network ERGMs 
+# Nice to meet (see) you GERGM package
+&lt;br&gt;
+### Installation:
+`remotes::install_github("matthewjdenny/GERGM", dependencies = TRUE)`
+
+### User manual
+`https://github.com/matthewjdenny/GERGM`
+
+### Vignette
+
+in the R console `browseVignettes("GERGM")`
+
+---
+name: GERGM_terms
+description: Specification of GERGM terms 
+# Intercept
+&lt;br&gt;
+
+## `edges` - same as in `ergm` - still used as intercept.
+
+### More options available:
+
+- edges(method = "endogenous") - to include the intercept as in a traditional ERGM
+
+- edges(method = "regression") - to include an intercept in the lambda transformation of the network
+
+
+
+---
+name: GERGM_endogenous
+description: Specification of endogenous GERGM terms 
+# GERGM Endogenous model terms: 
+&lt;br&gt;
+- `twostars`, equivalent to `star(2)`
+- `out2stars`, equivalent to `ostar(2)`
+- `in2stars`, equivalent to `istar(2)`
+- `ctriads`, same as in `ergm`
+- `mutual`, same as in `ergm`
+- `ttriads`, same as in `ergm`
+
+### Convergence problems? Use exponential down-weighting
+
+E.g., `out2stars(alpha = 0.25)` - default = 1
+
+---
+name: GERGM_exogenous
+description: Specification of exogenous GERGM terms 
+# GERGM Exogenous model terms: 
+&lt;br&gt;
+
+## Very similar to the `ergm` package
+
+- `absdiff(covariate = "MyCov")`
+- `sender(covariate = "MyCov")` -- != from `ergm` here attribute
+- `receiver(covariate = "MyCov")` -- != from `ergm` here attribute
+- `nodematch(covariate = "MyCov", base = "Ref.cat")`
+- `nodemix(covariate = "MyCov", base = "Ref.cat")` 
+- `netcov(network)` -- like `edgecov` in `ergm`
+
+
+---
+# GERGM example from your book
+
+- nodes = Basketball teams
+
+- edge-weight = N of points that `\(i\)` scored to `\(j\)` during the season
+
+
+
+.center[![:scale 70%](assets/images/GERGMbasketball.png)]
+
+
+---
+name: GERGM_data
+description: Specification for data format in the GERGM package 
+## Data Format
+
+.red[NO NETWORK or IGRAPH class]
+
+- adjacency weighted matrix
+- data frame with attributes (all together)
+
+.scroll-box-18[
+
+``` r
+class(adjacencyMatrix) 
+```
+
+```
+## [1] "matrix" "array"
+```
+
+``` r
+dim(adjacencyMatrix)
+```
+
+```
+## [1] 15 15
+```
+
+``` r
+class(covariateData)
+```
+
+```
+## [1] "data.frame"
+```
+
+``` r
+dim(covariateData)
+```
+
+```
+## [1] 15  2
+```
+
+``` r
+colnames(covariateData)
+```
+
+```
+## [1] "accTeams"   "enrollment"
+```
+]
+
+---
+name: GERGM_formula_specification
+description: Specification of the formula in a GERGM model 
+# Model Specification
+&lt;br&gt;
+###Let's assume that 
+
+- we have our solid theory ready and we can specify the model already
+- we run baseline models and other control models already
+
+### We are running our final model
+
+Nope! we specify the formula first!
+
+.scroll-box-18[
+
+``` r
+formula &lt;- adjacencyMatrix ~ edges +
+  sender("enrollment") + 
+  receiver("enrollment") +
+  netcov(nGames) + 
+  mutual(alpha = .9) 
+```
+]
+
+---
+# Now we are running the model
+
+.scroll-box-18[
+
+``` r
+set.seed(5)
+
+gergmResults &lt;- GERGM::gergm(formula,
+                             covariate_data = covariateData, # passing attributes on
+                             number_of_networks_to_simulate = 100000,
+                             MCMC_burnin = 10000,
+                             thin = 1/10, # retaining only a small number of simulated Networks in the computer memory
+                             transformation_type = "Cauchy", # it depends on the distribution of your weight
+                             parallel = TRUE,
+                             cores = 6)
+```
+
+```
+## You have specified 2 node level covariate effects.
+## You have provided 1 network covariates.
+## [1] 1 1 1 1 1 1 1
+## Updating Estimates -- Iteration: 1  
+## Initial Lambda Estimates:
+##    enrollment_sender  enrollment_receiver            intercept 
+##            0.0000000            0.0000000            0.9474667 
+##        nGames_netcov dispersion parameter 
+##            0.0000000           -0.6598233 
+## initial  value 327.330101 
+## iter  10 value -77.532938
+## iter  20 value -80.926211
+## final  value -80.926237 
+## converged
+## Lambda estimates 
+##    enrollment_sender  enrollment_receiver            intercept 
+##          0.003326746          0.003120129          3.281654034 
+##        nGames_netcov dispersion parameter 
+##          0.487536723         -2.661701403 
+## Estimating Initial Values for Theta via MPLE... 
+## initial  value -2.198845 
+## final  value -2.203740 
+## converged
+## 
+## MPLE Thetas:
+##    mutual 
+## 0.8806957 
+## Starting thetas: 0.8806957 
+## Current iteration of convex hull initialization: 1 
+## Average log probability of accepting a proposal: -2.715899 .
+## Standard deviation of log probability of accepting proposal: 2.328884 
+## Average (constrained) simulated network density: 0.5387794 
+## Metropolis Hastings Acceptance Rate (target = 0.25 ): 0.2427636
+## Average Q-Ratio: -2.355306 Average P-Ratio: -0.3605933 
+## Mean difference between proposed and current network densities: -0.002840236 
+## Distance between observed and mean simulated statistics: 2.224082 
+## Proportion of simulated stats that are further away: 0.3733 
+## initial  value -16.456065 
+## final  value -16.775238 
+## converged
+## New thetas: 0.5561531 
+## Current iteration of convex hull initialization: 2 
+## Average log probability of accepting a proposal: -2.533113 .
+## Standard deviation of log probability of accepting proposal: 2.265946 
+## Average (constrained) simulated network density: 0.5237939 
+## Metropolis Hastings Acceptance Rate (target = 0.25 ): 0.2603273
+## Average Q-Ratio: -2.397214 Average P-Ratio: -0.1358995 
+## Mean difference between proposed and current network densities: -0.001732825 
+## Distance between observed and mean simulated statistics: 0.3045639 
+## Proportion of simulated stats that are further away: 0.8914 
+## initial  value -6.890827 
+## final  value -6.897445 
+## converged
+## New thetas: 0.5078168 
+## Current iteration of convex hull initialization: 3 
+## Average log probability of accepting a proposal: -2.39907 .
+## Standard deviation of log probability of accepting proposal: 2.196842 
+## Average (constrained) simulated network density: 0.5219026 
+## Metropolis Hastings Acceptance Rate (target = 0.25 ): 0.2743636
+## Average Q-Ratio: -2.28552 Average P-Ratio: -0.1135504 
+## Mean difference between proposed and current network densities: -0.001596331 
+## Distance between observed and mean simulated statistics: 0.04322716 
+## Proportion of simulated stats that are further away: 0.9853 
+## Converged!
+## Average log probability of accepting a proposal: -2.39907 .
+## Standard deviation of log probability of accepting proposal: 2.196842 
+## Average (constrained) simulated network density: 0.5219026 
+## Metropolis Hastings Acceptance Rate (target = 0.25 ): 0.2743636
+## Average Q-Ratio: -2.28552 Average P-Ratio: -0.1135504 
+## Mean difference between proposed and current network densities: -0.001596331 
+## Simulated (averages) and observed network statistics...
+##            Observed Simulated
+## out2stars 358.59258 371.74229
+## in2stars  363.19353 371.92023
+## ctriads   117.42383 129.46172
+## mutual     28.92063  28.96386
+## ttriads   381.11739 388.23167
+## edges     105.63671 109.59808
+## diagonal   14.97111  14.97111
+## 
+## Optimizing theta estimates... 
+## initial  value -5.476044 
+## final  value -5.476220 
+## converged
+## 
+## Theta Estimates:
+##    mutual 
+## 0.4996957 
+## 
+## p.values for two-sided z-test of difference between current and updated theta estimates:
+## 
+## mutual 
+##      1 
+## 
+## MCMC convergence Geweke test statistic: -1.396523 
+## (If the absolute value is greater than 1.7, increase MCMC_burnin)
+```
+
+```
+## Lambda p.values 
+##    enrollment_sender  enrollment_receiver            intercept 
+##         2.206373e-03         7.806802e-01        2.140274e-140 
+##        nGames_netcov dispersion parameter 
+##        1.369290e-213         3.969127e-87 
+## Updating Estimates -- Iteration: 2  
+## Initial Lambda Estimates:
+##    enrollment_sender  enrollment_receiver            intercept 
+##          0.003326746          0.003120129          3.281654034 
+##        nGames_netcov dispersion parameter 
+##          0.487536723         -2.661701403 
+## initial  value -95.377753 
+## final  value -95.850149 
+## converged
+## Lambda estimates 
+##    enrollment_sender  enrollment_receiver            intercept 
+##          0.003329245          0.004628842          3.245288935 
+##        nGames_netcov dispersion parameter 
+##          0.482791749         -2.669664798 
+## Estimating Initial Values for Theta via MPLE... 
+## initial  value -3.658605 
+## final  value -3.928005 
+## converged
+## 
+## MPLE Thetas:
+##   mutual 
+## 1.147668 
+## Starting thetas: 0.4996957 
+## Current iteration of convex hull initialization: 1 
+## Average log probability of accepting a proposal: -2.361867 .
+## Standard deviation of log probability of accepting proposal: 2.198957 
+## Average (constrained) simulated network density: 0.5219405 
+## Metropolis Hastings Acceptance Rate (target = 0.25 ): 0.2793091
+## Average Q-Ratio: -2.248916 Average P-Ratio: -0.1129502 
+## Mean difference between proposed and current network densities: -0.001622803 
+## Distance between observed and mean simulated statistics: 1.878867 
+## Proportion of simulated stats that are further away: 0.427 
+## initial  value -6.099058 
+## final  value -6.341906 
+## converged
+## New thetas: 0.7827908 
+## Current iteration of convex hull initialization: 2 
+## Average log probability of accepting a proposal: -2.595861 .
+## Standard deviation of log probability of accepting proposal: 2.29803 
+## Average (constrained) simulated network density: 0.5339721 
+## Metropolis Hastings Acceptance Rate (target = 0.25 ): 0.2570364
+## Average Q-Ratio: -2.316733 Average P-Ratio: -0.2791281 
+## Mean difference between proposed and current network densities: -0.002474894 
+## Distance between observed and mean simulated statistics: 0.3618266 
+## Proportion of simulated stats that are further away: 0.8801 
+## initial  value -14.890738 
+## final  value -14.900037 
+## converged
+## New thetas: 0.8397316 
+## Current iteration of convex hull initialization: 3 
+## Average log probability of accepting a proposal: -2.711452 .
+## Standard deviation of log probability of accepting proposal: 2.357044 
+## Average (constrained) simulated network density: 0.5377638 
+## Metropolis Hastings Acceptance Rate (target = 0.25 ): 0.2461636
+## Average Q-Ratio: -2.378399 Average P-Ratio: -0.3330531 
+## Mean difference between proposed and current network densities: -0.002732339 
+## Distance between observed and mean simulated statistics: 0.1790687 
+## Proportion of simulated stats that are further away: 0.9432 
+## Converged!
+## Average log probability of accepting a proposal: -2.711452 .
+## Standard deviation of log probability of accepting proposal: 2.357044 
+## Average (constrained) simulated network density: 0.5377638 
+## Metropolis Hastings Acceptance Rate (target = 0.25 ): 0.2461636
+## Average Q-Ratio: -2.378399 Average P-Ratio: -0.3330531 
+## Mean difference between proposed and current network densities: -0.002732339 
+## Simulated (averages) and observed network statistics...
+##            Observed Simulated
+## out2stars 384.55912 394.84154
+## in2stars  388.99165 394.63900
+## ctriads   130.56584 141.62710
+## mutual     30.82482  31.00389
+## ttriads   421.84673 424.63877
+## edges     109.52206 112.92505
+## diagonal   14.97100  14.97100
+## 
+## Optimizing theta estimates... 
+## initial  value -16.674238 
+## final  value -16.676768 
+## converged
+## 
+## Theta Estimates:
+##    mutual 
+## 0.8114257 
+## 
+## p.values for two-sided z-test of difference between current and updated theta estimates:
+## 
+## mutual 
+##      1 
+## 
+## MCMC convergence Geweke test statistic: -0.1519123 
+## (If the absolute value is greater than 1.7, increase MCMC_burnin)
+```
+
+```
+## Lambda p.values 
+##    enrollment_sender  enrollment_receiver            intercept 
+##            0.9981650            0.8938492            0.6927196 
+##        nGames_netcov dispersion parameter 
+##            0.7550368            0.9374593
+```
+
+```
+## Average log probability of accepting a proposal: -2.639465 .
+## Standard deviation of log probability of accepting proposal: 2.319072 
+## Average (constrained) simulated network density: 0.5351824 
+## Metropolis Hastings Acceptance Rate (target = 0.25 ): 0.2519727
+## Average Q-Ratio: -2.339967 Average P-Ratio: -0.2994979 
+## Mean difference between proposed and current network densities: -0.002549602 
+## Thinning statistics to correct for autocorrelation in calculating fit diagnostics...
+## Statistics were thinned by a factor of 27, resulting in 371 samples.
+## Statistics of observed network and networks simulated from final theta parameter estimates:
+## 
+## t-test p-values for statistics of observed network and networks simulated from final theta parameter estimates:
+##  
+##           p_values
+## out2stars    0.000
+## in2stars     0.071
+## ctriads      0.000
+## mutual       0.521
+## ttriads      0.417
+## edges        0.000
+## diagonal        NA
+```
+
+```
+## Thinning statistics to correct for autocorrelation in calculating fit diagnostics...
+## Statistics were thinned by a factor of 27, resulting in 371 samples.
+## 
+## Statistics used in comparison:
+##    out2stars     in2stars      ctriads       mutual      ttriads        edges 
+## 3.845591e+02 3.889916e+02 1.305658e+02 3.082482e+01 4.218467e+02 1.095221e+02 
+##    intensity 
+## 2.960595e-17 
+## 
+## Mean statistic values from simulated networks:
+##    out2stars     in2stars      ctriads       mutual      ttriads        edges 
+## 391.82628549 391.80967858 139.91117195  30.74489031 419.81988127 112.51091504 
+##    intensity 
+##   0.01423264 
+## 
+## t-statistics for difference of simulated mean from observed statistic...
+##  out2stars   in2stars    ctriads     mutual    ttriads      edges  intensity 
+##  4.6812447  1.8095298 11.1775602 -0.6418200 -0.8123302 13.4821744 13.4821744 
+## 
+## t-statistics for test of whether observed statistic is an outlier with respect to simulated statistics...
+##   out2stars    in2stars     ctriads      mutual     ttriads       edges 
+## -0.24303812 -0.09394610 -0.58031001  0.03332163  0.04217408 -0.69995962 
+##   intensity 
+## -0.69995962
+```
+
+&lt;img src="assets/images/w11_11-1.svg" width="90%" /&gt;&lt;img src="assets/images/w11_11-2.svg" width="90%" /&gt;&lt;img src="assets/images/w11_11-3.svg" width="90%" /&gt;
+
+```
+## Transforming networks simulated via MCMC as part of the fit diagnostics back on to the scale of observed network. You can access these networks through the '@MCMC_output$Networks' field returned by this function...
+## 10% complete...
+## 20% complete...
+## 30% complete...
+## 40% complete...
+## 50% complete...
+## 60% complete...
+## 70% complete...
+## 80% complete...
+## 90% complete...
+## 100% complete...
+## Estimation Complete at: 2025-10-17 15:35:45.489926 
+## Elapsed time (seconds): 1.19848
+```
+]
+
+
+
+---
+name: GERGM_model_results
+description: Exploring results in a GERGM model
+# Now we are exploring the results 
+
+`GERGM::Trace_Plot(gergmResults)`
+
+.center[![:scale 65%](assets/images/PlotGERGMTrace.png)]
+
+---
+# Now we are exploring the results 
+&lt;br&gt;
+.center[![:scale 65%](assets/images/GERGMGOF.png)]
+
+
+---
+# Now we are exploring the results 
+
+`GERGM::Estimate_Plot(gergmResults)` 
+
+.center[![:scale 65%](assets/images/PlotGERGMRes.png)]
+
+
+---
+# Now we are exploring the results 
+
+`GERGM::Trace_Plot(gergmResults)`
+
+
+``` r
+(EstSE &lt;- rbind(t(attributes(gergmResults)$theta.coef),
+               t(attributes(gergmResults)$lambda.coef)))
+```
+
+```
+##                              est          se
+## mutual               0.811425685 0.398744983
+## enrollment_sender    0.003329245 0.001086689
+## enrollment_receiver  0.004628842 0.011306715
+## intercept            3.245288935 0.092024635
+## nGames_netcov        0.482791749 0.015208010
+## dispersion          -2.669664798 0.101491601
+```
+
+---
+.center[![:scale 50%](assets/images/over.jpeg)]
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="assets/remark-latest.min.js"></script>
+<script src="assets/js/remark-zoom.js"></script>
+<script src="assets/js/macros.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "atom-one-light",
+  "highlightLines": true,
+  "highlightSpans": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": "- %current% -",
+  "ratio": "16:9",
+  "navigation": {
+    "scroll": true
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

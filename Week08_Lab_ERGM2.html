@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>SOCIAL NETWORK ANALYSIS for DATA SCIENTISTS</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Claudia" />
+    <script src="assets/header-attrs-2.29/header-attrs.js"></script>
+    <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="assets/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="assets/tile-view-0.2.6/tile-view.js"></script>
+    <link href="assets/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="assets/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra_fit-screen-0.2.6/fit-screen.js"></script>
+    <link href="assets/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="assets/panelset-0.3.0/panelset.js"></script>
+    <script src="assets/js-cookie-3.0.0/js.cookie.js"></script>
+    <script src="assets/peerjs-1.3.1/peerjs.min.js"></script>
+    <script src="assets/tiny.toast-1.0.0/toast.min.js"></script>
+    <link href="assets/xaringanExtra-broadcast-0.2.6/broadcast.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-broadcast-0.2.6/broadcast.js"></script>
+    <script src="assets/fabric-4.3.1/fabric.min.js"></script>
+    <link href="assets/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="assets/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="assets/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script src="assets/xaringanExtra-webcam-0.0.1/webcam.js"></script>
+    <script id="xaringanExtra-webcam-options" type="application/json">{"width":"175","height":"131.25","margin":"1em"}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x1e3020a0d7b4e438a248448baa1d937","expires":1}</script>
+    <script src="assets/himalaya-1.1.0/himalaya.js"></script>
+    <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="assets/editable-0.2.6/editable.js"></script>
+    <script src="assets/mark.js-8.11.1/mark.min.js"></script>
+    <link href="assets/xaringanExtra-search-0.0.1/search.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-search-0.0.1/search.js"></script>
+    <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"bottom-left","caseSensitive":false,"showIcon":false,"autoSearch":true}) })</script>
+    <script src="assets/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"<i class=\"fa fa-clipboard\"><\/i>","success":"<i class=\"fa fa-check\" style=\"color: #90BE6D\"><\/i>","error":"<i class=\"fa fa-times-circle\" style=\"color: #F94144\"><\/i>"})</script>
+    <link href="assets/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+    <link href="assets/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+    <link href="assets/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="assets/css/apron.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/descartes.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/tachyons.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/xaringan-extra.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/RL-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS_effects.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/kleuren.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[SOCIAL NETWORK ANALYSIS&lt;br&gt;for DATA SCIENTISTS]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[LAB: ERGM2 .small-caps.font70[(lecture] .font70[LAB 10)]]]
+  ]
+
+&lt;br&gt;
+.f-abel.White-inline[Your lecturer: Claudia]&lt;br&gt;
+.f-abel.White-inline[Playdate: October, 20th, 2025]
+
+
+&lt;!-- setup options start --&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.highlight-last-item &gt; ul &gt; li, 
+.highlight-last-item &gt; ol &gt; li {
+  opacity: 0.5;
+}
+
+.highlight-last-item &gt; ul &gt; li:last-of-type,
+.highlight-last-item &gt; ol &gt; li:last-of-type {
+  opacity: 1;
+
+.bold-last-item &gt; ul &gt; li:last-of-type,
+.bold-last-item &gt; ol &gt; li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+&lt;/style&gt;
+
+&lt;style type="text/css"&gt;
+.remark-inline-code {
+  background: #F5F5F5;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.inverse-red, .inverse-red h1, .inverse-red h2, .inverse-red h3, .inverse-red a, inverse-red a &gt; code {
+	border-top: none;
+	background-color: red;
+	color: white; 
+	background-image: "";
+}
+
+.inverse-orange, .inverse-orange h1, .inverse-orange h2, .inverse-orange h3, .inverse-orange a, inverse-orange a &gt; code {
+	border-top: none;
+	background-color: orange;
+	color: black; 
+	background-image: "";
+}
+&lt;/style&gt;
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.grid-3-1 {
+  display: grid;
+  height: calc(80%);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1em;
+  padding: 1em;
+}
+&lt;/style&gt;
+
+&lt;!-- setup options end --&gt;
+
+---
+class: course-logo
+layout: true
+
+---
+name: menu
+description: List of contents for the lab
+# Menu'
+&lt;br&gt;
+&lt;br&gt;
+- TerMometer
+- The Intensity of the Effects
+- 7 steps Research Flow
+
+
+---
+# TerMometer
+&lt;br&gt;
+
+https://www.menti.com/alh367nr3ap3
+
+code: 4163 0041
+
+.center[![:scale 30%](assets/images/)]
+
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# The Intensity of the Effects
+
+---
+name: Model_results
+description: Interpreting model results
+# Interpreting model results
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+1. `\(\theta\)` &gt; 0 and stat. signif. -&gt; X increases P(1) and decreases P(0)
+2. `\(\theta\)` &lt; 0 and stat. signif. -&gt; X decreases P(1) and increases P(0)
+3. `\(\theta\)` not stat. signif. -&gt; X does not affect P(1) and P(0)
+
+---
+# Binary 
+
+## The sign of `\(\theta\)` provides us with a binary interpretation:
+
+### the probability of the edge forming
+- Increases 
+- Decreases
+
+.center[![:scale 40%](assets/images/increasesdecreases.jpeg)]
+
+---
+# Ok, sure... How much!?
+
+&lt;br&gt;
+The number tells us "how much'' ---- Intensity
+
+.center[![:scale 40%](assets/images/intensitypunch.jpeg)]
+
+
+---
+# How much ... or "The extent to which..."
+
+&lt;br&gt;
+## x predicts y
+&lt;br&gt;
+
+- The odds that x predicts (y) edge formation
+- The probability that x predicts (y) edge formation
+
+---
+name: Odds_ratios
+description: Odds_ratios
+# Odds ratios (Memo: Bootcamp!)
+
+&lt;br&gt;
+
+### ERGMs work with log scale, right? 
+
+### Well, to interpret our coefficients we need to exponentiate it. Makes sense, doesn't it?
+
+&lt;br&gt;
+
+### When you exponentiate you estimate the odds of something to happen -- 
+
+ .red[ODDS = probability of success]
+ 
+### FORMULA
+
+`\(OR = exp(\theta)\)`
+
+---
+# Odds Ratios meaning (Memo: Bootcamp!)
+
+&lt;br&gt;
+
+### If the coefficients are statistically significant it is possible to comment on the odds of the effect taking place
+
+&lt;br&gt;
+## Interpretation:
+
+### An increase of 1 in `\(X_1\)` increases the log odds with `\(\theta_1\)` (log odds) and it makes the odds of the effect taking place `\(exp(\theta_1)\)` times larger.
+
+---
+# Consider that...
+&lt;br&gt;
+&lt;br&gt;
+## Odds Ratio is a measure of the strength of association with an exposure and an outcome.
+
+&lt;br&gt;
+
+1. OR &gt; 1 means greater odds of association with the exposure and outcome.
+2. OR = 1 means there is no association between exposure and outcome.
+3. OR &lt; 1 means there is a lower odds of association between the exposure and outcome.
+---
+name: Probabilities
+description: Probabilities
+# Probabilities
+&lt;br&gt;
+&lt;br&gt;
+It measures the probability of an effect taking place
+&lt;br&gt;
+FORMULA:
+
+`\(P = \frac{exp(\theta)}{1 + exp(\theta)}\)`
+
+&lt;br&gt;
+
+WARNING: if you want to use % the result needs to be multiplied by 100.
+
+---
+name: example_inter_res
+description: Example for interpreting results
+# Back to Florence
+
+## Let's see the intensity of some effects
+
+
+
+.center[![:scale 70%](assets/images/Florence.jpg)]
+---
+# Dyadic independent model
+
+
+
+``` r
+m &lt;- ergm::ergm(flom ~ edges + nodecov("Wealth"))
+```
+
+.center[![:scale 30%](assets/images/Lorenzo_de_Medici.jpg)]
+---
+# Coefficients 
+`\(\theta\)`
+
+
+
+``` r
+summary(m)
+```
+
+```
+Call:
+ergm::ergm(formula = flom ~ edges + nodecov("Wealth"))
+
+Maximum Likelihood Results:
+
+                Estimate Std. Error MCMC % z value Pr(&gt;|z|)    
+edges          -2.594929   0.536056      0  -4.841   &lt;1e-04 ***
+nodecov.Wealth  0.010546   0.004674      0   2.256   0.0241 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+     Null Deviance: 166.4  on 120  degrees of freedom
+ Residual Deviance: 103.1  on 118  degrees of freedom
+ 
+AIC: 107.1  BIC: 112.7  (Smaller is better. MC Std. Err. = 0)
+```
+---
+# Coefficient interpretation
+&lt;br&gt;
+### Edges -2.595
+`\(\theta\)` &lt; 0 and stat. signif. -&gt; X decreases P(1) and increases P(0)
+
+&lt;br&gt;
+### Wealth 0.011
+
+`\(\theta\)` &gt; 0 and stat. signif. -&gt; X increases P(1) and decreases P(0)
+
+&lt;br&gt;
+
+## We still don't know anything about the intensity!!!
+---
+# Odds Ratios 
+
+`\(exp(\theta)\)`
+
+
+
+``` r
+snafun::stat_ef_int(m, type = "odds")
+```
+
+```
+               Estimate  Odds Std.Error  Pval
+edges            -2.595 0.075     0.536 0.000
+nodecov.Wealth    0.011 1.011     0.005 0.024
+```
+
+### manually estimating edges odds ratios
+
+``` r
+exp(-2.594929)
+```
+
+```
+[1] 0.07465118
+```
+---
+# Odds Interpretation
+
+### edges   0.075
+
+An increase of 1 in .red[the number of edges] increases the log odds with `\(-2.595\)` and it makes the odds of the effect taking place `\(0.075\)` times larger.
+
+OR &lt; 1 means that the odds of forming edges in this network is small.
+
+### nodecov.Wealth 0.011
+
+An increase of 1 in .red[wealth] increases the log odds with `\(0.011\)` and it makes the odds of the effect taking place `\(1.011\)` times larger.
+
+OR &gt; 1 means that the odds of wealth influencing marriage are bigger
+
+OR = 1 means there is little association between wealth influencing marriage.
+---
+# Probabilities 
+
+`\(exp(\theta)/ (1 + exp(\theta))\)`
+
+&lt;br&gt;
+
+``` r
+snafun::stat_ef_int(m, type = "prob")
+```
+
+```
+               Estimate  Prob Std.Error  Pval
+edges            -2.595 0.069     0.536 0.000
+nodecov.Wealth    0.011 0.503     0.005 0.024
+```
+
+
+
+
+
+## manually estimating edges probabilities
+
+``` r
+exp(-2.594929)/ (1 + exp(-2.594929))
+```
+
+```
+[1] 0.0694655
+```
+
+---
+# Probabilities Interpretation
+
+
+
+``` r
+0.069 * 100
+```
+
+```
+[1] 6.9
+```
+
+``` r
+0.503 * 100
+```
+
+```
+[1] 50.3
+```
+&lt;br&gt;
+### 6.9 % prob of forming edges
+
+small prob, so it is consistent with the OR result
+&lt;br&gt;
+### 50.3 % prob that wealth predicts marriage
+
+it's a bit more than 1/2 so it is consistent with the OR result
+
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# 7 steps Research Flow
+
+---
+name: Research_flow
+description: Approach to carry out research
+# Let's organize our research in steps
+&lt;br&gt;
+1. Literature research/ Questions &amp; Hypotheses (based on the literature) [- data collection]
+2. Data Exploration + terms selection
+3. Running models (baseline, exploratory models, final model)
+4. MCMC diagnostics of the best selected model
+5. Goodness of fit
+6. Interpreting results
+7. Write up about your research telling how this journey went
+
+&lt;br&gt; 
+
+.red[TIP: Rely on these steps for your report]
+
+---
+# See you on Wednesday!
+
+&lt;br&gt;
+
+.center[![:scale 60%](assets/images/MS_Dockville_Festival.jpg)]
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="assets/remark-latest.min.js"></script>
+<script src="assets/js/remark-zoom.js"></script>
+<script src="assets/js/macros.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "atom-one-light",
+  "highlightLines": true,
+  "highlightSpans": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": "- %current% -",
+  "ratio": "16:9",
+  "navigation": {
+    "scroll": true
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
