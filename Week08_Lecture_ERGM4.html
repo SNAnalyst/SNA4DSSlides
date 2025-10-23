@@ -20,7 +20,7 @@
     <script src="assets/freezeframe-5.0.2/freezeframe.min.js"></script>
     <script src="assets/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
     <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
-    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"xc521b0caed546818794eb3f399baedf","expires":1}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"d8c6da114a0d4b13bb95240e005c4d4c","expires":1}</script>
     <script src="assets/himalaya-1.1.0/himalaya.js"></script>
     <script src="assets/js-cookie-3.0.0/js.cookie.js"></script>
     <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
@@ -239,6 +239,7 @@ description: Recap about bipartite graphs
 - connections are allowed across sets
 - connections are forbidden within set
 
+
 .center[![:scale 30%](assets/images/Simple-bipartite-graph.png)]
 
 ---
@@ -251,6 +252,8 @@ description: Recap about bipartite graphs
 - Men to knitting club meetings
 
 - Women to football practices
+
+- ...
 
 ---
 # Less Common Examples
@@ -267,7 +270,7 @@ description: Recap about bipartite graphs
 
 - professors and students
 
-
+## It is about connections that are forbidden or that make no sense for us in that moment
 ---
 name: modelling_Bipartite_graph
 description: Modelling bipartite graphs
@@ -281,24 +284,24 @@ to make it work for bipartite data you can project it
 - set 1 are the nodes and being pairwise connected to a node in set 2 creates an edge on this one projection
 - set 2 are the nodes and being pairwise connected to a node in set 1 creates an edge on the other projection
 
-### Both projection would be undirected by definition
+### Both projections would be undirected by definition
 
-Usually bipartite connections go in one direction only
+(also, usually bipartite connections go in one direction only -- kinds --&gt; parties)
 
-Otherwise, you can use Bipartite ERGMs
+If you don't want/can't project it, you can use Bipartite ERGMs
 ---
 # Bipartite ERGMs
 &lt;br&gt;
 
 ### Conceptually the same as the unimodal
-- It's a unimodal with some constraints
+- It works as a unimodal with constraints
 - Same formula
 - Special terms same concepts 
 
 ### They are cumbersome ergm
 
 - It takes much longer to run
-- You need to use the advanced options to make the model work
+- You need to use the advanced options (control ergm) to make the model work
 
 ---
 name: Bipartite_model_terms
@@ -324,7 +327,7 @@ Found  36  matching ergm terms
 - `nodefactor` --&gt; `b1factor` &amp; `b2factor`
 - `nodematch` --&gt; `b1nodematch` &amp; `b2nodematch`
 - `star(k)` --&gt; `b1star(k)` &amp;  `b2star(k)`
-- `gwdsp()` --&gt; `gwb1dsp()` &amp; `gwb2dsp()`
+- `gwdsp()` --&gt; `gwb1dsp()` &amp; `gwb2dsp()` - no esp since triangles cannot close!
 - etc., ...
 ---
 background-image: url(assets/images/kids_toy_bip_example.jpg)
@@ -334,7 +337,7 @@ name: Bipartite_model_example
 description: Bipartite model example
 # Toy Example
 
-### convergence time is higher than the unimodal ERGM so, tiny data set
+### convergence time is higher than the unimodal ERGM so, tiny data set for the slides
 
 ### Kids going to events 
 
@@ -361,13 +364,21 @@ Let's run
 .scroll-box-18[
 
 ``` r
-m0 &lt;- ergm::ergm(kids ~ edges)
+m0 &lt;- ergm::ergm(kids ~ edges,
+                 control = ergm::control.ergm(
+                    MCMC.samplesize = 5000,
+                    MCMC.burnin = 1000, 
+                    MCMLE.maxit = 10,
+                    parallel = 10,
+                    parallel.type = "PSOCK"
+                  ) )
 summary(m0)
 ```
 
 ```
 ## Call:
-## ergm::ergm(formula = kids ~ edges)
+## ergm::ergm(formula = kids ~ edges, control = ergm::control.ergm(MCMC.samplesize = 5000, 
+##     MCMC.burnin = 1000, MCMLE.maxit = 10, parallel = 10, parallel.type = "PSOCK"))
 ## 
 ## Maximum Likelihood Results:
 ## 
@@ -388,13 +399,22 @@ summary(m0)
 .scroll-box-18[
 
 ``` r
-m1 &lt;- ergm::ergm(kids ~ edges  + b1factor("color", levels = -1))
+m1 &lt;- ergm::ergm(kids ~ edges  + b1factor("color", levels = -1),
+                 control = ergm::control.ergm(
+                    MCMC.samplesize = 5000,
+                    MCMC.burnin = 1000, 
+                    MCMLE.maxit = 10,
+                    parallel = 10,
+                    parallel.type = "PSOCK"
+                  ) )
 summary(m1)
 ```
 
 ```
 ## Call:
-## ergm::ergm(formula = kids ~ edges + b1factor("color", levels = -1))
+## ergm::ergm(formula = kids ~ edges + b1factor("color", levels = -1), 
+##     control = ergm::control.ergm(MCMC.samplesize = 5000, MCMC.burnin = 1000, 
+##         MCMLE.maxit = 10, parallel = 10, parallel.type = "PSOCK"))
 ## 
 ## Maximum Likelihood Results:
 ## 
@@ -416,26 +436,34 @@ summary(m1)
 .scroll-box-18[
 
 ``` r
-m2 &lt;- ergm::ergm(kids ~ edges  + b1factor("color", levels = -1) + b1star(2))
+m2 &lt;- ergm::ergm(kids ~ edges  + b1factor("color", levels = -1) + b1star(2),
+                 control = ergm::control.ergm(
+                    MCMC.samplesize = 5000,
+                    MCMC.burnin = 1000, 
+                    MCMLE.maxit = 10,
+                    parallel = 10,
+                    parallel.type = "PSOCK"
+                  ) )
 summary(m2)
 ```
 
 ```
 ## Call:
 ## ergm::ergm(formula = kids ~ edges + b1factor("color", levels = -1) + 
-##     b1star(2))
+##     b1star(2), control = ergm::control.ergm(MCMC.samplesize = 5000, 
+##     MCMC.burnin = 1000, MCMLE.maxit = 10, parallel = 10, parallel.type = "PSOCK"))
 ## 
 ## Monte Carlo Maximum Likelihood Results:
 ## 
 ##                       Estimate Std. Error MCMC % z value Pr(&gt;|z|)
-## edges                  0.06656    1.11520      0   0.060    0.952
-## b1factor.color.yellow -0.91698    1.25167      0  -0.733    0.464
-## b1star2               -1.15261    1.70684      0  -0.675    0.499
+## edges                  0.08555    1.13800      0   0.075    0.940
+## b1factor.color.yellow -0.89761    1.30051      0  -0.690    0.490
+## b1star2               -1.29586    1.51412      0  -0.856    0.392
 ## 
 ##      Null Deviance: 29.11  on 21  degrees of freedom
-##  Residual Deviance: 23.94  on 18  degrees of freedom
+##  Residual Deviance: 23.93  on 18  degrees of freedom
 ##  
-## AIC: 29.94  BIC: 33.08  (Smaller is better. MC Std. Err. = 0.02779)
+## AIC: 29.93  BIC: 33.06  (Smaller is better. MC Std. Err. = 0.007137)
 ```
 ]
 
@@ -447,9 +475,9 @@ summary(m2)
 &lt;br&gt;
 ### In this toy example, we might, but in a real bipartite ergm, hardly.
 
-The function `ergm::ergm` is set to run simulation on every possible combination
+The function `ergm::ergm` is set to run simulation on every possible combination (ignoring the forbidden ones)
 
-Here, every possible combination is simply not possible, then why not saving some computational time?
+But many more combinations are not possible here, then why not saving some computational time?
 
 &lt;br&gt;
 ## We need to .red[constraint] the model 
@@ -486,36 +514,43 @@ bd &lt;- sets a min and a max for degree
 # network::get.vertex.attribute(kids, "color")
 
 m3 &lt;- ergm::ergm(kids ~ edges  + b1factor("color", levels = -1) + b1star(2),
-                 constraints= ~ bd(minout = 0, maxout = 7))
+                 constraints= ~ bd(minout = 0, maxout = 10),
+                 control = ergm::control.ergm(
+                    MCMC.samplesize = 5000,
+                    MCMC.burnin = 1000, 
+                    MCMLE.maxit = 10,
+                    parallel = 10,
+                    parallel.type = "PSOCK"
+                  ) )
 summary(m3)
 ```
 
 ```
 ## Call:
 ## ergm::ergm(formula = kids ~ edges + b1factor("color", levels = -1) + 
-##     b1star(2), constraints = ~bd(minout = 0, maxout = 7))
+##     b1star(2), constraints = ~bd(minout = 0, maxout = 10), control = ergm::control.ergm(MCMC.samplesize = 5000, 
+##     MCMC.burnin = 1000, MCMLE.maxit = 10, parallel = 10, parallel.type = "PSOCK"))
 ## 
 ## Monte Carlo Maximum Likelihood Results:
 ## 
 ##                       Estimate Std. Error MCMC % z value Pr(&gt;|z|)
-## edges                   0.1390     1.1613      0   0.120    0.905
-## b1factor.color.yellow  -0.9903     1.3228      0  -0.749    0.454
-## b1star2                -1.3510     1.4806      0  -0.913    0.361
+## edges                  0.01606    1.25033      0   0.013    0.990
+## b1factor.color.yellow -0.81719    1.41780      0  -0.576    0.564
+## b1star2               -1.23269    1.62047      0  -0.761    0.447
 ## 
 ##      Null Deviance:  0.000  on 21  degrees of freedom
-##  Residual Deviance: -5.094  on 18  degrees of freedom
+##  Residual Deviance: -5.127  on 18  degrees of freedom
 ##  
-## Note that the null model likelihood and deviance are defined to be 0.
-## This means that all likelihood-based inference (LRT, Analysis of
-## Deviance, AIC, BIC, etc.) is only valid between models with the same
-## reference distribution and constraints.
+## Note that the null model likelihood and deviance are defined to be 0. This means that all likelihood-based inference
+## (LRT, Analysis of Deviance, AIC, BIC, etc.) is only valid between models with the same reference distribution and
+## constraints.
 ## 
-## AIC: 0.9059  BIC: 4.039  (Smaller is better. MC Std. Err. = 0.09991)
+## AIC: 0.8726  BIC: 4.006  (Smaller is better. MC Std. Err. = 0.02046)
 ```
 ]
 
 ---
-# Another point of view
+# Another approach - blocking connections
 &lt;br&gt;
 
 ### Example: you want to model relationships between bosses and employees as a bipartite
@@ -562,12 +597,12 @@ Since your simulation very likely is still clunky, you need to set up these para
 # network::get.vertex.attribute(kids, "color")
 
 m4 &lt;- ergm::ergm(kids ~ edges  + b1factor("color", levels = -1) + b1star(2),
-                 constraints= ~ bd(minout = 0, maxout = 7),
+                 constraints= ~ bd(minout = 0, maxout = 10),
                  control = ergm::control.ergm(
                     MCMC.samplesize = 5000,
                     MCMC.burnin = 1000, 
                     MCMLE.maxit = 10,
-                    parallel = 6,
+                    parallel = 10,
                     parallel.type = "PSOCK"
                   ) )
 summary(m4)
@@ -576,25 +611,24 @@ summary(m4)
 ```
 ## Call:
 ## ergm::ergm(formula = kids ~ edges + b1factor("color", levels = -1) + 
-##     b1star(2), constraints = ~bd(minout = 0, maxout = 7), control = ergm::control.ergm(MCMC.samplesize = 5000, 
-##     MCMC.burnin = 1000, MCMLE.maxit = 10, parallel = 6, parallel.type = "PSOCK"))
+##     b1star(2), constraints = ~bd(minout = 0, maxout = 10), control = ergm::control.ergm(MCMC.samplesize = 5000, 
+##     MCMC.burnin = 1000, MCMLE.maxit = 10, parallel = 10, parallel.type = "PSOCK"))
 ## 
 ## Monte Carlo Maximum Likelihood Results:
 ## 
 ##                       Estimate Std. Error MCMC % z value Pr(&gt;|z|)
-## edges                  0.07821    1.16692      0   0.067    0.947
-## b1factor.color.yellow -0.88655    1.33790      0  -0.663    0.508
-## b1star2               -1.29135    1.53179      0  -0.843    0.399
+## edges                  0.01606    1.25033      0   0.013    0.990
+## b1factor.color.yellow -0.81719    1.41780      0  -0.576    0.564
+## b1star2               -1.23269    1.62047      0  -0.761    0.447
 ## 
 ##      Null Deviance:  0.000  on 21  degrees of freedom
-##  Residual Deviance: -5.172  on 18  degrees of freedom
+##  Residual Deviance: -5.127  on 18  degrees of freedom
 ##  
-## Note that the null model likelihood and deviance are defined to be 0.
-## This means that all likelihood-based inference (LRT, Analysis of
-## Deviance, AIC, BIC, etc.) is only valid between models with the same
-## reference distribution and constraints.
+## Note that the null model likelihood and deviance are defined to be 0. This means that all likelihood-based inference
+## (LRT, Analysis of Deviance, AIC, BIC, etc.) is only valid between models with the same reference distribution and
+## constraints.
 ## 
-## AIC: 0.8276  BIC: 3.961  (Smaller is better. MC Std. Err. = 0.02102)
+## AIC: 0.8726  BIC: 4.006  (Smaller is better. MC Std. Err. = 0.02046)
 ```
 ]
 
@@ -617,18 +651,18 @@ ergm::mcmc.diagnostics(m4)
 ```
 ## Sample statistics summary:
 ## 
-## Iterations = 44032:854016
+## Iterations = 26624:512000
 ## Thinning interval = 1024 
-## Number of chains = 6 
-## Sample size per chain = 792 
+## Number of chains = 10 
+## Sample size per chain = 475 
 ## 
 ## 1. Empirical mean and standard deviation for each variable,
 ##    plus standard error of the mean:
 ## 
-##                           Mean    SD Naive SE Time-series SE
-## edges                  0.06166 1.623  0.02354        0.02251
-## b1factor.color.yellow -0.06503 1.021  0.01481        0.01421
-## b1star2                0.04609 1.001  0.01453        0.01435
+##                           Mean     SD Naive SE Time-series SE
+## edges                  0.13200 1.5855  0.02300        0.02329
+## b1factor.color.yellow -0.09747 1.0178  0.01477        0.01484
+## b1star2                0.01937 0.9626  0.01397        0.01370
 ## 
 ## 2. Quantiles for each variable:
 ## 
@@ -639,66 +673,98 @@ ergm::mcmc.diagnostics(m4)
 ## 
 ## 
 ## Are sample statistics significantly different from observed?
-##                  edges b1factor.color.yellow     b1star2       (Omni)
-## diff.      0.061658249         -6.502525e-02 0.046085859           NA
-## test stat. 2.790760688         -4.635628e+00 3.216389287 6.624821e+01
-## P-val.     0.005258434          3.558550e-06 0.001298146 3.433414e-14
+##                   edges b1factor.color.yellow    b1star2      (Omni)
+## diff.      1.320000e-01         -9.747368e-02 0.01936842          NA
+## test stat. 5.679890e+00         -6.578082e+00 1.45225101 3.22279e+02
+## P-val.     1.347811e-08          4.765557e-11 0.14643183 2.90336e-67
 ## 
 ## Sample statistics cross-correlations:
 ##                           edges b1factor.color.yellow   b1star2
-## edges                 1.0000000             0.6180320 0.7142229
-## b1factor.color.yellow 0.6180320             1.0000000 0.2413499
-## b1star2               0.7142229             0.2413499 1.0000000
+## edges                 1.0000000             0.6395111 0.7029505
+## b1factor.color.yellow 0.6395111             1.0000000 0.2129833
+## b1star2               0.7029505             0.2129833 1.0000000
 ## 
 ## Sample statistics auto-correlation:
 ## Chain 1 
-##                 edges b1factor.color.yellow      b1star2
-## Lag 0     1.000000000          1.0000000000  1.000000000
-## Lag 1024  0.001994299         -0.0315618606 -0.002455123
-## Lag 2048 -0.046385141         -0.0766254191 -0.024435722
-## Lag 3072  0.037661454          0.0895172220 -0.001492168
-## Lag 4096  0.047326416         -0.0064659132 -0.021955848
-## Lag 5120  0.066657512         -0.0006787659  0.034437726
+##                edges b1factor.color.yellow      b1star2
+## Lag 0     1.00000000           1.000000000  1.000000000
+## Lag 1024 -0.02338932           0.012322594  0.032640474
+## Lag 2048 -0.06885869          -0.040290456 -0.003216704
+## Lag 3072 -0.04447547          -0.005098568  0.038977761
+## Lag 4096  0.03196911          -0.009258420 -0.028100074
+## Lag 5120 -0.05374137           0.010781952 -0.010271806
 ## Chain 2 
 ##                 edges b1factor.color.yellow      b1star2
 ## Lag 0     1.000000000           1.000000000  1.000000000
-## Lag 1024 -0.060955973           0.004142652 -0.034778184
-## Lag 2048 -0.001641312          -0.017985441  0.030728374
-## Lag 3072 -0.002036507          -0.005363361 -0.026218049
-## Lag 4096  0.010373645          -0.002853502  0.010244487
-## Lag 5120 -0.023020740          -0.035292439 -0.006739983
+## Lag 1024 -0.025991307          -0.012661409 -0.026844956
+## Lag 2048  0.037932840           0.104651894  0.014025962
+## Lag 3072 -0.004515999          -0.059217444  0.009094889
+## Lag 4096  0.001555860           0.049231190  0.035422359
+## Lag 5120  0.008659998          -0.003965085  0.006446253
 ## Chain 3 
-##                 edges b1factor.color.yellow       b1star2
-## Lag 0     1.000000000          1.0000000000  1.0000000000
-## Lag 1024  0.009486814          0.0381307509  0.0493839800
-## Lag 2048 -0.005691983         -0.0278328014 -0.0324855895
-## Lag 3072 -0.030575737         -0.0469756772 -0.0005457213
-## Lag 4096 -0.060367587         -0.0145970644 -0.0439130450
-## Lag 5120 -0.029732863          0.0009994532  0.0071940493
+##                  edges b1factor.color.yellow       b1star2
+## Lag 0     1.0000000000           1.000000000  1.000000e+00
+## Lag 1024  0.0417974121          -0.020127900 -1.141579e-02
+## Lag 2048 -0.0283580522          -0.078223503  6.621124e-02
+## Lag 3072  0.0009447344           0.021262619  3.423750e-02
+## Lag 4096  0.0304023064           0.011808213  3.881337e-02
+## Lag 5120 -0.0102407321           0.001782716  1.902413e-05
 ## Chain 4 
-##                edges b1factor.color.yellow      b1star2
-## Lag 0     1.00000000           1.000000000  1.000000000
-## Lag 1024 -0.02904037           0.033465804 -0.003724346
-## Lag 2048 -0.01359379          -0.025420880  0.045483569
-## Lag 3072 -0.01706628          -0.001695828 -0.015975499
-## Lag 4096  0.03279898           0.019071385  0.023672328
-## Lag 5120 -0.05195740          -0.100957150 -0.062369822
-## Chain 5 
 ##                edges b1factor.color.yellow     b1star2
 ## Lag 0     1.00000000            1.00000000  1.00000000
-## Lag 1024 -0.07958853           -0.04173347 -0.07812984
-## Lag 2048 -0.01823197           -0.02118230  0.01325300
-## Lag 3072 -0.01961137           -0.06770466  0.01578593
-## Lag 4096 -0.06405654           -0.05743206 -0.01513143
-## Lag 5120 -0.05433651            0.01579680 -0.04082462
+## Lag 1024 -0.06428058           -0.09321691 -0.03949388
+## Lag 2048 -0.01755992           -0.03370711  0.02734650
+## Lag 3072  0.01277256           -0.03585478 -0.01187565
+## Lag 4096 -0.03422831           -0.05692096 -0.06027842
+## Lag 5120  0.01229575           -0.03570772 -0.01179932
+## Chain 5 
+##                 edges b1factor.color.yellow      b1star2
+## Lag 0     1.000000000            1.00000000  1.000000000
+## Lag 1024  0.041887129           -0.06141697  0.003485881
+## Lag 2048 -0.004717049           -0.04328964 -0.049127348
+## Lag 3072  0.017902566            0.05093934  0.007558346
+## Lag 4096  0.012075205            0.09515057 -0.005486372
+## Lag 5120  0.012230148            0.03488256  0.003181428
 ## Chain 6 
+##                 edges b1factor.color.yellow      b1star2
+## Lag 0     1.000000000          1.0000000000  1.000000000
+## Lag 1024  0.110760291          0.0357718490  0.142874875
+## Lag 2048 -0.008880361         -0.0302150847  0.005725511
+## Lag 3072  0.012968916          0.0957011138 -0.018268278
+## Lag 4096 -0.063083488         -0.0876697430 -0.013555405
+## Lag 5120  0.021239903         -0.0001045285  0.025928659
+## Chain 7 
 ##                edges b1factor.color.yellow      b1star2
 ## Lag 0     1.00000000           1.000000000  1.000000000
-## Lag 1024  0.03205098           0.003789137 -0.012681641
-## Lag 2048  0.01499786          -0.027740866 -0.002080706
-## Lag 3072  0.01089989          -0.011390346 -0.027563207
-## Lag 4096  0.02808540           0.002606113  0.030618424
-## Lag 5120 -0.03316282          -0.013562268 -0.022942200
+## Lag 1024  0.05723011          -0.049802119  0.041880876
+## Lag 2048 -0.06453532           0.032559907 -0.058248156
+## Lag 3072 -0.01931364          -0.015408190  0.003312139
+## Lag 4096  0.03992220          -0.002738966  0.057657924
+## Lag 5120  0.03342254          -0.007836820  0.048419257
+## Chain 8 
+##                  edges b1factor.color.yellow      b1star2
+## Lag 0     1.0000000000            1.00000000  1.000000000
+## Lag 1024 -0.0235389269           -0.01564353 -0.022357434
+## Lag 2048 -0.0098447073           -0.03413752 -0.030329118
+## Lag 3072 -0.0443418192           -0.02756668 -0.087745330
+## Lag 4096  0.0004462992            0.02407020  0.021970422
+## Lag 5120 -0.0200935249           -0.01515836  0.002785467
+## Chain 9 
+##                edges b1factor.color.yellow     b1star2
+## Lag 0     1.00000000            1.00000000  1.00000000
+## Lag 1024 -0.01373090           -0.01311764 -0.05745675
+## Lag 2048 -0.04785216           -0.02743720 -0.07051772
+## Lag 3072  0.01693352            0.01418729  0.01476891
+## Lag 4096 -0.00479807           -0.10622930  0.02211406
+## Lag 5120  0.03706542            0.02870813  0.05842598
+## Chain 10 
+##                  edges b1factor.color.yellow      b1star2
+## Lag 0     1.0000000000           1.000000000  1.000000000
+## Lag 1024 -0.0101002665           0.058182922 -0.052125136
+## Lag 2048  0.0266050355           0.031222827 -0.022348317
+## Lag 3072  0.0001527082           0.025268425 -0.000010481
+## Lag 4096 -0.0732726334           0.027595994 -0.076918299
+## Lag 5120 -0.0193330298           0.002706392 -0.054585687
 ## 
 ## Sample statistics burn-in diagnostic (Geweke):
 ## Chain 1 
@@ -707,87 +773,132 @@ ergm::mcmc.diagnostics(m4)
 ## Fraction in 2nd window = 0.5 
 ## 
 ##                 edges b1factor.color.yellow               b1star2 
-##            -2.5735368            -2.5464434            -0.7540952 
+##             0.5501383             1.0396752            -0.2493083 
 ## 
 ## Individual P-values (lower = worse):
 ##                 edges b1factor.color.yellow               b1star2 
-##            0.01006649            0.01088269            0.45079205 
-## Joint P-value (lower = worse):  0.01144864 
+##             0.5822245             0.2984908             0.8031223 
+## Joint P-value (lower = worse):  0.6951308 
 ## Chain 2 
 ## 
 ## Fraction in 1st window = 0.1
 ## Fraction in 2nd window = 0.5 
 ## 
 ##                 edges b1factor.color.yellow               b1star2 
-##            -0.4531348             0.3003537            -0.7237836 
+##            -0.7912186             0.1313308             0.2023531 
 ## 
 ## Individual P-values (lower = worse):
 ##                 edges b1factor.color.yellow               b1star2 
-##             0.6504517             0.7639074             0.4691986 
-## Joint P-value (lower = worse):  0.8306628 
+##             0.4288164             0.8955136             0.8396407 
+## Joint P-value (lower = worse):  0.6579637 
 ## Chain 3 
 ## 
 ## Fraction in 1st window = 0.1
 ## Fraction in 2nd window = 0.5 
 ## 
 ##                 edges b1factor.color.yellow               b1star2 
-##            -1.2489752            -1.5706080            -0.4845173 
+##             -1.544692             -1.520382             -1.954582 
 ## 
 ## Individual P-values (lower = worse):
 ##                 edges b1factor.color.yellow               b1star2 
-##             0.2116741             0.1162737             0.6280188 
-## Joint P-value (lower = worse):  0.4387128 
+##            0.12242082            0.12841504            0.05063247 
+## Joint P-value (lower = worse):  0.2376543 
 ## Chain 4 
 ## 
 ## Fraction in 1st window = 0.1
 ## Fraction in 2nd window = 0.5 
 ## 
 ##                 edges b1factor.color.yellow               b1star2 
-##             0.7858591            -0.2266894             1.0582022 
+##            -0.6345348            -0.3082917            -1.2534748 
 ## 
 ## Individual P-values (lower = worse):
 ##                 edges b1factor.color.yellow               b1star2 
-##             0.4319500             0.8206653             0.2899633 
-## Joint P-value (lower = worse):  0.6104055 
+##             0.5257319             0.7578604             0.2100330 
+## Joint P-value (lower = worse):  0.6791123 
 ## Chain 5 
 ## 
 ## Fraction in 1st window = 0.1
 ## Fraction in 2nd window = 0.5 
 ## 
 ##                 edges b1factor.color.yellow               b1star2 
-##            0.53098791           -0.01345756            2.43533216 
+##             0.6249246             0.5641386             0.1799079 
 ## 
 ## Individual P-values (lower = worse):
 ##                 edges b1factor.color.yellow               b1star2 
-##            0.59542716            0.98926275            0.01487813 
-## Joint P-value (lower = worse):  0.1884595 
+##             0.5320206             0.5726598             0.8572249 
+## Joint P-value (lower = worse):  0.8630387 
 ## Chain 6 
 ## 
 ## Fraction in 1st window = 0.1
 ## Fraction in 2nd window = 0.5 
 ## 
 ##                 edges b1factor.color.yellow               b1star2 
-##            -1.7116442            -0.7167026            -1.3018173 
+##           -0.17560189            0.22802185           -0.06511887 
 ## 
 ## Individual P-values (lower = worse):
 ##                 edges b1factor.color.yellow               b1star2 
-##            0.08696226            0.47355765            0.19297886 
-## Joint P-value (lower = worse):  0.458048 
+##             0.8606067             0.8196293             0.9480794 
+## Joint P-value (lower = worse):  0.9584375 
+## Chain 7 
 ## 
-## Note: MCMC diagnostics shown here are from the last round of
-##   simulation, prior to computation of final parameter estimates.
-##   Because the final estimates are refinements of those used for this
-##   simulation run, these diagnostics may understate model performance.
-##   To directly assess the performance of the final model on in-model
-##   statistics, please use the GOF command: gof(ergmFitObject,
-##   GOF=~model).
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##                 edges b1factor.color.yellow               b1star2 
+##            -0.1870592            -0.2436676            -0.1827298 
+## 
+## Individual P-values (lower = worse):
+##                 edges b1factor.color.yellow               b1star2 
+##             0.8516142             0.8074882             0.8550100 
+## Joint P-value (lower = worse):  0.993534 
+## Chain 8 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##                 edges b1factor.color.yellow               b1star2 
+##            -0.0961545            -0.4574713            -0.3874216 
+## 
+## Individual P-values (lower = worse):
+##                 edges b1factor.color.yellow               b1star2 
+##             0.9233979             0.6473323             0.6984441 
+## Joint P-value (lower = worse):  0.8886883 
+## Chain 9 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##                 edges b1factor.color.yellow               b1star2 
+##              1.256490              1.535773              1.192513 
+## 
+## Individual P-values (lower = worse):
+##                 edges b1factor.color.yellow               b1star2 
+##             0.2089383             0.1245942             0.2330603 
+## Joint P-value (lower = worse):  0.6075024 
+## Chain 10 
+## 
+## Fraction in 1st window = 0.1
+## Fraction in 2nd window = 0.5 
+## 
+##                 edges b1factor.color.yellow               b1star2 
+##             0.6647229             1.6385317             0.2090791 
+## 
+## Individual P-values (lower = worse):
+##                 edges b1factor.color.yellow               b1star2 
+##             0.5062277             0.1013108             0.8343865 
+## Joint P-value (lower = worse):  0.2521058 
+## 
+## Note: MCMC diagnostics shown here are from the last round of simulation, prior to computation of final parameter
+##   estimates. Because the final estimates are refinements of those used for this simulation run, these diagnostics may
+##   understate model performance. To directly assess the performance of the final model on in-model statistics, please
+##   use the GOF command: gof(ergmFitObject, GOF=~model).
 ```
 ]
 
 ---
 name: gof_bipartite
 description: goodness of fit for bipartite 
-# GOF
+# GOF 
 &lt;br&gt;
 ### The usual way
 .scroll-box-18[
@@ -801,73 +912,72 @@ ergm::gof(m4)
 ## Goodness-of-fit for model statistics 
 ## 
 ##                       obs min mean max MC p-value
-## edges                   6   3 6.02  11          1
-## b1factor.color.yellow   2   0 2.06   5          1
-## b1star2                 1   0 0.94   5          1
+## edges                   6   1 5.84  10          1
+## b1factor.color.yellow   2   0 1.90   5          1
+## b1star2                 1   0 0.99   4          1
 ## 
 ## Goodness-of-fit for minimum geodesic distance 
 ## 
 ##     obs min  mean max MC p-value
-## 1     6   3  6.02  11       1.00
-## 2     7   1  6.05  17       0.76
-## 3     3   0  2.48  10       0.82
-## 4     0   0  1.64   8       1.00
-## 5     0   0  0.30   5       1.00
-## 6     0   0  0.17   6       1.00
-## Inf  29   0 28.34  41       0.84
+## 1     6   1  5.84  10       1.00
+## 2     7   0  5.56  18       0.60
+## 3     3   0  2.20  11       0.76
+## 4     0   0  1.31   8       1.00
+## 5     0   0  0.26   4       1.00
+## 6     0   0  0.07   3       1.00
+## Inf  29   0 29.76  44       0.78
 ## 
 ## Goodness-of-fit for bipartition 1 degree 
 ## 
 ##   obs min mean max MC p-value
-## 0   2   0 1.90   4          1
-## 1   4   2 4.20   7          1
-## 2   1   0 0.88   4          1
+## 0   2   0 2.13   6          1
+## 1   4   1 3.92   6          1
+## 2   1   0 0.93   4          1
 ## 3   0   0 0.02   1          1
 ## 
 ## Goodness-of-fit for bipartition 2 degree 
 ## 
 ##   obs min mean max MC p-value
-## 0   0   0 0.34   2       1.00
-## 1   2   0 0.68   2       0.26
-## 2   0   0 1.01   3       0.46
-## 3   0   0 0.68   3       0.88
-## 4   1   0 0.19   2       0.36
-## 5   0   0 0.08   1       1.00
-## 6   0   0 0.02   1       1.00
+## 0   0   0 0.31   2       1.00
+## 1   2   0 0.82   2       0.38
+## 2   0   0 0.96   3       0.64
+## 3   0   0 0.61   2       0.88
+## 4   1   0 0.23   2       0.42
+## 5   0   0 0.07   1       1.00
 ## 
 ## Goodness-of-fit for edgewise shared partner 
 ## 
 ##        obs        min       mean        max MC p-value 
-##       6.00       3.00       6.02      11.00       1.00
+##       6.00       1.00       5.84      10.00       1.00
 ```
 ]
 
 ---
-# Interpreting Results
+# Interpreting Results - Final model
 &lt;br&gt;
 The advanced `ergm` options improved the IAC and BIC
 .scroll-box-18[
 
 ``` r
-texreg::screenreg(list(m0, m1, m2, m3, m4))
+texreg::screenreg(m4)
 ```
 
 ```
 ## 
-## ==================================================================
-##                        Model 1  Model 2  Model 3  Model 4  Model 5
-## ------------------------------------------------------------------
-## edges                   -0.92    -0.69     0.07    0.14     0.08  
-##                         (0.48)   (0.61)   (1.12)  (1.16)   (1.17) 
-## b1factor.color.yellow            -0.56    -0.92   -0.99    -0.89  
-##                                  (1.01)   (1.25)  (1.32)   (1.34) 
-## b1star2                                   -1.15   -1.35    -1.29  
-##                                           (1.71)  (1.48)   (1.53) 
-## ------------------------------------------------------------------
-## AIC                     27.13    28.81    29.94    0.91     0.83  
-## BIC                     28.17    30.90    33.08    4.04     3.96  
-## Log Likelihood         -12.56   -12.41   -11.97    2.55     2.59  
-## ==================================================================
+## ==============================
+##                        Model 1
+## ------------------------------
+## edges                   0.02  
+##                        (1.25) 
+## b1factor.color.yellow  -0.82  
+##                        (1.42) 
+## b1star2                -1.23  
+##                        (1.62) 
+## ------------------------------
+## AIC                     0.87  
+## BIC                     4.01  
+## Log Likelihood          2.56  
+## ==============================
 ## *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05
 ```
 ]
@@ -1126,8 +1236,8 @@ description: Specification of exogenous GERGM terms
 ## Very similar to the `ergm` package
 
 - `absdiff(covariate = "MyCov")`
-- `sender(covariate = "MyCov")` -- != from `ergm` here attribute
-- `receiver(covariate = "MyCov")` -- != from `ergm` here attribute
+- `sender(covariate = "MyCov")` -- != from `ergm` here attribute - nodeocov
+- `receiver(covariate = "MyCov")` -- != from `ergm` here attribute - nodeicov
 - `nodematch(covariate = "MyCov", base = "Ref.cat")`
 - `nodemix(covariate = "MyCov", base = "Ref.cat")` 
 - `netcov(network)` -- like `edgecov` in `ergm`
@@ -1247,20 +1357,16 @@ gergmResults &lt;- GERGM::gergm(formula,
 ## [1] 1 1 1 1 1 1 1
 ## Updating Estimates -- Iteration: 1  
 ## Initial Lambda Estimates:
-##    enrollment_sender  enrollment_receiver            intercept 
-##            0.0000000            0.0000000            0.9474667 
-##        nGames_netcov dispersion parameter 
-##            0.0000000           -0.6598233 
+##    enrollment_sender  enrollment_receiver            intercept        nGames_netcov dispersion parameter 
+##            0.0000000            0.0000000            0.9474667            0.0000000           -0.6598233 
 ## initial  value 327.330101 
 ## iter  10 value -77.532938
 ## iter  20 value -80.926211
 ## final  value -80.926237 
 ## converged
 ## Lambda estimates 
-##    enrollment_sender  enrollment_receiver            intercept 
-##          0.003326746          0.003120129          3.281654034 
-##        nGames_netcov dispersion parameter 
-##          0.487536723         -2.661701403 
+##    enrollment_sender  enrollment_receiver            intercept        nGames_netcov dispersion parameter 
+##          0.003326746          0.003120129          3.281654034          0.487536723         -2.661701403 
 ## Estimating Initial Values for Theta via MPLE... 
 ## initial  value -2.198845 
 ## final  value -2.203740 
@@ -1342,24 +1448,18 @@ gergmResults &lt;- GERGM::gergm(formula,
 
 ```
 ## Lambda p.values 
-##    enrollment_sender  enrollment_receiver            intercept 
-##         2.206373e-03         7.806802e-01        2.140274e-140 
-##        nGames_netcov dispersion parameter 
-##        1.369290e-213         3.969127e-87 
+##    enrollment_sender  enrollment_receiver            intercept        nGames_netcov dispersion parameter 
+##         2.206373e-03         7.806802e-01        2.140274e-140        1.369290e-213         3.969127e-87 
 ## Updating Estimates -- Iteration: 2  
 ## Initial Lambda Estimates:
-##    enrollment_sender  enrollment_receiver            intercept 
-##          0.003326746          0.003120129          3.281654034 
-##        nGames_netcov dispersion parameter 
-##          0.487536723         -2.661701403 
+##    enrollment_sender  enrollment_receiver            intercept        nGames_netcov dispersion parameter 
+##          0.003326746          0.003120129          3.281654034          0.487536723         -2.661701403 
 ## initial  value -95.377753 
 ## final  value -95.850149 
 ## converged
 ## Lambda estimates 
-##    enrollment_sender  enrollment_receiver            intercept 
-##          0.003329245          0.004628842          3.245288935 
-##        nGames_netcov dispersion parameter 
-##          0.482791749         -2.669664798 
+##    enrollment_sender  enrollment_receiver            intercept        nGames_netcov dispersion parameter 
+##          0.003329245          0.004628842          3.245288935          0.482791749         -2.669664798 
 ## Estimating Initial Values for Theta via MPLE... 
 ## initial  value -3.658605 
 ## final  value -3.928005 
@@ -1441,10 +1541,8 @@ gergmResults &lt;- GERGM::gergm(formula,
 
 ```
 ## Lambda p.values 
-##    enrollment_sender  enrollment_receiver            intercept 
-##            0.9981650            0.8938492            0.6927196 
-##        nGames_netcov dispersion parameter 
-##            0.7550368            0.9374593
+##    enrollment_sender  enrollment_receiver            intercept        nGames_netcov dispersion parameter 
+##            0.9981650            0.8938492            0.6927196            0.7550368            0.9374593
 ```
 
 ```
@@ -1475,26 +1573,20 @@ gergmResults &lt;- GERGM::gergm(formula,
 ## Statistics were thinned by a factor of 27, resulting in 371 samples.
 ## 
 ## Statistics used in comparison:
-##    out2stars     in2stars      ctriads       mutual      ttriads        edges 
-## 3.845591e+02 3.889916e+02 1.305658e+02 3.082482e+01 4.218467e+02 1.095221e+02 
-##    intensity 
-## 2.960595e-17 
+##    out2stars     in2stars      ctriads       mutual      ttriads        edges    intensity 
+## 3.845591e+02 3.889916e+02 1.305658e+02 3.082482e+01 4.218467e+02 1.095221e+02 2.960595e-17 
 ## 
 ## Mean statistic values from simulated networks:
-##    out2stars     in2stars      ctriads       mutual      ttriads        edges 
-## 391.82628549 391.80967858 139.91117195  30.74489031 419.81988127 112.51091504 
-##    intensity 
-##   0.01423264 
+##    out2stars     in2stars      ctriads       mutual      ttriads        edges    intensity 
+## 391.82628549 391.80967858 139.91117195  30.74489031 419.81988127 112.51091504   0.01423264 
 ## 
 ## t-statistics for difference of simulated mean from observed statistic...
 ##  out2stars   in2stars    ctriads     mutual    ttriads      edges  intensity 
 ##  4.6812447  1.8095298 11.1775602 -0.6418200 -0.8123302 13.4821744 13.4821744 
 ## 
 ## t-statistics for test of whether observed statistic is an outlier with respect to simulated statistics...
-##   out2stars    in2stars     ctriads      mutual     ttriads       edges 
-## -0.24303812 -0.09394610 -0.58031001  0.03332163  0.04217408 -0.69995962 
-##   intensity 
-## -0.69995962
+##   out2stars    in2stars     ctriads      mutual     ttriads       edges   intensity 
+## -0.24303812 -0.09394610 -0.58031001  0.03332163  0.04217408 -0.69995962 -0.69995962
 ```
 
 &lt;img src="assets/images/w11_11-1.svg" width="90%" /&gt;&lt;img src="assets/images/w11_11-2.svg" width="90%" /&gt;&lt;img src="assets/images/w11_11-3.svg" width="90%" /&gt;
@@ -1511,8 +1603,8 @@ gergmResults &lt;- GERGM::gergm(formula,
 ## 80% complete...
 ## 90% complete...
 ## 100% complete...
-## Estimation Complete at: 2025-10-17 15:35:45.489926 
-## Elapsed time (seconds): 1.19848
+## Estimation Complete at: 2025-10-23 14:00:32.390686 
+## Elapsed time (seconds): 1.616223
 ```
 ]
 

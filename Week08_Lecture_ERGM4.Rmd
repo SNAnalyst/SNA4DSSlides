@@ -278,6 +278,7 @@ description: Recap about bipartite graphs
 - connections are allowed across sets
 - connections are forbidden within set
 
+
 .center[![:scale 30%](assets/images/Simple-bipartite-graph.png)]
 
 ---
@@ -290,6 +291,8 @@ description: Recap about bipartite graphs
 - Men to knitting club meetings
 
 - Women to football practices
+
+- ...
 
 ---
 # Less Common Examples
@@ -306,7 +309,7 @@ description: Recap about bipartite graphs
 
 - professors and students
 
-
+## It is about connections that are forbidden or that make no sense for us in that moment
 ---
 name: modelling_Bipartite_graph
 description: Modelling bipartite graphs
@@ -320,24 +323,24 @@ to make it work for bipartite data you can project it
 - set 1 are the nodes and being pairwise connected to a node in set 2 creates an edge on this one projection
 - set 2 are the nodes and being pairwise connected to a node in set 1 creates an edge on the other projection
 
-### Both projection would be undirected by definition
+### Both projections would be undirected by definition
 
-Usually bipartite connections go in one direction only
+(also, usually bipartite connections go in one direction only -- kinds --> parties)
 
-Otherwise, you can use Bipartite ERGMs
+If you don't want/can't project it, you can use Bipartite ERGMs
 ---
 # Bipartite ERGMs
 <br>
 
 ### Conceptually the same as the unimodal
-- It's a unimodal with some constraints
+- It works as a unimodal with constraints
 - Same formula
 - Special terms same concepts 
 
 ### They are cumbersome ergm
 
 - It takes much longer to run
-- You need to use the advanced options to make the model work
+- You need to use the advanced options (control ergm) to make the model work
 
 ---
 name: Bipartite_model_terms
@@ -363,7 +366,7 @@ Found  36  matching ergm terms
 - `nodefactor` --> `b1factor` & `b2factor`
 - `nodematch` --> `b1nodematch` & `b2nodematch`
 - `star(k)` --> `b1star(k)` &  `b2star(k)`
-- `gwdsp()` --> `gwb1dsp()` & `gwb2dsp()`
+- `gwdsp()` --> `gwb1dsp()` & `gwb2dsp()` - no esp since triangles cannot close!
 - etc., ...
 ---
 background-image: url(assets/images/kids_toy_bip_example.jpg)
@@ -373,7 +376,7 @@ name: Bipartite_model_example
 description: Bipartite model example
 # Toy Example
 
-### convergence time is higher than the unimodal ERGM so, tiny data set
+### convergence time is higher than the unimodal ERGM so, tiny data set for the slides
 
 ### Kids going to events 
 
@@ -405,7 +408,14 @@ network::set.vertex.attribute(kids, "bipartite", value = rep(TRUE, 3), v = 1:3)
 
 .scroll-box-18[
 ```{r w11_02, echo=TRUE}
-m0 <- ergm::ergm(kids ~ edges)
+m0 <- ergm::ergm(kids ~ edges,
+                 control = ergm::control.ergm(
+                    MCMC.samplesize = 5000,
+                    MCMC.burnin = 1000, 
+                    MCMLE.maxit = 10,
+                    parallel = 10,
+                    parallel.type = "PSOCK"
+                  ) )
 summary(m0)
 
 ```
@@ -415,7 +425,14 @@ summary(m0)
 
 .scroll-box-18[
 ```{r w11_03, echo=TRUE}
-m1 <- ergm::ergm(kids ~ edges  + b1factor("color", levels = -1))
+m1 <- ergm::ergm(kids ~ edges  + b1factor("color", levels = -1),
+                 control = ergm::control.ergm(
+                    MCMC.samplesize = 5000,
+                    MCMC.burnin = 1000, 
+                    MCMLE.maxit = 10,
+                    parallel = 10,
+                    parallel.type = "PSOCK"
+                  ) )
 summary(m1)
 ```
 ]
@@ -426,7 +443,14 @@ summary(m1)
 
 .scroll-box-18[
 ```{r w11_04, echo=TRUE}
-m2 <- ergm::ergm(kids ~ edges  + b1factor("color", levels = -1) + b1star(2))
+m2 <- ergm::ergm(kids ~ edges  + b1factor("color", levels = -1) + b1star(2),
+                 control = ergm::control.ergm(
+                    MCMC.samplesize = 5000,
+                    MCMC.burnin = 1000, 
+                    MCMLE.maxit = 10,
+                    parallel = 10,
+                    parallel.type = "PSOCK"
+                  ) )
 summary(m2)
 ```
 ]
@@ -439,9 +463,9 @@ summary(m2)
 <br>
 ### In this toy example, we might, but in a real bipartite ergm, hardly.
 
-The function `ergm::ergm` is set to run simulation on every possible combination
+The function `ergm::ergm` is set to run simulation on every possible combination (ignoring the forbidden ones)
 
-Here, every possible combination is simply not possible, then why not saving some computational time?
+But many more combinations are not possible here, then why not saving some computational time?
 
 <br>
 ## We need to .red[constraint] the model 
@@ -478,13 +502,20 @@ bd <- sets a min and a max for degree
 # network::get.vertex.attribute(kids, "color")
 
 m3 <- ergm::ergm(kids ~ edges  + b1factor("color", levels = -1) + b1star(2),
-                 constraints= ~ bd(minout = 0, maxout = 7))
+                 constraints= ~ bd(minout = 0, maxout = 10),
+                 control = ergm::control.ergm(
+                    MCMC.samplesize = 5000,
+                    MCMC.burnin = 1000, 
+                    MCMLE.maxit = 10,
+                    parallel = 10,
+                    parallel.type = "PSOCK"
+                  ) )
 summary(m3)
 ```
 ]
 
 ---
-# Another point of view
+# Another approach - blocking connections
 <br>
 
 ### Example: you want to model relationships between bosses and employees as a bipartite
@@ -531,12 +562,12 @@ Since your simulation very likely is still clunky, you need to set up these para
 # network::get.vertex.attribute(kids, "color")
 
 m4 <- ergm::ergm(kids ~ edges  + b1factor("color", levels = -1) + b1star(2),
-                 constraints= ~ bd(minout = 0, maxout = 7),
+                 constraints= ~ bd(minout = 0, maxout = 10),
                  control = ergm::control.ergm(
                     MCMC.samplesize = 5000,
                     MCMC.burnin = 1000, 
                     MCMLE.maxit = 10,
-                    parallel = 6,
+                    parallel = 10,
                     parallel.type = "PSOCK"
                   ) )
 summary(m4)
@@ -560,7 +591,7 @@ ergm::mcmc.diagnostics(m4)
 ---
 name: gof_bipartite
 description: goodness of fit for bipartite 
-# GOF
+# GOF 
 <br>
 ### The usual way
 .scroll-box-18[
@@ -570,12 +601,12 @@ ergm::gof(m4)
 ]
 
 ---
-# Interpreting Results
+# Interpreting Results - Final model
 <br>
 The advanced `ergm` options improved the IAC and BIC
 .scroll-box-18[
 ```{r w11_07, echo=TRUE}
-texreg::screenreg(list(m0, m1, m2, m3, m4))
+texreg::screenreg(m4)
 ```
 ]
 
@@ -833,8 +864,8 @@ description: Specification of exogenous GERGM terms
 ## Very similar to the `ergm` package
 
 - `absdiff(covariate = "MyCov")`
-- `sender(covariate = "MyCov")` -- != from `ergm` here attribute
-- `receiver(covariate = "MyCov")` -- != from `ergm` here attribute
+- `sender(covariate = "MyCov")` -- != from `ergm` here attribute - nodeocov
+- `receiver(covariate = "MyCov")` -- != from `ergm` here attribute - nodeicov
 - `nodematch(covariate = "MyCov", base = "Ref.cat")`
 - `nodemix(covariate = "MyCov", base = "Ref.cat")` 
 - `netcov(network)` -- like `edgecov` in `ergm`
