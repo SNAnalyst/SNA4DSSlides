@@ -368,6 +368,158 @@ lectureName <- "Week 05 -- Lab: ERGM I"
 
 
 
+<!-- Week 06 - Lecture: Data Collection -->                                
+```{r, include = FALSE}                                                    
+overview <- matrix(c(                                                      
+"DataTypes_slide", "collect data about network, nodes and edge attributes",
+"Design_Bias", "how to make an unbiased study design",                     
+"Sampling_Bias", "Decide on the right approach for your sample",           
+"egonets", "example of egonets",                                           
+"ethical_issues", "Designing an ethics compliant study",                   
+"collection_strategies", "How to approach a data collection problem",      
+"collection_strategies", "How to approach a data collection problem",      
+"processing_data", "How to turn into a network the data we collect",       
+"SNA4DS_dataprocessing", "How to process survey data using `snafun`"       
+), byrow = TRUE, ncol = 2) |>                                              
+as.data.frame() |>                                                         
+setNames(c("name", "description"))                                         
+                                                                        
+slidedeckFile <- "Week06_Lecture_CZ_collecting_data"                       
+lectureName <- "Week 06 - Lecture: Data Collection"                        
+```                                                                        
+                                                                        
+`r make_overview(overview, path, slidedeckFile, lectureName)` 
+
+
+<!-- Week 07 - Lecture: ERGM III -->                                      
+```{r, include = FALSE}                                                   
+overview <- matrix(c(                                                     
+"menu", "List of contents for today's lecture",                           
+"ERGMestimation", "An intuitive description of how the estimation works", 
+"ERGMmath", "How the math of ERGM estimation works",                      
+"convergence", "What is the convergence of a model",                      
+"burnin", "What is the model burn-in",                                    
+"sample_size", "What is the model sample size",                           
+"mcmc_diagnostics", "How to perform and interpret mcmc diagnostics",      
+"model_degeneracy", "What is the model degeneracy",                       
+"curved_terms", "Terms to improve model convergence and predictive power",
+"gof", "How to perform and interpret goodness of fit"                     
+), byrow = TRUE, ncol = 2) |>                                             
+as.data.frame() |>                                                        
+setNames(c("name", "description"))                                        
+                                                                       
+slidedeckFile <- "Week07_Lecture_ERGM3"                                   
+lectureName <- "Week 07 - Lecture: ERGM III"                              
+```                                                                       
+                                                                       
+`r make_overview(overview, path, slidedeckFile, lectureName)` 
+
+                                                              
+<!-- Week 08 - Lab: ERGM II -->                              
+```{r, include = FALSE}                                      
+overview <- matrix(c(                                        
+"menu", "List of contents for the lab",                      
+"Model_results", "Interpreting model results",               
+"Odds_ratios", "Odds_ratios",                                
+"Probabilities", "Probabilities",                            
+"example_inter_res", "Example for interpreting results",     
+"Research_flow", "Approach to carry out research"            
+), byrow = TRUE, ncol = 2) |>                                
+as.data.frame() |>                                           
+setNames(c("name", "description"))                           
+                                                          
+slidedeckFile <- "Week08_Lab_ERGM2"                          
+lectureName <- "Week 08 - Lab: ERGM II"                      
+```                                                          
+                                                          
+`r make_overview(overview, path, slidedeckFile, lectureName)`
+
+
+
+                                                                      
+<!-- Week 08 - Lecture: ERGM IV -->                                            
+```{r, include = FALSE}                                                        
+overview <- matrix(c(                                                          
+"menu", "List of contents for today's lecture",                                
+"Bipartite_graph", "Recap about bipartite graphs",                             
+"modelling_Bipartite_graph", "Modelling bipartite graphs",                     
+"Bipartite_model_terms", "Terms for bipartite models",                         
+"Bipartite_model_example", "Bipartite model example",                          
+"Model_constraints", "Model constraints",                                      
+"Offset", "Offset a term in model specification",                              
+"Ergm_control", "Function for control ergm",                                   
+"diagnostics_bipartite", "diagnostics for bipartite",                          
+"gof_bipartite", "goodness of fit for bipartite",                              
+"weighted_networks", "Recap Weighted networks",                                
+"weight_types", "Types of Weighted networks",                                  
+"weight_count", "Weighted networks Count",                                     
+"weight_continuous", "Weighted networks continuous",                           
+"GERGM", "package for weighted network ERGMs",                                 
+"weighted_network_math", "GERGM mathematical specification",                   
+"GERGM_package", "A package for weighted network ERGMs",                       
+"GERGM_terms", "Specification of GERGM terms",                                 
+"GERGM_endogenous", "Specification of endogenous GERGM terms",                 
+"GERGM_exogenous", "Specification of exogenous GERGM terms",                   
+"GERGM_data", "Specification for data format in the GERGM package",            
+"GERGM_formula_specification", "Specification of the formula in a GERGM model",
+"GERGM_model_results", "Exploring results in a GERGM model"                    
+), byrow = TRUE, ncol = 2) |>                                                  
+as.data.frame() |>                                                             
+setNames(c("name", "description"))                                             
+                                                                          
+slidedeckFile <- "Week08_Lecture_ERGM4"                                        
+lectureName <- "Week 08 - Lecture: ERGM IV"                                    
+```                                                                            
+                                                                          
+`r make_overview(overview, path, slidedeckFile, lectureName)`  
+
+
+
+<!-- Week 09 - Lab: ERGM III -->                                 
+```{r, include = FALSE}                                          
+overview <- matrix(c(                                            
+"menu", "List of contents for today's Lab",                      
+"Net_out", "The meaning of having a network as outcome variable",
+"Str_terms", "The importance of including structural terms",     
+"Large_nets", "How to handle large networks",                    
+"complex_cases", "Handling complex cases",                       
+"Stat_signif", "What is a good model",                           
+"Seven_steps", "Doing research in a nutshell",                   
+"Res_Qs", "Think carefully about research questions"             
+), byrow = TRUE, ncol = 2) |>                                    
+as.data.frame() |>                                               
+setNames(c("name", "description"))                               
+                                                              
+slidedeckFile <- "Week9_Lab_ERGM3"                               
+lectureName <- "Week 09 - Lab: ERGM III"                         
+```                                                              
+                                                              
+`r make_overview(overview, path, slidedeckFile, lectureName)`
+
+
+
+<!-- Week 09 - Lecture: Temporal Networks -->                           
+```{r, include = FALSE}                                                 
+overview <- matrix(c(                                                   
+"soccer", "ball passing network in soccer",                             
+"characteristics", "Characteristics of temporal networks",              
+"how_analyze", "How do you analyze temporal networks",                  
+"analysis_overview", "Analysis of temporal network data in this course",
+"tergms", "The TERGM",                                                  
+"btergm", "The `btergm` package",                                       
+"example", "International alliances (example)",                         
+"memory", "Time effects (Memory)",                                      
+"reciprocity", "Time effects (Delayed reciprocity)",                    
+"covariates", "Time effects (Covariates)"                               
+), byrow = TRUE, ncol = 2) |>                                           
+as.data.frame() |>                                                      
+setNames(c("name", "description"))                                      
+                                                                     
+slidedeckFile <- "Lecture_TemporalSNA"                                  
+lectureName <- "Week 09 - Lecture: Temporal Networks"                   
+```                                                                     
+                                                                     
+`r make_overview(overview, path, slidedeckFile, lectureName)`  
 
 
 
