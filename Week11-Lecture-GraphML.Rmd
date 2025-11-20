@@ -1,0 +1,559 @@
+---
+title: "SOCIAL NETWORK ANALYSIS<br>for DATA SCIENTISTS"
+topic: "GRAPH MACHINE LEARNING"
+lecture_no: "Week 11"
+author: Gergo Bocsardi
+playdate: 2025-11-12
+output:
+  xaringan::moon_reader:
+    css:
+      - default
+      - assets/css/animate.css
+      - assets/css/apron.css
+      - assets/css/descartes.css
+      - assets/css/tachyons.min.css
+      - assets/css/xaringan-extra.css
+      - assets/css/RL-fonts.css
+      - assets/css/SNA4DS.css
+      - assets/css/SNA4DS_effects.css
+      - assets/css/kleuren.css # make sure this is the last one
+    self_contained: false
+    lib_dir: assets
+    chakra: assets/remark-latest.min.js
+    seal: false # automatic title slide with YAML information
+    mathjax: "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"
+    includes:
+      in_header:
+        - assets/html/mathjax-equation-numbers.html
+    nature:
+      beforeInit:
+        - assets/js/remark-zoom.js
+        - assets/js/macros.js
+      highlightStyle: atom-one-light
+      highlightLines: true
+      highlightSpans: true
+      titleSlideClass: [middle, left]
+      countIncrementalSlides: false
+      slideNumberFormat: "- %current% -"
+      ratio: '16:9' # alternatives '16:9' or '4:3' or others e.g. 13:9
+      navigation:
+        scroll: true # slide transitions by scrolling
+anomia:
+  combo:
+    prefix: "lab_SNAC"
+    pattern:
+      - colors
+      - [animals, fruits]
+      - adverbs
+    sep: "_"
+    case: "upper"
+---
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+<br><br><br><br><br>
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[`r rmarkdown::metadata$title`]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[`r rmarkdown::metadata$topic` .small-caps.font70[(lecture] .font70[`r rmarkdown::metadata$lecture_no`)]]]
+  ]
+
+<br>
+.f-abel.White-inline[Your lecturer: `r rmarkdown::metadata$author`]<br>
+.f-abel.White-inline[Playdate: `r rmarkdown::metadata$playdate`]
+
+
+<!-- setup options start -->
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                  out.width = "90%",
+                  fig.height = 6,
+                  fig.path = "assets/images/",
+                  fig.retina = 2,
+                  dev = "svg",
+                  message = FALSE,
+                  warning = FALSE)
+# library(htmlwidgets, quietly = TRUE, verbose = FALSE, warn.conflicts = FALSE)
+# library(countdown, quietly = TRUE, verbose = FALSE, warn.conflicts = FALSE)
+
+knitr::opts_knit$set(global.par = TRUE)  # anders worden de margin settings niet overal doorgevoerd
+```
+
+
+```{r lecture_measures_01, include = FALSE}
+par(mar = c(0,0,0,0) + .05) #it's important to have this in a separate chunk
+```
+
+
+```{r xaringanExtra_settings, include = FALSE}
+xaringanExtra::use_xaringan_extra(c("tile_view"
+                                    , "panelset"
+                                    , "animate"
+                                    , "tachyons"
+                                    , "freezeframe"
+                                    # , "broadcast"
+                                    , "scribble"
+                                    , "fit_screen"
+                                    ))
+
+# xaringanExtra::use_webcam(300 * 3.5, 300 / 4 * 3 * 3.5)
+xaringanExtra::use_editable(expires = 1)
+# xaringanExtra::use_search(show_icon = FALSE, case_sensitive = FALSE)
+xaringanExtra::use_clipboard()
+
+# htmltools::tagList(
+#   xaringanExtra::use_clipboard(
+#     button_text = "<i class=\"fa fa-clipboard\"></i>",
+#     success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+#     error_text = "<i class=\"fa fa-times-circle\" style=\"color: #F94144\"></i>"
+#   ),
+# rmarkdown::html_dependency_font_awesome()
+# )
+```
+
+
+```{r xaringan-extra-styles, echo = FALSE}
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,         
+  mute_unhighlighted_code = TRUE  
+)
+```
+
+```{css echo=FALSE}
+.highlight-last-item > ul > li, 
+.highlight-last-item > ol > li {
+  opacity: 0.5;
+}
+
+.highlight-last-item > ul > li:last-of-type,
+.highlight-last-item > ol > li:last-of-type {
+  opacity: 1;
+
+.bold-last-item > ul > li:last-of-type,
+.bold-last-item > ol > li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+```
+
+
+```{r some_handy_functions, echo = FALSE}
+source("assets/R/components.R")
+```
+
+
+
+```{css}
+.remark-inline-code {
+  background: #F5F5F5;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.inverse-red, .inverse-red h1, .inverse-red h2, .inverse-red h3, .inverse-red a, inverse-red a > code {
+	border-top: none;
+	background-color: red;
+	color: white; 
+	background-image: "";
+}
+
+.inverse-orange, .inverse-orange h1, .inverse-orange h2, .inverse-orange h3, .inverse-orange a, inverse-orange a > code {
+	border-top: none;
+	background-color: orange;
+	color: black; 
+	background-image: "";
+}
+
+.tab{
+  display: inline-block;
+  margin-left: 40px;
+}
+
+.tab1{tab-size: 2;}
+.tab2{tab-size: 4;}
+.tab3{tab-size: 6;}
+.tab4{tab-size: 8;}
+
+```
+
+
+
+```{css}
+.grid-3-2a {
+  display: grid;
+  height: calc(90%);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1em;
+  padding: 1em;
+}
+```
+
+<!-- setup options end -->
+
+
+
+---
+class: course-logo
+layout: true
+
+---
+name: Menu
+description: Topics covered in today's lecture
+# Menu for today
+<br>
+<br>
+1. From Statistics to Machine Learning
+2. Embeddings (the bread and butter)
+3. **BREAK**
+4. Graph Neural Networks (GNNs)
+5. Running GraphML models
+
+
+
+
+---
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+# 1. From Statistics to Machine Learning
+
+---
+name: stats_to_ml
+description: Transition from statistical models to machine learning
+# So far it was statistics, now it's ML
+
+.center[<img src="assets/images/GraphML Class.png" alt="GraphML Class">]
+
+---
+# The "data model" tradition: building models from theory
+
+<br>
+### A lot of methods in this course come from the "data model" tradition:
+
+<br>
+- Understanding whether a network structure is random (CUG tests)
+
+- Understanding what is the generative process (ERGM)
+
+---
+# Machine Learning is different
+
+<br>
+<br>
+## ML is concerned with the other end
+
+<br>
+## It takes the network as a given, and sees how we can use it for different tasks
+
+---
+# You can do "naive" ML
+
+<br>
+### Use node features, centrality measures as inputs to ML models
+
+<br>
+### (In ML models you're allowed to use centrality as predictors, in regressions you're not)
+
+<br>
+### But... you're not really using the graph structure itself
+
+---
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+# 2. Embeddings (the bread and butter)
+
+---
+# To "use" a graph for tasks you need embeddings
+
+<br>
+<br>
+## To "use" a graph for tasks you need to turn it into a shape that algorithms can eat
+
+<br>
+## This shape is called: **EMBEDDINGS**
+
+<br>
+## This is going to be our bread and butter for today
+
+---
+# What is an embedding?
+
+<br>
+### Further reading for the curious: 
+https://www.youtube.com/playlist?list=PLoROMvodv4rPLKxIpqhjhPgdQy7imNkDn
+
+---
+# Most ML tasks are inherently node-level
+
+<br>
+<br>
+### Outcomes of people given their social graph, performance of firms given their allies, etc
+
+<br>
+### This is exactly what node-level tasks are about!
+
+---
+# Embeddings turn nodes into vectors
+
+.center[<img src="assets/images/GraphML Class-1.png" alt="GraphML Class" style="width:70%">]
+
+<br>
+### Embeddings turn a node (or graph) into a vector
+
+### Then we can feed this vector to any algorithm we like!
+
+---
+# The goal of embeddings
+
+.center[<img src="assets/images/GraphML Class-2.png" alt="GraphML Class" style="width:70%">]
+
+<br>
+## Goal: similar position in the network = similar embedding vector
+
+---
+# Embeddings at a high level
+
+<br>
+### You need 3 things:
+
+<br>
+1. **Encoder**: looks up vector for any given node
+
+2. **Decoder**: measures the similarity between two vectors
+
+3. **Similarity definition**: what does "similar" mean? (distance in graph, topology, neighbors, etc.)
+
+---
+# The embedding framework
+
+<br>
+<br>
+## Similarity(u,v) = Decoder( Encoder(u), Encoder(v) )
+
+<br>
+<br>
+## Of these three components, we learn the encoder when training
+
+---
+# Different ways to make embeddings
+
+<br>
+## There are multiple approaches to creating embeddings
+
+<br>
+## Let's look at some key methods:
+- Random walk
+- DeepWalk
+- Node2Vec
+
+---
+# Random walk embeddings
+
+<br>
+<br>
+## Similarity(u,v) = P(u and v co-occur on a random walk over G)
+
+<br>
+<br>
+### The similarity between two nodes is defined by how often they appear together on random walks through the graph
+
+---
+# DeepWalk
+
+<br>
+### Think word2vec, but for graphs!
+
+<br>
+- Walks are sentences
+- Nodes are words
+- Then we do skipgram next token prediction
+
+<br>
+### You just do a bunch of walks, that is your corpus
+
+---
+# Node2Vec
+
+<br>
+### Improved DeepWalk by adding biased walks
+
+<br>
+### Not every path has an equal probability
+
+<br>
+### You can tune how the walk-based exploration goes:
+- BFS vs DFS
+- Return parameter
+- In-out parameter
+
+---
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+# **BREAK**
+
+---
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+# 4. Graph Neural Networks (GNNs)
+
+---
+
+# Not every task needs the same information (embeddings)
+
+<br>
+<br>
+## Different tasks require different kinds of information from a graph
+
+<br>
+## That's where GNNs come in
+
+---
+# Task-specific embeddings, end to end
+
+<br>
+## GNNs learn task-specific embeddings
+
+<br>
+## Different kinds of tasks:
+- Node level (classification/regression)
+- Edge level (link prediction)
+- Graph level (graph classification)
+
+---
+# Graph Convolutional Networks (GCN)
+
+<br>
+## Key concepts:
+- Compute graph
+- Message passing
+- Layers
+
+---
+# Compute Graphs in GCNs
+
+.center[<img src="assets/images/GraphML Class-3.png" alt="GraphML Class" style="width:70%">]
+
+## This graph determines how we aggregate information from neighbors
+
+.footnote[From https://web.stanford.edu/class/cs224w/slides/03-GNN1.pdf]
+
+---
+# Message passing
+
+.center[<img src="assets/images/GraphML Class-4.png" alt="GraphML Class" style="width:70%">]
+
+## You can just run backpropagation through all the aggregation neurons!
+
+.footnote[From https://web.stanford.edu/class/cs224w/slides/03-GNN1.pdf]
+
+
+---
+# GCN layers
+
+.center[<img src="assets/images/GraphML Class-5.png" alt="GraphML Class" style="width:40%">]
+
+### In GNNs we refer to degrees of separation as "hops"
+
+2 layers = 2-hop aggregation for each node
+
+## More layers = information from further away in the graph --> MORE ISN'T ALWAYS BETTER
+
+.footnote[From https://web.stanford.edu/class/cs224w/slides/03-GNN1.pdf]
+
+---
+# GCNs are generalized CNNs
+
+<br>
+<br>
+## GCNs are basically more general CNNs
+
+<br>
+### In CNNs: neighborhood is defined by pixels (every node has 8 neighbors)
+
+<br>
+### In GCNs: neighborhood is defined by edges
+
+---
+# Graph Attention Networks (GAT)
+
+<br>
+<br>
+<br>
+## Not every neighbor is equally important
+
+<br>
+## Attention is all you need!
+
+---
+# And many more...
+
+<br>
+<br>
+<br>
+## There are many more GNN architectures
+
+<br>
+## But we don't have time to cover them all today
+
+---
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+# 5. Running GraphML models
+
+---
+# How to run them
+
+<br>
+### PyTorch Geometric is the main library for GNNs
+.center[<img src="https://raw.githubusercontent.com/pyg-team/pyg_sphinx_theme/master/pyg_sphinx_theme/static/img/pyg_logo.png" alt="GraphML Class" style="width:10%">]
+
+<br>
+### Great tutorials and examples available:
+
+<br>
+https://pytorch-geometric.readthedocs.io/en/latest/get_started/colabs.html
+
+
+---
+
+# Thanks for the attention!
+
+### Let me know if you have any questions!
+
