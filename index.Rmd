@@ -522,6 +522,42 @@ lectureName <- "Week 09 - Lecture: Temporal Networks"
 `r make_overview(overview, path, slidedeckFile, lectureName)`  
 
 
+                                                          
+<!-- Week 11 -- Lab: Temporal networks -->                   
+```{r, include = FALSE}                                      
+overview <- matrix(c(                                        
+"friendship_dataset", "friendship dataset",                  
+"models", "modeling",                                        
+"interpret", "interpret function",                           
+"SNA4DS exam", "SNA4DS exam"                                 
+), byrow = TRUE, ncol = 2) |>                                
+as.data.frame() |>                                           
+setNames(c("name", "description"))                           
+                                                          
+slidedeckFile <- "Lab_temporalSNA"                           
+lectureName <- "Week 11 -- Lab: Temporal networks"           
+```                                                          
+                                                          
+`r make_overview(overview, path, slidedeckFile, lectureName)`
+
+
+<!-- Week 11 -- Lecture: Graph Machine Learning -->                    
+```{r, include = FALSE}                                                
+overview <- matrix(c(                                                  
+"Menu", "Topics covered in today's lecture",                           
+"stats_to_ml", "Transition from statistical models to machine learning"
+), byrow = TRUE, ncol = 2) |>                                          
+as.data.frame() |>                                                     
+setNames(c("name", "description"))                                     
+                                                                    
+slidedeckFile <- "Week11-Lecture-GraphML"                              
+lectureName <- "Week 11 -- Lecture: Graph Machine Learning"            
+```                                                                    
+                                                                    
+`r make_overview(overview, path, slidedeckFile, lectureName)`   
+
+
+
 
 
 
