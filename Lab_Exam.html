@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>SOCIAL NETWORK ANALYSIS for DATA SCIENTISTS</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Roger &amp; Claudia" />
+    <script src="assets/header-attrs-2.30/header-attrs.js"></script>
+    <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="assets/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="assets/tile-view-0.2.6/tile-view.js"></script>
+    <link href="assets/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="assets/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra_fit-screen-0.2.6/fit-screen.js"></script>
+    <link href="assets/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="assets/panelset-0.3.0/panelset.js"></script>
+    <script src="assets/fabric-4.3.1/fabric.min.js"></script>
+    <link href="assets/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="assets/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="assets/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script src="assets/xaringanExtra-webcam-0.0.1/webcam.js"></script>
+    <script id="xaringanExtra-webcam-options" type="application/json">{"width":"200","height":"150","margin":"1em"}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"c697500f7e2146368e50b4d3a774ba36","expires":1}</script>
+    <script src="assets/himalaya-1.1.0/himalaya.js"></script>
+    <script src="assets/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="assets/editable-0.2.6/editable.js"></script>
+    <script src="assets/mark.js-8.11.1/mark.min.js"></script>
+    <link href="assets/xaringanExtra-search-0.0.1/search.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-search-0.0.1/search.js"></script>
+    <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"bottom-left","caseSensitive":false,"showIcon":false,"autoSearch":true}) })</script>
+    <script src="assets/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="assets/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="assets/css/apron.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/descartes.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/tachyons.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/xaringan-extra.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/RL-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS_effects.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/kleuren.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[SOCIAL NETWORK ANALYSIS&lt;br&gt;for DATA SCIENTISTS]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[LAB: Exam / Q&amp;A .small-caps.font70[(lab] .font70[Week 14)]]]
+  ]
+
+&lt;br&gt;
+.f-abel.White-inline[Your lecturer: Roger &amp; Claudia]&lt;br&gt;
+.f-abel.White-inline[Playdate: December 2, 2025]
+
+
+&lt;!-- setup options start --&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.highlight-last-item &gt; ul &gt; li, 
+.highlight-last-item &gt; ol &gt; li {
+  opacity: 0.5;
+}
+
+.highlight-last-item &gt; ul &gt; li:last-of-type,
+.highlight-last-item &gt; ol &gt; li:last-of-type {
+  opacity: 1;
+
+.bold-last-item &gt; ul &gt; li:last-of-type,
+.bold-last-item &gt; ol &gt; li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+&lt;/style&gt;
+
+&lt;style type="text/css"&gt;
+.remark-inline-code {
+  background: #F5F5F5;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.inverse-red, .inverse-red h1, .inverse-red h2, .inverse-red h3, .inverse-red a, inverse-red a &gt; code {
+	border-top: none;
+	background-color: red;
+	color: white; 
+	background-image: "";
+}
+
+.inverse-orange, .inverse-orange h1, .inverse-orange h2, .inverse-orange h3, .inverse-orange a, inverse-orange a &gt; code {
+	border-top: none;
+	background-color: orange;
+	color: black; 
+	background-image: "";
+}
+
+.tab{
+  display: inline-block;
+  margin-left: 40px;
+}
+
+.tab1{tab-size: 2;}
+.tab2{tab-size: 4;}
+.tab3{tab-size: 6;}
+.tab4{tab-size: 8;}
+
+&lt;/style&gt;
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.grid-2-2 {
+  display: grid;
+  height: calc(80%);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1em;
+  padding: 1em;
+}
+&lt;/style&gt;
+
+&lt;!-- setup options end --&gt;
+
+---
+class: bg-Black course-logo center
+
+background-image: url(assets/images/question-2415069_1920.png)
+background-size: contain
+background-color: #000000
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.font300.Orange-inline.f-caveat.b[Any SNA4DS-related questions?]
+
+---
+class: course-logo
+layout: true
+
+---
+name: frontpage
+description: exam frontpage
+
+.scroll-box-24[
+.center[![](assets/images/resitQs/Resit 2020-2021_2_01.png)]
+]
+
+---
+name: best_model
+description: best model
+
+.scroll-box-24[
+.center[![](assets/images/resitQs/Resit 2020-2021_2_04.png)]
+]
+
+???
+netlm (QAP linear model) since the dependent network is valued
+---
+
+.scroll-box-24[
+.center[![](assets/images/resitQs/version2.png)]
+]
+
+???
+netogit
+---
+
+.scroll-box-24[
+.center[![](assets/images/resitQs/version3.png)]
+]
+
+???
+CUG for reciprocity and transitivity
+---
+name: application
+description: application to a field
+
+.scroll-box-24[
+.center[![](assets/images/resitQs/Resit 2020-2021_2_05.png)]
+]
+
+---
+name: walktrap
+description: application to a field
+
+.scroll-box-24[
+.center[![](assets/images/resitQs/Resit 2020-2021_2_06.png)]
+
+&lt;br&gt;
+With this network, you determine the communities using a walktrap algorithm. Before running this algorithm, what do you already know about the community vertex 29 (the vertex in the top right of the plot) will be a member of?
+]
+
+???
+The walktrap algorithm works by repeating short random walks and keep track which communities the walks tend to stay inside. Any walk from 29 will tend to dissapate into the graph and rarely come back to 29, since 29 is connected by only a single edge (to 28). As a result, 29 will end up in a community of its own (so, with only itself as a member).
+---
+name: friendships
+description: fewer friends than my friends
+
+.scroll-box-24[
+.center[![](assets/images/resitQs/Resit 2020-2021_2_07.png)]
+]
+
+---
+
+The basic logic can be described simply.
+
+If there are some people with many friendship ties and others with few (which is to be expected in most friendship networks), those with many ties show up disproportionately in sets of friends. For example, those with 40 friends show up in each of 40 individual friendship networks and thus can make 40 people feel relatively deprived, while those with only one friend show up in only one friendship network and can make only that one person feel relatively advantaged. Thus, it is inevitable that individual friendship networks disproportionately include those with the most friends.
+
+In lingo: this is due to the skewness of the degree distribution in this undirected graph.
+
+---
+name: stress
+description: stress centrality
+
+You work for a local government, in a job where you are responsible for the sewage system. In the Corona times, budgets are limited, since the government spends a considerable part of its budget to support businesses that had to close as part of the lockdowns in 2020.
+
+Given the limited budget, you want to identify the pipes that are most likely to experience cracks or deterioration, due to the flow of the sewage water (which has also increased during the Corona epidemia). Unfortunately, you have no sensors in the sewage pipes that allow you top automatically keep track of the state of each pipe.
+
+Rather, you realize that SNA can help you identify which pipes experience the highest strain as a result the sewage water flow. For simplicity, assume that this is the only relevant variable for now (in a actual analysis, you would also include the material the pipe is made of, it age, its angle, etc.).
+
+Which centrality measure (discussed in the course) finds you the pipe that is likely to be most affected by sewage water flow (with respect to this single objective)? Carefully explain why.
+
+???
+Stress centrality, as that is the spot that people will pass by the most, assuming sewage water travel mostly through the shortest routes, which is a reasonable assumption). Stress centrality captures the vertex (here: a pipe) that is most visited. Here, pipes are the vertices, and the edges and the connections between them.
+
+If pipes are seen as edges, rather than vertices, the correct answer would be "edge stress centrality."
+---
+name: pagerank
+description: pagerank centrality
+
+You work for a local government, in a job where you are responsible for the sewage system. In the Corona times, budgets are limited, since the government spends a considerable part of its budget to support businesses that had to close as part of the lockdowns in 2020.
+
+Given the limited budget, you want to identify the pipes that are most likely to experience cracks or deterioration, due to the flow of the sewage water (which has also increased during the Corona epidemia). Unfortunately, you have no sensors in the sewage pipes that allow you top automatically keep track of the state of each pipe.
+
+Rather, you realize that SNA can help you identify which pipes experience the highest strain as a result the sewage water flow. For simplicity, assume that this is the only relevant variable for now (in a actual analysis, you would also include the material the pipe is made of, it age, its angle, etc.).
+
+Which centrality measure (discussed in the course) finds you the pipe that is likely to be most affected by sewage water flow (with respect to this single objective)? Carefully explain why.
+
+???
+
+This is the process that is underlying pagerank: authoritative websites point to each other, less authoritative websites also point to the authoritative websites (and to each other).
+---
+name: conference
+description: temporal data
+
+.panelset[
+
+.panel[.panel-name[Conference]
+
+.scroll-box-24[
+.font90[
+ataset: conference
+
+The dataset is network data of interactions of 75 academists at a scientific conference. The actual temporal network dataset is called "conference_nw". Data were automatically collected through RFID tags (ie., wearable badges that detect the presence of other badges within 0.5 metre distance). All interactions were measured per 1/10 of a second interval (so, time = 10 means that 1 second has passed).
+
+A [3p]
+The measurement started at 8.30am.
+At what time did the last interaction end? Round to the nearest quarter of an hour.
+
+B [3p]
+Which vertex represents Johnny Le (coded as "Le, Johnny")?
+
+C [6p]
+At 10:00am coffee was served in a separate meeting room. About half of the conference participants go there, including Johnny Le.
+How many people does Johnny Le interact with between 10:00am and 10:30am?
+How many interactions occur overall within this interval between 10:00am and 10:30am?
+If everybody who goes to the coffee serving interacts with at least one other person, how many conference participants went to the coffee room?
+
+D [8p]
+Make a plot of the evolution of density of the conference network over the entire observation period. For this purpose, collapse the network into slices of 15 minutes, at 5 minute intervals (so, you plot the density of intervals 0-15, 5-20, 10-25, et cetera., all the way until the end)
+]
+]
+
+]
+
+
+.panel[.panel-name[R code]
+```
+A
+max(as.data.frame(conference_nw)$terminus)/10/60/60 # 9 hours and 15 mins -&gt; 17:45h
+
+B # then see where Johnny is: 31
+SNA4DS::extract_all_vertex_attributes(networkDynamic::network.collapse(conference_nw))
+
+C
+# How many interactions occur overall within this interval?
+start &lt;- 90*60*10
+end &lt;- 120*60*10
+coffee &lt;- networkDynamic::network.collapse(conference_nw, onset = start, terminus = end)
+coffee # you can see that there were 326 edges from the output
+coffee_socio &lt;- network::as.sociomatrix(coffee)
+sum(coffee_socio) # also 326
+
+# How many people does Johnny interact with between 1000 and 1030?
+rowSums(coffee_socio)[31] # he interacts with 11 people
+
+# If everybody who goes there interacts with at least one other person, how many
+# conference participants went to the coffee room?
+sum(rowSums(coffee_socio) &gt; 0) # 28 people
+# or via
+table(rowSums(coffee_socio))
+
+D
+plot(tsna::tSnaStats(conference_nw, snafun = "gden", time.interval = 5*60*10, aggregate.dur = 15*60*10))
+```
+]
+
+
+
+]
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="assets/remark-latest.min.js"></script>
+<script src="assets/js/remark-zoom.js"></script>
+<script src="assets/js/macros.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "atom-one-light",
+  "highlightLines": true,
+  "highlightSpans": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": "- %current% -",
+  "ratio": "16:9",
+  "navigation": {
+    "scroll": true
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -557,6 +557,26 @@ lectureName <- "Week 11 -- Lecture: Graph Machine Learning"
 `r make_overview(overview, path, slidedeckFile, lectureName)`   
 
 
+<!-- Week 14 -- Lab: Exam Prep -->                           
+```{r, include = FALSE}                                      
+overview <- matrix(c(                                        
+"frontpage", "exam frontpage",                               
+"best_model", "best model",                                  
+"application", "application to a field",                     
+"walktrap", "application to a field",                        
+"friendships", "fewer friends than my friends",              
+"stress", "stress centrality",                               
+"pagerank", "pagerank centrality",                           
+"conference", "temporal data"                                
+), byrow = TRUE, ncol = 2) |>                                
+as.data.frame() |>                                           
+setNames(c("name", "description"))                           
+                                                        
+slidedeckFile <- "Lab_Exam"                                  
+lectureName <- "Week 14 -- Lab: Exam Prep"                   
+```                                                          
+                                                        
+`r make_overview(overview, path, slidedeckFile, lectureName)`
 
 
 
