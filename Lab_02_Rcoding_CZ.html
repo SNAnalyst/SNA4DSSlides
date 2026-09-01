@@ -27,7 +27,7 @@
     <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
     <script src="assets/xaringanExtra-webcam-0.0.1/webcam.js"></script>
     <script id="xaringanExtra-webcam-options" type="application/json">{"width":"1050","height":"787.5","margin":"1em"}</script>
-    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x01d5159d1994dc9995c79cc75d77f67","expires":1}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"c567b9a0363649da886a0e9d220f8cdf","expires":1}</script>
     <script src="assets/himalaya-1.1.0/himalaya.js"></script>
     <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
     <script src="assets/editable-0.2.6/editable.js"></script>
@@ -35,6 +35,12 @@
     <link href="assets/xaringanExtra-search-0.0.1/search.css" rel="stylesheet" />
     <script src="assets/xaringanExtra-search-0.0.1/search.js"></script>
     <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"bottom-left","caseSensitive":false,"showIcon":false,"autoSearch":true}) })</script>
+    <script src="assets/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"<i class=\"fa fa-clipboard\"><\/i>","success":"<i class=\"fa fa-check\" style=\"color: #90BE6D\"><\/i>","error":"<i class=\"fa fa-times-circle\" style=\"color: #F94144\"><\/i>"})</script>
+    <link href="assets/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+    <link href="assets/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
     <link href="assets/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
@@ -73,12 +79,12 @@ background-color: #000000
 
 ***
 
-.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[R programming .small-caps.font70[(lecture] .font70[01B)]]]
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[R programming .small-caps.font70[(lecture] .font70[LAB 02)]]]
 ]
 
 &lt;br&gt;
 .f-abel.White-inline[Your lecturer: Claudia Zucca]&lt;br&gt;
-.f-abel.White-inline[Playdate: September, 1st, 2026]
+.f-abel.White-inline[Playdate: September, 4th, 2024]
 
 
 &lt;!-- setup options start --&gt;
@@ -113,13 +119,6 @@ background-color: #000000
 }
 &lt;/style&gt;
 
-&lt;script&gt;
-var element = document.getElementById("myCode");
-Shiki.highlight(element);
-&lt;/script&gt;
-
-
-
 
 
 &lt;!-- setup options end --&gt;
@@ -127,7 +126,7 @@ Shiki.highlight(element);
 ---
 name: intro_r
 description: Intro to R and RStudio
-# R &amp; RStudio 
+# Topic for today!
 
 .flex.h-50[
 .w-50[
@@ -135,435 +134,30 @@ description: Intro to R and RStudio
 .w-40[
 ![](assets/images/RStudio.png)]]
 
----
-# Why R?
-&lt;br&gt;
-### R is a programming language specifically thought for 
-- data analysis 
-- statistics
+
 
 
 
 ---
-# Why R?
-&lt;br&gt;
-### R is a programming language specifically thought for 
-- data analysis 
-- statistics
-
-### It is also quite similar to Python in many levels
-- if you are a Pythonist you will 'translate' quickly
-- you can do in R anything that you usually do in Python
-
-
-
----
-# Why R?
-
-&lt;br&gt;
-
-### R is a programming language specifically thought for 
-
-- data analysis 
-- statistics
-
-
-### It is also quite similar to Python in many levels
-
-- if you are a Pythonist you will 'translate' quickly
-- you can do in R anything that you usually do in Python
-
-## R has already more packages for statistical analysis
-This software choice makes your life easier.
-
----
-name: mentimeter
-description: Programming Survey
-background-image: url(assets/images/)
-background-size: 450px
-background-position: 50% 50%
-# How about your programming skills?
-&lt;br&gt;
- 
-www.menti.com
-code:   8767 4309
-
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-
-
-
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+# Any questions?
 
 
 
 
 
 ---
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+# Shall we check the homeplay?
 
-background-image: url(assets/images/Rstudio_layout.png)
-background-size: 900px
-background-position: 50% 60%
-# Does your Rstudio look like this?
-
----
-name: Rstudio_installation
-description: R studio installation and setup
-# Rstudio set up 
-
-&lt;br&gt;
-
-&lt;br&gt;
-
-## if it doesn't look like this, run the `snaverse::rstudiofy()` function?
-
-&lt;br&gt;
-## If you have problems, errors or warning - move on with a manual set up
-
----
-
-background-image: url(assets/images/Rstudio_layout1.png)
-background-size: 900px
-background-position: 50% 60%
-# R studio set up - manual
----
-
-background-image: url(assets/images/Rstudio_layout2.png)
-background-size: 900px
-background-position: 50% 60%
-# R studio set up - manual 
-
-
----
-name: snaverse_setup
-description: snaverse setup
-# Have you installed the snaverse?
-
-&lt;br&gt;
-
-## `snaverse::packagefy()`
-
-&lt;br&gt;
-
-## `snaverse::snaversify()`
-
-
----
-# Have you installed GERGM?
-
-&lt;br&gt; 
-
-## If it did not work in the regular installation, try:
-
-&lt;br&gt;
-## `install.packages("remotes")`
-## `remotes::install_github("czucca/GERGM", dependencies = TRUE, force = TRUE)`
-&lt;br&gt;
-
-## If it doesn't work, emails us at `SNA4DS@jads.nl`
-
-(especially mac users)
-
----
-# RTFM
-&lt;br&gt;
-## Read the friendly manual
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-## .red[Do not ask for help, unless you went through all the documentation by yourself and you failed]
 
 
 
 ---
-# `snaverse` suite
-
-&lt;br&gt;
-
-## snaverse - The sna package to rule them all ;-)
-
-&lt;br&gt;
-
-### Written by Roger and Claudia for the SNA4DS class
-
-&lt;br&gt;
-
-
-### Attempting to make this class more enjoyable :)
-
-## composed of 3 packages
-
----
-# `sna4tutti`
-
-&lt;br&gt; 
-
-## It contains 9 interactive tutorials
-
-&lt;br&gt;
-
-### It makes easier learning SNA4DS since 
-
-- you study the theory 
-- immediately get to practice it
-
-
----
-# `snafun`
-
-&lt;br&gt;
-
-## Doing analysis of dyadic data can be quite challenging
-
-## We introduced a set of function that will make your life much easier
-
-## without `snafun` you would have to navigate at least three packages everyday
-
-- `igraph`
-- `sna`
-- `network`
-- ...
----
-# `SNA4DSData`
-
-&lt;br&gt;
-
-It contains the Data tha we will use for...
-
-* Tutorials
-* Demostration
-* Examples 
-* Homeplays
-* Class play
-
-
-... during the semester
-
-You can also use it to practice for the exams
-
----
-background-image: url(assets/images/orion_ver_1.jpg)
-background-size: 450px
-background-position: 50% 50%
-# Any questions about the snaverse?
-
-
-
----
-name: tutorials
-description: Info about tutorials
-# Opening Tutorials 
-
-&lt;br&gt;
-
-&lt;br&gt;
-
-
-## `sna4tutti::open_sna4tutti_tutorials()`
-
-
-## similar to the bootcamp ones
-
-
-&lt;br&gt;
-
-
-## Any Problems/Questions?
-
-
-
----
-# Solving Possible problems you can encounter
-&lt;br&gt;
-## The tutorial does not open
-
-### .Red-inline[1) Close R studio] 
-
-### .Red-inline[2) Restart R  studio]
-
-### .Red-inline[3) Try again]
-
-## Still not working? 
-
-### .Red-inline[4) Clear the cache]
-
-## Still not working? 
-
-### .Red-inline[5) Contact us]
-
----
-# Solving Possible problems you can encounter
-
-&lt;br&gt;
-
-## Tutorials have a system to authomatically report errors
-
-In case there is an error, you will see it in two places
-
-- where the error takes place in the tutorial flow
-
-- at the end of the tutorial
-
-## If you see this, copy and paste the error code and email it to us
-
-
----
-name: bug_reporting
-description: Bug Reporting
-# Bug reporting
-&lt;br&gt;
-
-## First complete version of the suite
-
-## .red[Still, this package is work in progress]
-
-## You might find some bugs as code or text typos
-
-## If you do, please report them to us so we can fix them
-
-### SNA4DS@jads.nl
-
----
-# Best Practices
-&lt;br&gt;
-
-## - Do not run code in the Rstudio console if you are running a tutorial
-
-## - If you right click on the R icon you can open more than one R window at the same time, 
-
-## - Run tutorials and code in different windows
-
-## - Your code should be replicable, hence use the click and point options in R as little as humanly possible
-
-
-
----
-background-image: url(assets/images/hex-tidyverse.png)
-background-size: 250px
-background-position: 50% 50%
-
-# Forbidden Items
-&lt;br&gt;
-- attaching Libraries 
-
-### `library(igraph)` 
-&lt;br&gt;
-
-- using the suite of packages tidyverse
-
-### `library(dplyr)`
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-
-
-## DO NOT DO THAT! .red[You will be downgraded both in the exams and in the project.]
-
----
-# JUST DO IT 
-&lt;br&gt;
-&lt;br&gt;
-### prefix packages
-### `igraph::degree(net)` OR `stats::lm(Ovar ~ Pred)`
-
-&lt;br&gt;
-### do data analysis and manipulation in R base
-
-### `var$col1` OR `Var[,1]`
-### etc...
-
-## .red[If you attach libraries and/or use tidyverse we will mark you down]
-
-
----
-name: tutorial1
-description: T01 programming in R
-# Tutorial 01
-
-## Intro to programming in R
-
-### It has been written with two main purposes
-
-- Giving you an overview of the programming skills you need in this class
-- Getting you started with them
-
-## It will take you between 1 and 3 hours to complete the tutorial 
-
-## It depends on your programming level and your R level
-
-### It's not difficult!
-
-### Please do it carefully. -- No LLMs cannot code everything for you!
-
----
-# Topics in the tutorial (1)
-&lt;br&gt;
-- Checking installation
-- Operators, Variables and Conditions
-- Make your code readable
-- R Objects
-- Looking for help
-- Missing Data
-- Data Structures
-- Reading files into R
-
-
-
----
-# Topics in the tutorial (2)
-&lt;br&gt;
-- Inspecting Data
-- Data Manipulation
-- Packages in R
-- Functions
-- Loops
-- The `apply` family
-- basics R graphics
-
----
-# Tutorial 01 is a companion 
-&lt;br&gt;
-## Refer to it everytime you have to code something in R
-&lt;br&gt;
-## There should be everything you need
-&lt;br&gt;
-## No need to remember things if you know where to find them!
-&lt;br&gt;
-## .red[BUT DO FIND THEM!]
-
----
-# For next week:
-&lt;br&gt;
-
-## - Tutorial 1
-## - Tutorial 2
-## - Homeplay data manipulation in R
-## - Homeplay descriptives
-
-&lt;br&gt;
-&lt;br&gt;
-# You can do it! :)
-
----
-name: Disclaimer
-description: Keep up with the material
-background-image: url(assets/images/car-racing.jpg)
-background-size: 450px
-background-position: 50% 60%
-# Speed Disclaimer
-&lt;br&gt; 
-## We start FAST -- keep up with the speed!
-
-
-
-
----
-background-image: url(assets/images/pet-cat-green.jpg)
+background-image: url(assets/images/topo.jpg)
 background-size: 550px
 background-position: 50% 60%
-## See you next week!
+## See you next week!!
 
 
 ---
@@ -578,8 +172,6 @@ background-position: 50% 60%
 <script src="assets/remark-latest.min.js"></script>
 <script src="assets/js/remark-zoom.js"></script>
 <script src="assets/js/macros.js"></script>
-<script src="https://unpkg.com/shiki"></script>
-<script src="assets/js/"></script>
 <script>var slideshow = remark.create({
   "highlightStyle": "atom-one-light",
   "highlightLines": true,
