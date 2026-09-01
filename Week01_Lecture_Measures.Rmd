@@ -703,6 +703,30 @@ snafun::plot(gamenet, layout = coor, vertex.size = betw * 40)
 .font70[.center[.smallcaps[Node size is proportional to its betweenness centrality]]]
 
 ---
+
+# Betweenness as driver of success
+
+Imagine an artist with ties to
+
+* both Nashville and the pop scene
+* music industry and Hollywood
+* older generation and younger generation collaborators
+* a variety of cultural and social groups
+
+These are groups that are relatively weakly connected to each other.
+
+`r arrow_right()` This opens up a giant audience other artists can only dream of
+
+
+---
+class: bg-Black
+layout:false
+
+background-image: url(assets/images/dolly3.png)
+background-size: contain
+
+
+---
 name: centrality-interpretation
 description: Interpretation
 class: course-logo
