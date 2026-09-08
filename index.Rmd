@@ -192,3 +192,4 @@ lectureName <- "Week 02 -- Lecture: Intro to Statistical Network Modeling"
 `r make_overview(overview, path, slidedeckFile, lectureName)`
 
 
+# End of current slide collection
