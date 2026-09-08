@@ -165,34 +165,6 @@ lectureName <- "Week 01 -- Lecture: Network measures"
 `r make_overview(overview, path, slidedeckFile, lectureName)`
 
 
-<!-- Week 02 -- Lecture: Intro to Statistical Network Modeling -->
-```{r, include = FALSE}
-overview <- matrix(c(
-"menu", "Menu",
-"assumption", "Our assumptions from here on out",
-"role", "The role of statistics",
-"models_in_course", "Overview of the statistical models in this course",
-"toblerslaw", "Tobler's First Law",
-"socinf", "Social influence on a network",
-"nam", "Network autocorrelation model",
-"weightmatrix", "Weight matrix",
-"communication", "Communication",
-"comparison", "Comparison",
-"structuralequivalence", "Structural equivalence",
-"sedist", "snafun::d_structural_equivalence",
-"lnam", "stat_nam function"
-), byrow = TRUE, ncol = 2) |>
-as.data.frame() |>
-setNames(c("name", "description"))
-
-slidedeckFile <- "Week02_Lecture_Stats"
-lectureName <- "Week 02 -- Lecture: Intro to Statistical Network Modeling"
-```
-
-`r make_overview(overview, path, slidedeckFile, lectureName)`
-
-
-
 
 <!-- Week 02 -- Lecture: Intro to Statistical Network Modeling -->
 ```{r, include = FALSE}
@@ -214,10 +186,10 @@ overview <- matrix(c(
 as.data.frame() |>
 setNames(c("name", "description"))
 
-slidedeckFile <- "Week02_Lecture_Stats"
+slidedeckFile <- "Week02_Lecture_stats"
 lectureName <- "Week 02 -- Lecture: Intro to Statistical Network Modeling"
 ```
 
 `r make_overview(overview, path, slidedeckFile, lectureName)`
 
-# End of current slide collection
+
