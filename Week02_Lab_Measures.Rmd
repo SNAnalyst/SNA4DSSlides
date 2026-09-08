@@ -3,7 +3,7 @@ title: "SOCIAL NETWORK ANALYSIS<br>for DATA SCIENTISTS"
 topic: "LAB: Network Measures"
 lecture_no: "Week 02"
 author: "Roger"
-playdate: "September 09, 2025"
+playdate: "September 09, 2026"
 output:
   xaringan::moon_reader:
     css:
@@ -296,11 +296,7 @@ description: Transitivity
 
 *A friend of a friend is also my friend*
 
-This is *pure transitivity*, but it often doesn't happen that strongly.
-
---
-
-Often more accurate:
+More accurately:
 
 > If John is friends with Susan and Susan is friends with Ali, then it is 
 *more likely* that Ali and John are friends than not.
@@ -358,7 +354,7 @@ $Transitivity = \frac{no. closed  triads}{no. paths  of  length  2}$
 
 (so: the proportion of friends-of-my-friend who are **also** my friend)
 
-This is often also called the "clustering coefficient".
+This is also called "clustering coefficient".
 
 Transitivity = 1 implies perfect transitivity<br>
 Transitivity = 0 implies no closed triads
@@ -417,27 +413,7 @@ Here, we count the proportion of triads with at least 2 edges, that have 3 edges
 
 # Transitivity
 
-Recall that 
-
-```{r tra1, echo = TRUE}
-snafun::g_transitivity(blog1)
-```
-
-What does this tell us about the network?
-
-???
-
-Really high. Shows strong in-crowd: I connect to my friend and my friend's 
-friend is also my friend. 
-
----
-
-# Transitivity
-
-In *directed* networks, we need to take into account in which direction the 
-friendship flows.
-
-However, it is common to consider directed ties _as being undirected_ when 
+In *directed* networks, it is common to consider directed ties _as being undirected_ when 
 determining transitivity.
 
 `snafun::g_transitivity` and `igraph::transitivity` consider
@@ -487,32 +463,27 @@ igraph::sizes(walk)
 
 ## Modularity
 
-A moderately useful measure of the fit of the partitioning.
-
-<br>Partition the set of vertices into _c_ communities. 
-Modularity measures how good this division is by comparing within-community edges 
-with between-community edges as follows for an unweighted undirected graph:
+A measure of the fit of a partitioning. Partition the set of vertices into 
+_c_ communities. 
+Compares within-community edges with between-community edges for an unweighted undirected graph:
 
 $$Q = \sum_{i = 1}^{c} (e_{i} - a_{i}^2)$$
 
 where $e_{ii}$ is the fraction of all edges that remain within community _i_
 and $a_{i}^2$ is the fraction of all between community _i_ and other communities. 
-
-
-and for a directed graph:
+For a directed graph:
 
 $$Q = \sum_{i = 1}^{c} (e_i - a_{i}^{in} * a_{i}^{out})$$
 
 
-
-- The modularity for unweighted and undirected graphs lies in the range 
-${\displaystyle [-1/2,1]}$. For unweighted and directed graphs also about this range.
+- Modularity is between ${\displaystyle [-1/2,1]}$ (or ${\displaystyle [-1,1]}$ 
+for graphs with negative weights).
 
 - Modularity is positive if the number of edges within communities exceeds the number 
 expected in a graph with the same number of vertices and where each vertex keeps 
 its degree (but edges are randomly attached). 
 
-- In practice, a value above about 0.3 tends to indicate a good community structure 
+- In practice, a value above about 0.3 indicates a good community structure 
 in a graph.
 
 .font70[
@@ -889,13 +860,14 @@ the distance between two locations  = geodesic between these vertices
 .font50[.bottom[[Boeing, 2019, Urban Street Network Analysis in a Computational Notebook, Region 6(3): 39-51.](https://openjournals.wu-wien.ac.at/region/paper_278/278.html)]]
 ---
 class: bg-Black
+<!-- skip -->
 
 <br>
 ## .White-inline[.center[please go to]]
 
 ## .Gold-inline[.center[www.menti.com]]
 
-## .center[.White-inline[code:] .Gold-inline[49197653]]
+## .center[.White-inline[code:] .Gold-inline[45911523]]
 
 
 
@@ -1151,6 +1123,8 @@ class: course-logo bg-Black
 background-image: url(assets/images/pexels-olya-kobruseva-5428828.jpg)
 background-size: contain
 
+<!-- skip -->
+ 
 .font400.yellow.center-image[QUESTIONS?]
 
 

@@ -1,0 +1,233 @@
+---
+title: "Homeplay for (intro to) Statistical Network Models"
+output: 
+  html_document: 
+    toc: true
+    toc_float:
+      collapsed: true
+      smooth_scroll: true
+      number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  include = FALSE,
+  eval = FALSE
+)
+
+data(fifa2006, package = "SNA4DSData")
+data(fifa2015, package = "SNA4DSData")
+data(louis, package = "SNA4DSData")
+```
+
+## Louisiana
+
+Open the dataset `louis` from the `SNA4DSData` package. 
+
+The network describes the spatial adjacency (ie: do two counties share a border)
+among the counties. The data were collected just before the 1960 elections in Louisiana.
+
+You will see that the vertices have several attributes:
+
+* democratic : the proportion of support in the county for democratic presidential candidate Kennedy.
+* Intercept : a vector of ones, needed to get an intercept in the NAM model
+* perc_black : percentage black in the county
+* perc_cath: percentage catholic
+* perc_urban: percentage urban
+* black_political_equality: measure of black political equality in the county
+
+Our interest in this exercise is in modeling the extent to which political
+preference seem to cluster between adjacent counties. This makes the
+variable 'democratic' the dependent variable for this analysis.
+We also want to see if counties that have mutually equivalent locations in
+the spatial network tend to vote similar.
+
+1. Create a Weight matrix based on the adjacency matrix. 
+Make sure to row normalize the matrix.<br>
+(NOTE: you can use the cheatsheet to find the 
+appropriate functions, in this case the function to create 
+the adjacency matrix).
+
+1. Run an autocorrelation model where democratic preference 
+is regressed on "perc_black", "perc_cath", "perc_urban", and "black_political_equality."
+<br>(do not forget the intercept)
+
+1. Interpret the findings
+
+```{r hp06_remedy01}
+data(louis, package = "SNA4DSData")
+attrs <- snafun::extract_all_vertex_attributes(louis)
+attrs <- attrs[, - which(colnames(attrs) %in% c("Intercept", "vertex.names"))]
+
+adj <- snafun::to_matrix(louis)
+w_adj <- adj/rowSums(adj)
+mod <- snafun::stat_nam(democratic ~ ., data = attrs, W = w_adj)
+summary(mod)
+```
+
+
+NOTE: Remember that you get access to an attribute using the 
+`snafun::extract_vertex_attribute`
+function. So `snafun::extract_vertex_attribute(louis, "perc_black")` gives you the
+vector with the variable `perc_black`.
+You can also extract all of the vertex attribute values into a data.frame using the
+function `snafun::extract_all_vertex_attributes`, so here you would use
+`snafun::extract_all_vertex_attributes(louis)` to get a data.frame with all of
+the vertex attributes values of the louis network.
+
+It is advisable to remove the attributes "vertex.names" and "Intercept" from the 
+resulting attributes data.frame, so they don't end up in the model.
+
+
+## FIFA
+
+(NOTE: this assignment might take some time to run--I suggest you make some tea
+or coffee to enjoy while you wait for the analysis to finish, if you have a
+slow-ish laptop. If you have a slow laptop, limit yourself to 100 or 200 replications.)
+
+For the second analysis, load the datasets `fifa2006` and `fifa2015`
+from `SNA4DSData`.
+
+The vertices in the fifa2006 network are the members of the standing committees
+in FIFA. The edges represent joint membership. So, an edge between i and j
+means that both i and j were member of the same standing committee inside
+FIFA in 2006.
+
+The fifa2015 represents the committee membership network for the year 2015.
+
+Let's look at the division of power inside Fifa in these two years.
+
+First, transitivity. At its core, transitivity reflects the tendency that
+"a friend of my friend is my friend". That means that if you and I are on a
+committee together, and I am also on a committee with Claudia, then you would
+be tempted to start working on a committee with Claudia as well.
+
+1. Calculate the transitivity for both of the networks.
+
+```{r hp06_remedy03}
+snafun::g_transitivity(fifa2006)
+snafun::g_transitivity(fifa2015)
+```
+
+2. Run a test to check if the transitivities of the two fifa networks are statistically
+significantly high or low. Control for network size and density.
+
+
+```{r hp06_remedy04}
+# condition on the density
+trans_f <- function(x, directed = FALSE) {
+  x <- snafun::fix_cug_input(x, directed = directed)
+  snafun::g_transitivity(x)
+}
+
+
+system.time(
+cug_trans_06 <- sna::cug.test(fifa2006, mode = "graph", 
+                              FUN = trans_f, 
+                              cmode = "edges", reps = 1000)
+)
+cug_trans_06
+
+
+system.time(
+cug_trans_15 <- sna::cug.test(fifa2015, mode = "graph", 
+                              FUN = trans_f, 
+                              cmode = "edges", reps = 1000)
+)
+cug_trans_15
+```
+
+3. You could argue that the previous test is insufficient, since committee 
+membership
+is very skewed among the fifa members most people have few memberships and some
+have very many.<br>
+Try: `hist(snafun::v_degree(fifa2006))` or `hist(snafun::v_degree(fifa2015))`.<br><br>
+Therefore, now run a test to check if the transitivities of the two fifa
+networks are statistically
+significantly high or low, controling for network size **and** degree distribution.
+<br>
+
+
+```{r fifahist}
+hist(snafun::v_degree(fifa2006),
+     breaks = 20,
+     main = "Degree distribution of Fifa in 2006", 
+     xlab = "Number of shared committees")
+hist(snafun::v_degree(fifa2015), 
+     breaks = 20,
+     main = "Degree distribution of Fifa in 2015", 
+     xlab = "Number of shared committees")
+```
+
+
+```{r hp06_remedy05}
+# condition on the dyad census
+betw_f <- function(x, directed = FALSE) {  # note: directed = FALSE!
+  x <- snafun::fix_cug_input(x, directed = directed)
+  snafun::g_centralize(x, measure = "betweenness", directed = directed)$centralization
+}
+
+system.time(
+cug_betw_06_ds <- sna::cug.test(fifa2006, 
+                                mode = "graph", FUN = betw_f, 
+                                cmode = "dyad.census", reps = 200)
+)
+cug_betw_06_ds
+
+system.time(
+cug_betw_15_ds <- sna::cug.test(fifa2015, 
+                                mode = "graph", FUN = betw_f, 
+                                cmode = "dyad.census", reps = 200)
+)
+cug_betw_015_ds
+
+```
+
+4. Interpret your findings.
+
+5. Let's also check if the distribution of advantageous positions in the
+administrative network is exceptionally high. In this case, calculate some
+centralization score (e.g., betweenness centralization) and compare that score
+with networks of similar size+density or of similar degree distribution.
+You can do this for both networks, or just take one, depending on how much
+time you are willing to wait for a result.<br><br>
+
+
+```{r}
+system.time(cug_betw_06 <- sna::cug.test(fifa2006,
+                                         FUN = sna::centralization,
+                                         FUN.arg=list(FUN = sna::betweenness),
+                                         mode="graph",
+                                         reps = 200,
+                                         cmode="edges"))
+
+system.time(cug_betw_15 <- sna::cug.test(fifa2015,
+                                          sna::centralization,
+                                          FUN.arg=list(FUN = sna::betweenness),
+                                          mode="graph",
+                                          reps = 200,
+                                          cmode="edges"))
+
+system.time(cug_betw_06_ds <- sna::cug.test(fifa2006,
+                                            FUN = sna::centralization,
+                                            FUN.arg=list(FUN = sna::betweenness),
+                                            mode="graph",
+                                            reps = 200,
+                                            cmode="dyad.census"))
+
+system.time(cug_betw_15_ds <- sna::cug.test(fifa2015,
+                                             sna::centralization,
+                                             FUN.arg=list(FUN = sna::betweenness),
+                                             mode="graph",
+                                             reps = 200,
+                                             cmode="dyad.census"))
+```
+
+
+
+6. interpret your findings.
+
+
+
+
