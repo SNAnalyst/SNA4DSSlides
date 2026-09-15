@@ -232,7 +232,7 @@ overview <- matrix(c(
 as.data.frame() |>
 setNames(c("name", "description"))
 
-slidedeckFile <- "Week03_lab_stats"
+slidedeckFile <- "Week03_Lab_stats"
 lectureName <- "Week 03 -- Lab:  Statistical Network Models"
 ```
 
