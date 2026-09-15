@@ -1,9 +1,9 @@
 ---
 title: "SOCIAL NETWORK ANALYSIS<br>for DATA SCIENTISTS"
 topic: "R programming"
-lecture_no: "LAB 02"
+lecture_no: "LAB 01"
 author: "Claudia Zucca"
-date: "September, 4th, 2024"
+date: "September, 9th, 2026"
 output:
   xaringan::moon_reader:
     css:
