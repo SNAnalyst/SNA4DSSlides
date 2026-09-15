@@ -21,11 +21,17 @@ RLslides::turn_to_pdf(tb, folder = "D:/Dropbox/R/eigen_packages/=git/SNA4DSSlide
 RLslides::make_index_code("D:/Dropbox/R/eigen_packages/=git/SNA4DSSlides/Week02_Lab_Measures.Rmd", "Week 02 -- Lab: Network measures")
 
 
-tb <- RLslides::xaringan_slide_urls("D:/Dropbox/R/eigen_packages/=git/SNA4DSSlides/Week02_Lecture_Stats")
+tb <- RLslides::xaringan_slide_urls("D:/Dropbox/R/eigen_packages/=git/SNA4DSSlides/Week02_Lecture_Stats.html")
 tb
 RLslides::turn_to_pdf(tb, folder = "D:/Dropbox/R/eigen_packages/=git/SNA4DSSlides/Week02_Lecture_Stats")
 RLslides::make_index_code("D:/Dropbox/R/eigen_packages/=git/SNA4DSSlides/Week02_Lecture_Stats.Rmd", "Week 02 -- Lecture: Intro to Statistical Network Modeling")
 
+
+
+tb <- RLslides::xaringan_slide_urls("D:/Dropbox/R/eigen_packages/=git/SNA4DSSlides/Week03_lab_stats.html")
+tb
+RLslides::turn_to_pdf(tb, folder = "D:/Dropbox/R/eigen_packages/=git/SNA4DSSlides/Week03_lab_stats")
+RLslides::make_index_code("D:/Dropbox/R/eigen_packages/=git/SNA4DSSlides/Week03_lab_stats.Rmd", "Week 03 -- Lab:  Statistical Network Models")
 
 
 

@@ -3,7 +3,7 @@ title: "SOCIAL NETWORK ANALYSIS<br>for DATA SCIENTISTS"
 topic: "LAB: Introduction to Statistical Modeling with Networks"
 lecture_no: "Week 03"
 author: "Roger"
-playdate: "September 16, 2025"
+playdate: "September 15, 2026"
 output:
   xaringan::moon_reader:
       # - assets/css/adirondack.css
@@ -85,6 +85,7 @@ remedy::remedy_opts$set(name = paste0("stats_07", "_"))
 
 data(louis, package = "SNA4DSData")
 data(fifa2006, package = "SNA4DSData")
+data(fifa2015, package = "SNA4DSData")
 load("assets/data/nam_mods.Rdata")
 load("assets/data/fifa_mods.Rdata")
 ```
@@ -212,8 +213,9 @@ background-position: 100% 0%
 background-size: cover
 background-color: #000000
 
-### .White-inline.font350.b[<br>Turn your<br>cameras on!]
+<!-- skip -->
 
+### .White-inline.font350.b[<br>Turn your<br>cameras on!]
 
 .footnote[[Credit](https://unsplash.com/@cwmonty)]
 
@@ -232,7 +234,7 @@ description: "Menu"
 
 1. Homeplay
 
-1. QAP findings
+1. NAM findings
 
 1. CUG findings and extension
 
@@ -248,10 +250,14 @@ background-position: 100% 0%
 background-size: cover
 background-color: #000000
 
+<!-- skip -->
+
 <br><br><br><br><br><br><br><br>
 .font300.Orange-inline.f-caveat.b[Any SNA4DS-related questions?]
 
 .footnote[[Credit](https://pixabay.com/illustrations/question-mark-pile-questions-symbol-2492009/)]
+
+
 
 ---
 class: bg-Black course-logo
@@ -301,19 +307,16 @@ description: Louisiana results
 
 <br>
 ```{r stats_07_03, echo = TRUE, eval = TRUE}
-adj <- snafun::to_matrix(louis)
-w_adj <- adj/rowSums(adj)
-
 mod <- snafun::stat_nam(democratic ~ perc_black + 
                           perc_cath + perc_urban + black_political_equality, 
-                          data = attrs, W = w_adj)
+                        data = attrs, W = louis)
 ```
 
 ]
 
 
 
-.panel[.panel-name[NAM Output]
+.panel[.panel-name[NAM Output: lag model]
 .font80[
 .limity500[
 ```{r stats_07_05, eval = TRUE, echo = FALSE}
@@ -326,80 +329,34 @@ summary(mod)
 ]
 
 
-
 ---
-name: pvalues
-description: Empirical <i>p</i>-values
 
-class: bg-Black
+.panelset[
 
-.center-image.font200.f-abel.orange[What again is a *p*-value and why do we need it?]
+.panel[.panel-name[R code NAM]
 
----
 
 <br>
-Two ways to computationally derive the empirical distribution of 
-statistics and parameter estimates:
+```{r stats_07_03b, echo = TRUE, eval = TRUE}
+mod2 <- snafun::stat_nam(democratic ~ perc_black + 
+                          perc_cath + perc_urban + black_political_equality, 
+                        data = attrs, W = louis, W2 = louis, model = "combined")
+```
 
-1. conditionally uniform graphs (CUG)
-1. quadratic assignment procedure (QAP)
-
---
-<br>
-****
-
-__CUG__ is a __random__ graph with specific overall traits (such as a given 
-size, number of edges, degree distribution, et cetera). 
-
-CUG is especially useful to test the significance of a specific network measure 
-for a single specific network.
-
---
-
-****
-
-__QAP__ generates graphs based on the *permutation of an actually __observed__ graph*. 
-This maintains some of the structure of the original graph and stays closer to 
-the "nature" of the observed network.
-
-It is not meant to generate networks, but to generate the empirical distribution of a 
-statistic, under a null hypothesis.
-
----
-class: bg-Black
-
-# .Gold-inline[Today's menu]
-
-<div class="grid-2-2">
-<div class="extension-tile tileview"><div>Homeplay</div></div>
-<div class="extension-tile panelset-tile animated flipInX"><div>What to<br>use when?</div></div>
-</div>
-
----
-name: table
-description: Which method to use when?
-class: bg-Black
+]
 
 
-# General approach
 
-<br><br>
-
+.panel[.panel-name[NAM Output: combined model]
 .font80[
-<table class=" lightable-material" style='color: black; font-family: "Source Sans Pro", helvetica, sans-serif; margin-left: auto; margin-right: auto;'>
-<thead> <tr> <th style="text-align:left;font-weight: bold;color: white !important;background-color: rgba(215, 38, 30, 255) !important;"> When </th> <th style="text-align:left;font-weight: bold;color: white !important;background-color: rgba(215, 38, 30, 255) !important;"> Which approach </th> <th style="text-align:left;font-weight: bold;color: white !important;background-color: rgba(215, 38, 30, 255) !important;"> function </th> </tr> </thead>
+.limity500[
+```{r stats_07_05b, eval = TRUE, echo = FALSE}
+summary(mod2)
+```
+]]
 
-<tbody>
+]   # end of panel 2
 
-<tr bgcolor = "#f2f3f4"> <td style="text-align:left;"> Statistic on a single network </td> </td> <td style="text-align:left;"> Conditionally Uniform Graph </td> <td style="text-align:left;"> sna::cug.test </td> </tr>
-
-<tr> <td style="text-align:left;"> Association between two networks </td> <td style="text-align:left;"> QAP </td> <td style="text-align:left;"> sna::qaptest </td> </tr>
-
-<tr bgcolor = "#f2f3f4"> <td style="text-align:left;"> A valued dependent network and one or more explanatory networks </td> <td style="text-align:left;"> QAP linear model </td> <td style="text-align:left;"> sna::netlm </td> </tr>
-
-<tr> <td style="text-align:left;"> A binary dependent network and one or more explanatory networks </td> <td style="text-align:left;"> QAP logistic model </td> <td style="text-align:left;"> sna::netlogit </td> </tr>
-
-</tbody> </table>
 ]
 
 
@@ -441,12 +398,10 @@ cug_trans_15
 
 OR
 
-```{r stats_07_07a, echo = TRUE, eval = FALSE}
-cug_trans_15 <- sna::cug.test(fifa2015, 
-                              FUN = sna::gtrans, 
-                              cmode = "edges",
-                              reps = 1000, 
-                              FUN.args = list(mode = "graph"))
+```{r stats_07_10B , echo = TRUE, eval = FALSE}
+cug_trans_15 <- snafun::stat_cug(fifa2015, mode = "graph", 
+                                     FUN = snafun::g_transitivity, 
+                                     cmode = "edges", reps = 1000)
 cug_trans_15
 ```
 
@@ -482,11 +437,21 @@ Exceptionally strong friend-of-a-friend tendencies!
 # Betweenness centralization
 
 .panelset[
-.panel[.panel-name[R code]
+
+.panel[.panel-name[R code (centralization)]
+
+```{r stats_07_12a, echo = TRUE, eval = TRUE}
+### Conditioning on the dyad census
+snafun::g_centralize(fifa2006, measure = "betweenness")
+```
+
+]
+
+
+.panel[.panel-name[R code (model)]
 
 ```{r stats_07_12, echo = TRUE, eval = FALSE}
 ### Conditioning on the dyad census
-
 betw_f <- function(x, directed = FALSE) {  # note: directed = FALSE!
   x <- snafun::fix_cug_input(x, directed = directed)
   snafun::g_centralize(x, measure = "betweenness", directed = directed)$centralization
@@ -495,20 +460,19 @@ betw_f <- function(x, directed = FALSE) {  # note: directed = FALSE!
 cug_betw_06_ds <- sna::cug.test(fifa2006, 
                                  mode = "graph", FUN = betw_f, 
                                  cmode = "dyad.census", reps = 200)
-cug_betw_06_ds
 ```
 
 OR
 
-```{r stats_07_14, echo = TRUE, eval = FALSE}
-cug_betw_06_ds <- sna::cug.test(fifa2006, FUN = sna::centralization,
-                                          FUN.arg=list(FUN = sna::betweenness),
-                                          mode="graph",
-                                          reps = 200,
-                                          cmode="dyad.census")
+```{r stats_07_12b, echo = TRUE, eval = FALSE}
+### Conditioning on the dyad census
+cent <- function(x) snafun::g_centralize(x, measure = "betweenness")$centralization
+cug_betw_06_ds <- snafun::stat_cug(snafun::to_igraph(fifa2006), FUN = cent, 
+                                   mode = "graph", cmode = "edges", reps = 200)
 ```
-
 ]
+
+
 
 .panel[.panel-name[Output]
 
@@ -544,43 +508,29 @@ class: bg-Black
 
 <div class="grid-2-2">
 <div class="extension-tile tileview"><div>Homeplay</div></div>
-<div class="extension-tile panelset-tile"><div>What to<br>use when?</div></div>
-<div class="extension-tile webcam animated bounceInDown"><div>CUG advanced</div></div>
+<div class="extension-tile webcam animated bounceInDown"><div>CUG challenge</div></div>
 </div>
 
 ---
 name: advanced
-description: Advanced CUG use
+description: CUG challenge
 
-# Advanced CUG use
+#  CUG challenge
 
-## Use your own measure for sna::cug.test
+Test if the number of walktrap communities in the fifa2015 network is statistically significant.
 
-.panelset[
+Recall:
 
-.panel[.panel-name[Intuition]
-You can define your own measures to use inside `sna::cug.test`, so you are not 
-confined to only the measures implemented in `sna`.
-For example, you can test if the number of walktrap communities in the network 
-is statistically significant.
-
-]
-
-
-
-.panel[.panel-name[Challenge]
-Test if the number of walktrap communities in the network is statistically 
-significant for the `fifa2015` network.
-
-You can use previous code as a template:
-
-```{r, echo = TRUE, eval = FALSE}
-trans_f <- function(x, directed = FALSE) {
+```
+data(fifa2015, package = "SNA4DSData)
+betw_f <- function(x, directed = FALSE) {  # note: directed = FALSE!
   x <- snafun::fix_cug_input(x, directed = directed)
-  snafun::g_transitivity(x)
+  snafun::g_centralize(x, measure = "betweenness", directed = directed)$centralization
 }
 
-sna::cug.test(fifa2015, mode = "graph", FUN = trans_f, cmode = "edges", reps = 1000)
+cug_betw_15_ds <- sna::cug.test(fifa2015, 
+                                 mode = "graph", FUN = betw_f, 
+                                 cmode = "dyad.census", reps = 200)
 ```
 
 
@@ -595,9 +545,11 @@ countdown::countdown(
 )
 ```
 
-]
+
+---
 
 
+.panelset[
 
 
 .panel[.panel-name[R code]
@@ -608,7 +560,7 @@ walktrap_num_f <- function(x, directed = FALSE) {  # note: directed = FALSE!
 }
 
 fifa_coms <- sna::cug.test(fifa2015, FUN = walktrap_num_f, mode = "graph", 
-                           diag = FALSE, cmode = "edges", reps = 1000)
+                           diag = FALSE, cmode = "edges", reps = 200)
 
 fifa_coms
 plot(fifa_coms)
@@ -622,6 +574,7 @@ plot(fifa_coms)
 print(fifa_coms)
 ```
 
+<br><br><br>
 `r arrow_right("blue")` There are more information-trapping communities (statistically significant) 
 than you would expect of a network of this size and density.
 
@@ -638,6 +591,7 @@ plot(fifa_coms)
 ]
 
 
+
 ---
 class: bg-Black
 
@@ -645,8 +599,7 @@ class: bg-Black
 
 <div class="grid-2-2">
 <div class="extension-tile tileview"><div>Homeplay</div></div>
-<div class="extension-tile panelset-tile"><div>What to<br>use when?</div></div>
-<div class="extension-tile webcam"><div>CUG advanced</div></div>
+<div class="extension-tile webcam"><div>CUG challenge</div></div>
 <div class="extension-tile editable animated fadeInRight"><div>Overview</div></div>
 </div>
 
@@ -657,11 +610,11 @@ class: bg-Black
 # Let's see if you have this mastered
 
 
-.GoldenRod.center-image.b.f-abel.font125[www.menti.com<br>code: 3933 1244]
+.GoldenRod.center-image.b.f-abel.font125[www.menti.com<br>code: 4722 2476]
 
 <br><br><br><br><br><br><br><br>
 ```{r qr, echo = FALSE, out.width="30%"}
-qrcode::qr_code("https://www.menti.com/alw2sxr14emo") |> qrcode:::plot.qr_code()
+qrcode::qr_code("https://www.menti.com/al53udhvo9ka") |> qrcode:::plot.qr_code()
 ```
 
 ---
@@ -677,27 +630,30 @@ description: Statistically modeling networks
   + QAP, MRQAP, Logistic QAP, and CUG are often great for simple 
   hypotheses
   
-  + use ERGM's to test more complex expectations
+  + use ERGM/GERGM/BTERGM to test more complex expectations
 
 --
 
 ### Estimating parameters
 
-- MRQAP, Logistic QAP, and ERGM's allow for parameter estimation
+- MRQAP, Logistic QAP, and ERGM/GERGM/BTERGM allow for parameter estimation
 
 --
   
 ### Uncovering what the drivers are of the observed network
 
-- ERGM's model the network as a whole and allow for much more modeling 
+- ERGMs/GERGMs/BTERGMs model the network as a whole and allow for much more modeling 
   flexibility and options
   
   + this comes at the challenge of fitting a more complex model
     
 ---
 class: bg-JADSbrown
+<!-- skip -->
 
 # Questions?
 
 <br><br>
 .center[![:scale 45%](assets/images/group_with_questions_800_clr_3122.png)]
+
+

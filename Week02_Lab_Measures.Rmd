@@ -235,6 +235,25 @@ description: "Menu"
 
 ---
 layout: false
+class: course-logo
+description: update!
+
+# Updates!
+
+`snafun::g_transitivity()` is broken for specific graphs. This will be fixed this week.
+<br><br>
+--
+In the tutorial, you are referred to the `snafun` website. This website is now superseded. 
+For a full overview of the package and its functions use:
+
+```{r updates, eval=FALSE, echo = TRUE}
+snafun::browse_vignettes()  # a list of available vignettes will open
+snafun::browse_cheatsheet() # the full cheatsheet will open in your default browser
+```
+
+
+---
+layout: false
 class: course-logo bg-Black
 
 # .Gold-inline[Today's menu]
@@ -460,6 +479,7 @@ igraph::sizes(walk)
 
 
 ---
+class: course-logo
 
 ## Modularity
 
@@ -469,26 +489,21 @@ Compares within-community edges with between-community edges for an unweighted u
 
 $$Q = \sum_{i = 1}^{c} (e_{i} - a_{i}^2)$$
 
-where $e_{ii}$ is the fraction of all edges that remain within community _i_
-and $a_{i}^2$ is the fraction of all between community _i_ and other communities. 
+where $e_{i}$ is the fraction of edges in the graph that stay within community _i_ 
+and $a_{i}^2$ is the fraction of ends of edges that are attached to vertices in community _i_ (irrespective of where the edge goes). 
 For a directed graph:
 
 $$Q = \sum_{i = 1}^{c} (e_i - a_{i}^{in} * a_{i}^{out})$$
 
 
-- Modularity is between ${\displaystyle [-1/2,1]}$ (or ${\displaystyle [-1,1]}$ 
-for graphs with negative weights).
-
-- Modularity is positive if the number of edges within communities exceeds the number 
+- Modularity is between ${\displaystyle [-1/2,1]}$. It is positive if the number of edges within communities exceeds the number 
 expected in a graph with the same number of vertices and where each vertex keeps 
-its degree (but edges are randomly attached). 
+its degree (but edges are randomly attached). Value 0 represents perfect randomness of the wiring.
 
-- In practice, a value above about 0.3 indicates a good community structure 
-in a graph.
+- In practice: modularity > 0.3 indicates a good community structure.
 
 .font70[
-Note: the computation is somewhat adapted when the edges are weighed, but the 
-concept remains the same.
+Note: Modularity is between ${\displaystyle [-1,1]}$ for graphs with negative weights.
 ]
 
 
@@ -500,6 +515,7 @@ Modularity compares the number of edges inside a cluster with the expected numbe
 Multiresolution methods
 There are two main approaches which try to solve the resolution limit within the modularity context: the addition of a resistance r to every node, in the form of a self-loop, which increases (r>0) or decreases (r<0) the aversion of nodes to form communities;[12] or the addition of a parameter γ>0 in front of the null-case term in the definition of modularity, which controls the relative importance between internal links of the communities and the null model.[7] Optimizing modularity for values of these parameters in their respective appropriate ranges, it is possible to recover the whole mesoscale of the network, from the macroscale in which all nodes belong to the same community, to the microscale in which every node forms its own community, hence the name multiresolution methods. However, it has been shown that these methods have limitations when communities are very heterogeneous in size.[13]
 ---
+
 layout: true
 class: course-logo
 
