@@ -647,7 +647,7 @@ Exogenous covariates make the ERG model equivalent to logistic regressions. no s
 
 ### H1: The richer a family is, the more likely its members are to marry into other families 
 
-### TERM: `nodecov()` Probability of a tie given the receiver having the similar attribute. 
+### TERM: `nodecov()` Probability of a tie given the receiver having a higher value for an attribute. 
 
 <br>
 
