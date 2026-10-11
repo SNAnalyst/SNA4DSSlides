@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>SOCIAL NETWORK ANALYSIS for DATA SCIENTISTS</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Claudia" />
+    <script src="assets/header-attrs-2.31/header-attrs.js"></script>
+    <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="assets/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="assets/tile-view-0.2.6/tile-view.js"></script>
+    <link href="assets/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="assets/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra_fit-screen-0.2.6/fit-screen.js"></script>
+    <link href="assets/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="assets/panelset-0.3.0/panelset.js"></script>
+    <script src="assets/fabric-4.3.1/fabric.min.js"></script>
+    <link href="assets/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="assets/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="assets/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"fbd5ae6eec0c4ae096828862f2093aa2","expires":1}</script>
+    <script src="assets/himalaya-1.1.0/himalaya.js"></script>
+    <script src="assets/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="assets/editable-0.2.6/editable.js"></script>
+    <script src="assets/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="assets/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="assets/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/apron.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/descartes.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/tachyons.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/xaringan-extra.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/RL-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS_effects.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/kleuren.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[SOCIAL NETWORK ANALYSIS&lt;br&gt;for DATA SCIENTISTS]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[LECTURE: Network Research Design .small-caps.font70[(lecture] .font70[Week 7)]]]
+  ]
+
+&lt;br&gt;
+.f-abel.White-inline[Your lecturer: Claudia]&lt;br&gt;
+.f-abel.White-inline[Playdate: October, 13th, 2026]
+
+
+&lt;!-- setup options start --&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.highlight-last-item &gt; ul &gt; li, 
+.highlight-last-item &gt; ol &gt; li {
+  opacity: 0.5;
+}
+
+.highlight-last-item &gt; ul &gt; li:last-of-type,
+.highlight-last-item &gt; ol &gt; li:last-of-type {
+  opacity: 1;
+}
+
+.bold-last-item &gt; ul &gt; li:last-of-type,
+.bold-last-item &gt; ol &gt; li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+&lt;/style&gt;
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.remark-inline-code {
+  background: #F5F5F5;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.inverse-red, .inverse-red h1, .inverse-red h2, .inverse-red h3, .inverse-red a, inverse-red a &gt; code {
+	border-top: none;
+	background-color: red;
+	color: white; 
+	background-image: "";
+}
+
+.inverse-orange, .inverse-orange h1, .inverse-orange h2, .inverse-orange h3, .inverse-orange a, inverse-orange a &gt; code {
+	border-top: none;
+	background-color: orange;
+	color: black; 
+	background-image: "";
+}
+
+.tab{
+  display: inline-block;
+  margin-left: 40px;
+}
+
+.tab1{tab-size: 2;}
+.tab2{tab-size: 4;}
+.tab3{tab-size: 6;}
+.tab4{tab-size: 8;}
+
+&lt;/style&gt;
+
+
+
+&lt;style type="text/css"&gt;
+.grid-3-2a {
+  display: grid;
+  height: calc(90%);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1em;
+  padding: 1em;
+}
+&lt;/style&gt;
+
+
+&lt;!--scroll box set up --&gt;
+&lt;style type="text/css"&gt;
+/* Allow slides to show overflowing content */
+.remark-slide-content {
+  overflow: visible !important;
+}
+
+/* Scroll box */
+.scroll-box-18 {
+  display: block;           /* make it a block element */
+  max-height: 18em;         /* height of scroll box */
+  overflow-y: auto;         /* vertical scroll */
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fafafa;
+  box-sizing: border-box;   /* include padding in height */
+}
+
+/* Optional: nicer scrollbar */
+.scroll-box-18::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-box-18::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.scroll-box-18::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+&lt;/style&gt;
+
+&lt;!-- setup options end --&gt;
+
+
+
+---
+class: course-logo
+layout: true
+
+
+---
+name: Menu
+description: Topics we cover today
+# Menu for today
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+- To explain or to predict?
+
+- Explanatory Modelling for Networks 
+
+- Theory for studying networks
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# To explain or to predict?
+
+---
+name: WhyTheory
+description: Why do we need a class on theory?
+# Why do we need this class? 
+&lt;br&gt;
+## Data Science is an umbrella term 
+
+## Causal inference, Machine Learning, Deep Learning, Neural Networks...
+
+Different people with different background will give you different definitions
+ &lt;br&gt;&lt;br&gt;&lt;br&gt;
+## Ultimately data science is about any techniques that you can use to analyze data
+
+## When to use what technique then?
+
+---
+# The real deal is the research question
+&lt;br&gt;
+## .red[What do you want to know provided that your data contains the answer]
+
+---
+# The real deal is the research question
+&lt;br&gt;
+## .red[What do you want to know provided that your data contains the answer]
+&lt;br&gt;
+## Three big families of research questions (relevant for data science)
+
+### Research questions that want to predict something (new or future observations)
+### Research questions that want to explain something (understanding why something happens)
+### Research questions that want to describe something (summarizing or describing data patterns)
+
+---
+background-image: url(assets/images/ResPipeline.png)
+background-size: 1000px
+background-position: 50% 50%
+# The research Pipeline
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.center[It is is the same for all the research questions, but what you do in each step is different]
+
+---
+# Disclaimers
+
+## Shmueli (reading for today) discusses this ideas talking about ‘statistical modelling’
+
+## Read this as Models of any sort (if you ask a statistician data science is statistics...)
+
+### This theory applies to all the classes you take at JADS
+
+## ML, deep learning, etc ask the type of questions that do predictions
+## Statistical modelling, causal inference etc, ask the type of questions that are about causality
+
+## .red[it might even be the same math but used DIFFERENTLY for DIFFERENT GOALS]
+
+---
+name: RQsTypes
+description: Explanations and Predictions as two main type of research questions
+# RQs
+
+## - Explanation asks whether the model represents an underlying process or causal relationship. 
+## - Prediction asks whether the model can accurately predict new observations.
+
+
+### Don't assume that explanatory quality automatically implies predictive quality.
+
+---
+# Predictive Modeling
+
+## Generic RQ: Can we predict the value of Y given X?
+
+## In this type of approach 
+
+- the more variable are the merrier (no theoretical motivation to include them)
+- more information means more knowledge that improve the model
+- A model that predicts its training data extremely well isn't necessarily a good predictive model.
+- Prediction should therefore be evaluated using out-of-sample data.
+
+---
+# Example
+
+## RQ: Under which circumstances will a customer cancel their subscription?
+
+Variables
+
+- number of logins
+- customer-service calls
+- time since last purchase
+- device type
+- browsing behavior
+- ...
+
+Train the model, test on new data
+
+---
+# Explanatory Modeling - Causal 
+
+## Generic RQ: Can we assess what caused the observed Y given X?
+
+## In this type of approach 
+- carefully select variables based on hypotheses. Included only if there is a theory that supports the selection
+- more variables is not better, unless you have theory
+- you assess the model with goodness of fit within the sample
+- you read model results looking at p-value, sign of the estimate, estimate size
+
+---
+# Example
+
+## RQ What are the factors that increase the productivity of employees?
+
+### After learning theory on the topic:
+## H1: higher employee satisfaction cause higher productivity
+## H0: Higher employee satisfaction has no effect on productivity
+
+Variables
+- predictor: employee satisfaction 
+- controls: ... (other variables that might matter)
+
+Test on your sample
+
+
+
+---
+# Differences between Explanatory and Predictive Modelling
+
+## 1) Theory Driven VS Data Driven
+## 2) Causation VS Association
+## 3) Retrospective VS Prospective
+## 4) Bias VS Variance
+## 5) What's the best model differs
+## 6) Explanatory power VS Predictive Power
+## 7) Model Fit VS Predictive Validation
+
+---
+# 1) Theory Driven VS Data Driven
+
+## Theory-Driven
+
+- Starts with a theory or hypothesis
+- Uses data to test expected relationships
+- Focuses on understanding why something happens
+- Variables are selected based on theoretical reasoning
+
+## Data-Driven
+
+- Starts with data and observed patterns
+- Identifies relationships that improve prediction
+- Focuses on what happens / what can be predicted
+- Variables are selected based on predictive performance
+
+
+---
+# 2) Causation VS Association
+&lt;br&gt;&lt;br&gt;
+## Explanatory → Causation: Focuses on why something happens and whether one variable causes changes in another.
+
+Explanatory models require stronger evidence for causal relationships, often using theory, experiments, or causal methods.
+
+
+## Predictive → Association: Focuses on whether variables are useful for predicting an outcome, without needing to establish causality.
+
+Predictive models can use associations and correlations as long as they improve prediction accuracy.
+
+
+---
+# 3) Retrospective VS Prospective
+
+## Explanatory Models → Retrospective
+
+Analyze past/observed data to understand relationships.
+
+Ask: “What happened, and why?”
+
+Test whether the data support a theory or hypothesis.
+
+## Predictive Models → Prospective
+
+Use current data to predict future or unseen outcomes.
+
+Ask: “What is likely to happen next?”
+
+Focus on prediction accuracy and generalization.
+
+### Example:
+Explanatory: Analyze past customer churn → Why did customers leave?
+
+Predictive: Use current customer behavior → Who will leave next month?
+
+---
+# 4) Bias VS Variance
+
+### Bias: The error caused by a model being too simple and making overly strong assumptions about the underlying relationship. (high bias → underfitting )
+### Variance: The error caused by a model being too sensitive to the specific training data.(high variance → overfitting)
+
+## Explanatory Models → Bias: Often prefer simpler, theory-based models to clearly represent relationships, even if some prediction error remains.
+Explanatory goal: Minimize bias to accurately capture the theoretical relationships and explain why and how an outcome occurs, while avoiding unnecessary model complexity.
+## Predictive Models → Bias–Variance Trade-off: Aim to balance bias and variance to achieve the best performance on unseen data.
+Predictive goal: Find the right balance → low prediction error and good generalization to new data. and what is the goal of explanatory models?
+
+---
+# 5) What's the best model differs for the two types
+
+## Explanatory
+### Best model: A model that best represents theoretical relationships and provides clear, meaningful interpretation.
+- Explanatory models often prioritize simplicity, interpretability, and theoretical consistency over predictive accuracy.
+
+## Predictive 
+### Best model: A model that achieves the lowest prediction error and generalizes well to unseen data.
+- Predictive models may use greater complexity if it improves performance on new data.
+
+### Key point: A model can be best for explanation but poor for prediction, or best for prediction but difficult to interpret.
+
+---
+# 6) Explanatory power VS Predictive Power
+
+## Explanatory Power → Measures how well a model explains theoretical relationships and helps us understand why/how an outcome occurs.
+## Predictive Power → Measures how well a model predicts new or unseen outcomes accurately.
+
+Explanatory models prioritize theoretical meaning, interpretation, and causal understanding.
+
+Predictive models prioritize out-of-sample accuracy and generalization rather than explaining causality.
+
+Key point: A model can have high explanatory power but low predictive power, or high predictive power but low explanatory power.
+
+---
+# 7) Model Fit VS Predictive Validation
+
+## Explanatory 
+### Model Fit: Evaluates how well the model fits the observed data and supports the proposed theoretical relationships.
+Model Fit focuses on in-sample performance — how well the model describes the data it was estimated from.
+## Predictive
+### Predictive Validation: Evaluates how well the model predicts new or unseen data that were not used to build the model.
+
+Predictive Validation focuses on out-of-sample performance — how well the model generalizes to new observations.
+
+### Key point: A model can have excellent fit to existing data but poor predictive performance due to overfitting.
+
+---
+# Nota BENE: Example with OLS
+
+## OLS: ordinary least square is an estimation method
+
+### OLS can solve a predictive problem
+### OLS can solve a causal model 
+
+## .red[Different research questions will involve a different usage of OLS]
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# Explanatory Modelling for Networks 
+
+---
+# What is Explanatory Modelling in a Network?
+
+## Key point: observations are NOT independent
+
+## Goal: Understand why and how relationships, behaviors, or network structures arise.
+
+- Starts from a theory or hypothesis about relationships between actors, attributes, and network structure.
+- Explains outcomes using both actor-level characteristics and network-level processes.
+- Focuses on interpretation, mechanisms, and causal reasoning.
+- Accounts for the fact that actors are connected and their outcomes may be interdependent.
+
+---
+# Exogenous vs. Endogenous Variables
+
+## Exogenous variables (node and edge attributes - comes from outside of the network)
+
+- Determined outside the network/model.
+- Their values do not depend on other actors' network-related outcomes.
+- Examples: age, gender, education, geographic characteristics.
+
+## Endogenous variables (structure of the network - located in the inside of the network)
+
+- Determined within the network/system.
+- Can depend on other actors, network structure, or network processes.
+- Examples: friends' behavior, network position, tie formation.
+
+
+---
+# Developing theory about exogenous variables
+
+## this is about node and edge attributes  
+
+- read theory that discusses what the attribute measures (sex, age, time two nodes spend together...)
+
+- find a ‘gap’: what is not known yet? or, at your level, does the theory that we read work for our specific sample too?
+
+- formulate a research question: E.g., Under which circumstance do people become friends?
+
+- advance an answer based on the literature, for example: 
+
+- H1 Having a similar age increase the chances of becoming friends
+
+- H0 Having similar age has no influence of becoming friends
+
+- move on with hypothesis testing
+
+---
+# Developing theory about endogenous variables
+
+## this is about patterns in the structure of the network 
+
+- read theory that discusses phenomena that you can expect in your network (e.g., friend of my friend is my friend)
+
+- find a ‘gap’: what is not known yet? or, at your level, does the theory that we read work for our specific sample too?
+
+- formulate a research question: E.g., Does friendship occur at random?
+
+- advance an answer based on the literature, for example:
+
+- H1 It is more likely that I become friend with someone if we have a friend in common
+
+- H0 Having a friend in common does not increase the likelihood that two individuals become friends.
+
+- move on with hypothesis testing
+
+
+---
+# Which model does what?
+
+&lt;div style="width: 92%; margin: 30px auto;"&gt;
+&lt;table style="width:100%; border-collapse:collapse; font-size:20px;"&gt;
+&lt;tr style="background:#eeeeee;"&gt;
+&lt;th style="padding:11px; border-bottom:3px solid #555; text-align:left;"&gt;Model&lt;/th&gt;
+&lt;th style="padding:11px; border-bottom:3px solid #555; text-align:center;"&gt;Exogenous&lt;/th&gt;
+&lt;th style="padding:11px; border-bottom:3px solid #555; text-align:center;"&gt;Endogenous&lt;/th&gt;
+&lt;th style="padding:11px; border-bottom:3px solid #555; text-align:left;"&gt;Example hypothesis&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc;"&gt;&lt;b&gt;CUG&lt;/b&gt;&lt;/td&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc; text-align:center;"&gt;—&lt;/td&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc; text-align:center; font-size:24px;"&gt;✓&lt;/td&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc;"&gt;Does the network show structural patterns beyond chance?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc;"&gt;&lt;b&gt;QAP&lt;/b&gt;&lt;/td&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc; text-align:center; font-size:24px;"&gt;✓&lt;/td&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc; text-align:center;"&gt;—&lt;/td&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc;"&gt;Does geographic proximity predict ties?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc;"&gt;&lt;b&gt;MRQAP&lt;/b&gt;&lt;/td&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc; text-align:center; font-size:24px;"&gt;✓&lt;/td&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc; text-align:center; font-size:24px;"&gt;✓&amp;#42;&lt;/td&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc;"&gt;Do multiple predictors explain network ties?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc;"&gt;&lt;b&gt;Netlogit&lt;/b&gt;&lt;/td&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc; text-align:center; font-size:24px;"&gt;✓&lt;/td&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc; text-align:center; font-size:24px;"&gt;✓&lt;/td&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc;"&gt;Do actor, dyadic, or network effects predict ties?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc;"&gt;&lt;b&gt;ERGM&lt;/b&gt;&lt;/td&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc; text-align:center; font-size:24px;"&gt;✓&lt;/td&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc; text-align:center; font-size:24px;"&gt;✓&lt;/td&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc;"&gt;Do attributes and network structure explain tie formation?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc;"&gt;&lt;b&gt;LNAM&lt;/b&gt;&lt;/td&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc; text-align:center;"&gt;✓&amp;#42;&lt;/td&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc; text-align:center; font-size:24px;"&gt;✓&lt;/td&gt;
+&lt;td style="padding:10px; border-bottom:1px solid #ccc;"&gt;Do network dependence and predictors explain ties?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;div style="font-size:15px; margin-top:14px; text-align:center;"&gt;&lt;b&gt;&amp;#42;&lt;/b&gt; Depends on the variables and model specification.&lt;/div&gt;
+&lt;/div&gt;
+&lt;br&gt;
+&lt;div style="text-align:center; font-size:23px;"&gt;&lt;b&gt;Key point:&lt;/b&gt; The method does not determine whether a hypothesis is &lt;b&gt;exogenous or endogenous&lt;/b&gt; — the &lt;b&gt;variables and theoretical hypothesis&lt;/b&gt; do.&lt;/div&gt;
+
+---
+## from here on temporary slides
+
+---
+# What Does It Mean to Develop a Theory?
+
+- A .orange[theory] is an explanation of why or how a phenomenon occurs.
+- It identifies .orange[mechanisms] that connect conditions to outcomes.
+- It explains why we expect certain relationships or network patterns.
+- A theory goes beyond describing a pattern: it proposes .orange[why the pattern exists].
+- A good theory generates .orange[testable hypotheses].
+
+## Example:
+People may become friends because they share interests, spend time together, or have mutual friends.
+
+### Key question: Why should one person be more likely to become friends with another?
+
+---
+# Where Do Theoretical Ideas Come From?
+
+- .orange[Existing theories:] Apply established explanations to a new research question.
+- .orange[Literature review:] Identify explanations already proposed and tested.
+- .orange[Empirical observations:] Notice recurring patterns that need explaining.
+- .orange[Contradictions:] Investigate why previous studies reach different conclusions.
+- .orange[Context:] Consider whether established explanations apply to your population or setting.
+
+## Example:
+Previous research suggests that people form friendships with similar others.
+Does age similarity also explain friendship formation among university students?
+
+### Key point: Start with existing knowledge, then identify what still needs explaining.
+
+---
+# How to Identify a Research Gap
+
+A research gap is something important that existing research has not adequately explained.
+
+- .orange[Population gap:] Has the theory been tested in this population?
+- .orange[Context gap:] Does the explanation apply in a different social setting?
+- .orange[Mechanism gap:] Do we understand why the relationship occurs?
+- .orange[Evidence gap:] Are previous findings inconsistent or uncertain?
+- .orange[Boundary condition:] Under what circumstances might the explanation not apply?
+
+## Example:
+We know that similarity can be associated with friendship.
+Does age similarity matter equally in small and large student groups?
+
+### Key question: What would our study help us understand that we do not already know?
+
+---
+# From a Theoretical Concept to a Mechanism
+
+A theoretical concept is not yet an explanation.
+
+.orange[Concept:] Age similarity
+
+.orange[Possible mechanism:]
+- People of similar ages may share life experiences.
+- Shared experiences may create common interests.
+- Common interests may increase opportunities for interaction.
+- Interaction may increase the likelihood of friendship.
+
+.orange[Hypothesis:]
+People of similar ages are more likely to become friends.
+
+.orange[Key point:] A mechanism explains how or why a proposed relationship might occur.
+
+---
+
+# Developing Theory About Endogenous Network Processes
+
+Network structure can itself create opportunities and constraints.
+
+.orange[Example: Triadic closure]
+
+- Two people may meet through a mutual friend.
+- A mutual friend can create opportunities for interaction.
+- Shared connections may increase trust or social familiarity.
+- These processes may make a new friendship more likely.
+
+.orange[Hypothesis (H1):]
+Two people are more likely to form a friendship when they have mutual friends.
+
+.orange[Null hypothesis (H0):]
+The number of mutual friends is not positively associated with the likelihood of a friendship tie.
+
+.orange[Key question:] What social mechanism could generate this network pattern?
+
+---
+# One Pattern, Multiple Theoretical Explanations
+
+.orange[Observation:] Friends often have similar characteristics.
+
+Possible explanations:
+
+- .orange[Selection:] People choose friends who are similar to themselves.
+- .orange[Influence:] Friends become more similar over time.
+- .orange[Shared context:] People in the same class or workplace become similar and interact more.
+- .orange[Opportunity:] People who meet more often have more chances to become friends.
+
+These explanations can produce similar observed patterns.
+
+.orange[Key point:] The same association can be consistent with different theories.
+
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# Theory for studying networks
+
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="assets/remark-latest.min.js"></script>
+<script src="assets/js/remark-zoom.js"></script>
+<script src="assets/js/macros.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "atom-one-light",
+  "highlightLines": true,
+  "highlightSpans": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": "- %current% -",
+  "ratio": "16:9",
+  "navigation": {
+    "scroll": true
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
