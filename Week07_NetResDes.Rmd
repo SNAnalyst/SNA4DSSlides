@@ -260,7 +260,7 @@ description: Topics we cover today
 
 - To explain or to predict?
 
-- Theory for studying networks
+- Some theory for studying networks
 
 - Explanatory modelling with theory of networks
 
@@ -361,6 +361,8 @@ description: Explanations and Predictions as two main type of research questions
 ### Don't assume that explanatory quality automatically implies predictive quality - these two things are different.
 
 ---
+name: PredMod
+description: Predictive Modeling
 # Predictive Modeling
 <br>
 ## Generic RQ: Can we predict the value of Y given X?
@@ -389,6 +391,8 @@ Variables
 Train the model, test on new data
 
 ---
+name: ExpMod
+description: Explanatory Modeling
 # Explanatory Modeling - Causal 
 <br>
 ## Generic RQ: Can we assess what is the X that caused the observed Y?
@@ -583,9 +587,11 @@ Predictive Validation focuses on **out-of-sample performance** — how well the 
 <br>
 <br>
 <br>
-# Theory for studying networks
+# Some theory for studying networks
 
 ---
+name: NetTheory
+description: Discussing theory and networks
 ## **The Two Papers for today**
 
 ### **Shmueli (2010):**
@@ -604,6 +610,8 @@ Predictive Validation focuses on **out-of-sample performance** — how well the 
 **Paper two applies to networks what paper one discusses in a generic way**
 
 ---
+name: RealNom
+description: Differences between realist and nominalist (elements of epistemology)
 ## **What is your network?**
 <br>
 ### Boundaries of your sample 
@@ -619,6 +627,8 @@ The network is shaped by how you conceptualize it, based on the research questio
 
 
 ---
+name: TwoAppr
+description: Network theory and theory of networks
 # Two approaches 
 <br>
 
@@ -647,6 +657,8 @@ The network is shaped by how you conceptualize it, based on the research questio
 
 - Some people claim SNA has no theory of its own... proven wrong!
 ---
+name: GranSWT
+description: Granovetter's strentgh of weak ties
 # Granovetter's SWT
 <br>
 ### **Premise 1**: Strong ties overlap. If A–B and B–C are strong, A and C probably know each other. 
@@ -663,6 +675,8 @@ Group level: Communities with many weak ties mobilize better against outside thr
 ---
 .center[![:scale 70%](assets/images/strength_of_weak_ties_bridge.png)] 
 ---
+name: BurtSH
+description: Burt's structural holes
 # Burt's SH
 <br>
 ### **Structural hole**: A gap between two contacts who don’t know each other, with ego sitting in the gap.
@@ -682,6 +696,8 @@ Second benefit: Control. A broker can exploit divisions between unconnected cont
 .center[![:scale 70%](assets/images/structural_holes_a_vs_b.png)] 
 
 ---
+name: NewTheory
+description: Generating New Theory from SWT and SH
 # What do Granovetter and Burt have in common?
  <br>
 ## General 
@@ -737,7 +753,7 @@ Example: workers tied by solidarity can act as one (a union) and bargain on equa
 <br>
 ## The social capital literature: **Success** - performance and rewards, for a node or a whole network.
 
-## the social homogeneity literature: **Choice** - behaviors, attitudes, beliefs, and organizations’ internal structures, often framed as similarity of choice
+## The social homogeneity literature: **Choice** - behaviors, attitudes, beliefs, and organizations’ internal structures, often framed as similarity of choice
 
 <br>
 Two mechanisms (flow, bond) and two outcomes (success, choice) give four combinations.
@@ -793,27 +809,13 @@ These theory recreates the micro fundation of two major fields in social science
 <br><br>
 # So what?
 
----
-# Model-based theorizing
-
-## How to do it?
-<br>
-<br>
-- Start from an observed state of affairs and imagine it as the outcome of an unseen process. 
-
-- The model specifies that process.
-
-- Derive testable implications from the model, including the original observations that led you to it.
-
-- (Ideally, state the model formally so math or simulation can derive implications that intuition would miss.)
-
-
-### Lave and March (1975) call model-based theorizing one of the strongest forms of theorizing.
 
 ---
-# From observation to Generalization
+name: ObsGen
+description: From Observation to Generalization
+# From Observation to Generalization
 <br>
-- First you observe a phenomenon 
+- First you observe a phenomenon (something that happens, we care about it and we have data about it)
 
 - Remove from it all the specifics 
 
@@ -824,126 +826,135 @@ Example: you observe three friends chatting, but you see them as three nodes con
 The theory travels across cultures, because friendship means different things in different settings. You pick whichever local tie has the property the theory needs.
 
 ---
-
-# Networks and Theory
+# From Observation to Generalization
 <br>
-## A phenomenon is something that happens, we care about it and we have data about it
+- First you observe a phenomenon (something that happens, we care about it and we have data about it)
+
+- Remove from it all the specifics 
+
+- Try to understand the dynamics that can apply to as many cases as possible
+
+## In data science:
+
+- Derive testable implications (RQs and/or hypotheses) from the model, including the original observations that led you to it.
+
+- (Ideally, state the model formally so math or simulation can derive implications that intuition would miss.)
+
+
+### Lave and March (1975) call model-based theorizing one of the strongest forms of theorizing.
+
+
+
+---
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+# Explanatory Modelling with Theory of Networks
+
+---
+name: ResPipNetTheory
+description: The research pipeline applied to explanatory modelling with theory of Networks
+background-image: url(assets/images/ResPipeline2.png)
+background-size: 1000px
+background-position: 50% 50%
+# Where theory places
+
+---
+## **Explanatory Modelling with Theory of Networks**
+
+**Goal: Understand why and how relationships, network structures and/or behaviors arise.**
+
+- First you **observe** a phenomenon (something that happens, we care about it and we have data about it)
+- Remove from it all the specifics (**abstract**)
+- Try to understand the **dynamics** that can apply to as many cases as possible (causal mechanism)
+- Find **literature** about it 
+- Formulate a **research question**.
+- Develop/Identify a **theory** to explain what happens.
+- Formulate an **hypothesis** about relationships between network structure, nodes, and attributes.
+- Find the appropriate **methodology** to answer the RQ or test the H and defend the theory.
+- Test and explain **outcomes** using both network-level processes and actor-level characteristics.
+- Focus on **interpretation**, mechanisms, and causal reasoning.
+- Account for the fact that actors are connected and their outcomes are interdependent.
+
+
+---
+name: causMech
+description: Causal Mechanism
+# Causal Mechanism
 <br>
 
-## Developing theory with networks is:
+## Developing theory with networks in the explanatory tradition is:
 
 ## - really about understanding how connections (structure and position) affect phenomena (**Network Theory**)
 
 ## - really about understanding how connections (structure and position) are affected by phenomena (**Theory of Networks**)
 
-The two can also overlap...
----
-# Different levels of theory building
- <br>
-### **Theory unification** - take different theories and unify them with generalization (this paper)
+## This is also called "causal mechanism"
 
-### **Theory development** - observe and create an abstract representation (From observation to generalization, Granovetter and Burt)
+**In which way does X affect Y?**
+
+The two can also overlap...
+
+---
+## Causal Mechanism within Network Theory in the Explanatory domain
+<br> <br>
+- A .orange[theory] is an explanation of why or how a phenomenon occurs.
+- It identifies .orange[(causal) mechanisms] that connect conditions to outcomes.
+- It explains why we expect certain relationships or network patterns.
+- A theory goes beyond describing a pattern: it proposes .orange[why the pattern exists].
+- A good theory in the explanatory domain generates .orange[testable hypotheses].
+---
+name: TheoBuild
+description: Some elements of theory building
+# Different levels of theory building
+ <br><br>
+### **Theory unification** - take different theories and unify them with generalization (as in  Borgatti and Halgin, 2011)
+
+### **Theory development** - observe and create an abstract representation (From observation to generalization, as in Granovetter or Burt)
 
 ### **Theory derivation** - develop new relevant hypotheses to enrich existing theory
 
 ### **Theory testing** - take existing theory and test it with new data
 
-
-**Your work with the project sits in between theory derivation and theory testing**
-
+<br>
+**Your work with the course project (and thesis/research in action) sits in between theory derivation and theory testing**
 
 ---
+## **Where Do Theoretical Ideas Come From 1**
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-# Explanatory Modelling with Theory of Networks
-
----
-# Explanatory Modelling with Theory of Networks
-
-
-## Goal: Understand why and how relationships, behaviors, or network structures arise.
-
-- Starts from developing a theory (in your case at the level of theory derivation or testing)
-- Formulates hypothesis about relationships between network structure, nodes, and attributes.
-- Explains outcomes using both network-level processes and actor-level characteristics.
-- Focuses on interpretation, mechanisms, and causal reasoning.
-- Accounts for the fact that actors are connected and their outcomes may be interdependent.
-
-
-
-
----
-# What Does It Mean to Develop a Theory?
-
-- A .orange[theory] is an explanation of why or how a phenomenon occurs.
-- It identifies .orange[mechanisms] that connect conditions to outcomes.
-- It explains why we expect certain relationships or network patterns.
-- A theory goes beyond describing a pattern: it proposes .orange[why the pattern exists].
-- A good theory generates .orange[testable hypotheses].
-
-## Example:
-People may become friends because they share interests, spend time together, or have mutual friends.
-
-### Key question: Why should one person be more likely to become friends with another?
-
----
-# Where Do Theoretical Ideas Come From?
-
-- .orange[Existing theories:] Apply established explanations to a new research question.
-- .orange[Literature review:] Identify explanations already proposed and tested.
+### **Theory unification** 
+- .orange[Existing theories:] Apply established explanations to a broader (more abstract) research question.
 - .orange[Empirical observations:] Notice recurring patterns that need explaining.
+- .orange[Literature review:] Identify explanations already proposed and tested.
+- .orange[Contradictions:] Investigate why previous studies reach different conclusions.
+
+### **Theory development** 
+- .orange[Empirical observations:] Notice recurring patterns that need explaining.
+- .orange[Literature review:] Identify explanations already proposed and tested.
+- .orange[Contradictions:] Investigate why previous studies reach different conclusions.
+
+---
+## **Where Do Theoretical Ideas Come From 2**
+<br>
+### **Theory derivation** 
+- .orange[Literature review:] Identify explanations already proposed and tested.
 - .orange[Contradictions:] Investigate why previous studies reach different conclusions.
 - .orange[Context:] Consider whether established explanations apply to your population or setting.
 
-## Example:
-Previous research suggests that people form friendships with similar others.
-Does age similarity also explain friendship formation among university students?
+### **Theory testing** 
+- .orange[Literature review:] Identify explanations already proposed and tested.
+- .orange[Context:] Consider whether established explanations apply to your population or setting.
 
-### Key point: Start with existing knowledge, then identify what still needs explaining.
-
----
-# How to Identify a Research Gap
-
-A research gap is something important that existing research has not adequately explained.
-
-- .orange[Population gap:] Has the theory been tested in this population?
-- .orange[Context gap:] Does the explanation apply in a different social setting?
-- .orange[Mechanism gap:] Do we understand why the relationship occurs?
-- .orange[Evidence gap:] Are previous findings inconsistent or uncertain?
-- .orange[Boundary condition:] Under what circumstances might the explanation not apply?
-
-## Example:
-We know that similarity can be associated with friendship.
-Does age similarity matter equally in small and large student groups?
-
-### Key question: What would our study help us understand that we do not already know?
 
 ---
-# From a Theoretical Concept to a Mechanism
-
-A theoretical concept is not yet an explanation.
-
-.orange[Concept:] Age similarity
-
-.orange[Possible mechanism:]
-- People of similar ages may share life experiences.
-- Shared experiences may create common interests.
-- Common interests may increase opportunities for interaction.
-- Interaction may increase the likelihood of friendship.
-
-.orange[Hypothesis:]
-People of similar ages are more likely to become friends.
-
-.orange[Key point:] A mechanism explains how or why a proposed relationship might occur.
-
----
-# Exogenous vs. Endogenous Variables (not just in ERGM!)
-
+name: TheoData
+description: Reconnect theory building to measurement
+# Theory and Data
+<br>
 ## Exogenous variables (node and edge attributes - comes from outside of the network)
 
 - Determined outside the network/model.
@@ -995,30 +1006,9 @@ People of similar ages are more likely to become friends.
 
 - move on with hypothesis testing
 
-
 ---
-
-
-# Developing Theory About Endogenous Network Processes
-
-Network structure can itself create opportunities and constraints.
-
-.orange[Example: Triadic closure]
-
-- Two people may meet through a mutual friend.
-- A mutual friend can create opportunities for interaction.
-- Shared connections may increase trust or social familiarity.
-- These processes may make a new friendship more likely.
-
-.orange[Hypothesis (H1):]
-Two people are more likely to form a friendship when they have mutual friends.
-
-.orange[Null hypothesis (H0):]
-The number of mutual friends is not positively associated with the likelihood of a friendship tie.
-
-.orange[Key question:] What social mechanism could generate this network pattern?
-
----
+name: MultiExpl
+description: One phenomenon, multiple theories
 # One Pattern, Multiple Theoretical Explanations
 
 .orange[Observation:] Friends often have similar characteristics.
@@ -1035,6 +1025,8 @@ These explanations can produce similar observed patterns.
 .orange[Key point:] The same association can be consistent with different theories.
 
 ---
+name: TheoTesting
+description: Theory Testing in this course
 # Testing your theory
 
 <br>
@@ -1088,12 +1080,6 @@ These explanations can produce similar observed patterns.
 </div>
 <br>
 <div style="text-align:center; font-size:23px;"><b>Key point:</b> The method does not determine whether a hypothesis is <b>exogenous or endogenous</b> — the <b>variables and theoretical hypothesis</b> do.</div>
-
----
-# Discuss your findings
-
-
-## So what?
 
 
 ---
