@@ -1,0 +1,1090 @@
+---
+title: "SOCIAL NETWORK ANALYSIS<br>for DATA SCIENTISTS"
+topic: "LECTURE: Network Research Design"
+lecture_no: "Week 7"
+author: "Claudia"
+playdate: "October, 13th, 2026"
+output:
+  xaringan::moon_reader:
+    css:
+      - default
+      - assets/css/animate.css
+      - assets/css/apron.css
+      - assets/css/descartes.css
+      - assets/css/tachyons.min.css
+      - assets/css/xaringan-extra.css
+      - assets/css/RL-fonts.css
+      - assets/css/SNA4DS.css
+      - assets/css/SNA4DS_effects.css
+      - assets/css/kleuren.css # make sure this is the last one
+    self_contained: false
+    lib_dir: assets
+    chakra: assets/remark-latest.min.js
+    seal: false # automatic title slide with YAML information
+    mathjax: "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"
+    includes:
+      in_header:
+        - assets/html/mathjax-equation-numbers.html
+    nature:
+      beforeInit:
+        - assets/js/remark-zoom.js
+        - assets/js/macros.js
+      highlightStyle: atom-one-light
+      highlightLines: true
+      highlightSpans: true
+      titleSlideClass: [middle, left]
+      countIncrementalSlides: false
+      slideNumberFormat: "- %current% -"
+      ratio: '16:9' # alternatives '16:9' or '4:3' or others e.g. 13:9
+      navigation:
+        scroll: true # slide transitions by scrolling
+anomia:
+  combo:
+    prefix: "lab_SNAC"
+    pattern:
+      - colors
+      - [animals, fruits]
+      - adverbs
+    sep: "_"
+    case: "upper"
+---
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+<br><br><br><br><br>
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[`r rmarkdown::metadata$title`]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[`r rmarkdown::metadata$topic` .small-caps.font70[(lecture] .font70[`r rmarkdown::metadata$lecture_no`)]]]
+  ]
+
+<br>
+.f-abel.White-inline[Your lecturer: `r rmarkdown::metadata$author`]<br>
+.f-abel.White-inline[Playdate: `r rmarkdown::metadata$playdate`]
+
+
+<!-- setup options start -->
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                  out.width = "90%",
+                  fig.height = 6,
+                  fig.path = "assets/images/",
+                  fig.retina = 2,
+                  dev = "svg",
+                  message = FALSE,
+                  warning = FALSE)
+# library(htmlwidgets, quietly = TRUE, verbose = FALSE, warn.conflicts = FALSE)
+# library(countdown, quietly = TRUE, verbose = FALSE, warn.conflicts = FALSE)
+
+knitr::opts_knit$set(global.par = TRUE)  # anders worden de margin settings niet overal doorgevoerd
+```
+
+
+```{r lecture_measures_01, include = FALSE}
+par(mar = c(0,0,0,0) + .05) #it's important to have this in a separate chunk
+```
+
+
+```{r xaringanExtra_settings, include = FALSE}
+xaringanExtra::use_xaringan_extra(c("tile_view"
+                                    , "panelset"
+                                    , "animate"
+                                    , "tachyons"
+                                    , "freezeframe"
+                                    # , "broadcast"
+                                    , "scribble"
+                                    , "fit_screen"
+                                    ))
+
+# xaringanExtra::use_webcam(300 * 3.5, 300 / 4 * 3 * 3.5)
+xaringanExtra::use_editable(expires = 1)
+# xaringanExtra::use_search(show_icon = FALSE, case_sensitive = FALSE)
+xaringanExtra::use_clipboard()
+
+# htmltools::tagList(
+#   xaringanExtra::use_clipboard(
+#     button_text = "<i class=\"fa fa-clipboard\"></i>",
+#     success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+#     error_text = "<i class=\"fa fa-times-circle\" style=\"color: #F94144\"></i>"
+#   ),
+# rmarkdown::html_dependency_font_awesome()
+# )
+```
+
+
+```{r xaringan-extra-styles, echo = FALSE}
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,         
+  mute_unhighlighted_code = TRUE  
+)
+```
+
+```{css echo=FALSE}
+.highlight-last-item > ul > li, 
+.highlight-last-item > ol > li {
+  opacity: 0.5;
+}
+
+.highlight-last-item > ul > li:last-of-type,
+.highlight-last-item > ol > li:last-of-type {
+  opacity: 1;
+}
+
+.bold-last-item > ul > li:last-of-type,
+.bold-last-item > ol > li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+```
+
+
+```{r some_handy_functions, echo = FALSE}
+source("assets/R/components.R")
+```
+
+
+
+```{css}
+.remark-inline-code {
+  background: #F5F5F5;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.inverse-red, .inverse-red h1, .inverse-red h2, .inverse-red h3, .inverse-red a, inverse-red a > code {
+	border-top: none;
+	background-color: red;
+	color: white; 
+	background-image: "";
+}
+
+.inverse-orange, .inverse-orange h1, .inverse-orange h2, .inverse-orange h3, .inverse-orange a, inverse-orange a > code {
+	border-top: none;
+	background-color: orange;
+	color: black; 
+	background-image: "";
+}
+
+.tab{
+  display: inline-block;
+  margin-left: 40px;
+}
+
+.tab1{tab-size: 2;}
+.tab2{tab-size: 4;}
+.tab3{tab-size: 6;}
+.tab4{tab-size: 8;}
+
+```
+
+
+
+```{css}
+.grid-3-2a {
+  display: grid;
+  height: calc(90%);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1em;
+  padding: 1em;
+}
+```
+
+
+<!--scroll box set up -->
+```{css}
+/* Allow slides to show overflowing content */
+.remark-slide-content {
+  overflow: visible !important;
+}
+
+/* Scroll box */
+.scroll-box-18 {
+  display: block;           /* make it a block element */
+  max-height: 18em;         /* height of scroll box */
+  overflow-y: auto;         /* vertical scroll */
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fafafa;
+  box-sizing: border-box;   /* include padding in height */
+}
+
+/* Optional: nicer scrollbar */
+.scroll-box-18::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-box-18::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.scroll-box-18::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+```
+
+<!-- setup options end -->
+
+
+
+---
+class: course-logo
+layout: true
+
+
+---
+name: Menu
+description: Topics we cover today
+# Menu for today
+<br>
+<br>
+<br>
+<br>
+
+- Why do we need this class?
+
+- To explain or to predict?
+
+- Some theory for studying networks
+
+- Explanatory modelling with theory of networks
+
+---
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+# Why do we need this class?
+---
+name: WhyTheory
+description: Why do we need a class on theory?
+# Why do we need this class? 
+
+.center[![:scale 40%](assets/images/cartoon-kids-thinking.jpg)] 
+
+
+---
+# Why do we need this class? 
+
+.center[![:scale 60%](assets/images/WordCloudTheory.png)]
+
+
+
+---
+
+# Why do we need this class? 
+<br>
+## Data Science is an umbrella term 
+
+ Causal inference, Machine Learning, Deep Learning, Neural Networks...
+
+## - Different people with different background will give you different definitions
+
+## - Some of them might tell you that there is only one way to do data science
+
+
+## .red[Ultimately data science is about any techniques that you can use to analyze data]
+
+## .blue[The trick is learning to use the right technique in the right moment!]
+
+
+---
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+# To explain or to predict?
+
+---
+# The real deal is the research question
+<br>
+## .red[What do you want to know provided that your data contains the answer?]
+
+---
+name: RQs
+description: Three main types of research questions
+# The real deal is the research question
+<br>
+## .red[What do you want to know provided that your data contains the answer?]
+<br>
+## Three big families of research questions (relevant for data science)
+
+### Research questions that want to predict something (new or future observations)
+### Research questions that want to explain something (understanding why something happens)
+### Research questions that want to describe something (summarizing or describing data patterns)
+
+---
+name: ResPipeline
+description: The General Research Pipeline valid for all types of data science modelling
+background-image: url(assets/images/ResPipeline.png)
+background-size: 1000px
+background-position: 50% 50%
+# The research Pipeline
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+.center[It is is the same for all the research questions, but what you do in each step is different according to the type of Research Question]
+
+*EDA = Exploratory data analysis
+
+---
+name: RQsTypes
+description: Explanations and Predictions as two main type of research questions we focus on
+# Research Questions
+<br>
+## We move on with these two types
+<br>
+## - **Explanation** asks whether the model represents an underlying process or causal relationship. 
+## - **Prediction** asks whether the model can accurately predict new observations.
+
+<br>
+### Don't assume that explanatory quality automatically implies predictive quality - these two things are different.
+
+---
+name: PredMod
+description: Predictive Modeling
+# Predictive Modeling
+<br>
+## Generic RQ: Can we predict the value of Y given X?
+
+## In this type of approach 
+
+- The more variable are the merrier (no theoretical motivation to include them)
+- More information means more knowledge that improve the model
+- A model that predicts its training data extremely well isn't necessarily a good predictive model.
+- Prediction should therefore be evaluated using out-of-sample data.
+
+---
+# Example
+<br>
+## RQ: Under which circumstances will a customer cancel their subscription?
+
+Variables
+
+- number of logins
+- customer-service calls
+- time since last purchase
+- device type
+- browsing behavior
+- ...
+
+Train the model, test on new data
+
+---
+name: ExpMod
+description: Explanatory Modeling
+# Explanatory Modeling - Causal 
+<br>
+## Generic RQ: Can we assess what is the X that caused the observed Y?
+
+## In this type of approach 
+- Carefully select variables based on hypotheses. Included only if there is a theory that supports the selection
+- More variables is not better, unless you have theory
+- You assess the model with goodness of fit within the sample
+- You read model results looking at p-value, sign of the estimate, estimate size
+
+---
+# Example
+
+## RQ What are the factors that increase the productivity of employees?
+
+### After learning theory on the topic:
+## H1: higher employee satisfaction cause higher productivity
+## H0: Higher employee satisfaction has no effect on productivity
+
+Variables
+- predictor: employee satisfaction 
+- controls: ... (other variables that might matter)
+
+Test on your sample
+
+
+
+---
+name: ExpPred
+description: Differences between Explanatory and Predictive Approaches in Research
+# Differences between Explanatory and Predictive Approaches in Research
+<br>
+### 1) Theory Driven VS Data Driven
+### 2) Causation VS Association
+### 3) Retrospective VS Prospective
+### 4) Bias VS Variance
+### 5) What's the best model differs
+### 6) Explanatory power VS Predictive Power
+### 7) Model Fit VS Predictive Validation
+
+---
+# 1) Theory Driven VS Data Driven
+
+## Theory-Driven (Explanatory)
+
+- Starts with a theory or hypothesis
+- Uses data to test expected relationships
+- Focuses on understanding why something happens
+- Variables are selected based on theoretical reasoning (no, here you cannot select by p-value)
+
+## Data-Driven (Predictive)
+
+- Starts with data and observed patterns
+- Identifies relationships that improve prediction
+- Focuses on what happens / what can be predicted
+- Variables are selected based on predictive performance (yes, here you can select by p-value)
+
+
+---
+# 2) Causation VS Association
+<br><br>
+## **Causation** (Explanatory): Focuses on why something happens and whether one variable causes changes in another.
+
+Explanatory models require stronger evidence for causal relationships, using theory, experiments, or causal methods.
+
+
+## **Association** (Predictive): Focuses on whether variables are useful for predicting an outcome, without needing to establish causality.
+
+Predictive models can use associations and correlations as long as they improve prediction accuracy.
+
+
+---
+# 3) Retrospective VS Prospective
+
+## **Retrospective** (Explanatory)
+
+Analyze past/observed data to understand relationships.
+
+Ask: “What happened, and why?”
+
+Test whether the data support a theory or hypothesis.
+
+- Example: Analyze past customer churn → Why did customers leave?
+
+## **Prospective** (Predictive)
+
+Use current data to predict future or unseen outcomes.
+
+Ask: “What is likely to happen next?”
+
+Focus on prediction accuracy and generalization.
+
+- Example: Predictive: Use current customer behavior → Who will leave next month?
+
+---
+# 4a) Bias VS Variance
+<br>
+<br>
+## **Bias**: The error caused by a model being too simple and making overly strong assumptions about the underlying relationship. 
+
+(high bias → underfitting )
+
+<br>
+<br>
+## **Variance**: The error caused by a model being too sensitive to the specific training data.
+
+(high variance → overfitting)
+
+
+
+---
+# 4b) Bias VS Variance
+<br>
+## Explanatory → Bias: 
+
+### Often prefer simpler, theory-based models to clearly represent relationships, even if some prediction error remains.
+
+-Explanatory goal: Minimize bias to accurately capture the theoretical relationships and explain why and how an outcome occurs, while avoiding unnecessary model complexity.
+
+<br> 
+
+## Predictive → Bias–Variance Trade-off: 
+### Aim to balance bias and variance to achieve the best performance on unseen data.
+
+-Predictive goal: Find the right balance → low prediction error and good generalization to new data.
+
+---
+# 5) What's the best model?
+
+## It differs for the two types
+
+## **Explanatory**
+- Best model: A model that best represents theoretical relationships and provides clear, meaningful interpretation.
+- Explanatory models often prioritize simplicity, interpretability, and theoretical consistency over predictive accuracy.
+
+## **Predictive** 
+- Best model: A model that achieves the lowest prediction error and generalizes well to unseen data.
+- Predictive models may use greater complexity if it improves performance on new data.
+
+**Key point: A model can be best for explanation but poor for prediction, or best for prediction but difficult to interpret.**
+
+---
+# 6) Explanatory power VS Predictive Power
+<br>
+## **Explanatory Power** → Measures how well a model explains theoretical relationships and helps us understand why/how an outcome occurs.
+Explanatory models prioritize theoretical meaning, interpretation, and causal understanding.
+
+## **Predictive Power** → Measures how well a model predicts new or unseen outcomes accurately.
+Predictive models prioritize out-of-sample accuracy and generalization rather than explaining causality.
+
+**Key point: A model can have high explanatory power but low predictive power, or high predictive power but low explanatory power.**
+
+---
+# 7) Model Fit VS Predictive Validation
+<br>
+## **Explanatory** 
+### Model Fit: Evaluates how well the model fits the observed data and supports the proposed theoretical relationships.
+Model Fit focuses on **in-sample performance** — how well the model describes the data it was estimated from (GOF).
+
+## **Predictive**
+### Predictive Validation: Evaluates how well the model predicts new or unseen data that were not used to build the model.
+Predictive Validation focuses on **out-of-sample performance** — how well the model generalizes to new observations.
+
+**Key point: A model can have excellent fit to existing data but poor predictive performance due to overfitting.**
+
+---
+# Nota BENE: Example with OLS
+<br>
+## OLS: ordinary least square is an estimation method
+<br>
+### OLS can solve a predictive problem
+### OLS can solve an explanatory problem (causal model) 
+<br>
+## .red[Different research questions will involve a different usage of OLS - different tasks in the same research pipeline]
+
+---
+# Disclaimers
+<br>
+## Shmueli (2010) -reading for today- discusses theory talking about ‘statistical modelling’
+ 
+## Read ‘statistical modelling’ as **Models of any sort** (if you ask a statistician data science is statistics...)
+
+## .red[The theory we discuss today applies to all the classes you take at JADS]
+
+## .blue[They might even be the models with the same math but used DIFFERENTLY for DIFFERENT GOALS]
+
+---
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+# Some theory for studying networks
+
+---
+name: NetTheory
+description: Discussing theory and networks
+## **The Two Papers for today**
+
+### **Shmueli (2010):**
+
+- Descriptive: What patterns do we observe in the network?
+- Explanatory: Why do these patterns occur, and through what mechanisms?
+- Predictive: How accurately can we predict outcomes for unseen cases?
+- Discuss differences and research pipeline 
+
+### **Borgatti & Halgin (2011):**
+
+- Clarify what a network is, and separate network theory (structure → outcomes) from theory of networks (why structures form).
+- Show that network theories rest on a few mechanisms: the flow model (ties as pipes) and the bond model (ties as coordination).
+- Argue for model-based theorizing: derive testable hypotheses from these models.
+
+**Paper two applies to networks what paper one discusses in a generic way**
+
+---
+name: RealNom
+description: Differences between realist and nominalist (elements of epistemology)
+## **What is your network?**
+<br>
+### Boundaries of your sample 
+The researcher defines the network by choosing nodes and a tie type. This is dictated by the research question and theory
+
+### **Realist**: 
+There is a “true” network of relationships to discover, so the question becomes which survey questions elicit it best.
+
+### **Nominalist**: 
+The network is shaped by how you conceptualize it, based on the research question. Every tie question (“Who are your friends?”, “Who do you seek advice from?”) generates its own network with its own structure and implications.
+
+### **The authors follow the nominalist tradition**
+
+
+---
+name: TwoAppr
+description: Network theory and theory of networks
+# Two approaches 
+<br>
+
+**Network theory: what networks do**
+
+- Question: what are the consequences of network structure or position?
+- Network → outcome
+- Example: having many contacts that do not know each others (structural holes) → more novel information → better performance or promotion
+
+**Theory of networks: why networks look the way they do**
+
+- Question: what are the antecedents of network structure?
+- Cause → network
+- Example: homophily (people tie to similar others) → networks shows clusters driven by homophily
+
+
+---
+# Focus on Network Theory
+<br>
+<br>
+<br>
+## Two famous theories:
+
+## - .orange[Granovetter:] strength of weak ties (SWT)
+## - .orange[Burt:] structural holes (SH)
+
+- Some people claim SNA has no theory of its own... proven wrong!
+---
+name: GranSWT
+description: Granovetter's strentgh of weak ties
+# Granovetter's SWT
+<br>
+### **Premise 1**: Strong ties overlap. If A–B and B–C are strong, A and C probably know each other. 
+(theory of networks - why ties are transitive))
+
+### **Premise 2**: Bridging ties reach people outside your circle, so they bring novel information.
+(network theory - structure leads to outcomes)
+
+### **Conclusion**: Bridges are rarely strong ties, so weak ties are the best source of new information.
+
+Example: People hear about jobs through acquaintances more often than through close friends.
+Group level: Communities with many weak ties mobilize better against outside threats.
+
+---
+.center[![:scale 70%](assets/images/strength_of_weak_ties_bridge.png)] 
+---
+name: BurtSH
+description: Burt's structural holes
+# Burt's SH
+<br>
+### **Structural hole**: A gap between two contacts who don’t know each other, with ego sitting in the gap.
+Example: A’s three contacts come from separate groups. B’s three contacts all know each other. Same number and strength of ties.
+
+### **Core claim**: A hears different things from each contact, while B hears the same thing three times. So A gets more new information, which means better performance and promotion.
+
+Cause: What matters is whether contacts are unconnected, not tie strength. This is the same idea as Granovetter’s bridges.
+
+Second benefit: Control. A broker can exploit divisions between unconnected contacts.
+
+
+
+
+---
+
+.center[![:scale 70%](assets/images/structural_holes_a_vs_b.png)] 
+
+---
+name: NewTheory
+description: Generating New Theory from SWT and SH
+# What do Granovetter and Burt have in common?
+ <br>
+## General 
+
+-  Structure and position do the explaining: where a tie is matters
+
+-  **Both theories focus on structure** and ignores nodes and edge attributes (skill, personality, status) 
+
+## On the specifics
+ 
+- Both assume ties work like pipes through which information moves.
+
+- Weak ties and structural holes are largely the same idea (bridges = nonredundant ties).
+
+---
+## **On the application side: The flow model (ties as pipes)**
+<br>
+
+### Ties are conduits, and things such as information or resources travel along them.
+
+- The longer the path, the longer it takes; dense clusters pass the same thing around repeatedly.
+
+- Central nodes receive flow sooner, and nodes in clusters get more redundant flow.
+
+### Flow can work differently: 
+
+- a dollar bill moves (walk)
+- gossip duplicates but doesn’t revisit ties (trail), 
+- a virus doesn’t reinfect (true path).
+
+Researchers link model outcomes (timing, redundancy) to jobs, promotion and creativity.
+
+---
+## **On the application side: The bond model (ties as bonds)**
+<br>
+### Ties are bonds, and they coordinate action and allow to establish power
+
+- Power in exchange networks (Cook & Emerson): nothing flows, yet position matters.
+
+- Power comes from having alternatives while your partners have none, not from being central.
+
+Example: in a negotiation, a node whose partners have no alternatives holds power, even though nothing moves between them.
+
+Example: workers tied by solidarity can act as one (a union) and bargain on equal terms.
+
+## Being connected to weak partners gives power, while being connected to well-connected partners gives centrality.
+
+## The flow model is well developed, and the bond model is still developing.
+---
+# What are these models used to explain?
+
+<br>
+<br>
+## The social capital literature: **Success** - performance and rewards, for a node or a whole network.
+
+## The social homogeneity literature: **Choice** - behaviors, attitudes, beliefs, and organizations’ internal structures, often framed as similarity of choice
+
+<br>
+Two mechanisms (flow, bond) and two outcomes (success, choice) give four combinations.
+
+
+
+---
+## Explain success and choice with flow and bond 
+
+<br><br>
+
+<div style="width: 92%; margin: 30px auto;">
+<table style="width:100%; border-collapse:collapse; font-size:20px;">
+<tr style="background:#eeeeee;">
+<th style="padding:11px; border-bottom:3px solid #555; text-align:left;">Model</th>
+<th style="padding:11px; border-bottom:3px solid #555; text-align:center;">Social capital<br><span style="font-size:15px; font-weight:normal;">(success)</span></th>
+<th style="padding:11px; border-bottom:3px solid #555; text-align:center;">Social homogeneity<br><span style="font-size:15px; font-weight:normal;">(choice)</span></th>
+</tr>
+<tr>
+<td style="padding:10px; border-bottom:1px solid #ccc;"><b>Network flow model</b><br><span style="font-size:16px;">(ties as pipes)</span></td>
+<td style="padding:10px; border-bottom:1px solid #ccc; text-align:center;"><b>Capitalization</b><br><span style="font-size:16px;">Weak ties, structural holes (information)</span></td>
+<td style="padding:10px; border-bottom:1px solid #ccc; text-align:center;"><b>Contagion</b><br><span style="font-size:16px;">Diffusion and adoption of traits</span></td>
+</tr>
+<tr>
+<td style="padding:10px; border-bottom:1px solid #ccc;"><b>Network coordination model</b><br><span style="font-size:16px;">(ties as bonds)</span></td>
+<td style="padding:10px; border-bottom:1px solid #ccc; text-align:center;"><b>Cooperation</b><br><span style="font-size:16px;">Exchange networks, structural holes (control)</span></td>
+<td style="padding:10px; border-bottom:1px solid #ccc; text-align:center;"><b>Convergence</b><br><span style="font-size:16px;">Structural equivalence, similar positions</span></td>
+</tr>
+</table>
+<div style="font-size:15px; margin-top:14px; text-align:center;">Adapted from Borgatti &amp; Halgin (2011), Table 2. Examples added from the paper's discussion of each quadrant.</div>
+</div>
+<br>
+<div style="text-align:center; font-size:23px;"><b>Key point:</b> The same <b>outcome</b> (success or choice) can be explained by two different <b>mechanisms</b>: ties as <b>pipes</b> or ties as <b>bonds</b>. Social Capital and Social Homogeneity are the two macro areas of tesearch that focused respectively on success and choice.</div>
+
+---
+# More on the the four combinations 
+<br><br>
+
+- Flow and success: capitalization (position gives access to resources; weak ties, structural holes).
+
+- Flow and choice: contagion (nodes influence each other; diffusion of innovations).
+
+- Bond and success: cooperation (nodes act as a unit; exchange networks, control benefits).
+
+- Bond and choice: convergence (similar positions lead to similar attitudes).
+
+Burt appears in two cells: information benefits (capitalization) and control benefits (cooperation).
+
+These theory recreates the micro fundation of two major fields in social science
+---
+<br><br>
+<br><br>
+<br><br>
+# So what?
+
+
+---
+name: ObsGen
+description: From Observation to Generalization
+# From Observation to Generalization
+<br>
+- First you observe a phenomenon (something that happens, we care about it and we have data about it)
+
+- Remove from it all the specifics 
+
+- Try to understand the dynamics that can apply to as many cases as possible
+
+Example: you observe three friends chatting, but you see them as three nodes connected by ties. In this way it becomes mesurable
+
+The theory travels across cultures, because friendship means different things in different settings. You pick whichever local tie has the property the theory needs.
+
+---
+# From Observation to Generalization
+<br>
+- First you observe a phenomenon (something that happens, we care about it and we have data about it)
+
+- Remove from it all the specifics 
+
+- Try to understand the dynamics that can apply to as many cases as possible
+
+## In data science:
+
+- Derive testable implications (RQs and/or hypotheses) from the model, including the original observations that led you to it.
+
+- (Ideally, state the model formally so math or simulation can derive implications that intuition would miss.)
+
+
+### Lave and March (1975) call model-based theorizing one of the strongest forms of theorizing.
+
+
+
+---
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+# Explanatory Modelling with Theory of Networks
+
+---
+name: ResPipNetTheory
+description: The research pipeline applied to explanatory modelling with theory of Networks
+background-image: url(assets/images/ResPipeline2.png)
+background-size: 1000px
+background-position: 50% 50%
+# Where theory places
+
+---
+## **Explanatory Modelling with Theory of Networks**
+
+**Goal: Understand why and how relationships, network structures and/or behaviors arise.**
+
+- First you **observe** a phenomenon (something that happens, we care about it and we have data about it)
+- Remove from it all the specifics (**abstract**)
+- Try to understand the **dynamics** that can apply to as many cases as possible (causal mechanism)
+- Find **literature** about it 
+- Formulate a **research question**.
+- Develop/Identify a **theory** to explain what happens.
+- Formulate an **hypothesis** about relationships between network structure, nodes, and attributes.
+- Find the appropriate **methodology** to answer the RQ or test the H and defend the theory.
+- Test and explain **outcomes** using both network-level processes and actor-level characteristics.
+- Focus on **interpretation**, mechanisms, and causal reasoning.
+- Account for the fact that actors are connected and their outcomes are interdependent.
+
+
+---
+name: causMech
+description: Causal Mechanism
+# Causal Mechanism
+<br>
+
+## Developing theory with networks in the explanatory tradition is:
+
+## - really about understanding how connections (structure and position) affect phenomena (**Network Theory**)
+
+## - really about understanding how connections (structure and position) are affected by phenomena (**Theory of Networks**)
+
+## This is also called "causal mechanism"
+
+**In which way does X affect Y?**
+
+The two can also overlap...
+
+---
+## Causal Mechanism within Network Theory in the Explanatory domain
+<br> <br>
+- A .orange[theory] is an explanation of why or how a phenomenon occurs.
+- It identifies .orange[(causal) mechanisms] that connect conditions to outcomes.
+- It explains why we expect certain relationships or network patterns.
+- A theory goes beyond describing a pattern: it proposes .orange[why the pattern exists].
+- A good theory in the explanatory domain generates .orange[testable hypotheses].
+---
+name: TheoBuild
+description: Some elements of theory building
+# Different levels of theory building
+ <br><br>
+### **Theory unification** - take different theories and unify them with generalization (as in  Borgatti and Halgin, 2011)
+
+### **Theory development** - observe and create an abstract representation (From observation to generalization, as in Granovetter or Burt)
+
+### **Theory derivation** - develop new relevant hypotheses to enrich existing theory
+
+### **Theory testing** - take existing theory and test it with new data
+
+<br>
+**Your work with the course project (and thesis/research in action) sits in between theory derivation and theory testing**
+
+---
+## **Where Do Theoretical Ideas Come From 1**
+<br>
+### **Theory unification** 
+- .orange[Existing theories:] Apply established explanations to a broader (more abstract) research question.
+- .orange[Empirical observations:] Notice recurring patterns that need explaining.
+- .orange[Literature review:] Identify explanations already proposed and tested.
+- .orange[Contradictions:] Investigate why previous studies reach different conclusions.
+
+### **Theory development** 
+- .orange[Empirical observations:] Notice recurring patterns that need explaining.
+- .orange[Literature review:] Identify explanations already proposed and tested.
+- .orange[Contradictions:] Investigate why previous studies reach different conclusions.
+
+---
+## **Where Do Theoretical Ideas Come From 2**
+<br>
+### **Theory derivation** 
+- .orange[Literature review:] Identify explanations already proposed and tested.
+- .orange[Contradictions:] Investigate why previous studies reach different conclusions.
+- .orange[Context:] Consider whether established explanations apply to your population or setting.
+
+### **Theory testing** 
+- .orange[Literature review:] Identify explanations already proposed and tested.
+- .orange[Context:] Consider whether established explanations apply to your population or setting.
+
+
+---
+name: TheoData
+description: Reconnect theory building to measurement
+# Theory and Data
+<br>
+## Exogenous variables (node and edge attributes - comes from outside of the network)
+
+- Determined outside the network/model.
+- Their values do not depend on other actors' network-related outcomes.
+- Examples: age, gender, education, geographic characteristics.
+
+## Endogenous variables (structure of the network - located in the inside of the network)
+
+- Determined within the network/system.
+- Can depend on other actors, network structure, or network processes.
+- Examples: friends' behavior, network position, tie formation.
+
+
+---
+# Developing theory about exogenous variables
+
+## this is about node and edge attributes  
+
+- read theory that discusses what the attribute measures (sex, age, time two nodes spend together...)
+
+- find a ‘gap’: what is not known yet? or, at your level, does the theory that we read work for our specific sample too?
+
+- formulate a research question: E.g., Under which circumstance do people become friends?
+
+- advance an answer based on the literature, for example: 
+
+- H1 Having a similar age increase the chances of becoming friends
+
+- H0 Having similar age has no influence of becoming friends
+
+- move on with hypothesis testing
+
+---
+# Developing theory about endogenous variables
+
+## this is about patterns in the structure of the network 
+
+- read theory that discusses phenomena that you can expect in your network (e.g., friend of my friend is my friend)
+
+- find a ‘gap’: what is not known yet? or, at your level, does the theory that we read work for our specific sample too?
+
+- formulate a research question: E.g., Does friendship occur at random?
+
+- advance an answer based on the literature, for example:
+
+- H1 It is more likely that I become friend with someone if we have a friend in common
+
+- H0 Having a friend in common does not increase the likelihood that two individuals become friends.
+
+- move on with hypothesis testing
+
+---
+name: MultiExpl
+description: One phenomenon, multiple theories
+# One Pattern, Multiple Theoretical Explanations
+
+.orange[Observation:] Friends often have similar characteristics.
+
+Possible explanations:
+
+- .orange[Selection:] People choose friends who are similar to themselves.
+- .orange[Influence:] Friends become more similar over time.
+- .orange[Shared context:] People in the same class or workplace become similar and interact more.
+- .orange[Opportunity:] People who meet more often have more chances to become friends.
+
+These explanations can produce similar observed patterns.
+
+.orange[Key point:] The same association can be consistent with different theories.
+
+---
+name: TheoTesting
+description: Theory Testing in this course
+# Testing your theory
+
+<br>
+
+<div style="width: 92%; margin: 30px auto;">
+<table style="width:100%; border-collapse:collapse; font-size:20px;">
+<tr style="background:#eeeeee;">
+<th style="padding:11px; border-bottom:3px solid #555; text-align:left;">Model</th>
+<th style="padding:11px; border-bottom:3px solid #555; text-align:center;">Exogenous</th>
+<th style="padding:11px; border-bottom:3px solid #555; text-align:center;">Endogenous</th>
+<th style="padding:11px; border-bottom:3px solid #555; text-align:left;">Example hypothesis</th>
+</tr>
+<tr>
+<td style="padding:10px; border-bottom:1px solid #ccc;"><b>CUG</b></td>
+<td style="padding:10px; border-bottom:1px solid #ccc; text-align:center;">—</td>
+<td style="padding:10px; border-bottom:1px solid #ccc; text-align:center; font-size:24px;">✓</td>
+<td style="padding:10px; border-bottom:1px solid #ccc;">Does the network show structural patterns beyond chance?</td>
+</tr>
+<tr>
+<td style="padding:10px; border-bottom:1px solid #ccc;"><b>QAP</b></td>
+<td style="padding:10px; border-bottom:1px solid #ccc; text-align:center; font-size:24px;">✓</td>
+<td style="padding:10px; border-bottom:1px solid #ccc; text-align:center;">—</td>
+<td style="padding:10px; border-bottom:1px solid #ccc;">Does geographic proximity predict ties?</td>
+</tr>
+<tr>
+<td style="padding:10px; border-bottom:1px solid #ccc;"><b>MRQAP</b></td>
+<td style="padding:10px; border-bottom:1px solid #ccc; text-align:center; font-size:24px;">✓</td>
+<td style="padding:10px; border-bottom:1px solid #ccc; text-align:center; font-size:24px;">✓&#42;</td>
+<td style="padding:10px; border-bottom:1px solid #ccc;">Do multiple predictors explain network ties?</td>
+</tr>
+<tr>
+<td style="padding:10px; border-bottom:1px solid #ccc;"><b>Netlogit</b></td>
+<td style="padding:10px; border-bottom:1px solid #ccc; text-align:center; font-size:24px;">✓</td>
+<td style="padding:10px; border-bottom:1px solid #ccc; text-align:center; font-size:24px;">✓</td>
+<td style="padding:10px; border-bottom:1px solid #ccc;">Do actor, dyadic, or network effects predict ties?</td>
+</tr>
+<tr>
+<td style="padding:10px; border-bottom:1px solid #ccc;"><b>ERGM</b></td>
+<td style="padding:10px; border-bottom:1px solid #ccc; text-align:center; font-size:24px;">✓</td>
+<td style="padding:10px; border-bottom:1px solid #ccc; text-align:center; font-size:24px;">✓</td>
+<td style="padding:10px; border-bottom:1px solid #ccc;">Do attributes and network structure explain tie formation?</td>
+</tr>
+<tr>
+<td style="padding:10px; border-bottom:1px solid #ccc;"><b>LNAM</b></td>
+<td style="padding:10px; border-bottom:1px solid #ccc; text-align:center;">✓&#42;</td>
+<td style="padding:10px; border-bottom:1px solid #ccc; text-align:center; font-size:24px;">✓</td>
+<td style="padding:10px; border-bottom:1px solid #ccc;">Do network dependence and predictors explain ties?</td>
+</tr>
+</table>
+<div style="font-size:15px; margin-top:14px; text-align:center;"><b>&#42;</b> Depends on the variables and model specification.</div>
+</div>
+<br>
+<div style="text-align:center; font-size:23px;"><b>Key point:</b> The method does not determine whether a hypothesis is <b>exogenous or endogenous</b> — the <b>variables and theoretical hypothesis</b> do.</div>
+
+
+---
+
+.center[![:scale 70%](assets/images/cartoon-man-and-his-cat.jpg)] 
+
+---
+
