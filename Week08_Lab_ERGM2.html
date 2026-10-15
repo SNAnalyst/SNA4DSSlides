@@ -27,7 +27,7 @@
     <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
     <script src="assets/xaringanExtra-webcam-0.0.1/webcam.js"></script>
     <script id="xaringanExtra-webcam-options" type="application/json">{"width":"175","height":"131.25","margin":"1em"}</script>
-    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"xb1c557fcf304eba91d0bc94c6965870","expires":1}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x201cca0835e47af8e4ca0ad169ed0c2","expires":1}</script>
     <script src="assets/himalaya-1.1.0/himalaya.js"></script>
     <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
     <script src="assets/editable-0.2.6/editable.js"></script>
@@ -171,11 +171,20 @@ description: List of contents for the lab
 # Menu'
 &lt;br&gt;
 &lt;br&gt;
-- TerMometer
+- ERGM terms bootcamp
 - The Intensity of the Effects
 - 7 steps Research Flow
 
 
+---
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+# ERGM terms bootcamp
 ---
 # TerMometer
 &lt;br&gt;
@@ -186,6 +195,222 @@ code: 4163 0041
 
 .center[![:scale 30%](assets/images/)]
 
+---
+&lt;style type="text/css"&gt;
+/* Keep prompts, counts and networks stationary between reveals. */
+.term-count-slide .term-count {
+  position: absolute;
+  top: 205px;
+  left: 60px;
+  right: 60px;
+  font-weight: bold;
+}
+.term-count-slide p:has(&gt; img) {
+  position: absolute;
+  top: 250px;
+  left: 60px;
+  right: 60px;
+  margin: 0;
+  text-align: center;
+}
+.term-count-slide .term-note {
+  position: absolute;
+  bottom: 25px;
+  left: 60px;
+  right: 60px;
+  font-size: 85%;
+}
+.term-value, .term-blank {
+  display: inline-block;
+  min-width: 2em;
+}
+.term-blank {
+  border-bottom: 2px solid currentColor;
+}
+&lt;/style&gt;
+
+# Counting ERGM terms
+
+Count each statistic, then check the highlighted answer.
+
+All ties are directed. An **edge** is one arrow; a **dyad** is one unordered node pair.
+
+
+
+---
+class: term-count-slide
+# Edges: count
+
+How many arrows? Count both directions of a reciprocal pair.
+
+.term-count[`edges` = &lt;span class="term-blank"&gt;&amp;nbsp;&lt;/span&gt;]
+
+&lt;img src="assets/images/terms-edges-question-1.svg" alt="" width="68%" /&gt;
+
+---
+class: term-count-slide
+# Edges: answer
+
+Each arrow counts once.
+
+.term-count[`edges` = &lt;span class="term-value"&gt;7&lt;/span&gt;]
+
+&lt;img src="assets/images/terms-edges-answer-1.svg" alt="" width="68%" /&gt;
+
+---
+class: term-count-slide
+# Mutual dyads: count
+
+How many pairs have arrows in both directions? Name them.
+
+.term-count[`mutual` = &lt;span class="term-blank"&gt;&amp;nbsp;&lt;/span&gt;]
+
+&lt;img src="assets/images/terms-mutual-question-1.svg" alt="" width="68%" /&gt;
+
+---
+class: term-count-slide
+# Mutual dyads: answer
+
+A–B and C–D. Each pair counts once.
+
+.term-count[`mutual` = &lt;span class="term-value"&gt;2&lt;/span&gt;]
+
+&lt;img src="assets/images/terms-mutual-answer-1.svg" alt="" width="68%" /&gt;
+
+---
+class: term-count-slide
+# Two-out-stars: count
+
+A **2-out-star** is two arrows with the same sender. Count the stars and identify their arrows.
+
+.term-count[`ostar(2)` = &lt;span class="term-blank"&gt;&amp;nbsp;&lt;/span&gt;]
+
+&lt;div class="term-note"&gt;Outdegree \(d\) contributes \(\binom{d}{2}\) stars.&lt;/div&gt;
+
+&lt;img src="assets/images/terms-out-question-1.svg" alt="" width="68%" /&gt;
+
+---
+class: term-count-slide
+# Two-out-stars: answer
+
+A, B and D each contribute one star.
+
+.term-count[`ostar(2)` = &lt;span class="term-value"&gt;3&lt;/span&gt;]
+
+&lt;img src="assets/images/terms-out-answer-1.svg" alt="" width="68%" /&gt;
+
+.term-note[A→B / A→C; B→A / B→E; D→C / D→E. Each color marks one star.]
+
+---
+class: term-count-slide
+# Two-in-stars: count
+
+A **2-in-star** is two arrows with the same receiver. Count the stars and identify their arrows.
+
+.term-count[`istar(2)` = &lt;span class="term-blank"&gt;&amp;nbsp;&lt;/span&gt;]
+
+&lt;div class="term-note"&gt;Indegree \(d\) contributes \(\binom{d}{2}\) stars.&lt;/div&gt;
+
+&lt;img src="assets/images/terms-in-question-1.svg" alt="" width="68%" /&gt;
+
+---
+class: term-count-slide
+# Two-in-stars: answer
+
+C receives from A and D; E receives from B and D.
+
+.term-count[`istar(2)` = &lt;span class="term-value"&gt;2&lt;/span&gt;]
+
+&lt;img src="assets/images/terms-in-answer-1.svg" alt="" width="68%" /&gt;
+
+.term-note[Each color marks one star; grey arrows belong to none.]
+
+---
+class: term-count-slide
+# Closed triads: count
+
+No reciprocal ties. List triples with all three pairs connected (`triangle`); identify directed cycles (`ctriple`).
+
+.term-count[`triangle` = &lt;span class="term-blank"&gt;&amp;nbsp;&lt;/span&gt; · `ctriple` = &lt;span class="term-blank"&gt;&amp;nbsp;&lt;/span&gt;]
+
+&lt;img src="assets/images/terms-tri-question-1.svg" alt="" width="68%" /&gt;
+
+---
+class: term-count-slide
+# Closed triads: answer
+
+Orange: transitive ABC. Purple: cyclic EFG.
+
+.term-count[`triangle` = &lt;span class="term-value"&gt;7&lt;/span&gt; · `ctriple` = &lt;span class="term-value"&gt;1&lt;/span&gt;]
+
+&lt;img src="assets/images/terms-tri-answer-1.svg" alt="" width="68%" /&gt;
+
+.term-note[Transitive: ABC, ABD, ACD, BCD, CDE, DEF. Cyclic: EFG.]
+
+---
+class: term-count-slide
+# Edgewise shared partners: count
+
+For **OTP**, a shared partner of `\(i\to j\)` is a node `\(k\)` on `\(i\to k\to j\)`. Which arrows have one partner? Two?
+
+.term-count[`esp(1)` = &lt;span class="term-blank"&gt;&amp;nbsp;&lt;/span&gt; · `esp(2)` = &lt;span class="term-blank"&gt;&amp;nbsp;&lt;/span&gt;]
+
+.term-note[`esp(d, type="OTP")` counts arrows with exactly `\(d\)` outgoing two-path shared partners.]
+
+&lt;img src="assets/images/terms-esp-question-1.svg" alt="" width="68%" /&gt;
+
+---
+class: term-count-slide
+# One shared partner: answer
+
+C→E has one partner: D, via C→D→E.
+
+.term-count[`esp(1)` = &lt;span class="term-value"&gt;1&lt;/span&gt; · `esp(2)` = &lt;span class="term-blank"&gt;&amp;nbsp;&lt;/span&gt;]
+
+&lt;img src="assets/images/terms-esp-one-1.svg" alt="" width="68%" /&gt;
+
+.term-note[The thick arrow is counted; the other colored arrows show the two-path.]
+
+---
+class: term-count-slide
+# Two shared partners: answer
+
+A→D has two partners: B and C.
+
+.term-count[`esp(1)` = &lt;span class="term-value"&gt;1&lt;/span&gt; · `esp(2)` = &lt;span class="term-value"&gt;1&lt;/span&gt;]
+
+&lt;img src="assets/images/terms-esp-two-1.svg" alt="" width="68%" /&gt;
+
+.term-note[A→B→D and A→C→D. The target arrow contributes **one** to `esp(2)`, not two.]
+
+---
+# From ESP to GWESP
+
+With decay `\(0.5\)`, an arrow with `\(k\)` OTP shared partners contributes
+
+$$
+w(k)=e^{0.5}\left[1-\left(1-e^{-0.5}\right)^k\right].
+$$
+
+| Arrow | Partners | ESP statistic | GWESP contribution |
+|:--|:--|:--|:--|
+| C→E | D | `esp(1) = 1` | `\(w(1)=1\)` |
+| A→D | B, C | `esp(2) = 1` | `\(w(2)=2-e^{-0.5}\approx1.393\)` |
+
+**`gwesp(0.5, fixed=TRUE, type="OTP")` = 2.393**.
+
+The first partner adds 1; the second adds about 0.393. GWESP combines ESP counts with diminishing contributions from additional partners.
+
+---
+# Counts and coefficients
+
+These counts are the ERGM's sufficient statistics `\(g(y)\)`:
+
+- **Network 1:** `edges` = 7, `mutual` = 2, `ostar(2)` = 3, `istar(2)` = 2.
+- **Network 2:** `triangle` = 7, `ctriple` = 1.
+- **Network 3:** `esp(1)` = 1, `esp(2)` = 1, `gwesp(0.5)` = 2.393.
+
+Coefficients weight these statistics in the model. Toggling one arrow can change several statistics at once.
 
 ---
 &lt;br&gt;
@@ -636,7 +861,7 @@ slideshow._releaseMath(document);
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML';
+  script.src  = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);
