@@ -655,7 +655,7 @@ The network is not fully connected
 ---
 # Type two
 <br>
-## How to ask causal questions (edge formation) on this type 2 weighted networks?
+## How to ask causal questions (Explanatory) about edge formation on this type 2 weighted networks?
 
 Option 1: You find a meaningful threshold and remove the weight. 
 
@@ -797,7 +797,7 @@ description: A package for weighted network ERGMs
 # Nice to meet (see) you GERGM package
 <br>
 ### Installation:
-`remotes::install_github("matthewjdenny/GERGM", dependencies = TRUE)`
+`remotes::install_github("czucca/GERGM", dependencies = TRUE)`
 
 ### User manual
 `https://github.com/matthewjdenny/GERGM`

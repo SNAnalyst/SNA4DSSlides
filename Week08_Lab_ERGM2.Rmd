@@ -582,6 +582,10 @@ These counts are the ERGM's sufficient statistics $g(y)$:
 Coefficients weight these statistics in the model. Toggling one arrow can change several statistics at once.
 
 ---
+# Estimation tricks, Gergo
+
+
+---
 <br>
 <br>
 <br>
@@ -838,7 +842,7 @@ description: Approach to carry out research
 .red[TIP: Rely on these steps for your report]
 
 ---
-# See you on Wednesday!
+# See you on Next Week!
 
 <br>
 
