@@ -493,7 +493,7 @@ bd <- sets a min and a max for degree
 # Constraining for degree 
 
 - min 0 -- isolates
-- max 7 -- number of nodes that can attend party
+- max 10 -- number of nodes that can attend party
 
 
 .scroll-box-18[
@@ -502,14 +502,8 @@ bd <- sets a min and a max for degree
 # network::get.vertex.attribute(kids, "color")
 
 m3 <- ergm::ergm(kids ~ edges  + b1factor("color", levels = -1) + b1star(2),
-                 constraints= ~ bd(minout = 0, maxout = 10),
-                 control = ergm::control.ergm(
-                    MCMC.samplesize = 5000,
-                    MCMC.burnin = 1000, 
-                    MCMLE.maxit = 10,
-                    parallel = 10,
-                    parallel.type = "PSOCK"
-                  ) )
+                 constraints= ~ bd(minout = 0, maxout = 10)
+                  ) 
 summary(m3)
 ```
 ]
@@ -567,7 +561,7 @@ description: diagnostics for bipartite
 
 .scroll-box-18[
 ```{r w11_05, echo=TRUE}
-ergm::mcmc.diagnostics(list(m3,m4))
+ergm::mcmc.diagnostics(m4)
 ```
 ]
 
@@ -586,10 +580,10 @@ ergm::gof(m4)
 ---
 # Interpreting Results - Final model
 <br>
-The advanced `ergm` options improved the IAC and BIC
+Did the advanced `ergm` options improved the IAC and BIC
 .scroll-box-18[
 ```{r w11_07, echo=TRUE}
-texreg::screenreg(m4)
+texreg::screenreg(list(m2, m3, m4))
 ```
 ]
 
@@ -758,39 +752,76 @@ The probability distribution is conditioned on two parameters $\theta$ and $\gam
 ---
 name: weighted_network_math
 description: GERGM mathematical specification
-# GERGM Math
+# ERGM Math
 <br>
-### Original ERGM equation 
+<br>
+## Remember the original ERGM equation 
+
 ### $P(N,\theta) = \frac{exp\{\theta^T h(N)\}}{\sum_{N^*\in \mathcal{N}} exp\{\theta^T h(N^*) \}^T}$
 
+---
+# GERGM math: from "yes/no" to "how much"
 
-### GERGM
-### $fX(x|\theta) = \frac{exp\{\theta^T h(x)\}}{\int_{[0,1]^m} exp(\theta^T h(z) )dz^T}$  
+**Regular ERGM:** is there a link between two nodes? (yes or no)
 
-With $x \in [O,I]^m$ that represents the way the edges values relate to each other.
+**GERGM:** how strong is the link? (a number)
 
-$\mathcal{N}$ does not denote anymore the adjancency matrix  since the network is fully connected. 
+*Example: not just "do countries A and B trade?" but "how much do they trade?"*
 
-We refer at this network with $X$ instead. 
+The GERGM does this in two steps:
 
+1. Model a network whose edge weights are between $0$ and $1$
+2. Transform to the real-world values we actually observe
 
+### $f_X(x|\theta) = \frac{\exp\{\theta^T h(x)\}}{\int_{[0,1]^m} \exp(\theta^T h(z))\,dz^T}$
+
+- $x$: the network, a list of $m$ edge weights, each between 0 and 1
+- $h(x)$: patterns we care about (reciprocity, triangles, ...)
+- $\theta$: how much each pattern matters (can be positive or negative)
+- Denominator: makes all probabilities add up to 1
+
+**Note:** every pair of nodes now has a weight, so the network is fully connected. We call it $X$ instead of using the adjacency matrix $\mathcal{N}$.
 
 ---
-# GERGM Math: bonus equation 
-<br>
+# GERGM math: bonus equation
 
-Up to this point  we can handle 
+**So far:** a fully connected network with weights between $0$ and $1$.
 
-- a fully connected network with weights bounded between 0 and 1
-- parameters ranging from 0 and 1
+**Problem:** real data rarely look like that (dollars, counts, kilometers...).
 
-We want more! Hence, here is your bonus equation!
+**We want more!** Hence, the bonus equation:
 
+### $f_Y(y | \theta, \gamma) = \frac{\exp\{\theta^T h(T(y | \gamma))\}}{\int_{[0,1]^m} \exp(\theta^T h(z))\,dz^T} \prod_{i,j} t_{i,j}(y_{i,j}| \gamma)$
 
-### $f_Y(y | \theta, \gamma) = \frac{exp(\theta^T h(T(y | \gamma))}{\int_{[0,1]^m} exp(\theta^T h(z) )dz^T} \prod_{i,j} t_{i,j}(y_{i,j}| \gamma )$
+- $y$: the real network, on its original scale
+- $T(y|\gamma)$: a "squasher" that turns each edge weight into a number between 0 and 1
+- $\gamma$: settings of the squasher (e.g. mean and spread)
+- $\prod t_{i,j}$: a correction factor so the math still works after squashing
 
-This equation models the distribution of the edge weights and the parameters.
+**Key idea:** $\gamma$ handles the edge weights themselves, $\theta$ handles how edges relate to each other.
 
+---
+# GERGM math: the intuition
+
+### The squasher is a CDF
+
+**CDF = Cumulative Distribution Function**, $F(y) = P(Y \le y)$
+
+Think of it as a **percentile rank**:
+
+- Scoring higher than 90% of your class means a percentile of $0.90$
+- A trade value bigger than 90% of all trade values maps to $0.90$
+
+So any number, however big, gets mapped into $[0,1]$, and **the order is preserved** (bigger stays bigger).
+
+### Putting it together
+
+1. Take the real network $y$
+2. Convert each edge to a percentile: $x = T(y|\gamma)$
+3. Model how the edges depend on each other with $\theta$
+4. Apply the correction factor $\prod t_{i,j}$ (the CDF's derivative, the PDF)
+
+**Takeaway:** $\gamma$ = what edges look like alone, $\theta$ = how edges influence each other.
 ---
 name: GERGM_package
 description: A package for weighted network ERGMs 
@@ -946,10 +977,11 @@ gergmResults <- GERGM::gergm(formula,
 name: GERGM_model_results
 description: Exploring results in a GERGM model
 # Now we are exploring the results 
-
+different colors show different types of estimates.
 `GERGM::Trace_Plot(gergmResults)`
 
 .center[![:scale 65%](assets/images/PlotGERGMTrace.png)]
+
 
 ---
 # Now we are exploring the results 
@@ -960,6 +992,7 @@ description: Exploring results in a GERGM model
 ---
 # Now we are exploring the results 
 
+different colors show different types of estimates.
 `GERGM::Estimate_Plot(gergmResults)` 
 
 .center[![:scale 65%](assets/images/PlotGERGMRes.png)]
@@ -977,6 +1010,7 @@ description: Exploring results in a GERGM model
 ```
 
 ---
+# But see you tomorrow ...
 .center[![:scale 50%](assets/images/over.jpeg)]
 
 
