@@ -582,7 +582,112 @@ These counts are the ERGM's sufficient statistics $g(y)$:
 Coefficients weight these statistics in the model. Toggling one arrow can change several statistics at once.
 
 ---
-# Estimation tricks, Gergo
+name: estimation_tricks
+# Estimation tricks: checkpointing
+
+```{r checkpoint_render_setup, include=FALSE}
+set.seed(2026)
+# Never overwrite or delete an existing user checkpoint just to render the demo.
+if (file.exists("ergm-checkpoint.RData"))
+  stop("Existing ergm-checkpoint.RData preserved. Move it aside before rendering this demo.")
+network <- intergraph::asNetwork(n1)
+network::set.vertex.attribute(network, "group", c("one", "one", "two", "two", "two"))
+```
+
+.pull-left-1[
+**Five nodes, seven directed ties.**
+
+```{r checkpoint_network, echo=FALSE, fig.width=3.5, fig.height=3, out.width="95%"}
+checkpoint_colors <- setNames(
+  ifelse(network::get.vertex.attribute(network, "group") == "one", pal[1], pal[2]),
+  network::get.vertex.attribute(network, "vertex.names"))
+plot_lanes(n1, xy1,
+  data.frame(edge=seq_len(igraph::ecount(n1)), color="#777777", star=0L),
+  vertex_colors=checkpoint_colors)
+```
+
+**Orange:** group one (A/B).<br>
+**Blue:** group two (C/D/E).
+]
+
+.pull-right-2[
+**Overwritten at the start of each MCMLE iteration.**
+
+```{r checkpoint_fit, echo=TRUE, eval=FALSE}
+checkpoint_file <- "ergm-checkpoint.RData"
+
+fit <- ergm::ergm(
+  network ~ edges + mutual + nodematch("group"),
+  control = ergm::control.ergm(
+    MCMC.samplesize = 500,
+    MCMC.burnin = 100,
+    MCMLE.maxit = 5,
+    parallel = 0,
+    parallel.type = "PSOCK",
+    checkpoint = checkpoint_file,
+    resume = if (file.exists(checkpoint_file)) checkpoint_file else NULL
+  )
+)
+```
+
+```{r checkpoint_first_output, echo=FALSE}
+checkpoint_log <- character()
+withCallingHandlers(
+  eval(parse(text = knitr::knit_code$get("checkpoint_fit"))),
+  message = function(m) {
+    checkpoint_log <<- c(checkpoint_log, conditionMessage(m))
+    invokeRestart("muffleMessage")
+  }
+)
+cat(grep("^(Iteration |Saving state)", checkpoint_log, value = TRUE), sep = "")
+```
+]
+
+???
+The output chunks run the displayed code and print the save/resume messages.
+The network is n1: A/B belong to group one; C/D/E belong to group two.
+The controls follow the lecture, with smaller samples, burn-in, and maxit.
+parallel=0 runs in the current R process; PSOCK applies when workers are enabled.
+The first fit finishes normally. The second run reloads its checkpoint;
+no crash is simulated.
+
+---
+name: checkpoint_resume
+# Estimation tricks: resuming a fit
+
+If RStudio crashes or you stop the fit, rerun the whole code block.
+The fit resumes from the last checkpoint.
+
+**Output after rerunning:**
+
+```{r checkpoint_resume_output, echo=FALSE}
+checkpoint_log <- character()
+withCallingHandlers(
+  eval(parse(text = knitr::knit_code$get("checkpoint_fit"))),
+  message = function(m) {
+    checkpoint_log <<- c(checkpoint_log, conditionMessage(m))
+    invokeRestart("muffleMessage")
+  }
+)
+cat(grep("^(Resuming from|Iteration |Saving state)", checkpoint_log, value = TRUE), sep = "")
+```
+
+The counter restarts at 1, but the fit uses the saved state.
+Use the same network and model.
+
+To start again, delete the checkpoint:
+
+```{r checkpoint_reset, echo=TRUE}
+file.remove("ergm-checkpoint.RData")
+```
+
+???
+ergm 4.12.0 restarts the iteration counter when resuming.
+The checkpoint stores the state at the start of an MCMLE iteration.
+Work after the last save must be repeated. The file is not the final fitted model.
+A fixed filename causes "one argument not used by format" sprintf warnings in
+this version; the deck's warning=FALSE hides them.
+file.remove deletes the checkpoint created for this example.
 
 
 ---

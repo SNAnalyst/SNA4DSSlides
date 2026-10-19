@@ -3,7 +3,7 @@
   <head>
     <title>SOCIAL NETWORK ANALYSIS for DATA SCIENTISTS</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Claudia" />
+    <meta name="author" content="Claudia and Gergo" />
     <script src="assets/header-attrs-2.31/header-attrs.js"></script>
     <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="assets/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -27,7 +27,7 @@
     <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
     <script src="assets/xaringanExtra-webcam-0.0.1/webcam.js"></script>
     <script id="xaringanExtra-webcam-options" type="application/json">{"width":"175","height":"131.25","margin":"1em"}</script>
-    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"xf5997d8efbe489d8b6f298356e328ee","expires":1}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"xa24d47e2b3841029c2788f551b21c8c","expires":1}</script>
     <script src="assets/himalaya-1.1.0/himalaya.js"></script>
     <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
     <script src="assets/editable-0.2.6/editable.js"></script>
@@ -84,7 +84,7 @@ background-color: #000000
   ]
 
 &lt;br&gt;
-.f-abel.White-inline[Your lecturer: Claudia]&lt;br&gt;
+.f-abel.White-inline[Your lecturer: Claudia and Gergo]&lt;br&gt;
 .f-abel.White-inline[Playdate: October, 21st, 2026]
 
 
@@ -186,14 +186,14 @@ description: List of contents for the lab
 &lt;br&gt;
 # ERGM terms bootcamp
 ---
-# TerMometer
+# Wooclap 
 &lt;br&gt;
 
-https://www.menti.com/alh367nr3ap3
+## The term test!
 
-code: 4163 0041
+## MKRQLBY
 
-.center[![:scale 30%](assets/images/)]
+
 
 ---
 &lt;style type="text/css"&gt;
@@ -411,6 +411,96 @@ These counts are the ERGM's sufficient statistics `\(g(y)\)`:
 - **Network 3:** `esp(1)` = 1, `esp(2)` = 1, `gwesp(0.5)` = 2.393.
 
 Coefficients weight these statistics in the model. Toggling one arrow can change several statistics at once.
+
+---
+name: estimation_tricks
+# Estimation tricks: checkpointing
+
+
+
+.pull-left-1[
+**Five nodes, seven directed ties.**
+
+&lt;img src="assets/images/checkpoint_network-1.svg" alt="" width="95%" /&gt;
+
+**Orange:** group one (A/B).&lt;br&gt;
+**Blue:** group two (C/D/E).
+]
+
+.pull-right-2[
+**Overwritten at the start of each MCMLE iteration.**
+
+
+``` r
+checkpoint_file &lt;- "ergm-checkpoint.RData"
+
+fit &lt;- ergm::ergm(
+  network ~ edges + mutual + nodematch("group"),
+  control = ergm::control.ergm(
+    MCMC.samplesize = 500,
+    MCMC.burnin = 100,
+    MCMLE.maxit = 5,
+    parallel = 0,
+    parallel.type = "PSOCK",
+    checkpoint = checkpoint_file,
+    resume = if (file.exists(checkpoint_file)) checkpoint_file else NULL
+  )
+)
+```
+
+
+```
+Iteration 1 of at most 5:
+Saving state in 'ergm-checkpoint.RData'.
+```
+]
+
+???
+The output chunks run the displayed code and print the save/resume messages.
+The network is n1: A/B belong to group one; C/D/E belong to group two.
+The controls follow the lecture, with smaller samples, burn-in, and maxit.
+parallel=0 runs in the current R process; PSOCK applies when workers are enabled.
+The first fit finishes normally. The second run reloads its checkpoint;
+no crash is simulated.
+
+---
+name: checkpoint_resume
+# Estimation tricks: resuming a fit
+
+If RStudio crashes or you stop the fit, rerun the whole code block.
+The fit resumes from the last checkpoint.
+
+**Output after rerunning:**
+
+
+```
+Resuming from state saved in 'ergm-checkpoint.RData'.
+Iteration 1 of at most 5:
+Saving state in 'ergm-checkpoint.RData'.
+```
+
+The counter restarts at 1, but the fit uses the saved state.
+Use the same network and model.
+
+To start again, delete the checkpoint:
+
+
+``` r
+file.remove("ergm-checkpoint.RData")
+```
+
+```
+[1] TRUE
+```
+
+???
+ergm 4.12.0 restarts the iteration counter when resuming.
+The checkpoint stores the state at the start of an MCMLE iteration.
+Work after the last save must be repeated. The file is not the final fitted model.
+A fixed filename causes "one argument not used by format" sprintf warnings in
+this version; the deck's warning=FALSE hides them.
+file.remove deletes the checkpoint created for this example.
+
 
 ---
 &lt;br&gt;
@@ -716,7 +806,7 @@ description: Approach to carry out research
 .red[TIP: Rely on these steps for your report]
 
 ---
-# See you on Wednesday!
+# See you on Next Week!
 
 &lt;br&gt;
 
