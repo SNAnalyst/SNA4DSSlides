@@ -454,8 +454,23 @@ lectureName <- "Week 08 -- Lecture: ERGM 4"
 `r make_overview(overview, path, slidedeckFile, lectureName)`
 
 
-             
-             
-             
-             
-             
+<!-- Week 08 -- Lab: ERGM 2 -->
+```{r, include = FALSE}
+overview <- matrix(c(
+"menu", "List of contents for the lab",
+"estimation_tricks", "NA",
+"checkpoint_resume", "NA",
+"Model_results", "Interpreting model results",
+"Odds_ratios", "Odds_ratios",
+"Probabilities", "Probabilities",
+"example_inter_res", "Example for interpreting results",
+"Research_flow", "Approach to carry out research"
+), byrow = TRUE, ncol = 2) |>
+as.data.frame() |>
+setNames(c("name", "description"))
+
+slidedeckFile <- "Week08_Lab_ERGM2"
+lectureName <- "Week 08 -- Lab: ERGM 2"
+```
+
+`r make_overview(overview, path, slidedeckFile, lectureName)`
