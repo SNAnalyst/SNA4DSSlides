@@ -20,7 +20,7 @@
     <script src="assets/freezeframe-5.0.2/freezeframe.min.js"></script>
     <script src="assets/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
     <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
-    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"xe001600348d4158b50af7fd3d9a5139","expires":1}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x9b53f4ad53640de8b6f499924dd954b","expires":1}</script>
     <script src="assets/himalaya-1.1.0/himalaya.js"></script>
     <script src="assets/js-cookie-3.0.0/js.cookie.js"></script>
     <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
@@ -216,24 +216,22 @@ description: Transition from statistical models to machine learning
 ---
 # Machine Learning is different
 
-&lt;br&gt;
-&lt;br&gt;
 ## ML is concerned with the other end
 
-&lt;br&gt;
 ## It takes the network as a given, and sees how we can use it for different tasks
+
+.center[&lt;img src="assets/images/graphml/stats_vs_ml.svg" alt="Statistics explains the network; machine learning uses it" style="width:62%"&gt;]
 
 ---
 # You can do "naive" ML
 
-&lt;br&gt;
 ### Use node features, centrality measures as inputs to ML models
 
-&lt;br&gt;
 ### (In ML models you're allowed to use centrality as predictors, in regressions you're not)
 
-&lt;br&gt;
 ### But... you're not really using the graph structure itself
+
+.center[&lt;img src="assets/images/graphml/naive_ml.svg" alt="A network turned into a table of node features and centralities for an ML model" style="width:62%"&gt;]
 
 ---
 &lt;br&gt;
@@ -268,12 +266,11 @@ https://www.youtube.com/playlist?list=PLoROMvodv4rPLKxIpqhjhPgdQy7imNkDn
 ---
 # Most ML tasks are inherently node-level
 
-&lt;br&gt;
-&lt;br&gt;
 ### Outcomes of people given their social graph, performance of firms given their allies, etc
 
-&lt;br&gt;
 ### This is exactly what node-level tasks are about!
+
+.center[&lt;img src="assets/images/graphml/node_tasks.svg" alt="A network with known node outcomes and two nodes to predict" style="width:62%"&gt;]
 
 ---
 # Embeddings turn nodes into vectors
@@ -296,15 +293,15 @@ https://www.youtube.com/playlist?list=PLoROMvodv4rPLKxIpqhjhPgdQy7imNkDn
 ---
 # Embeddings at a high level
 
-&lt;br&gt;
 ### You need 3 things:
 
-&lt;br&gt;
 1. **Encoder**: looks up vector for any given node
 
 2. **Decoder**: measures the similarity between two vectors
 
 3. **Similarity definition**: what does "similar" mean? (distance in graph, topology, neighbors, etc.)
+
+.center[&lt;img src="assets/images/graphml/encoder_decoder.svg" alt="The encoder maps nodes u and v to vectors; the decoder scores the pair" style="width:62%"&gt;]
 
 ---
 # The embedding framework
@@ -332,42 +329,38 @@ https://www.youtube.com/playlist?list=PLoROMvodv4rPLKxIpqhjhPgdQy7imNkDn
 ---
 # Random walk embeddings
 
-&lt;br&gt;
-&lt;br&gt;
 ## Similarity(u,v) = P(u and v co-occur on a random walk over G)
 
-&lt;br&gt;
-&lt;br&gt;
 ### The similarity between two nodes is defined by how often they appear together on random walks through the graph
+
+.center[&lt;img src="assets/images/graphml/random_walk.svg" alt="A random walk over a graph and the resulting node sequence" style="width:62%"&gt;]
 
 ---
 # DeepWalk
 
-&lt;br&gt;
 ### Think word2vec, but for graphs!
 
-&lt;br&gt;
 - Walks are sentences
 - Nodes are words
 - Then we do skipgram next token prediction
 
-&lt;br&gt;
 ### You just do a bunch of walks, that is your corpus
+
+.center[&lt;img src="assets/images/graphml/deepwalk_corpus.svg" alt="Sentences and random walks both go into skip-gram" style="width:62%"&gt;]
 
 ---
 # Node2Vec
 
-&lt;br&gt;
 ### Improved DeepWalk by adding biased walks
 
-&lt;br&gt;
 ### Not every path has an equal probability
 
-&lt;br&gt;
 ### You can tune how the walk-based exploration goes:
 - BFS vs DFS
 - Return parameter
 - In-out parameter
+
+.center[&lt;img src="assets/images/graphml/node2vec_bfs_dfs.svg" alt="BFS-like walks explore nearby nodes; DFS-like walks move further away" style="width:50%"&gt;]
 
 ---
 &lt;br&gt;
@@ -403,14 +396,14 @@ https://www.youtube.com/playlist?list=PLoROMvodv4rPLKxIpqhjhPgdQy7imNkDn
 ---
 # Task-specific embeddings, end to end
 
-&lt;br&gt;
 ## GNNs learn task-specific embeddings
 
-&lt;br&gt;
 ## Different kinds of tasks:
 - Node level (classification/regression)
 - Edge level (link prediction)
 - Graph level (graph classification)
+
+.center[&lt;img src="assets/images/graphml/task_levels.svg" alt="Node-, edge-, and graph-level prediction tasks" style="width:62%"&gt;]
 
 ---
 # Graph Convolutional Networks (GCN)
@@ -456,15 +449,13 @@ https://www.youtube.com/playlist?list=PLoROMvodv4rPLKxIpqhjhPgdQy7imNkDn
 ---
 # GCNs are generalized CNNs
 
-&lt;br&gt;
-&lt;br&gt;
 ## GCNs are basically more general CNNs
 
-&lt;br&gt;
 ### In CNNs: neighborhood is defined by pixels (every node has 8 neighbors)
 
-&lt;br&gt;
 ### In GCNs: neighborhood is defined by edges
+
+.center[&lt;img src="assets/images/graphml/cnn_vs_gcn.svg" alt="A CNN pixel neighborhood versus a GCN neighborhood defined by edges" style="width:62%"&gt;]
 
 ---
 # Graph Attention Networks (GAT)

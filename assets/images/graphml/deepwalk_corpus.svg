@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" width="1000" height="300" role="img" aria-label="DeepWalk treats random walks like sentences">
+<title>DeepWalk treats random walks like sentences</title>
+<defs><marker id="ah-dark" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#333333"/></marker><marker id="ah-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#FF8C00"/></marker><marker id="ah-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4D8DC9"/></marker></defs>
+<style>circle{stroke:#333333;stroke-width:3}.e{stroke:#666666;stroke-width:3;stroke-linecap:round}</style>
+<g font-family="Calibri, Carlito, 'Noto Sans', 'Helvetica Neue', Arial, sans-serif" fill="#333333" text-anchor="middle">
+<text x="20" y="104" font-size="26" text-anchor="start" font-weight="bold">Sentence</text>
+<text x="20" y="244" font-size="26" text-anchor="start" font-weight="bold">Walk</text>
+<rect x="150" y="72" width="62" height="46" rx="12" fill="#EEEEEE" stroke="#333333" stroke-width="3"/>
+<text x="181" y="95" font-size="22" dominant-baseline="central">the</text>
+<rect x="220" y="72" width="62" height="46" rx="12" fill="#EEEEEE" stroke="#333333" stroke-width="3"/>
+<text x="251" y="95" font-size="22" dominant-baseline="central">cat</text>
+<rect x="290" y="72" width="62" height="46" rx="12" fill="#EEEEEE" stroke="#333333" stroke-width="3"/>
+<text x="321" y="95" font-size="22" dominant-baseline="central">sat</text>
+<rect x="360" y="72" width="62" height="46" rx="12" fill="#EEEEEE" stroke="#333333" stroke-width="3"/>
+<text x="391" y="95" font-size="22" dominant-baseline="central">on</text>
+<rect x="430" y="72" width="62" height="46" rx="12" fill="#EEEEEE" stroke="#333333" stroke-width="3"/>
+<text x="461" y="95" font-size="22" dominant-baseline="central">the</text>
+<rect x="500" y="72" width="62" height="46" rx="12" fill="#EEEEEE" stroke="#333333" stroke-width="3"/>
+<text x="531" y="95" font-size="22" dominant-baseline="central">mat</text>
+<circle cx="181" cy="235" r="24" fill="#FFD9A8"/>
+<text x="181" y="236" font-size="22" font-weight="bold" dominant-baseline="central">A</text>
+<circle cx="251" cy="235" r="24" fill="#FFD9A8"/>
+<text x="251" y="236" font-size="22" font-weight="bold" dominant-baseline="central">C</text>
+<circle cx="321" cy="235" r="24" fill="#FFD9A8"/>
+<text x="321" y="236" font-size="22" font-weight="bold" dominant-baseline="central">D</text>
+<circle cx="391" cy="235" r="24" fill="#FFD9A8"/>
+<text x="391" y="236" font-size="22" font-weight="bold" dominant-baseline="central">F</text>
+<circle cx="461" cy="235" r="24" fill="#FFD9A8"/>
+<text x="461" y="236" font-size="22" font-weight="bold" dominant-baseline="central">G</text>
+<line x1="578" y1="95" x2="632" y2="130" stroke="#333333" stroke-width="4" stroke-linecap="round" marker-end="url(#ah-dark)"/>
+<line x1="530" y1="235" x2="632" y2="200" stroke="#333333" stroke-width="4" stroke-linecap="round" marker-end="url(#ah-dark)"/>
+<rect x="640" y="65" width="160" height="205" rx="12" fill="#FFD9A8" stroke="#333333" stroke-width="3"/>
+<text x="720" y="154.9" font-size="26" dominant-baseline="central">skip-gram</text>
+<text x="720" y="183.1" font-size="21" dominant-baseline="central">(word2vec)</text>
+<line x1="808" y1="95" x2="848" y2="95" stroke="#333333" stroke-width="4" stroke-linecap="round" marker-end="url(#ah-dark)"/>
+<text x="856" y="104" font-size="25" text-anchor="start">word vectors</text>
+<line x1="808" y1="235" x2="848" y2="235" stroke="#333333" stroke-width="4" stroke-linecap="round" marker-end="url(#ah-dark)"/>
+<text x="856" y="244" font-size="25" text-anchor="start">node vectors</text>
+</g>
+</svg>

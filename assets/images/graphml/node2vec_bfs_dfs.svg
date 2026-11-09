@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 320" width="1000" height="320" role="img" aria-label="BFS-like walks stay local; DFS-like walks move away">
+<title>BFS-like walks stay local; DFS-like walks move away</title>
+<defs><marker id="ah-dark" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#333333"/></marker><marker id="ah-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#FF8C00"/></marker><marker id="ah-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4D8DC9"/></marker></defs>
+<style>circle{stroke:#333333;stroke-width:3}.e{stroke:#666666;stroke-width:3;stroke-linecap:round}</style>
+<g font-family="Calibri, Carlito, 'Noto Sans', 'Helvetica Neue', Arial, sans-serif" fill="#333333" text-anchor="middle">
+<line x1="170" y1="170" x2="80" y2="95" class="e"/>
+<line x1="170" y1="170" x2="70" y2="235" class="e"/>
+<line x1="170" y1="170" x2="205" y2="280" class="e"/>
+<line x1="170" y1="170" x2="290" y2="100" class="e"/>
+<line x1="80" y1="95" x2="70" y2="235" class="e"/>
+<line x1="290" y1="100" x2="410" y2="170" class="e"/>
+<line x1="410" y1="170" x2="530" y2="95" class="e"/>
+<line x1="530" y1="95" x2="625" y2="200" class="e"/>
+<line x1="410" y1="170" x2="505" y2="270" class="e"/>
+<line x1="505" y1="270" x2="625" y2="200" class="e"/>
+<line x1="205" y1="280" x2="330" y2="270" class="e"/>
+<line x1="330" y1="270" x2="410" y2="170" class="e"/>
+<line x1="150.8" y1="154.0" x2="100.7" y2="112.3" stroke="#4D8DC9" stroke-width="6" stroke-linecap="round" marker-end="url(#ah-blue)"/>
+<line x1="149.0" y1="183.6" x2="92.6" y2="220.3" stroke="#4D8DC9" stroke-width="6" stroke-linecap="round" marker-end="url(#ah-blue)"/>
+<line x1="177.6" y1="193.8" x2="196.8" y2="254.3" stroke="#4D8DC9" stroke-width="6" stroke-linecap="round" marker-end="url(#ah-blue)"/>
+<line x1="191.6" y1="157.4" x2="266.7" y2="113.6" stroke="#FF8C00" stroke-width="6" stroke-linecap="round" marker-end="url(#ah-orange)"/>
+<line x1="311.6" y1="112.6" x2="386.7" y2="156.4" stroke="#FF8C00" stroke-width="6" stroke-linecap="round" marker-end="url(#ah-orange)"/>
+<line x1="431.2" y1="156.8" x2="507.1" y2="109.3" stroke="#FF8C00" stroke-width="6" stroke-linecap="round" marker-end="url(#ah-orange)"/>
+<circle cx="170" cy="170" r="22" fill="#333333"/>
+<circle cx="80" cy="95" r="22" fill="#D3E3F3"/>
+<circle cx="70" cy="235" r="22" fill="#D3E3F3"/>
+<circle cx="205" cy="280" r="22" fill="#D3E3F3"/>
+<circle cx="290" cy="100" r="22" fill="#FFD9A8"/>
+<circle cx="410" cy="170" r="22" fill="#FFD9A8"/>
+<circle cx="530" cy="95" r="22" fill="#FFD9A8"/>
+<circle cx="625" cy="200" r="22" fill="#FFFFFF"/>
+<circle cx="330" cy="270" r="22" fill="#FFFFFF"/>
+<circle cx="505" cy="270" r="22" fill="#FFFFFF"/>
+<text x="170" y="170" font-size="24" font-weight="bold" fill="#FFFFFF" dominant-baseline="central">u</text>
+<line x1="668" y1="125" x2="730" y2="125" stroke="#4D8DC9" stroke-width="6" stroke-linecap="round" marker-end="url(#ah-blue)"/>
+<text x="745" y="134" font-size="26" text-anchor="start">BFS: nearby nodes</text>
+<line x1="668" y1="205" x2="730" y2="205" stroke="#FF8C00" stroke-width="6" stroke-linecap="round" marker-end="url(#ah-orange)"/>
+<text x="745" y="214" font-size="26" text-anchor="start">DFS: far-away nodes</text>
+</g>
+</svg>

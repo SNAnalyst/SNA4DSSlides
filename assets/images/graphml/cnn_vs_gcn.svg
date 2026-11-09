@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 345" width="1000" height="345" role="img" aria-label="CNN neighborhoods are grid cells; GCN neighborhoods are edges">
+<title>CNN neighborhoods are grid cells; GCN neighborhoods are edges</title>
+<defs><marker id="ah-dark" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#333333"/></marker><marker id="ah-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#FF8C00"/></marker><marker id="ah-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4D8DC9"/></marker></defs>
+<style>circle{stroke:#333333;stroke-width:3}.e{stroke:#666666;stroke-width:3;stroke-linecap:round}</style>
+<g font-family="Calibri, Carlito, 'Noto Sans', 'Helvetica Neue', Arial, sans-serif" fill="#333333" text-anchor="middle">
+<text x="175" y="40" font-size="30" font-weight="bold">Image</text>
+<rect x="60" y="65" width="46" height="46" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+<rect x="106" y="65" width="46" height="46" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+<rect x="152" y="65" width="46" height="46" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+<rect x="198" y="65" width="46" height="46" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+<rect x="244" y="65" width="46" height="46" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+<rect x="60" y="111" width="46" height="46" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+<rect x="106" y="111" width="46" height="46" fill="#FFD9A8" stroke="#333333" stroke-width="2"/>
+<rect x="152" y="111" width="46" height="46" fill="#FFD9A8" stroke="#333333" stroke-width="2"/>
+<rect x="198" y="111" width="46" height="46" fill="#FFD9A8" stroke="#333333" stroke-width="2"/>
+<rect x="244" y="111" width="46" height="46" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+<rect x="60" y="157" width="46" height="46" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+<rect x="106" y="157" width="46" height="46" fill="#FFD9A8" stroke="#333333" stroke-width="2"/>
+<rect x="152" y="157" width="46" height="46" fill="#FF8C00" stroke="#333333" stroke-width="2"/>
+<rect x="198" y="157" width="46" height="46" fill="#FFD9A8" stroke="#333333" stroke-width="2"/>
+<rect x="244" y="157" width="46" height="46" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+<rect x="60" y="203" width="46" height="46" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+<rect x="106" y="203" width="46" height="46" fill="#FFD9A8" stroke="#333333" stroke-width="2"/>
+<rect x="152" y="203" width="46" height="46" fill="#FFD9A8" stroke="#333333" stroke-width="2"/>
+<rect x="198" y="203" width="46" height="46" fill="#FFD9A8" stroke="#333333" stroke-width="2"/>
+<rect x="244" y="203" width="46" height="46" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+<rect x="60" y="249" width="46" height="46" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+<rect x="106" y="249" width="46" height="46" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+<rect x="152" y="249" width="46" height="46" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+<rect x="198" y="249" width="46" height="46" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+<rect x="244" y="249" width="46" height="46" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+<text x="175" y="330" font-size="25">CNN: always 8 neighbors</text>
+<line x1="450" y1="25" x2="450" y2="335" stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-dasharray="8 8"/>
+<text x="705" y="40" font-size="30" font-weight="bold">Graph</text>
+<line x1="700" y1="175" x2="600" y2="110" class="e"/>
+<line x1="700" y1="175" x2="805" y2="105" class="e"/>
+<line x1="700" y1="175" x2="735" y2="270" class="e"/>
+<line x1="600" y1="110" x2="520" y2="200" class="e"/>
+<line x1="805" y1="105" x2="895" y2="175" class="e"/>
+<line x1="735" y1="270" x2="865" y2="265" class="e"/>
+<line x1="895" y1="175" x2="865" y2="265" class="e"/>
+<line x1="735" y1="270" x2="615" y2="260" class="e"/>
+<line x1="520" y1="200" x2="615" y2="260" class="e"/>
+<line x1="600" y1="110" x2="705" y2="85" class="e"/>
+<line x1="805" y1="105" x2="705" y2="85" class="e"/>
+<circle cx="700" cy="175" r="22" fill="#FF8C00"/>
+<circle cx="600" cy="110" r="22" fill="#FFD9A8"/>
+<circle cx="805" cy="105" r="22" fill="#FFD9A8"/>
+<circle cx="735" cy="270" r="22" fill="#FFD9A8"/>
+<circle cx="520" cy="200" r="22" fill="#FFFFFF"/>
+<circle cx="895" cy="175" r="22" fill="#FFFFFF"/>
+<circle cx="865" cy="265" r="22" fill="#FFFFFF"/>
+<circle cx="615" cy="260" r="22" fill="#FFFFFF"/>
+<circle cx="705" cy="85" r="22" fill="#FFFFFF"/>
+<text x="705" y="330" font-size="25">GCN: neighbors are defined by edges</text>
+</g>
+</svg>

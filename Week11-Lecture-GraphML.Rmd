@@ -255,24 +255,22 @@ description: Transition from statistical models to machine learning
 ---
 # Machine Learning is different
 
-<br>
-<br>
 ## ML is concerned with the other end
 
-<br>
 ## It takes the network as a given, and sees how we can use it for different tasks
+
+.center[<img src="assets/images/graphml/stats_vs_ml.svg" alt="Statistics explains the network; machine learning uses it" style="width:62%">]
 
 ---
 # You can do "naive" ML
 
-<br>
 ### Use node features, centrality measures as inputs to ML models
 
-<br>
 ### (In ML models you're allowed to use centrality as predictors, in regressions you're not)
 
-<br>
 ### But... you're not really using the graph structure itself
+
+.center[<img src="assets/images/graphml/naive_ml.svg" alt="A network turned into a table of node features and centralities for an ML model" style="width:62%">]
 
 ---
 <br>
@@ -307,12 +305,11 @@ https://www.youtube.com/playlist?list=PLoROMvodv4rPLKxIpqhjhPgdQy7imNkDn
 ---
 # Most ML tasks are inherently node-level
 
-<br>
-<br>
 ### Outcomes of people given their social graph, performance of firms given their allies, etc
 
-<br>
 ### This is exactly what node-level tasks are about!
+
+.center[<img src="assets/images/graphml/node_tasks.svg" alt="A network with known node outcomes and two nodes to predict" style="width:62%">]
 
 ---
 # Embeddings turn nodes into vectors
@@ -335,15 +332,15 @@ https://www.youtube.com/playlist?list=PLoROMvodv4rPLKxIpqhjhPgdQy7imNkDn
 ---
 # Embeddings at a high level
 
-<br>
 ### You need 3 things:
 
-<br>
 1. **Encoder**: looks up vector for any given node
 
 2. **Decoder**: measures the similarity between two vectors
 
 3. **Similarity definition**: what does "similar" mean? (distance in graph, topology, neighbors, etc.)
+
+.center[<img src="assets/images/graphml/encoder_decoder.svg" alt="The encoder maps nodes u and v to vectors; the decoder scores the pair" style="width:62%">]
 
 ---
 # The embedding framework
@@ -371,42 +368,38 @@ https://www.youtube.com/playlist?list=PLoROMvodv4rPLKxIpqhjhPgdQy7imNkDn
 ---
 # Random walk embeddings
 
-<br>
-<br>
 ## Similarity(u,v) = P(u and v co-occur on a random walk over G)
 
-<br>
-<br>
 ### The similarity between two nodes is defined by how often they appear together on random walks through the graph
+
+.center[<img src="assets/images/graphml/random_walk.svg" alt="A random walk over a graph and the resulting node sequence" style="width:62%">]
 
 ---
 # DeepWalk
 
-<br>
 ### Think word2vec, but for graphs!
 
-<br>
 - Walks are sentences
 - Nodes are words
 - Then we do skipgram next token prediction
 
-<br>
 ### You just do a bunch of walks, that is your corpus
+
+.center[<img src="assets/images/graphml/deepwalk_corpus.svg" alt="Sentences and random walks both go into skip-gram" style="width:62%">]
 
 ---
 # Node2Vec
 
-<br>
 ### Improved DeepWalk by adding biased walks
 
-<br>
 ### Not every path has an equal probability
 
-<br>
 ### You can tune how the walk-based exploration goes:
 - BFS vs DFS
 - Return parameter
 - In-out parameter
+
+.center[<img src="assets/images/graphml/node2vec_bfs_dfs.svg" alt="BFS-like walks explore nearby nodes; DFS-like walks move further away" style="width:50%">]
 
 ---
 <br>
@@ -442,14 +435,14 @@ https://www.youtube.com/playlist?list=PLoROMvodv4rPLKxIpqhjhPgdQy7imNkDn
 ---
 # Task-specific embeddings, end to end
 
-<br>
 ## GNNs learn task-specific embeddings
 
-<br>
 ## Different kinds of tasks:
 - Node level (classification/regression)
 - Edge level (link prediction)
 - Graph level (graph classification)
+
+.center[<img src="assets/images/graphml/task_levels.svg" alt="Node-, edge-, and graph-level prediction tasks" style="width:62%">]
 
 ---
 # Graph Convolutional Networks (GCN)
@@ -495,15 +488,13 @@ https://www.youtube.com/playlist?list=PLoROMvodv4rPLKxIpqhjhPgdQy7imNkDn
 ---
 # GCNs are generalized CNNs
 
-<br>
-<br>
 ## GCNs are basically more general CNNs
 
-<br>
 ### In CNNs: neighborhood is defined by pixels (every node has 8 neighbors)
 
-<br>
 ### In GCNs: neighborhood is defined by edges
+
+.center[<img src="assets/images/graphml/cnn_vs_gcn.svg" alt="A CNN pixel neighborhood versus a GCN neighborhood defined by edges" style="width:62%">]
 
 ---
 # Graph Attention Networks (GAT)
