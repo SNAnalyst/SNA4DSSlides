@@ -490,3 +490,67 @@ lectureName <- "Week 11 -- Lecture: Graph Machine Learning"
 ```
 
 `r make_overview(overview, path, slidedeckFile, lectureName)`
+
+
+
+ <!-- Week 09 -- Lecture: Temporal Networks -->                          
+ ```{r, include = FALSE}                                                 
+ overview <- matrix(c(                                                   
+ "soccer", "ball passing network in soccer",                             
+ "characteristics", "Characteristics of temporal networks",              
+ "how_analyze", "How do you analyze temporal networks",                  
+ "analysis_overview", "Analysis of temporal network data in this course",
+ "tergms", "The TERGM",                                                  
+ "btergm", "The `btergm` package",                                       
+ "example", "International alliances (example)",                         
+ "memory", "Time effects (Memory)",                                      
+ "reciprocity", "Time effects (Delayed reciprocity)",                    
+ "covariates", "Time effects (Covariates)"                               
+ ), byrow = TRUE, ncol = 2) |>                                           
+ as.data.frame() |>                                                      
+ setNames(c("name", "description"))                                      
+                                                                         
+ slidedeckFile <- "Lecture_TemporalSNA"                                  
+ lectureName <- "Week 09 -- Lecture: Temporal Networks"                  
+ ```                                                                     
+                                                                         
+ `r make_overview(overview, path, slidedeckFile, lectureName)`     
+
+
+   <!-- Week 09 -- Lab: ERGM3 -->                                   
+ ```{r, include = FALSE}                                          
+ overview <- matrix(c(                                            
+ "menu", "List of contents for today's Lab",                      
+ "Net_out", "The meaning of having a network as outcome variable",
+ "Str_terms", "The importance of including endogenous terms",     
+ "Large_nets", "How to handle large networks",                    
+ "complex_cases", "Handling complex cases",                       
+ "Stat_signif", "What is a good model",                           
+ "Seven_steps", "Doing research in a nutshell",                   
+ "Res_Qs", "Think carefully about research questions"             
+ ), byrow = TRUE, ncol = 2) |>                                    
+ as.data.frame() |>                                               
+ setNames(c("name", "description"))                               
+                                                                  
+ slidedeckFile <- "Week9_lab_ERGM3"                               
+ lectureName <- "Week 09 -- Lab: ERGM3"                           
+ ```                                                              
+                                                                  
+ `r make_overview(overview, path, slidedeckFile, lectureName)`    
+
+
+
+<!-- Week 11 -- Lecture: Machine Learning -->                          
+ ```{r, include = FALSE}                                                
+ overview <- matrix(c(                                                  
+ "Menu", "Topics covered in today's lecture",                           
+ "stats_to_ml", "Transition from statistical models to machine learning"
+ ), byrow = TRUE, ncol = 2) |>                                          
+ as.data.frame() |>                                                     
+ setNames(c("name", "description"))                                     
+                                                                        
+ slidedeckFile <- "Week11-Lecture-GraphML"                              
+ lectureName <- "Week 11 -- Lecture: Machine Learning"                  
+ ```                                                                    
+                                                                        
+ `r make_overview(overview, path, slidedeckFile, lectureName)`   
