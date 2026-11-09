@@ -532,7 +532,7 @@ lectureName <- "Week 11 -- Lecture: Graph Machine Learning"
  as.data.frame() |>                                               
  setNames(c("name", "description"))                               
                                                                   
- slidedeckFile <- "Week9_lab_ERGM3"                               
+ slidedeckFile <- "Week9_Lab_ERGM3"                               
  lectureName <- "Week 09 -- Lab: ERGM3"                           
  ```                                                              
                                                                   
