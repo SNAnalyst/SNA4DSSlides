@@ -36,6 +36,8 @@ RLslides::make_index_code("D:/Dropbox/R/eigen_packages/=git/SNA4DSSlides/Week03_
 
 
 
-tb <- RLslides::xaringan_slide_urls("D:/Dropbox/R/eigen_packages/=git/SNA4DSSlides/Lab_temporalSNA.html")
-RLslides::turn_to_pdf(tb, folder = "D:/Dropbox/R/eigen_packages/=git/SNA4DSSlides/Lab_temporalSNA")
-RLslides::make_index_code("D:/Dropbox/R/eigen_packages/=git/SNA4DSSlides/Lab_temporalSNA.Rmd", "Week 11 -- Lab: Temporal networks (TERGMs)")
+# tb <- RLslides::xaringan_slide_urls("D:/Dropbox/R/eigen_packages/=git/SNA4DSSlides/Lab_temporalSNA.html")
+# RLslides::turn_to_pdf(tb, folder = "D:/Dropbox/R/eigen_packages/=git/SNA4DSSlides/Lab_temporalSNA")
+# RLslides::make_index_code("D:/Dropbox/R/eigen_packages/=git/SNA4DSSlides/Lab_temporalSNA.Rmd", "Week 11 -- Lab: Temporal networks (TERGMs)")
+RLslides::process_deck("D:/Dropbox/R/eigen_packages/=git/SNA4DSSlides/Lab_temporalSNA.html", lecture_description = "Week 11 -- Lab: Temporal networks (TERGMs)", skip_marker = "<!-- skip -->")
+
