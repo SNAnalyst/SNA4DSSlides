@@ -1,6 +1,7 @@
 
 data(friendship, package = "SNA4DSData")
 sapply(friendship, snafun::count_vertices)
+sapply(friendship, snafun::g_density)
 
 
 # edges: number of edgtes in the network
@@ -26,8 +27,6 @@ model.01 <- btergm::btergm(friendship ~ edges + mutual + ttriple +
                              edgecov(primary), R = 100)
 
 btergm::summary(model.01)
-btergm::summary(model.01, type = "basic")
-btergm::summary(model.01, type = "bca")
 
 
 gof.01 <- snafun::stat_plot_gof_as_btergm(model.01, 
@@ -45,7 +44,10 @@ model.02 <- btergm::btergm(friendship ~ edges + mutual + ttriple +
                              memory(type = "stability"), R = 100)
 btergm::summary(model.02)
 gof.02 <- snafun::stat_plot_gof_as_btergm(model.02,
-                                btergm_statistics = c(esp, dsp, geodesic, deg, triad.undirected, rocpr))
+                                btergm_statistics = c(btergm::esp, btergm::dsp, 
+                                                      btergm::geodesic, btergm::deg, 
+                                                      btergm::triad.undirected, 
+                                                      btergm::rocpr))
 
 
 
@@ -102,14 +104,14 @@ btergm::interpret(model.03, type = "node", i = 10, j = 13:15, t = 2)
 # ROC: 
 # x-axis: FPR (False Positive Rate) = false alarm rate = % of 0's where a 
 # 1 is predicted. 
-# y-axis: TPR (True Positive Rate) = sensitivity = recall = %1's that are 
+# y-axis: TPR (True Positive Rate) = sensitivity = recall = %ties's that are 
 # correctly predicted.
 # Best model: bow to the top left corner.
 # Poor model: diagonal
 # 
 # 
 # PR-curve: 
-#   x-axis: TPR (True Positive Rate) = sensitivity = recall = %1's that are 
+#   x-axis: TPR (True Positive Rate) = sensitivity = recall = %ties's that are 
 # correctly predicted.
 # y-axis: Positive Predictive Value/Rate = precision = % of predicted 1's that 
 # are correct
@@ -121,8 +123,16 @@ btergm::interpret(model.03, type = "node", i = 10, j = 13:15, t = 2)
 # Best model: bow to the top right corner.
 # Poor model: horizontal line (y-value = %of 0's in the data)
 
+# De precision lijn zou op de density liggen bij een pouur random model, dat 
+# is ong. 0.2. Maar de lijn ligt zelfs in het eenvoudige model al een flink stuk 
+# hoger en daarmee is model 1 al helemaal niet zo slecht
 
-
+# model.00 <- btergm::btergm(friendship ~ edges  + mutual, R = 500)
+# gof.00 <- snafun::stat_plot_gof_as_btergm(model.00, 
+#                                           btergm_statistics = c(btergm::esp, btergm::dsp, 
+#                                                                 btergm::geodesic, btergm::deg, 
+#                                                                 btergm::triad.undirected, btergm::rocpr))
+# waardeloos model: zie dat de blauwe lijn nu inderdaad rond de density ligt
 
 
  btergm::interpret(model.01, type = "dyad", i = 12, j = 15, t = 3)

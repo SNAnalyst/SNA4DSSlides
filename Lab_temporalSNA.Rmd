@@ -3,7 +3,7 @@ title: "SOCIAL NETWORK ANALYSIS<br>for DATA SCIENTISTS"
 topic: "LAB: Temporal Networks"
 lecture_no: "Week 11"
 author: "Roger"
-playdate: "November 11, 2025"
+playdate: "November 11, 2026"
 output:
   xaringan::moon_reader:
     css:
@@ -81,6 +81,11 @@ library(btergm, warn.conflicts = FALSE, quietly = TRUE, verbose = FALSE)
 load("assets/tergm_assets/model_results.RData")
 ```
 
+
+```{r, echo = FALSE, eval = TRUE}
+model.04 <- btergm::btergm(friendship ~ edges + mutual + nodematch("sex") +
+                     edgecov(primary), R = 100)
+```
 
 ```{r marset, include = FALSE}
 par(mar = c(2,2,2,2) + .05) #it's important to have this in a separate chunk
@@ -329,11 +334,15 @@ PR curves reveal weak performance on the positive class, making them more inform
 
 .b.Red-inline[ROC: plots FPR (False Positive Rate, x-axis) against TPR (True Positive Rate, y-axis)]
 
-TPR = of all 1's in the data, which proportion do you correctly predict as 1
-FPR = of all 0's in the data, which proportion do you incorrectly predict as 1
+TPR = fraction of ties that are correctly predicted by the model
+
+FPR = faction of 0's in the data that are incorrectly predicted as 1
 
 You want TPR to be very high and FPR to be very low. 
-Hence: the curve should lean strongly into the top-left corner of the plot.
+Hence: the curve should lean strongly into the top-left corner of the plot, this 
+indicates how well the model can distinguish between 1's and 0's in the networks.
+
+(the ROC of a poor model will be close to the diagonal)
 
 _Best suited for balanced datasets, where the number of 1's and 0's is similar._
 <br><br>
@@ -342,9 +351,11 @@ _Best suited for balanced datasets, where the number of 1's and 0's is similar._
 Precision = of all predicted 1's, which proportion is correct
 
 You want TPR and Precision to be very high. 
-Hence: the curve should lean strongly into the top-right corner of the plot
+Hence: the curve should lean strongly into the top-right corner
 
 _Best suited for imbalanced datasets — where 1's are rare_
+
+(a poor model will just mimic the network's density horizontally)
 
 
 
@@ -398,7 +409,7 @@ plot(g02)
 
 ---
 
-# Model III: predict the next network
+# Model III: out-of-sample GOF
 
 
 .panelset[
@@ -411,40 +422,24 @@ model.03 <- btergm::btergm(friendship[1:3] ~ edges + mutual + ttriple +
                      nodematch("sex") + edgecov(primary) + delrecip() +
                      memory(type = "stability"), R = 100)
 
+# out of sample gof
 gof.03 <- btergm::gof(model.03, nsim = 100, target = friendship[[4]],
               formula = friendship[3:4] ~ edges + mutual + ttriple +
                 transitiveties + ctriple + nodeicov("idegsqrt") +
                 nodeicov("odegsqrt") + nodeocov("odegsqrt") + nodeofactor("sex") +
                 nodeifactor("sex") + nodematch("sex") + edgecov(primary) +
-                delrecip + memory(type = "stability"), coef = coef(model.03),
+                delrecip + memory(type = "stability"),
               statistics = c(btergm::esp, btergm::dsp, btergm::geodesic, 
                              btergm::deg, btergm::triad.undirected, btergm::rocpr))
-
-nw <- simulate(model.03, nsim = 10, index = 4)
 ```
 ]
 
 
-.panel[.panel-name[Simulated nw's]
-.font70.scroll-box-24[
-```{r, echo = TRUE, eval = TRUE}
-for (net in nw) print(net)
-```
-]
-]
 
-.panel[.panel-name[GOF of simulated nw's]
+.panel[.panel-name[GOF of out of sample network]
 .font70.scroll-box-24[
 ```{r, eval = TRUE, echo = FALSE}
 plot(gof.03)
-
-# print AUCROC
-print("Area under the ROC curve")
-gof.03$`Tie prediction`$auc.roc
-
-# print AUCPR
-print("Area under the PR curve")
-gof.03$`Tie prediction`$auc.pr
 ```
 
 
@@ -456,159 +451,129 @@ gof.03$`Tie prediction`$auc.pr
 
 ---
 name: interpret
-description: interpret function
+description: the probability of a tie
 
-# What does this mean for edge probabilities?
+# The probability of an edge
+
+Get all probabilities using `btergm::edgeprob(model.03)`
+
+```{r, eval = TRUE, echo = FALSE}
+ep <- btergm::edgeprob(model.03)
+```
+
+Extract what you need:
+
+```{r, eval = TRUE, echo = TRUE}
+ep[ep$i == 10 & ep$j == 15 & ep$t == 2, "probability"]
+ep[ep$i == 10 & ep$j %in% c(9, 11, 12, 15) & ep$t == 2, "probability"]
+```
+
+Note: you  can also use `btergm::interpret`.
+
+---
+name: plogis
+description: plogis
+
+# Edge probability for specific cases
 
 
 .panelset[
 
-.panel[.panel-name[dyad]
-```{r, eval = TRUE, echo = TRUE}
-btergm::interpret(model.03, type = "dyad", i = 10, j = 15, t = 2)
-btergm::interpret(model.03, type = "dyad", i = 10, j = 15)
+.panel[.panel-name[R Code]
+```{r, eval = FALSE, echo = TRUE}
+model.04 <- btergm::btergm(friendship ~ edges + mutual + nodematch("sex") +
+                     edgecov(primary), R = 100)
+
+btergm::summary(model.04)
 ```
+
+(terrible model, but that doesn't matter for now)
 ]
 
 
-.panel[.panel-name[node]
-.font70.scroll-box-24[
+.panel[.panel-name[Summary]
+.font70.scroll-box-36[
 ```{r, echo = TRUE, eval = TRUE}
-btergm::interpret(model.03, type = "node", i = 10, j = 13:15, t = 2)
+btergm::summary(model.04)
 ```
 ]
 ]
+]
 
+---
 
+.panelset[
+
+.panel[.panel-name[R Code]
+What is the probability of an edge between _i_ and _j_ if 
+
+* there is no tie from _j_ to _j_
+
+* the actors have a different gender
+
+* attended a different primary school
+
+```{r, eval = TRUE, echo = TRUE}
+btergm::summary(model.04)
+```
 ]
 
 
+.panel[.panel-name[Summary]
+.scroll-box-36[
 
+In this case _mutual_ = _nodematch.sex_ = _edgecov.primary[[i]]_ = 0.
+So, the logodds of this tie is -3.0875.
 
-<!-- --- -->
-<!-- name: exploration -->
-<!-- description: temporal exploratory analysis -->
+```{r, echo = TRUE, eval = TRUE}
+1 / (1 + exp(+3.0875))
 
+plogis(-3.0875)
 
-<!-- # Temporal exploratory analysis -->
+```
 
-<!-- Using the `tsna` and `networkDynamic` packages. -->
+Note: this is the overall probability for this tie  across the four waves.
 
+]
+]
+]
 
-<!-- ```{r} -->
-<!-- data(McFarland_cls33_10_16_96, package = 'networkDynamic') -->
-<!-- classroom <- cls33_10_16_96 -->
-<!-- rm(cls33_10_16_96) -->
-<!-- ``` -->
-
-
-<!-- .font70.scroll-box-24[ -->
-<!-- ```{r, echo = TRUE, eval = FALSE} -->
-<!-- data(McFarland_cls33_10_16_96, package = 'networkDynamic') -->
-<!-- classroom <- cls33_10_16_96 -->
-<!-- rm(cls33_10_16_96) -->
-<!-- as.data.frame(classroom) -->
-<!-- ``` -->
-
-<!-- .center[![](assets/images/classroom_adf.jpg)] -->
-
-<!-- ] -->
-
-<!-- --- -->
-
-<!-- ### How do you extract the interactions that occur between seconds 50 and 100? -->
-
-<!-- -- -->
-
-<!-- The interactions are coded per minute, so adjust accordingly: -->
-
-<!-- .font70.scroll-box-24[ -->
-<!-- ```{r, echo = TRUE} -->
-<!-- networkDynamic::network.extract(classroom, onset = 50/60, terminus = 100/60) |> -->
-<!--   as.data.frame() |> # only needed if you want to convert to dataframe -->
-<!--   sort() -->
-<!-- ``` -->
-<!-- ] -->
-
-<!-- --- -->
-<!-- class: inverse bg-Black -->
-
-<!-- <br><br><br><br><br> -->
-
-
-<!-- .font300.b.f-abel.Orange-inline.center[For what research questions can you use -->
-<!-- these these temporal tools?] -->
 
 ---
-name: SNA4DS exam
-description: SNA4DS exam
+.panelset[
 
-# SNA4DS exam
+.panel[.panel-name[R Code]
+What is the probability of an edge between _i_ and _j_ if 
 
-### STRUCTURE
+* there is a tie from _j_ to _j_
 
-* A series of (largely) open questions, focused on both you conceptual understanding of the material and your ability to conduct appropriate analyses on a dataset
+* the actors have a different gender
 
-* several questions include a dataset for you to run analyses on
+* attended the same primary school
 
-* we use Testvision
+```{r, eval = TRUE, echo = TRUE}
+btergm::summary(model.04)
+```
+]
 
-* you run analyses on the Tilburg university PC's, using `r rproj()`
 
----
+.panel[.panel-name[Summary]
+.scroll-box-36[
 
-### What do you need to know & be able to do?
+The logodds of the tie is now -3.0875 + 1.9971 + 1.2733 = 0.1829.
 
-* apply all of the models to real data
+```{r, echo = TRUE, eval = TRUE}
+plogis(0.1829)
+```
 
-* **substantively** and **conceptually** interpret the results of analyses (your own results, or output offered by us)
+Note: this is the overall probability for this tie across the four waves.
 
-* use `r rproj()` for actual analyses
-
-* understand all of the theoretical and conceptual concepts and be able to describe them
-
-* find appropriate `r rproj()` code in the slides, tutorials, book, you own notes, et cetera
-
-* this is an *open book* exam: you can have your notes, articles, and the book with you
-
-* we may refer to any of the material, so please make sure you have access to all of it during the exam
-
-* you are tested for understanding and ability to apply the methods, not for memory of terms or lists
+]
+]
+]
 
 ---
+class: course-logo bg-Black
 
-`r slides_from_images("assets/images/exam_qs", regexp = "jpg$", class = "")`
-
----
-
-# How to prepare for the exam?
-
-- If you did all the required work throughout the semester (ie. studied the book
-and additional materials, took the tutorials, actively followed the lectures and
-tutorials, and actively participate in the team project), you do not need to prepare
-anything (except perhaps a quick diagonal scan as a refresher).
-
-- If you fell behind on some of these elements, please study them carefully now.
-Again, study for understanding of the concepts and ability to apply them in real research,
-do not waste time learning definitions or stupid lists.
-
-<!-- --- -->
-<!-- class: bg-Black course-logo center -->
-
-<!-- background-image: url(assets/images/question-mark-1872634_1920.jpg) -->
-<!-- background-position: 70% 30% -->
-<!-- background-size: contain -->
-<!-- background-color: #000000 -->
-
-<!-- <br><br><br><br><br> -->
-<!-- .font300.Orange-inline.f-caveat.b[Any remaining questions?] -->
-
-<!-- --- -->
-
-<!-- background-image: url(assets/images/gratisography-bath-snorkeling-free-stock-photo.jpg) -->
-<!-- background-position: 100% 0% -->
-<!-- background-size: cover -->
-<!-- background-color: #000000 -->
-
-
-<!-- .footnote[https://gratisography.com/photo/snorkels-man-water/] -->
+<br><br><br><br><br><br><br>
+.font300.Orange-inline.center[ANY QUESTIONS?]

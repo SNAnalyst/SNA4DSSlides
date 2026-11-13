@@ -554,3 +554,23 @@ lectureName <- "Week 11 -- Lecture: Graph Machine Learning"
  ```                                                                    
                                                                         
  `r make_overview(overview, path, slidedeckFile, lectureName)`   
+
+
+
+<!-- Week 11 -- Lab: Temporal networks (TERGMs) -->
+```{r, include = FALSE}
+overview <- matrix(c(
+"friendship_dataset", "friendship dataset",
+"models", "modeling",
+"interpret", "the probability of a tie",
+"plogis", "plogis"
+), byrow = TRUE, ncol = 2) |>
+as.data.frame() |>
+setNames(c("name", "description"))
+
+slidedeckFile <- "Lab_temporalSNA"
+lectureName <- "Week 11 -- Lab: Temporal networks (TERGMs)"
+```
+
+`r make_overview(overview, path, slidedeckFile, lectureName)`
+

@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>SOCIAL NETWORK ANALYSIS for DATA SCIENTISTS</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Roger" />
+    <script src="assets/header-attrs-2.32/header-attrs.js"></script>
+    <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="assets/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="assets/tile-view-0.2.6/tile-view.js"></script>
+    <link href="assets/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="assets/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra_fit-screen-0.2.6/fit-screen.js"></script>
+    <link href="assets/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="assets/panelset-0.3.0/panelset.js"></script>
+    <script src="assets/fabric-4.3.1/fabric.min.js"></script>
+    <link href="assets/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="assets/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="assets/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script src="assets/xaringanExtra-webcam-0.0.1/webcam.js"></script>
+    <script id="xaringanExtra-webcam-options" type="application/json">{"width":"200","height":"150","margin":"1em"}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"ccb3295823714b32bf4230ed734bc512","expires":1}</script>
+    <script src="assets/himalaya-1.1.0/himalaya.js"></script>
+    <script src="assets/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="assets/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="assets/editable-0.2.6/editable.js"></script>
+    <script src="assets/mark.js-8.11.1/mark.min.js"></script>
+    <link href="assets/xaringanExtra-search-0.0.1/search.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-search-0.0.1/search.js"></script>
+    <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"bottom-left","caseSensitive":false,"showIcon":false,"autoSearch":true}) })</script>
+    <script src="assets/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="assets/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="assets/css/apron.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/descartes.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/tachyons.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/xaringan-extra.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/RL-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/SNA4DS_effects.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/kleuren.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+layout:false
+
+background-image: url(assets/images/sna4ds_logo_140.png), url(assets/images/jads_logo_transparent.png), url(assets/images/network_people_7890_cropped2.png)
+background-position: 100% 0%, 0% 10%, 0% 0%
+background-size: 20%, 20%, cover
+background-color: #000000
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.full-width-screen-grey.center.fw9.font-250[
+# .Orange-inline.f-shadows_into[SOCIAL NETWORK ANALYSIS&lt;br&gt;for DATA SCIENTISTS]
+]
+
+***
+
+.full-width-screen-grey.center.fw9[.f-abel[.WhiteSmoke-inline[today's menu: ] .Orange-inline[LAB: Temporal Networks .small-caps.font70[(lab] .font70[Week 11)]]]
+  ]
+
+&lt;br&gt;
+.f-abel.White-inline[Your lecturer: Roger]&lt;br&gt;
+.f-abel.White-inline[Playdate: November 11, 2026]
+
+
+&lt;!-- setup options start --&gt;
+
+
+
+
+```
+                 t=1 t=2 t=3 t=4
+friendship (row)  26  26  25  25
+friendship (col)  26  26  25  25
+primary (row)     26  26  26  26
+primary (col)     26  26  26  26
+```
+
+```
+  label time   object where
+1    21    3 networks   row
+2    21    3 networks   col
+3    21    4 networks   row
+4    21    4 networks   col
+```
+
+```
+                            t=1 t=2 t=3 t=4
+maximum deleted nodes (row)   0   0   1   1
+maximum deleted nodes (col)   0   0   1   1
+remaining rows               26  26  25  25
+remaining columns            26  26  25  25
+```
+
+```
+                 t=1 t=2 t=3 t=4
+friendship (row)  26  26  25  25
+friendship (col)  26  26  25  25
+primary (row)     26  26  25  25
+primary (col)     26  26  25  25
+```
+
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.highlight-last-item &gt; ul &gt; li, 
+.highlight-last-item &gt; ol &gt; li {
+  opacity: 0.5;
+}
+
+.highlight-last-item &gt; ul &gt; li:last-of-type,
+.highlight-last-item &gt; ol &gt; li:last-of-type {
+  opacity: 1;
+
+.bold-last-item &gt; ul &gt; li:last-of-type,
+.bold-last-item &gt; ol &gt; li:last-of-type {
+  font-weight: bold;
+}
+
+.show-only-last-code-result pre + pre:not(:last-of-type) code[class="remark-code"] {
+    display: none;
+}
+&lt;/style&gt;
+
+&lt;style type="text/css"&gt;
+.remark-inline-code {
+  background: #F5F5F5;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.inverse-red, .inverse-red h1, .inverse-red h2, .inverse-red h3, .inverse-red a, inverse-red a &gt; code {
+	border-top: none;
+	background-color: red;
+	color: white; 
+	background-image: "";
+}
+
+.inverse-orange, .inverse-orange h1, .inverse-orange h2, .inverse-orange h3, .inverse-orange a, inverse-orange a &gt; code {
+	border-top: none;
+	background-color: orange;
+	color: black; 
+	background-image: "";
+}
+
+.tab{
+  display: inline-block;
+  margin-left: 40px;
+}
+
+.tab1{tab-size: 2;}
+.tab2{tab-size: 4;}
+.tab3{tab-size: 6;}
+.tab4{tab-size: 8;}
+
+&lt;/style&gt;
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.grid-2-2 {
+  display: grid;
+  height: calc(80%);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1em;
+  padding: 1em;
+}
+&lt;/style&gt;
+
+&lt;!-- setup options end --&gt;
+
+---
+class: bg-Black course-logo center
+
+background-image: url(assets/images/question-2415069_1920.png)
+background-size: contain
+background-color: #000000
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.font300.Orange-inline.f-caveat.b[Any SNA4DS-related questions?]
+
+---
+class: course-logo
+layout: true
+
+---
+name: friendship_dataset
+description: friendship dataset
+
+.scroll-box-24[
+.center[![](assets/images/friendshipdata.png)]
+]
+
+---
+name: models
+description: modeling
+
+# Homeplay: Model I
+
+
+.panelset[
+
+.panel[.panel-name[R Code]
+
+``` r
+model.01 &lt;- btergm::btergm(friendship ~ edges + mutual + ttriple +
+                     transitiveties + ctriple + nodeicov("idegsqrt") +
+                     nodeicov("odegsqrt") + nodeocov("odegsqrt") +
+                     nodeofactor("sex") + nodeifactor("sex") + nodematch("sex") +
+                     edgecov(primary), R = 100)
+
+btergm::summary(model.01)
+
+snafun::stat_plot_gof_as_btergm(model.01,
+             btergm_statistics = c(btergm::esp, btergm::dsp, btergm::geodesic, 
+                                   btergm::deg, btergm::triad.undirected, btergm::rocpr))
+```
+]
+
+
+.panel[.panel-name[Summary]
+.font70.scroll-box-36[
+
+``` r
+btergm::summary(model.01)
+```
+
+```
+                     Estimate Boot mean     2.5%    97.5%
+edges                -9.17591  -9.31582 -10.3377  -8.6755
+mutual                2.96172   2.99616   2.2630   3.7861
+ttriple               0.21316   0.21734   0.0955   0.3509
+transitiveties        0.36794   0.35113   0.2114   0.4292
+ctriple              -0.67677  -0.68368  -0.9483  -0.4596
+nodeicov.idegsqrt     1.17509   1.22274   0.9788   1.5237
+nodeicov.odegsqrt    -0.28432  -0.32635  -0.5821  -0.1682
+nodeocov.odegsqrt     1.19846   1.24066   1.1665   1.4090
+nodeofactor.sex.2     0.60720   0.62415   0.4228   0.8305
+nodeifactor.sex.2     0.22578   0.22499   0.0487   0.3592
+nodematch.sex         1.76805   1.78569   1.6030   2.0681
+edgecov.primary[[i]]  1.05123   1.01450   0.7702   1.2552
+```
+]
+]
+
+.panel[.panel-name[Goodness of fit]
+.font70.scroll-box-24[
+
+``` r
+snafun::stat_plot_gof_as_btergm(model.01,
+             btergm_statistics = c(btergm::esp, btergm::dsp, btergm::geodesic, 
+                                   btergm::deg, btergm::triad.undirected, btergm::rocpr))
+```
+
+&lt;img src="assets/images/unnamed-chunk-8-1.svg" alt="" width="90%" /&gt;
+]
+]
+
+]
+
+???
+Als je de gof print, dan zie je een hele serie tabellen. Bijv. voor esp.
+Elke rij geeft aan het aantal esp dat in de data en/of de gesimuleerde netwerken
+voorkwam. In dit geval zijn dat minimaal 0 en maximaal 19.
+
+In de plot: de grijze boxen geven de verdeling van de % esp met een bepaalde waarde
+die in de gesimuleerde netwerken voor kwam. Bijv.: bereken voor elke simulatie het
+percentage edges met esp = 0. Dan geeft dan een verdeling van percentages over de
+simulaties heen.
+Voor de observaties staat het gemiddelde % over de de observeerde nw's vermeld (je hebt
+immers meerdere tijdstippen waarop het nw is geobserveerd). Zo ook de mediaan, etc.
+
+In de tabel: hier staan de %. Dus, het gem % edges met esp = 0 is 13.965%.
+
+De p--waarden geven aan welk % van de gesimuleerde waarden kleiner zijn dan de geobserveerde
+waarde. Dus, p = .234 voor esp = 0 betekent dat 23% van de gesimuleerde netwerken
+een kleiner % edges hebben met esp = 0 dan in de observatie.
+Als die p erg klein is, bijv,. bij esp = 6 t/m esp = 17, dan is de waarde in het gesimuleerde
+netwerk dus bijna altijd groter dan in de geobserveerde graaf. Ofwel: je overschat
+het effect structureel.
+Bij p = 1 heb je ws die waarde nooit in de gesimuleerde gezien, terwijl die wel in de
+observatie zit...?
+
+In de plot: de gestippelde lijn is de gemiddelde waarde in de observaties, de
+dikke lijn de mediaan.
+
+
+
+
+==== ROC 
+TPR = of all 1's in the data, which proportion do you correctly predict as 1
+FPR = of all 0's in the data, which proportion do you incorrectly predict as 1
+
+ROC curve: TPR vs FPR
+
+FRP: you want this really low (x-axis)
+TPR: you want this really high (y-axis
+
+so: curve all the way in top left corner
+
+--&gt; Measures the model's ability to distinguish between 1's and 0's without considering distribution. of 1's and 0's​
+
+Best suited for balanced datasets, where the number of 1's and 0's is similar.
+
+
+==== PR (precision-recall) 
+Precision = of all predicted 1's, which proportion is correct
+Recall = TPR
+
+PR curve: Precision op y-as, Recall op x-as
+Precision: wil je zo hoog mogelijk, dus hoog op y-as
+Recall: wil je hoog, dus hoog op x-as
+
+So, you want the curve all the way in the top right corner
+
+--&gt; Measures the accuracy of positive predictions and the model’s ability to find positive instances.​
+
+Best suited for imbalanced datasets — where 1's are rare, PR curves give more insights into real model performance.
+
+=====
+Practical Differences
+ROC curves can look “good” even if the model performs poorly on the minority class, because the bulk of negatives can dominate FPR.
+
+PR curves reveal weak performance on the positive class, making them more informative in scenarios like fraud detection or disease diagnosis, where the positive class is rare.
+
+
+---
+# Intermezzo: rusty on ROC and PR?
+
+.b.Red-inline[ROC: plots FPR (False Positive Rate, x-axis) against TPR (True Positive Rate, y-axis)]
+
+TPR = fraction of ties that are correctly predicted by the model
+
+FPR = faction of 0's in the data that are incorrectly predicted as 1
+
+You want TPR to be very high and FPR to be very low. 
+Hence: the curve should lean strongly into the top-left corner of the plot, this 
+indicates how well the model can distinguish between 1's and 0's in the networks.
+
+(the ROC of a poor model will be close to the diagonal)
+
+_Best suited for balanced datasets, where the number of 1's and 0's is similar._
+&lt;br&gt;&lt;br&gt;
+.b.Red-inline[PR: plots TPR (True Positive Rate, x-axis) against Precision (y-axis)]
+
+Precision = of all predicted 1's, which proportion is correct
+
+You want TPR and Precision to be very high. 
+Hence: the curve should lean strongly into the top-right corner
+
+_Best suited for imbalanced datasets — where 1's are rare_
+
+(a poor model will just mimic the network's density horizontally)
+
+
+
+---
+
+# Model II
+
+
+.panelset[
+
+.panel[.panel-name[R Code]
+
+``` r
+model.02 &lt;- btergm::btergm(friendship ~ edges + mutual + ttriple +
+                     transitiveties + ctriple + nodeicov("idegsqrt") + nodeicov("odegsqrt") +
+                     nodeocov("odegsqrt") + nodeofactor("sex") + nodeifactor("sex") +
+                     nodematch("sex") + edgecov(primary) + delrecip +
+                     memory(type = "stability"), R = 100)
+
+btergm::summary(model.02)
+
+snafun::stat_plot_gof_as_btergm(model.02,
+             btergm_statistics = c(btergm::esp, btergm::dsp, btergm::geodesic, 
+                                   btergm::deg, btergm::triad.undirected, btergm::rocpr))
+```
+]
+
+
+.panel[.panel-name[Summary]
+.font70.scroll-box-36[
+
+``` r
+btergm::summary(model.02)
+```
+
+```
+                      Estimate Boot mean     2.5%    97.5%
+edges                 -9.54228  -9.78141 -11.4719  -8.7203
+mutual                 2.17294   2.19220   1.8416   2.6791
+ttriple                0.13423   0.12964   0.0345   0.2123
+transitiveties         0.31509   0.32739   0.2884   0.3945
+ctriple               -0.55434  -0.56112  -0.7623  -0.4185
+nodeicov.idegsqrt      1.28064   1.32425   1.1461   1.5899
+nodeicov.odegsqrt     -0.13179  -0.14649  -0.3148  -0.0353
+nodeocov.odegsqrt      1.49624   1.54988   1.3781   1.8553
+nodeofactor.sex.2      0.52990   0.56336   0.3846   0.8017
+nodeifactor.sex.2      0.28694   0.29877  -0.0012   0.5483
+nodematch.sex          1.49245   1.52131   1.3044   1.8714
+edgecov.primary[[i]]   0.42395   0.41395  -0.0552   0.8300
+edgecov.delrecip[[i]]  0.67436   0.73580   0.3309   1.3391
+edgecov.memory[[i]]    0.77922   0.79105   0.6961   0.9556
+```
+]
+]
+
+.panel[.panel-name[Goodness of fit]
+.font70.scroll-box-24[
+
+``` r
+snafun::stat_plot_gof_as_btergm(model.02,
+             btergm_statistics = c(btergm::esp, btergm::dsp, btergm::geodesic, 
+                                   btergm::deg, btergm::triad.undirected, btergm::rocpr))
+```
+
+&lt;img src="assets/images/unnamed-chunk-12-1.svg" alt="" width="90%" /&gt;
+]
+]
+
+]
+
+---
+
+# Model III: out-of-sample GOF
+
+
+.panelset[
+
+.panel[.panel-name[R Code]
+
+``` r
+model.03 &lt;- btergm::btergm(friendship[1:3] ~ edges + mutual + ttriple +
+                     transitiveties + ctriple + nodeicov("idegsqrt") + nodeicov("odegsqrt") +
+                     nodeocov("odegsqrt") + nodeofactor("sex") + nodeifactor("sex") +
+                     nodematch("sex") + edgecov(primary) + delrecip() +
+                     memory(type = "stability"), R = 100)
+
+# out of sample gof
+gof.03 &lt;- btergm::gof(model.03, nsim = 100, target = friendship[[4]],
+              formula = friendship[3:4] ~ edges + mutual + ttriple +
+                transitiveties + ctriple + nodeicov("idegsqrt") +
+                nodeicov("odegsqrt") + nodeocov("odegsqrt") + nodeofactor("sex") +
+                nodeifactor("sex") + nodematch("sex") + edgecov(primary) +
+                delrecip + memory(type = "stability"),
+              statistics = c(btergm::esp, btergm::dsp, btergm::geodesic, 
+                             btergm::deg, btergm::triad.undirected, btergm::rocpr))
+```
+]
+
+
+
+.panel[.panel-name[GOF of out of sample network]
+.font70.scroll-box-24[
+&lt;img src="assets/images/unnamed-chunk-14-1.svg" alt="" width="90%" /&gt;
+
+
+]
+]
+
+]
+
+
+---
+name: interpret
+description: the probability of a tie
+
+# The probability of an edge
+
+Get all probabilities using `btergm::edgeprob(model.03)`
+
+
+
+Extract what you need:
+
+
+``` r
+ep[ep$i == 10 &amp; ep$j == 15 &amp; ep$t == 2, "probability"]
+```
+
+```
+[1] 0.8243134
+```
+
+``` r
+ep[ep$i == 10 &amp; ep$j %in% c(9, 11, 12, 15) &amp; ep$t == 2, "probability"]
+```
+
+```
+[1] 0.04576358 0.22475778 0.30616613 0.82431338
+```
+
+Note: you  can also use `btergm::interpret`.
+
+---
+name: plogis
+description: plogis
+
+# Edge probability for specific cases
+
+
+.panelset[
+
+.panel[.panel-name[R Code]
+
+``` r
+model.04 &lt;- btergm::btergm(friendship ~ edges + mutual + nodematch("sex") +
+                     edgecov(primary), R = 100)
+
+btergm::summary(model.04)
+```
+
+(terrible model, but that doesn't matter for now)
+]
+
+
+.panel[.panel-name[Summary]
+.font70.scroll-box-36[
+
+``` r
+btergm::summary(model.04)
+```
+
+```
+                     Estimate Boot mean    2.5%   97.5%
+edges                 -3.0875   -3.1269 -3.7262 -2.7424
+mutual                 1.9971    2.0017  1.7416  2.2753
+nodematch.sex          1.1957    1.2240  1.0691  1.5008
+edgecov.primary[[i]]   1.2733    1.2958  1.0898  1.5953
+```
+]
+]
+]
+
+---
+
+.panelset[
+
+.panel[.panel-name[R Code]
+What is the probability of an edge between _i_ and _j_ if 
+
+* there is no tie from _j_ to _j_
+
+* the actors have a different gender
+
+* attended a different primary school
+
+
+``` r
+btergm::summary(model.04)
+```
+
+```
+                     Estimate Boot mean    2.5%   97.5%
+edges                 -3.0875   -3.1269 -3.7262 -2.7424
+mutual                 1.9971    2.0017  1.7416  2.2753
+nodematch.sex          1.1957    1.2240  1.0691  1.5008
+edgecov.primary[[i]]   1.2733    1.2958  1.0898  1.5953
+```
+]
+
+
+.panel[.panel-name[Summary]
+.scroll-box-36[
+
+In this case _mutual_ = _nodematch.sex_ = _edgecov.primary[[i]]_ = 0.
+So, the logodds of this tie is -3.0875.
+
+
+``` r
+1 / (1 + exp(+3.0875))
+```
+
+```
+[1] 0.04362582
+```
+
+``` r
+plogis(-3.0875)
+```
+
+```
+[1] 0.04362582
+```
+
+Note: this is the overall probability for this tie  across the four waves.
+
+]
+]
+]
+
+
+---
+.panelset[
+
+.panel[.panel-name[R Code]
+What is the probability of an edge between _i_ and _j_ if 
+
+* there is a tie from _j_ to _j_
+
+* the actors have a different gender
+
+* attended the same primary school
+
+
+``` r
+btergm::summary(model.04)
+```
+
+```
+                     Estimate Boot mean    2.5%   97.5%
+edges                 -3.0875   -3.1269 -3.7262 -2.7424
+mutual                 1.9971    2.0017  1.7416  2.2753
+nodematch.sex          1.1957    1.2240  1.0691  1.5008
+edgecov.primary[[i]]   1.2733    1.2958  1.0898  1.5953
+```
+]
+
+
+.panel[.panel-name[Summary]
+.scroll-box-36[
+
+The logodds of the tie is now -3.0875 + 1.9971 + 1.2733 = 0.1829.
+
+
+``` r
+plogis(0.1829)
+```
+
+```
+[1] 0.545598
+```
+
+Note: this is the overall probability for this tie across the four waves.
+
+]
+]
+]
+
+---
+class: course-logo bg-Black
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.font300.Orange-inline.center[ANY QUESTIONS?]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="assets/remark-latest.min.js"></script>
+<script src="assets/js/remark-zoom.js"></script>
+<script src="assets/js/macros.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "atom-one-light",
+  "highlightLines": true,
+  "highlightSpans": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": "- %current% -",
+  "ratio": "16:9",
+  "navigation": {
+    "scroll": true
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
